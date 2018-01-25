@@ -1,8 +1,17 @@
 apply plugin: 'com.android.library'
+/*
+    第 2 步：应用插件
+    打开您的库模块的 build.gradle 文件并添加以下代码，以应用我们在上一步中添加的插件。
+ */
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.fliggy' //最终引用形式，如compile 'com.leon.lfilepicker:1.0.0'，其中lfilepicker在后面配置
+version = '1.0.1' // Change this to match your version number
 
+def siteUrl = 'https://github.com/dicallc/BodyMachine'
+def gitUrl = 'https://github.com/dicallc/BodyMachine.git'
 android {
     compileSdkVersion 26
-
 
 
     defaultConfig {
@@ -26,8 +35,109 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.google.code.gson:gson:2.2.4'
-    implementation 'com.github.zhaokaiqiang.klog:library:1.6.0'
-    implementation 'com.jakewharton:butterknife:8.6.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
+    compile 'com.jakewharton:butterknife:8.6.0'
 }
+
+//生成源文件
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+//生成Javadoc文档
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+//文档打包成jar
+task generateJavadocsJar(type: Jar, dependsOn: generateJavadocs) {
+    from generateJavadocs.destinationDir
+    classifier = 'javadoc'
+}
+//拷贝javadoc文件
+task copyDoc(type: Copy) {
+    from "${buildDir}/docs/"
+    into "docs"
+}
+
+artifacts {
+    archives generateJavadocsJar
+    archives generateSourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("BINTRAY_USER")
+    key = properties.getProperty("BINTRAY_KEY")
+    configurations = ['archives']
+    pkg {
+        repo = "android-utils-module"
+        name = "dk-utilsModule"    //发布到JCenter上的项目名字
+
+        version {
+            name = 'utils_module'
+            desc = 'My test upload'
+            vcsTag = '1.0.1'
+        }
+
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ['MIT']//不能随便写，只能是仓库创建时选择的license type
+        publish = true
+    }
+}
+task javadoc(type: Javadoc) {
+    failOnError false //必须添加以免出错
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+javadoc{
+    options{
+        //如果你的项目里面有中文注释的话，必须将格式设置为UTF-8，不然会出现乱码
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                // Add your description here
+                name 'dicallc Android'
+                description 'dicallc open library.'
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name 'MIT' //和之前自己定义的协议一致
+                        url 'https://raw.githubusercontent.com/minggo620/Pluto-Android/master/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'dicallc'        //填写bintray或者github的用户名
+                        name 'dicallc'         //姓名
+                        email 'huayuehai@gmail.com'//邮箱
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+
