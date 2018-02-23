@@ -25,7 +25,9 @@ alias:bodymachine
 
 https://www.jianshu.com/p/b5d3462407fc
 
+[Android打印机--没有设备驱动sdk，自己实现USB打印功能](http://blog.csdn.net/johnWcheung/article/details/71576833)
 
+[android连接打印机打印](http://blog.csdn.net/dengpeng_/article/details/60869509)
 
 
 

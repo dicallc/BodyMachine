@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 /*
     第 2 步：应用插件
     打开您的库模块的 build.gradle 文件并添加以下代码，以应用我们在上一步中添加的插件。
@@ -6,12 +7,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.fliggy' //最终引用形式，如compile 'com.leon.lfilepicker:1.0.0'，其中lfilepicker在后面配置
-version = '1.0.1' // Change this to match your version number
+def version_code='1.0.4'
+version = version_code // Change this to match your version number
 
 def siteUrl = 'https://github.com/dicallc/BodyMachine'
 def gitUrl = 'https://github.com/dicallc/BodyMachine.git'
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
 
 
     defaultConfig {
@@ -35,10 +37,11 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
-    compile 'com.jakewharton:butterknife:8.6.0'
+    compile 'com.jakewharton:butterknife:9.0.0-SNAPSHOT'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
 }
 
 //生成源文件
@@ -80,7 +83,7 @@ bintray {
         version {
             name = 'utils_module'
             desc = 'My test upload'
-            vcsTag = '1.0.1'
+            vcsTag = version_code
         }
 
         websiteUrl = siteUrl
