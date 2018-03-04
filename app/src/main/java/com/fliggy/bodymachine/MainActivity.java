@@ -9,25 +9,30 @@ import android.serialport.utils.SerialPortUtil;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private String receiveString;
-    private StringBuffer result;
+    private StringBuffer result=new StringBuffer();
     private MediaPlayer mediaPlayer ;
-    @Override
+  private TextView mTextShow;
+
+  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initData();
+    mTextShow = (TextView)findViewById(R.id.txt_result);
+      initData();
         //手动申请权限,视频音频权限为同一个
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.
                 WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);//权限返回码为1
         } else {
-            initAudio();
+            //initAudio();
         }
 
     }
@@ -48,16 +53,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataReceive(byte[] buffer, int size) {
                 receiveString = SerialDataUtils.ByteArrToHex(buffer).trim();
-                System.out.println("MainActivity2.onDataReceive receiveString= " + receiveString);
+                Log.e("dicallc", receiveString);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        result.append(receiveString + "\r\n");
+                      mTextShow.setText(receiveString + "\r\n");
+                        //result.append(receiveString + "\r\n");
                     }
                 });
 
             }
         });
+        serialPort.sendCmds("CA0306AA140300000070");
     }
     /**
      * 依旧是申请权限
