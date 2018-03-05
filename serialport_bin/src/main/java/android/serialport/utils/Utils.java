@@ -25,6 +25,23 @@ public class Utils {
     mBuffer.append(check_str);
     return mBuffer.toString();
   }
+
+  /**
+   * 发送开始测量指令
+   * @param
+   * @return
+   */
+  public static String sendStartCmd() {
+    String cmd = "02";
+    String head_str = "CA0406";
+    StringBuffer mBuffer = new StringBuffer(head_str);
+    mBuffer.append(cmd);
+    String tail_str = "0000000000";
+    mBuffer.append(tail_str);
+    String check_str = checkXor(mBuffer.toString());
+    mBuffer.append(check_str);
+    return mBuffer.toString();
+  }
   public static String loadUserInfoCmd() {
     //String height,String age,String sex,String runModel
     String head_str = "CA0306";
@@ -39,6 +56,8 @@ public class Utils {
     mBuffer.append(check_str);
     return mBuffer.toString();
   }
+
+
 
   public static String checkXor(String data) {
     int checkData = 0;
@@ -113,17 +132,17 @@ public class Utils {
           break;
         }
         //获取内容
-        String content = loadContent(buffer, factPackLen);
+        byte[] content = loadContent(buffer, factPackLen);
         //校验成功与失败，重新发送
         boolean ischeck = checkReceveMsg(buffer, factPackLen);
       }
   }
-  protected static String loadContent(final byte[] buffer, final int packlen) {
+  protected static byte[] loadContent(final byte[] buffer, final int packlen) {
     System.out.println("收到信息");
     byte[] buf = new byte[packlen];
     System.arraycopy(buffer, 6, buf, 0, packlen);
-    String str=SerialDataUtils.ByteArrToHex(buf);
-    return str;
+    //String str=SerialDataUtils.ByteArrToHex(buf);
+    return buf;
   }
   protected static boolean checkReceveMsg(final byte[] buffer, final int packlen) {
     //int head_length=6;
@@ -144,7 +163,6 @@ public class Utils {
     }
   }
   public static int parseLen(byte buffer[], int index) {
-
     //      if (buffer.length - index < headerLength) { return 0; }
     //3和4位就是信息长度
     byte a = buffer[index + 4];//3
@@ -160,7 +178,17 @@ public class Utils {
       String s = new String(tmp, 0, 2);
       rlt = Integer.parseInt(s, 16);
     }
-
     return rlt;
+  }
+  public static int parseNumCmd(byte buffer[], int index) {
+    //      if (buffer.length - index < headerLength) { return 0; }
+    //3和4位就是信息长度
+    byte a = buffer[2];//3
+    byte b = buffer[3];//4
+      char[] tmp = new char[2];
+      tmp[0] = (char) a;
+      tmp[1] = (char) b;
+      String s = new String(tmp, 0, 2);
+    return Integer.parseInt(s, 16);
   }
 }

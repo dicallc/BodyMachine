@@ -22,7 +22,7 @@ public class SerialPortUtil {
   private boolean isStop = false;
 
   public interface OnDataReceiveListener {
-    public void onDataReceive(String buffer, boolean size);
+    public void onDataReceive(int mCmd_num, byte[] buffer, boolean size);
   }
 
   public void setOnDataReceiveListener(OnDataReceiveListener dataReceiveListener) {
@@ -128,11 +128,7 @@ public class SerialPortUtil {
       // 定义一个包的最大长度
       int maxLength = 2048;
       byte[] buffer = new byte[maxLength];
-
-
       while (!isInterrupted()) {
-
-
         // 每次收到实际长度
         int available = 0;
         // 当前已经收到包的总长度
@@ -166,6 +162,7 @@ public class SerialPortUtil {
             continue;
           }
 
+          int cmd_num = Utils.parseNumCmd(buffer, cursor);
           int contentLenght = Utils.parseLen(buffer, cursor);
           // 如果内容包的长度大于最大内容长度或者小于等于0，则说明这个包有问题，丢弃
           if (contentLenght <= 0 || contentLenght > maxLength - 5) {
@@ -178,10 +175,10 @@ public class SerialPortUtil {
             break;
           }
           //获取内容
-          String content = Utils.loadContent(buffer, factPackLen);
+          byte[] content = Utils.loadContent(buffer, factPackLen);
           //校验成功与失败，重新发送
           boolean ischeck = Utils.checkReceveMsg(buffer, factPackLen);
-          onDataReceived(content,ischeck);
+          onDataReceived(cmd_num,content,ischeck);
           break;
         }
 
@@ -189,10 +186,10 @@ public class SerialPortUtil {
     }
   }
 
-  protected void onDataReceived(final String content, final boolean ischeck) {
+  protected void onDataReceived(int mCmd_num, byte[] content, final boolean ischeck) {
     System.out.println("收到信息");
     //callback data
-    onDataReceiveListener.onDataReceive(content, ischeck);
+    onDataReceiveListener.onDataReceive(mCmd_num,content, ischeck);
     //        ProtocolAnalyze.getInstance(myHandler).analyze(buf);
   }
 
