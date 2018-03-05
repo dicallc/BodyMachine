@@ -17,18 +17,17 @@ alias:bodymachine
 协议规则：
 开始符:一位
 信息类型：一位
-信息长度:两位
-信息内容：（信息长度）位
+信息长度:两位`
 校验：一位 //是自信息类型起至对象号止所有码的异或
 结束符：一位
 
 
 https://www.jianshu.com/p/b5d3462407fc
 
-[Android打印机--没有设备驱动sdk，自己实现USB打印功能](http://blog.csdn.net/johnWcheung/article/details/71576833)
+[Android打印机--没有设备驱动sdk，自己 实现USB打印功能](http://blog.csdn.net/johnWcheung/article/details/71576833)
 
 [android连接打印机打印](http://blog.csdn.net/dengpeng_/article/details/60869509)
 
-
+[Android通过系统打印功能实现PDF预览打印](http://blog.csdn.net/tangxl2008008/article/details/78424867)
 
 
