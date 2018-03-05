@@ -42,14 +42,13 @@ public class Utils {
     mBuffer.append(check_str);
     return mBuffer.toString();
   }
-  public static String loadUserInfoCmd() {
-    //String height,String age,String sex,String runModel
+  public static String loadUserInfoCmd(String height,String age,String sex,String runModel) {
     String head_str = "CA0306";
     StringBuffer mBuffer = new StringBuffer(head_str);
-    mBuffer.append(integerToHexString(176));
-    mBuffer.append(integerToHexString(24));
-    mBuffer.append(integerToHexString(1));
-    mBuffer.append(integerToHexString(1));
+    mBuffer.append(integerToHexString(height));
+    mBuffer.append(integerToHexString(age));
+    mBuffer.append(integerToHexString(sex));
+    mBuffer.append(integerToHexString(runModel));
     String tail_str = "0000";
     mBuffer.append(tail_str);
     String check_str = checkXor(mBuffer.toString());
@@ -75,6 +74,12 @@ public class Utils {
    */
   public static String integerToHexString(int s) {
     String ss = Integer.toHexString(s);
+    if (ss.length() % 2 != 0) {
+      ss = "0" + ss;//0F格式
+    }
+    return ss.toUpperCase();
+  }
+  public static String integerToHexString(String ss) {
     if (ss.length() % 2 != 0) {
       ss = "0" + ss;//0F格式
     }

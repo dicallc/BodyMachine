@@ -25,7 +25,7 @@ public class ExampleUnitTest {
     public void sendUser() throws Exception {
         //正常CA0306AA140300000070
         //测试CA0306B0180101000067
-        String str = Utils.loadUserInfoCmd();
+        //String str = Utils.loadUserInfoCmd();
     }
     @Test
     public void recevelUser() throws Exception {
