@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.serialport.utils.SerialDataUtils;
 import android.serialport.utils.SerialPortUtil;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -44,8 +45,13 @@ public class MainActivity extends AppCompatActivity {
         SerialPortUtil  serialPort = SerialPortUtil.getInstance();
         //该方法是读取数据的回调监听，一旦读取到数据，就立马回调
         serialPort.setOnDataReceiveListener(new SerialPortUtil.OnDataReceiveListener() {
-            @Override public void onDataReceive(String buffer, boolean size) {
-                receiveString = buffer;
+            @Override public void onDataReceive(int mCmd_num, byte[] buffer, boolean size) {
+                switch (mCmd_num){
+                  case 2:
+
+                    break;
+                }
+                receiveString = SerialDataUtils.ByteArrToHex(buffer);
                 System.out.println("MainActivity2.onDataReceive receiveString= " + receiveString);
                 runOnUiThread(new Runnable() {
                     @Override
