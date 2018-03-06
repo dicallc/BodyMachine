@@ -5,12 +5,13 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.serialport.utils.SerialDataUtils;
-import android.serialport.utils.SerialPortUtil;
+import android.serialport.utils.SimpleSerialPortUtil;
 import android.serialport.utils.Utils;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -21,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.fliggy.bodymachine.utils.ToastUtils;
+import com.socks.library.KLog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,9 +33,10 @@ public class MainActivity extends AppCompatActivity {
   @BindView(R.id.famale_rb) RadioButton mFamaleRb;
   @BindView(R.id.sex_rg) RadioGroup mSexRg;
   @BindView(R.id.start) Button mStart;
-  private String receiveString;
-  private StringBuffer result;
+  @BindView(R.id.start_test) Button mStartTest;
+  private StringBuffer result = new StringBuffer();
   private MediaPlayer mediaPlayer;
+  private SimpleSerialPortUtil mSerialPort;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
           Manifest.permission.WRITE_EXTERNAL_STORAGE
       }, 1);//权限返回码为1
     } else {
-      initAudio();
+      //initAudio();
     }
   }
 
@@ -61,40 +64,48 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void initData() {
-    SerialPortUtil serialPort = SerialPortUtil.getInstance();
-    //该方法是读取数据的回调监听，一旦读取到数据，就立马回调
-    serialPort.setOnDataReceiveListener(new SerialPortUtil.OnDataReceiveListener() {
-      @Override public void onDataReceive(int mCmd_num, byte[] buffer, boolean size) {
-        switch (mCmd_num) {
-          case 2:
-            char[] tmp = new char[2];
-            tmp[0] = (char) buffer[0];
-            tmp[1] = (char) buffer[1];
-            if (SerialDataUtils.HexToInt(new String(tmp))!=1){
-              startTepOne();
-            }else{
-              startTepTwo();
-            }
-
-            break;
+    mSerialPort = SimpleSerialPortUtil.getInstance();
+    mSerialPort.setOnDataReceiveListener(new SimpleSerialPortUtil.OnDataReceiveListener() {
+      @Override public void onDataReceive(byte[] buffer, int size) {
+        String receiveString = SerialDataUtils.ByteArrToHex(buffer).replace(" ", "");
+        //如果数据是2位，等待下一次接受，
+        result.append(receiveString);
+        if (result.length() == 2) {
+          return;
         }
-        receiveString = SerialDataUtils.ByteArrToHex(buffer);
-        System.out.println("MainActivity2.onDataReceive receiveString= " + receiveString);
-        runOnUiThread(new Runnable() {
-          @Override public void run() {
-            result.append(receiveString + "\r\n");
-          }
-        });
+        KLog.e("dicallc" + result.toString().trim());
+        result.delete(0, result.length());
       }
     });
+
+    //该方法是读取数据的回调监听，一旦读取到数据，就立马回调
+    //mSerialPort.setOnDataReceiveListener(new SerialPortUtil.OnDataReceiveListener() {
+    //  @Override public void onDataReceive(int mCmd_num, byte[] buffer, boolean size) {
+    //    switch (mCmd_num) {
+    //      case 2:
+    //        char[] tmp = new char[2];
+    //        tmp[0] = (char) buffer[0];
+    //        tmp[1] = (char) buffer[1];
+    //        if (SerialDataUtils.HexToInt(new String(tmp))!=1){
+    //          startTepOne();
+    //        }else{
+    //          startTepTwo();
+    //        }
+    //
+    //        break;
+    //    }
+    //    receiveString = SerialDataUtils.ByteArrToHex(buffer);
+    //    System.out.println("MainActivity2.onDataReceive receiveString= " + receiveString);
+    //    runOnUiThread(new Runnable() {
+    //      @Override public void run() {
+    //        result.append(receiveString + "\r\n");
+    //      }
+    //    });
+    //  }
+    //});
   }
 
-  /**
-   * 发送可以开始命令
-   */
-  private void startTepTwo() {
-    Utils.sendStartCmd();
-  }
+
 
   /**
    * 依旧是申请权限
@@ -124,8 +135,16 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  @OnClick(R.id.start) public void onViewClicked() {
-    startTepOne();
+  @OnClick({R.id.start,R.id.start_test}) public void onViewClicked(View mView) {
+    switch (mView.getId()){
+      case R.id.start:
+        startTepOne();
+        break;
+      case R.id.start_test:
+        startTepTwo();
+        break;
+    }
+
   }
 
   /**
@@ -136,9 +155,9 @@ public class MainActivity extends AppCompatActivity {
     String age = mEtAge.getText().toString().trim();
     String femail = "";
     if (mSexRg.getCheckedRadioButtonId() == R.id.male_rb) {
-      femail = "01";
+      femail = "1";
     } else {
-      femail = "00";
+      femail = "0";
     }
     if (TextUtils.isEmpty(height)) {
       ToastUtils.showShortToast("身高还没填写");
@@ -148,7 +167,16 @@ public class MainActivity extends AppCompatActivity {
       ToastUtils.showShortToast("年龄还没填写");
       return;
     }
-    String runModel = "00";
-    Utils.loadUserInfoCmd(height, age, femail, runModel);
+    String runModel = "0";
+    String str = Utils.loadUserInfoCmd(height, age, femail, runModel);
+    mSerialPort.sendCmds(str);
   }
+  /**
+   * 发送可以开始命令
+   */
+  private void startTepTwo() {
+    String str = Utils.sendStartCmd();
+    mSerialPort.sendCmds(str);
+  }
+
 }

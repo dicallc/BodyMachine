@@ -40,6 +40,7 @@ public class SerialDataUtils {
         return strBuilder.toString();
     }
 
+
     //-------------------------------------------------------
     //字节数组转转hex字符串，可选长度
     public static String ByteArrToHex(byte[] inBytArr, int offset, int byteCount) {

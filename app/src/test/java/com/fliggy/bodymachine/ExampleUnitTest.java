@@ -1,5 +1,6 @@
 package com.fliggy.bodymachine;
 
+import android.serialport.utils.NumUtils;
 import android.serialport.utils.Utils;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,5 +33,23 @@ public class ExampleUnitTest {
         String pathname = "F:\\user.txt";
         File filename = new File(pathname); // 要读取以上路径的input。txt文件
         Utils.parseData( new FileInputStream(filename));
+    }
+    @Test
+    public void testFunction() throws Exception {
+        String mS = Utils.checkXor("CA0206010000000000");
+        String mS1 = Integer.toHexString(175);
+    }
+    @Test
+    public void testFunction1() throws Exception {
+        String mS = NumUtils.string2HexString("175");
+        String mS1 = NumUtils.string2HexString("1");
+        String mS2 = NumUtils.string2HexString("10");
+        String mS3 = NumUtils.string2HexString("9");
+    }
+    @Test
+    public void testFunction2() throws Exception {
+       String str="CA02 06 01 00 00 00 00 00 CF";
+        String mReplace = str.replace(" ", "");
+        System.out.print(mReplace);
     }
 }

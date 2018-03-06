@@ -1,6 +1,7 @@
 package android.serialport.utils;
 
 import android.serialport.SerialPort;
+import com.socks.library.KLog;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +20,7 @@ public class SerialPortUtil {
   private int baudrate = 9600;//这个参数，硬件开发人员也会告诉我们的
   private static SerialPortUtil portUtil;
   private OnDataReceiveListener onDataReceiveListener = null;
+  //private OnDataReceiveListener1 onDataReceiveListener = null;
   private boolean isStop = false;
 
   public interface OnDataReceiveListener {
@@ -28,6 +30,13 @@ public class SerialPortUtil {
   public void setOnDataReceiveListener(OnDataReceiveListener dataReceiveListener) {
     onDataReceiveListener = dataReceiveListener;
   }
+  //public interface OnDataReceiveListener1 {
+  //  public void onDataReceive(byte[] buffer, int size);
+  //}
+  //
+  //public void setOnDataReceiveListener1(OnDataReceiveListener1 dataReceiveListener) {
+  //  onDataReceiveListener = dataReceiveListener;
+  //}
 
   public static SerialPortUtil getInstance() {
     if (null == portUtil) {
@@ -61,7 +70,13 @@ public class SerialPortUtil {
     boolean result = true;
     String str = cmd;
     str = str.replace(" ", "");
-    byte[] mBuffer = SerialDataUtils.HexToByteArr(str);
+    StringBuffer mStringBuffer = new StringBuffer(str);
+    String mS = Utils.checkXor(str);
+    mStringBuffer.append(mS);
+    String msg = mStringBuffer.toString();
+    KLog.e("发送数据"+msg);
+    byte[] mBuffer = SerialDataUtils.HexToByteArr(msg);
+    //byte[] mBuffer = msg.getBytes();
     if (!isStop) {
       try {
         if (mOutputStream != null) {
@@ -192,7 +207,14 @@ public class SerialPortUtil {
     onDataReceiveListener.onDataReceive(mCmd_num,content, ischeck);
     //        ProtocolAnalyze.getInstance(myHandler).analyze(buf);
   }
-
+  //protected void onDataReceived(final byte[] buffer, final int index, final int packlen) {
+  //  System.out.println("收到信息");
+  //  byte[] buf = new byte[packlen];
+  //  System.arraycopy(buffer, index, buf, 0, packlen);
+  //  //callback data
+  //  onDataReceiveListener.onDataReceive(buf, 0);
+  //  //        ProtocolAnalyze.getInstance(myHandler).analyze(buf);
+  //}
   public int parseLen(byte buffer[], int index) {
 
     //      if (buffer.length - index < headerLength) { return 0; }

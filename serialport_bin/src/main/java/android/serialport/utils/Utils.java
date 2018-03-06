@@ -45,17 +45,14 @@ public class Utils {
   public static String loadUserInfoCmd(String height,String age,String sex,String runModel) {
     String head_str = "CA0306";
     StringBuffer mBuffer = new StringBuffer(head_str);
-    mBuffer.append(integerToHexString(height));
-    mBuffer.append(integerToHexString(age));
-    mBuffer.append(integerToHexString(sex));
-    mBuffer.append(integerToHexString(runModel));
+    mBuffer.append(NumUtils.string2HexString(height));
+    mBuffer.append(NumUtils.string2HexString(age));
+    mBuffer.append(NumUtils.string2HexString(sex));
+    mBuffer.append(NumUtils.string2HexString(runModel));
     String tail_str = "0000";
     mBuffer.append(tail_str);
-    String check_str = checkXor(mBuffer.toString());
-    mBuffer.append(check_str);
     return mBuffer.toString();
   }
-
 
 
   public static String checkXor(String data) {
