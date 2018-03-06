@@ -1,6 +1,18 @@
+### 模拟串口文件下载
+http://blog.csdn.net/simple__happyness/article/details/50636318?locationNum=11
+
+### android模拟器上模拟串口通信
+
+#### 第一步：
+emulator.exe -list-avds
+emulator.exe @Nexus_4_API_21 -qemu -serial COM4
+
+chmod 777 ttyS2
 ### 参考文档
 http://blog.csdn.net/da_caoyuan/article/details/69566299
 http://blog.csdn.net/junfeng120125/article/details/9328947
+
+
 ### keys:
 password:kaisa008
 alias:bodymachine
@@ -31,3 +43,6 @@ https://www.jianshu.com/p/b5d3462407fc
 [Android通过系统打印功能实现PDF预览打印](http://blog.csdn.net/tangxl2008008/article/details/78424867)
 
 
+### 数据不完成参考
+
+https://www.jianshu.com/p/e5004d75bd9c
