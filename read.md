@@ -43,3 +43,6 @@ https://www.jianshu.com/p/b5d3462407fc
 [Android通过系统打印功能实现PDF预览打印](http://blog.csdn.net/tangxl2008008/article/details/78424867)
 
 
+### 数据不完成参考
+
+https://www.jianshu.com/p/e5004d75bd9c
