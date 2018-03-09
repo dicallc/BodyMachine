@@ -2,6 +2,7 @@ package com.fliggy.bodymachine;
 
 import android.serialport.utils.NumUtils;
 import android.serialport.utils.Utils;
+import com.socks.library.KLog;
 import java.io.File;
 import java.io.FileInputStream;
 import org.junit.Test;
@@ -62,5 +63,10 @@ public class ExampleUnitTest {
         int mInt2 = Integer.parseInt(code, 16);
         int full_lenght= mInt*2+8;
         assertEquals(str.length(), full_lenght);
+    }
+    @Test
+    public void testFunction4() throws Exception {
+      String mS = Utils.sendStartCmd();
+      KLog.e(mS);
     }
 }

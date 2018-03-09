@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context="com.fliggy.bodymachine.MainActivity"
     tools:layout_editor_absoluteY="81dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 
   <TextView
@@ -81,49 +83,26 @@
         android:text="女"
         />
   </RadioGroup>
-  <RadioGroup
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:orientation="horizontal"
-      >
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="男"
-        />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="女"
-        />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="男"
-        />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="女"
-        />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="男"
-        />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="女"
-        />
-  </RadioGroup>
-    <LinearLayout
+  <Spinner
+      android:id="@+id/spinner1"
+      android:layout_width="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="20dp"
+      android:layout_height="20dp"
+      android:entries="@array/letter"
+      />
+  <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
         android:layout_marginTop="20dp"
             android:gravity="center"
             android:layout_height="wrap_content">
+      <Button
+          android:id="@+id/test"
+          android:layout_width="wrap_content"
+          android:layout_height="40dp"
+          android:text="测试"
+          />
       <Button
           android:id="@+id/start"
           android:layout_width="wrap_content"
@@ -135,6 +114,12 @@
           android:layout_width="wrap_content"
           android:layout_height="40dp"
           android:text="开始测量"
+          />
+      <Button
+          android:id="@+id/start_clear"
+          android:layout_width="wrap_content"
+          android:layout_height="40dp"
+          android:text="清零"
           />
     </LinearLayout>
 

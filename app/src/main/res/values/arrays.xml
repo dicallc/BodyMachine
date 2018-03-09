@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="letter">
+    <item>成年正常</item>
+    <item>运动强度 1</item>
+    <item>运动强度 2</item>
+    <item>运动强度 3</item>
+    <item>运动强度 4</item>
+    <item>运动强度 5</item>
+    <item>未成年</item>
+  </string-array>
+</resources>
