@@ -67,42 +67,60 @@ public class MainActivity extends AppCompatActivity {
     mSerialPort = SimpleSerialPortUtil.getInstance();
     mSerialPort.setOnDataReceiveListener(new SimpleSerialPortUtil.OnDataReceiveListener() {
       @Override public void onDataReceive(byte[] buffer, int size) {
-        String receiveString = SerialDataUtils.ByteArrToHex(buffer).replace(" ", "");
-        //如果数据是2位，等待下一次接受，
-        result.append(receiveString);
-        if (result.length() == 2) {
-          return;
+        try {
+          String receiveString = SerialDataUtils.ByteArrToHex(buffer).replace(" ", "");
+          //如果数据是2位，等待下一次接受，
+          result.append(receiveString);
+          if (result.length() <6) {
+            return;
+          }else{
+            //大于6的话，就可以知道字段长度了
+            String mSubstring = result.substring(4, 6);
+            int mInt = Integer.parseInt(mSubstring, 16);
+            int full_lenght= mInt*2+8;
+            if (result.length()<full_lenght){
+              return;
+            }
+          }
+          String str = result.toString().trim();
+          KLog.e("dicallc" + str);
+          String code = str.substring(2, 4);
+          switch (Integer.parseInt(code, 16)){
+            case 1:
+            //查询命令回应
+
+              break;
+            case 2:
+            //上行体重数据
+
+              break;
+            case 3:
+            //上行结果数据
+
+              break;
+            case 4:
+            //上行清零
+
+              break;
+            case 5:
+            //上行开始测量命令
+
+              break;
+            case 6:
+
+              break;
+          }
+          //去除识别码，知道这条语句应该干什么
+
+          result.delete(0, result.length());
+
+        }catch (Exception mE){
+          KLog.e(mE.getMessage());
         }
-        KLog.e("dicallc" + result.toString().trim());
-        result.delete(0, result.length());
+
       }
     });
 
-    //该方法是读取数据的回调监听，一旦读取到数据，就立马回调
-    //mSerialPort.setOnDataReceiveListener(new SerialPortUtil.OnDataReceiveListener() {
-    //  @Override public void onDataReceive(int mCmd_num, byte[] buffer, boolean size) {
-    //    switch (mCmd_num) {
-    //      case 2:
-    //        char[] tmp = new char[2];
-    //        tmp[0] = (char) buffer[0];
-    //        tmp[1] = (char) buffer[1];
-    //        if (SerialDataUtils.HexToInt(new String(tmp))!=1){
-    //          startTepOne();
-    //        }else{
-    //          startTepTwo();
-    //        }
-    //
-    //        break;
-    //    }
-    //    receiveString = SerialDataUtils.ByteArrToHex(buffer);
-    //    System.out.println("MainActivity2.onDataReceive receiveString= " + receiveString);
-    //    runOnUiThread(new Runnable() {
-    //      @Override public void run() {
-    //        result.append(receiveString + "\r\n");
-    //      }
-    //    });
-    //  }
-    //});
   }
 
 

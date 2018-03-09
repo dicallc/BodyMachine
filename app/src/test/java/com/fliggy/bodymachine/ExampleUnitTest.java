@@ -52,4 +52,15 @@ public class ExampleUnitTest {
         String mReplace = str.replace(" ", "");
         System.out.print(mReplace);
     }
+    @Test
+    public void testFunction3() throws Exception {
+       String str="CA0206010000000000CF";
+        StringBuffer mStringBuffer = new StringBuffer(str);
+        String mSubstring = mStringBuffer.substring(4, 6);
+        String code = mStringBuffer.substring(2, 4);
+        int mInt = Integer.parseInt(mSubstring, 16);
+        int mInt2 = Integer.parseInt(code, 16);
+        int full_lenght= mInt*2+8;
+        assertEquals(str.length(), full_lenght);
+    }
 }
