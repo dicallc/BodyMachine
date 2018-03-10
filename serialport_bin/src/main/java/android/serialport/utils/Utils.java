@@ -191,4 +191,11 @@ public class Utils {
       String s = new String(tmp, 0, 2);
     return Integer.parseInt(s, 16);
   }
+  public static String getTime(){
+    long timeStampSec = System.currentTimeMillis()/1000;
+    String timestamp = String.format("%010d", timeStampSec);
+
+    return timestamp;
+
+  }
 }

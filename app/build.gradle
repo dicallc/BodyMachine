@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'realm-android'
+realm {
+    syncEnabled = true;
+}
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {

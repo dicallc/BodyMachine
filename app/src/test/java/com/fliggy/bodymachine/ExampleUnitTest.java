@@ -70,6 +70,11 @@ public class ExampleUnitTest {
       KLog.e(mS);
     }
     @Test
+    public void testFunction6() throws Exception {
+      String mS = Utils.getTime();
+      KLog.e(mS);
+    }
+    @Test
     public void testFunction5() throws Exception {
       String mS = "CA03610A141E283200000000000000000000000000000000000000000000000000000000000000000000000000000000000000\n"
           + "                  000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000B9";

@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.fliggy.bodymachine.utils.ToastUtils;
 import com.socks.library.KLog;
+import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
   private MediaPlayer mediaPlayer;
   private SimpleSerialPortUtil mSerialPort;
   private String mWorkLevel = "00";
+  private Realm realm;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
+    realm = Realm.getDefaultInstance();
     ArrayAdapter<String> adapter =
         new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
             getResources().getStringArray(R.array.letter));
@@ -235,5 +238,12 @@ public class MainActivity extends AppCompatActivity {
   private void startTepTwo() {
     String str = Utils.sendStartCmd();
     mSerialPort.sendCmds(str);
+  }
+  private  void saveData(){
+    realm.executeTransaction(new Realm.Transaction() {
+      @Override public void execute(Realm realm) {
+        // Add a person
+      }
+    });
   }
 }
