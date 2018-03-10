@@ -89,64 +89,63 @@ public class MainActivity extends AppCompatActivity {
     mSerialPort = SimpleSerialPortUtil.getInstance();
     mSerialPort.setOnDataReceiveListener(new SimpleSerialPortUtil.OnDataReceiveListener() {
       @Override public void onDataReceive(byte[] buffer, int size) {
-        //try {
+        try {
           String receiveString = SerialDataUtils.ByteArrToHex(buffer).replace(" ", "");
           KLog.e("dicallc: " + receiveString);
-          return;
           //如果数据是2位，等待下一次接受，
-        //  result.append(receiveString);
-        //  if (result.length() < 6) {
-        //    return;
-        //  } else {
-        //    //大于6的话，就可以知道字段长度了
-        //    String mSubstring = result.substring(4, 6);
-        //    int mInt = Integer.parseInt(mSubstring, 16);
-        //    int full_lenght = mInt * 2 + 8;
-        //    if (result.length() < full_lenght) {
-        //      return;
-        //    }
-        //  }
-        //  final String str = result.toString().trim();
-        //  KLog.e("dicallc: " + str);
-        //  final String code = str.substring(2, 4);
-        //  runOnUiThread(new Runnable() {
-        //    @Override public void run() {
-        //      switch (Integer.parseInt(code, 16)) {
-        //        case 1:
-        //          //查询命令回应
-        //          // TODO: 2018/3/9 0009 如果没有回复发送三次
-        //          ToastUtils.showShortToast("模块准备就绪");
-        //          break;
-        //        case 2:
-        //          //上行体重数据
-        //          ToastUtils.showShortToast("得到数据: " + str);
-        //          break;
-        //        case 3:
-        //          //上行结果数据
-        //
-        //          break;
-        //        case 4:
-        //          //上行清零
-        //          ToastUtils.showShortToast("已经清零: " + str);
-        //          break;
-        //        case 5:
-        //          //上行开始测量命令
-        //
-        //          break;
-        //        case 6:
-        //
-        //          break;
-        //      }
-        //      result.delete(0, result.length());
-        //    }
-        //  });
-        //  // TODO: 2018/3/9 0009 检验失败怎么办
-        //
-        //  //去除识别码，知道这条语句应该干什么
-        //
-        //} catch (Exception mE) {
-        //  KLog.e(mE.getMessage());
-        //}
+          result.append(receiveString);
+          if (result.length() < 6) {
+            return;
+          } else {
+            //大于6的话，就可以知道字段长度了
+            String mSubstring = result.substring(4, 6);
+            int mInt = Integer.parseInt(mSubstring, 16);
+            int full_lenght = mInt * 2 + 8;
+            if (result.length() < full_lenght) {
+              return;
+            }
+          }
+          final String str = result.toString().trim();
+          KLog.e("dicallc: " + str);
+          final String code = str.substring(2, 4);
+          runOnUiThread(new Runnable() {
+            @Override public void run() {
+              switch (Integer.parseInt(code, 16)) {
+                case 1:
+                  //查询命令回应
+                  // TODO: 2018/3/9 0009 如果没有回复发送三次
+                  ToastUtils.showShortToast("模块准备就绪");
+                  break;
+                case 2:
+                  //上行体重数据
+                  ToastUtils.showShortToast("得到数据: " + str);
+                  break;
+                case 3:
+                  //上行结果数据
+
+                  break;
+                case 4:
+                  //上行清零
+                  ToastUtils.showShortToast("已经清零: " + str);
+                  break;
+                case 5:
+                  //上行开始测量命令
+
+                  break;
+                case 6:
+
+                  break;
+              }
+              result.delete(0, result.length());
+            }
+          });
+          // TODO: 2018/3/9 0009 检验失败怎么办
+
+          //去除识别码，知道这条语句应该干什么
+
+        } catch (Exception mE) {
+          KLog.e(mE.getMessage());
+        }
       }
     });
   }

@@ -23,6 +23,10 @@ public class Utils {
     mBuffer.append(tail_str);
     return mBuffer.toString();
   }
+  public static String toResult(String str,int start,int end){
+    String  weight = str.substring(start, end);
+    return Integer.parseInt(weight,16)+"";
+  }
 
   /**
    * 发送开始测量指令
