@@ -130,4 +130,12 @@ public class ExampleUnitTest {
       String    LEFT_root_muscle_volume        = Utils.toResult(mS,102,106);
       KLog.e(weight);
     }
+  @Test
+  public void testFunction6() throws Exception {
+   String authKey="zp0adsxvtp1oeiw1k7isd3tz9pft";
+   String str="AtUserID=1521043729&BMI=1521043729&BasalMeta=1521043729&BoneSalt=1521043729&FatFreeBodyWt=1521043729&FatWt=1521043729&LhandFatRate=1521043729&LhandMsclVal=1521043729&LlegFatRate=1521043729&LlegMsclVal=1521043729&MuscleWt=1521043729&ObesityDegree=1521043729&PBF=1521043729&PBW=1521043729&PhysicalAge=1521043729&PhysicalScore=1521043729&Protein=1521043729&RecID=1521043729&RecTime=1521043729&RhandFatRate=1521043729&RhandMsclVal=1521043729&RlegFatRate=1521043729&RlegMsclVal=1521043729&ToatalWatWt=1521043729&TrunkFatRate=1521043729&TrunkMsclVal=1521043729&Wt=1521043729&time=1521080922";
+   String finalStr=authKey+str+authKey;
+    String mS = com.fliggy.bodymachine.utils.Utils.sha1(finalStr);
+    KLog.e(mS);
+  }
 }
