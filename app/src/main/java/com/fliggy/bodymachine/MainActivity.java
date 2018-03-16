@@ -122,18 +122,35 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                   //上行体重数据
                   ToastUtils.showShortToast("得到数据: " + str);
+                  String wd = Utils.toResult(str, 6, 10);
+                  mTextView.setText("体重是: "+wd+"kg");
                   break;
                 case 3:
-                  //上行结果数据
+                  //上行体脂数据
 
                   break;
                 case 4:
-                  //上行清零
+                  // 上行测脂报错
                   ToastUtils.showShortToast("已经清零: " + str);
+                  String rt = Utils.toResult(str, 6, 8);
+                  switch (rt){
+                    case "1":
+                      mTextView.setText("错误参数非法");
+                      break;
+                    case "2":
+                      mTextView.setText("站姿错误");
+                      break;
+                    case "3":
+                      mTextView.setText("数据溢出");
+                      break;
+
+                  }
+
                   break;
                 case 5:
-                  //上行开始测量命令
-
+                  //上行锁定体重
+                  String mToString = mTextView.getText().toString();
+                  mTextView.setText("体重是: "+mToString+"kg 已经稳定了，可以进行下一步");
                   break;
                 case 6:
 
