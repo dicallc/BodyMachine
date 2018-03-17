@@ -28,20 +28,175 @@ public class Utils {
     return Integer.parseInt(weight,16)+"";
   }
 
+  public static String toShowFinalResult(String mS){
+    StringBuffer stringBuffer=new StringBuffer();
+    String  weight= Utils.toResult(mS,6,10);
+    //总阻抗
+    String  all_impedance= Utils.toResult(mS,10,14);
+    String  left_h_impedance= Utils.toResult(mS,14,18);
+    String  right_h_impedance= Utils.toResult(mS,18,22);
+    String  left_f_impedance= Utils.toResult(mS,22,26);
+    String  right_f_impedance= Utils.toResult(mS,26,30);
+    String  body_impedance= Utils.toResult(mS,30,34);
+    stringBuffer.append("体重："+weight+"\n");
+    stringBuffer.append("总阻抗："+all_impedance+"\n");
+    stringBuffer.append("左手："+left_h_impedance+"\n");
+    stringBuffer.append("左手："+right_h_impedance+"\n");
+    stringBuffer.append("左脚："+left_f_impedance+"\n");
+    stringBuffer.append("右脚："+right_f_impedance+"\n");
+    stringBuffer.append("躯干："+body_impedance+"\n");
+    //脂肪重
+    String  fat_weight= Utils.toResult(mS,34,38);
+    stringBuffer.append("脂肪重："+fat_weight+"\n");
+    //肌肉重
+    String  muscle_weight= Utils.toResult(mS,38,42);
+    stringBuffer.append("肌肉重："+muscle_weight+"\n");
+    //总水重
+    String  total_water_weight= Utils.toResult(mS,42,46);
+    //细胞外液
+    String  extracellular_fluid= Utils.toResult(mS,46,50);
+    //细胞内液
+    String  intracellular_Fluid= Utils.toResult(mS,50,54);
+    //去脂体重
+    String  fat_free= Utils.toResult(mS,54,58);
+    //标准肌肉
+    String  Standard_muscle= Utils.toResult(mS,58,62);
+    //骨盐量
+    String  Bone_salt_content = Utils.toResult(mS,62,66);
+    //骨骼肌重
+    String   skeletal_muscle = Utils.toResult(mS,66,70);
+    stringBuffer.append("总水重："+total_water_weight+"\n");
+    stringBuffer.append("细胞外液："+extracellular_fluid+"\n");
+    stringBuffer.append("细胞内液："+intracellular_Fluid+"\n");
+    stringBuffer.append("去脂体重："+fat_free+"\n");
+    stringBuffer.append("标准肌肉："+Standard_muscle+"\n");
+    stringBuffer.append("骨盐量："+Bone_salt_content+"\n");
+    stringBuffer.append("骨骼肌重："+skeletal_muscle+"\n");
+    //蛋白质
+    String    protein = Utils.toResult(mS,70,74);
+    //体质指数
+    String    physique_num = Utils.toResult(mS,74,78);
+    //基础代谢
+    String    basal_metabolism = Utils.toResult(mS,78,82);
+    //体脂百分比
+    String    Body_fat_percentage = Utils.toResult(mS,82,86);
+    //含水百分比
+    String    Percentage_of_water  = Utils.toResult(mS,86,90);
+    //标准体重
+    String    stander_weight  = Utils.toResult(mS,90,94);
+    //内脏脂肪等级
+    String    visceral_fat  = Utils.toResult(mS,94,98);
+    //身体年龄
+    String    physical_age   = Utils.toResult(mS,98,100);
+    //身体评分
+    String    Body_score    = Utils.toResult(mS,100,102);
+    //水肿度
+    String    Edematous_degree    = Utils.toResult(mS,102,106);
+    //肥胖度
+    String    Fat_degree     = Utils.toResult(mS,106,110);
+    //肌肉控制
+    String    Muscle_control     = Utils.toResult(mS,110,114);
+    //体重控制
+    String    Weight_control     = Utils.toResult(mS,114,118);
+    //脂肪控制
+    String    Fat_control     = Utils.toResult(mS,118,122);
+    stringBuffer.append("蛋白质："+protein+"\n");
+    stringBuffer.append("体质指数："+physique_num+"\n");
+    stringBuffer.append("基础代谢："+basal_metabolism+"\n");
+    stringBuffer.append("体脂百分比："+Body_fat_percentage+"\n");
+    stringBuffer.append("含水百分比："+Percentage_of_water+"\n");
+    stringBuffer.append("标准体重："+stander_weight+"\n");
+    stringBuffer.append("内脏脂肪等级："+visceral_fat+"\n");
+    stringBuffer.append("身体年龄："+physical_age+"\n");
+    stringBuffer.append("身体评分："+Body_score+"\n");
+    stringBuffer.append("水肿度："+Edematous_degree+"\n");
+    stringBuffer.append("肥胖度："+Fat_degree+"\n");
+    stringBuffer.append("肌肉控制："+Muscle_control+"\n");
+    stringBuffer.append("体重控制："+Weight_control+"\n");
+    stringBuffer.append("脂肪控制："+Fat_control+"\n");
+    //no
+    String    no_one     = Utils.toResult(mS,122,126);
+    //躯干脂肪率
+    String    Trunk_fat_rate      = Utils.toResult(mS,126,130);
+    //右手脂肪率
+    String    Right_hand_fat_rate       = Utils.toResult(mS,130,134);
+    //左手脂肪率
+    String    Left_hand_fat_ratio       = Utils.toResult(mS,134,138);
+    //右脚脂肪率
+    String    Right_foot_fat_ratio        = Utils.toResult(mS,138,142);
+    //左脚脂肪率
+    String    LEFT_foot_fat_ratio        = Utils.toResult(mS,142,146);
+    stringBuffer.append("躯干脂肪率："+Trunk_fat_rate+"\n");
+    stringBuffer.append("右手脂肪率："+Right_hand_fat_rate+"\n");
+    stringBuffer.append("左手脂肪率："+Left_hand_fat_ratio+"\n");
+    stringBuffer.append("右脚脂肪率："+Right_foot_fat_ratio+"\n");
+    stringBuffer.append("左脚脂肪率："+LEFT_foot_fat_ratio+"\n");
+
+    //躯干肌肉量
+    String    Trunk_muscle_volume        = Utils.toResult(mS,146,150);
+    //右手肌肉量
+    String    Right_hand_muscle_volume        = Utils.toResult(mS,150,154);
+    //左手肌肉
+    String    LEFT_hand_muscle_volume        = Utils.toResult(mS,154,158);
+    //右脚肌肉
+    String    Right_root_muscle_volume        = Utils.toResult(mS,158,162);
+    //左脚肌肉
+    String    LEFT_root_muscle_volume        = Utils.toResult(mS,162,166);
+    stringBuffer.append("躯干肌肉量："+Trunk_muscle_volume+"\n");
+    stringBuffer.append("右手肌肉量："+Right_hand_muscle_volume+"\n");
+    stringBuffer.append("左手肌肉："+LEFT_hand_muscle_volume+"\n");
+    stringBuffer.append("右脚肌肉："+Right_root_muscle_volume+"\n");
+    stringBuffer.append("左脚肌肉："+LEFT_root_muscle_volume+"\n");
+    //颈围
+    String    Neck_circumference        = Utils.toResult(mS,166,170);
+    //腰围
+    String    waist        = Utils.toResult(mS,170,174);
+    //臀围
+    String    Hipline        = Utils.toResult(mS,174,178);
+    //胸围
+    String    Bust        = Utils.toResult(mS,178,182);
+    //右上臂围
+    String    r_t_Hipline        = Utils.toResult(mS,182,186);
+    //左上臂围
+    String    l_t_Hipline        = Utils.toResult(mS,186,190);
+    //右大腿围
+    String    r_b_Hipline        = Utils.toResult(mS,190,194);
+    //左大腿围
+    String    l_b_Hipline        = Utils.toResult(mS,194,198);
+    stringBuffer.append("颈围："+Neck_circumference+"\n");
+    stringBuffer.append("腰围："+waist+"\n");
+    stringBuffer.append("臀围："+Hipline+"\n");
+    stringBuffer.append("胸围："+Bust+"\n");
+    stringBuffer.append("右上臂围："+r_t_Hipline+"\n");
+    stringBuffer.append("左上臂围："+l_t_Hipline+"\n");
+    stringBuffer.append("右大腿围："+r_b_Hipline+"\n");
+    stringBuffer.append("左大腿围："+l_b_Hipline+"\n");
+    return stringBuffer.toString();
+  }
+
   /**
    * 发送开始测量指令
    * @param
    * @return
    */
   public static String sendStartCmd() {
-    String head_str = "CA0506";
+    String head_str = "CA0806";
     StringBuffer mBuffer = new StringBuffer(head_str);
     String tail_str = "000000000000";
     mBuffer.append(tail_str);
     return mBuffer.toString();
   }
+
+  /**
+   * 发送用户数据
+   * @param height
+   * @param age
+   * @param sex
+   * @param runModel
+   * @return
+   */
   public static String loadUserInfoCmd(String height,String age,String sex,String runModel) {
-    String head_str = "CA0206";
+    String head_str = "CA0706";
     StringBuffer mBuffer = new StringBuffer(head_str);
     mBuffer.append(NumUtils.string2HexString(height));
     mBuffer.append(NumUtils.string2HexString(age));

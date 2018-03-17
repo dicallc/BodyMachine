@@ -4,125 +4,153 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.fliggy.bodymachine.MainActivity"
-    tools:layout_editor_absoluteY="81dp"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    >
+    android:orientation="vertical"
+    tools:context="com.fliggy.bodymachine.MainActivity"
+    tools:layout_editor_absoluteY="81dp">
 
-  <TextView
-      android:id="@+id/textView"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="Hello World!"
-      />
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:gravity="center"
-      android:orientation="horizontal"
-      tools:layout_editor_absoluteX="8dp"
-      tools:layout_editor_absoluteY="27dp"
-      >
-    <EditText
-        android:id="@+id/et_height"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="175"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="cm"
-        />
-  </LinearLayout>
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:gravity="center"
-      android:orientation="horizontal"
-      tools:layout_editor_absoluteX="8dp"
-      tools:layout_editor_absoluteY="27dp"
-      >
-    <EditText
-        android:id="@+id/et_age"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="21"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="岁"
-        />
-  </LinearLayout>
-  <RadioGroup
-      android:id="@+id/sex_rg"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:orientation="horizontal"
-      >
-    <RadioButton
-        android:id="@+id/male_rb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="男"
-        />
-    <RadioButton
-        android:id="@+id/famale_rb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="女"
-        />
-  </RadioGroup>
-  <Spinner
-      android:id="@+id/spinner1"
-      android:layout_width="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginTop="20dp"
-      android:layout_height="20dp"
-      android:entries="@array/letter"
-      />
-  <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:layout_height="wrap_content">
-      <Button
-          android:id="@+id/test"
-          android:layout_width="wrap_content"
-          android:layout_height="40dp"
-          android:text="测试"
-          />
-      <Button
-          android:id="@+id/start"
-          android:layout_width="wrap_content"
-          android:layout_height="40dp"
-          android:text="开始"
-          />
-      <Button
-          android:id="@+id/start_test"
-          android:layout_width="wrap_content"
-          android:layout_height="40dp"
-          android:text="开始测量"
-          />
-      <Button
-          android:id="@+id/start_clear"
-          android:layout_width="wrap_content"
-          android:layout_height="40dp"
-          android:text="清零"
-          />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="27dp">
+
+        <EditText
+            android:id="@+id/et_height"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="175" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cm" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="27dp">
+
+        <EditText
+            android:id="@+id/et_age"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="21" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="岁" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/sex_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/male_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="男" />
+
+        <RadioButton
+            android:id="@+id/famale_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:entries="@array/letter" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_height="40dp"
+        android:text="请等待机器有物体后，进行第一步操作"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/test"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="测试"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="第一步发送用户信息" />
+
+        <Button
+            android:id="@+id/start_test"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="第二步测量" />
+
+        <Button
+            android:id="@+id/start_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="清零"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="信息返回显示区域"
+                android:textColor="@android:color/background_dark" />
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Hello World!" />
+        </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v4.widget.NestedScrollView>
 
 
 </android.support.v7.widget.LinearLayoutCompat>

@@ -1,6 +1,7 @@
 package com.fliggy.bodymachine;
 
 import android.Manifest;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
+//    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     realm = Realm.getDefaultInstance();
     ArrayAdapter<String> adapter =
         new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
@@ -94,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
       @Override public void onDataReceive(byte[] buffer, int size) {
         try {
           String receiveString = SerialDataUtils.ByteArrToHex(buffer).replace(" ", "");
-          KLog.e("dicallc: " + receiveString);
           //如果数据是2位，等待下一次接受，
           result.append(receiveString);
           if (result.length() < 6) {
@@ -115,23 +116,20 @@ public class MainActivity extends AppCompatActivity {
             @Override public void run() {
               switch (Integer.parseInt(code, 16)) {
                 case 1:
-                  //查询命令回应
-                  // TODO: 2018/3/9 0009 如果没有回复发送三次
-                  ToastUtils.showShortToast("模块准备就绪");
+                  //模块回应初始化是否成功
                   break;
                 case 2:
                   //上行体重数据
-                  ToastUtils.showShortToast("得到数据: " + str);
                   String wd = Utils.toResult(str, 6, 10);
                   mTextView.setText("体重是: "+wd+"kg");
                   break;
                 case 3:
                   //上行体脂数据
-
+                  String s = Utils.toShowFinalResult(str);
+                  mTextView.setText(s);
                   break;
                 case 4:
                   // 上行测脂报错
-                  ToastUtils.showShortToast("已经清零: " + str);
                   String rt = Utils.toResult(str, 6, 8);
                   switch (rt){
                     case "1":
@@ -149,12 +147,24 @@ public class MainActivity extends AppCompatActivity {
                   break;
                 case 5:
                   //上行锁定体重
-                  String mToString = mTextView.getText().toString();
-                  mTextView.setText("体重是: "+mToString+"kg 已经稳定了，可以进行下一步");
+                  mTextView.setText("已经稳定了，可以进行下一步");
                   break;
                 case 6:
+                  //查询是否准备好了
 
                   break;
+                case 7:
+                  //用户数据回应是否收到
+                  mTextView.setText("用户数据，模块已经收到");
+                  break;
+                case 9:
+                  //测体脂回应
+
+                  break;
+//                case 8:
+//                  //测体脂回应
+//
+//                  break;
               }
               result.delete(0, result.length());
             }
