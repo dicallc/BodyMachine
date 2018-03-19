@@ -62,6 +62,7 @@
             android:orientation="vertical"
         android:padding="10dp"
             android:layout_height="match_parent">
+      <!--体重控制-->
       <LinearLayout
           android:layout_width="match_parent"
           android:orientation="horizontal"
@@ -79,7 +80,27 @@
             android:layout_marginLeft="5dp"
             android:background="@android:color/black"/>
       </LinearLayout>
-      
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
+                android:layout_height="20dp">
+           <TextView
+               android:layout_weight="1"
+               android:layout_width="0dp"
+               android:textSize="12sp"
+               android:textStyle="bold"
+               android:text="目标体重"
+               android:layout_height="wrap_content"/>
+           <TextView
+               android:layout_weight="1"
+               android:layout_width="0dp"
+               android:textStyle="bold"
+               android:textSize="12sp"
+               android:text="21kg"
+               android:layout_height="wrap_content"/>
+        </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -88,16 +109,183 @@
            <TextView
                android:layout_weight="1"
                android:layout_width="0dp"
-               android:textSize="14sp"
-               android:text="目标能够"
+               android:textStyle="bold"
+               android:textSize="12sp"
+               android:text="体重控制"
                android:layout_height="wrap_content"/>
            <TextView
                android:layout_weight="1"
                android:layout_width="0dp"
-               android:textSize="14sp"
-               android:text="asd"
+               android:textSize="12sp"
+               android:textStyle="bold"
+               android:text="21kg"
                android:layout_height="wrap_content"/>
         </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_height="20dp">
+           <TextView
+               android:layout_weight="1"
+               android:layout_width="0dp"
+               android:textStyle="bold"
+               android:textSize="12sp"
+               android:text="脂肪控制"
+               android:layout_height="wrap_content"/>
+           <TextView
+               android:layout_weight="1"
+               android:layout_width="0dp"
+               android:textSize="12sp"
+               android:textStyle="bold"
+               android:text="21kg"
+               android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_height="20dp">
+           <TextView
+               android:layout_weight="1"
+               android:layout_width="0dp"
+               android:textStyle="bold"
+               android:textSize="12sp"
+               android:text="肌肉控制"
+               android:layout_height="wrap_content"/>
+           <TextView
+               android:layout_weight="1"
+               android:layout_width="0dp"
+               android:textSize="12sp"
+               android:textStyle="bold"
+               android:text="21kg"
+               android:layout_height="wrap_content"/>
+        </LinearLayout>
+      <!--肥胖评估-->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:layout_marginTop="10dp"
+          android:layout_height="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="肥胖评估"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/black"/>
+      </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+          <TextView
+              android:layout_width="wrap_content"
+              android:textSize="12sp"
+              android:textStyle="bold"
+              android:text="BMI:"
+              android:layout_height="wrap_content"/>
+          <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                android:paddingLeft="1dp"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:textSize="9sp"
+                      android:layout_height="wrap_content"
+                      android:text="□正常" />
+                  <TextView
+                      android:layout_weight="1"
+                      android:layout_width="0dp"
+                      android:textSize="9sp"
+                      android:layout_marginLeft="5dp"
+                      android:layout_height="wrap_content"
+                      android:text="□低体重" />
+                  <TextView
+                      android:layout_weight="1"
+                      android:layout_width="0dp"
+                      android:textSize="9sp"
+                      android:layout_height="wrap_content"
+                      android:text="□超重  " />
+                </LinearLayout>
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:textSize="9sp"
+                  android:layout_gravity="right"
+                  android:layout_height="wrap_content"
+                  android:text="□严重超重" />
 
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+          <TextView
+              android:layout_width="wrap_content"
+              android:textSize="10sp"
+              android:textStyle="bold"
+              android:text="体重百分比:"
+              android:layout_height="wrap_content"/>
+          <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                android:paddingLeft="1dp"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:textSize="9sp"
+                      android:layout_height="wrap_content"
+                      android:text="□正常" />
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:textSize="9sp"
+                      android:layout_height="wrap_content"
+                      android:text="□轻度肥胖" />
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:textSize="8sp"
+                      android:layout_height="wrap_content"
+                      android:text="□肥胖" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:layout_height="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:text="腰臂比:"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/black"/>
+      </LinearLayout>
     </LinearLayout>
 </LinearLayout>
