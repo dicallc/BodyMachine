@@ -216,6 +216,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textSize="12sp"
+        android:id="@+id/txt_visceral_fat"
         android:text="等级 15"
         android:layout_height="match_parent"
         />

@@ -41,6 +41,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:textStyle="bold"
+        android:id="@+id/txt_fat_free"
         android:textSize="10sp"
         android:text="59.5kg"
         android:layout_height="wrap_content"
@@ -65,6 +66,7 @@
         android:layout_width="0dp"
         android:textStyle="bold"
         android:textSize="10sp"
+        android:id="@+id/txt_basal_metabolism"
         android:text="1656kcal"
         android:layout_height="wrap_content"
         />
@@ -88,6 +90,7 @@
         android:layout_width="0dp"
         android:textStyle="bold"
         android:textSize="10sp"
+        android:id="@+id/txt_fat_degree"
         android:text="135%"
         android:layout_height="wrap_content"
         />
