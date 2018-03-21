@@ -8,13 +8,16 @@ import android.graphics.Path;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
+import com.fliggy.bodymachine.model.DeviderModel;
 import com.socks.library.KLog;
+import java.util.ArrayList;
 
 /**
  * Created by dicallc on 2018/3/20.
  */
 
 public class LbsView extends View {
+  private  TextPaint mTextBigPaint;
   private int viewSize;//获取空间的尺寸，也就是我们布局的尺寸大小（不知道理解的是否正确）
   private Paint linePaint;// 线条画笔和点画笔
 
@@ -27,6 +30,9 @@ public class LbsView extends View {
   private float width_x_end;
   private Paint mRectPaint;
   private Paint mRectGrayPaint;
+  private ArrayList<String> arrDeviderText;
+  private int devider_limit;
+  private int devider_limit_num;
 
   public LbsView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -44,6 +50,9 @@ public class LbsView extends View {
     mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG | Paint.LINEAR_TEXT_FLAG);
     mTextPaint.setColor(Color.BLACK);
     mTextPaint.setTextSize(36);
+    mTextBigPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG | Paint.LINEAR_TEXT_FLAG);
+    mTextBigPaint.setColor(Color.BLACK);
+    mTextBigPaint.setTextSize(54);
   }
 
   private void initNormalR() {
@@ -84,6 +93,31 @@ public class LbsView extends View {
     drawXY(canvas);
   }
 
+  public void setData(DeviderModel mWeightDevider) {
+   /*
+         * 数据为空直接GG
+         */
+    if (mWeightDevider.devider_text.size() == 0) {
+      throw new IllegalArgumentException("No data to display !");
+    }
+    this.devider_limit = mWeightDevider.devider_limit;
+    // 设置区间文字
+    this.arrDeviderText = mWeightDevider.devider_text;
+    this.devider_limit_num=mWeightDevider.devider_limit_num;
+    invalidate();
+  }
+
+  public synchronized void setData(ArrayList<String> devider_w_arr) {
+        /*
+         * 数据为空直接GG
+         */
+    if (devider_w_arr.size() == 0) throw new IllegalArgumentException("No data to display !");
+
+    // 设置区间文字
+    this.arrDeviderText = devider_w_arr;
+    invalidate();
+  }
+
   private void drawXY(Canvas canvas) {
     mPath.moveTo(width_x_start, height);
     mPath.lineTo(width_x_start, width_y_start);
@@ -96,17 +130,28 @@ public class LbsView extends View {
     for (int i = 0; i < 11; i++) {
       float devider_w1 = width_x_start + width_x_end * ((1 + (i * 2)) / 24f);
       canvas.drawLine(devider_w1, width_y_start, devider_w1, width_y_start + 30, linePaint);
-      canvas.drawText("18" + i, devider_w1 - 30, width_y_start + 65, mTextPaint);
-      if (i == 4 || i == 5) {
-        canvas.drawRect(preResult + 3, width_y_start + 75, devider_w1 - 3, width_y_start + 100,
-            mRectGrayPaint);
-      } else {
-        canvas.drawRect(preResult + 3, width_y_start + 75, devider_w1 - 3, width_y_start + 100,
-            mRectPaint);
+      if (arrDeviderText.size() == 11) {
+        canvas.drawText(arrDeviderText.get(i) + "", devider_w1 - 30, width_y_start + 65,
+            mTextPaint);
+      }
+      //如果遍历循环i小与传入最大值才可以绘制
+      if (i < devider_limit) {
+        if (i == 4 || i == 5) {
+          canvas.drawRect(preResult + 3, width_y_start + 95, devider_w1 - 3, width_y_start + 120,
+              mRectGrayPaint);
+        } else {
+          canvas.drawRect(preResult + 3, width_y_start + 95, devider_w1 - 3, width_y_start + 120,
+              mRectPaint);
+        }
+      }else if(i==devider_limit){
+        canvas.drawText(devider_limit_num+"", preResult + 10, width_y_start + 125, mTextBigPaint);
+
+      }else{
+
       }
       //如果到最后需要画上一个百分号和一个数值
-      if (i==10){
-        canvas.drawText("%", width_x_end-20, width_y_start + 40, mTextPaint);
+      if (i == 10) {
+        canvas.drawText("%", width_x_end - 20, width_y_start + 40, mTextPaint);
       }
       preResult = devider_w1;
     }

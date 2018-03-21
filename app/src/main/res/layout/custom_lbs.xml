@@ -5,6 +5,7 @@
     android:orientation="vertical"
     >
   <com.fliggy.bodymachine.LbsView
+      android:id="@+id/lbs_view"
       android:layout_width="match_parent"
       android:layout_height="70dp"
       >
