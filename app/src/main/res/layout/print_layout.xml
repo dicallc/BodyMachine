@@ -134,8 +134,8 @@
       <!--//肌肉脂肪分析-->
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="70dp"
-          android:layout_marginTop="58dp"
+          android:layout_height="100dp"
+          android:layout_marginTop="68dp"
           android:orientation="vertical"
           android:paddingLeft="100dp"
           >
@@ -164,8 +164,8 @@
       <!--//肥胖分析-->
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="50dp"
-          android:layout_marginTop="50dp"
+          android:layout_height="60dp"
+          android:layout_marginTop="75dp"
           android:orientation="vertical"
           android:paddingLeft="100dp"
           >
@@ -188,7 +188,7 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="170dp"
-          android:layout_marginTop="50dp"
+          android:layout_marginTop="100dp"
           android:orientation="horizontal"
           android:paddingLeft="30dp"
           android:paddingRight="15dp"
