@@ -2,6 +2,7 @@ package com.fliggy.bodymachine;
 
 import android.serialport.utils.NumUtils;
 import android.serialport.utils.Utils;
+import com.fliggy.bodymachine.utils.Arith;
 import com.socks.library.KLog;
 import java.io.File;
 import java.io.FileInputStream;
@@ -196,5 +197,10 @@ public class ExampleUnitTest {
   public void testFunction9() {
     String authKey = "5A040601F400000000AB";
     Utils.toResult(authKey,6,8);
+  }
+  @Test
+  public void testFunction10() {
+    double mDiv = Arith.div("95", "1.9");
+    KLog.e(mDiv);
   }
 }

@@ -1,69 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
     android:layout_height="match_parent"
     android:background="@drawable/layout"
     android:orientation="vertical"
     >
-  <android.support.v7.widget.LinearLayoutCompat
-      android:id="@+id/ly_baseinfo"
-      android:layout_width="match_parent"
-      android:layout_height="40dp"
-      android:layout_marginTop="100dp"
-      android:orientation="horizontal"
-      android:paddingLeft="50dp"
-      android:paddingTop="14dp"
-      >
-    <TextView
-        android:id="@+id/user_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:text="132"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        />
-    <TextView
-        android:id="@+id/user_height"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:text="132"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        />
-    <TextView
-        android:id="@+id/user_age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp"
-        android:text="25"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        />
-    <TextView
-        android:id="@+id/user_sex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:text="男"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        />
-    <TextView
-        android:id="@+id/user_test_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:text="2017-03-04"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        />
-
-  </android.support.v7.widget.LinearLayoutCompat>
+  <include layout="@layout/include_base_info"/>
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:visibility="visible"
       android:orientation="horizontal"
       >
     <LinearLayout
@@ -75,120 +23,109 @@
         >
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="140dp"
-          android:layout_marginTop="35dp"
+          android:layout_height="108dp"
+          android:layout_marginTop="39dp"
           android:orientation="vertical"
-          android:paddingLeft="370dp"
+          android:paddingLeft="250dp"
           >
         <TextView
             android:id="@+id/user_total_water_weight"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="0dp"
-            android:layout_marginTop="2dp"
-            android:gravity="center"
-            android:text="(lbs)    51.4   (37.3~45.6)"
+            android:text="(lbs) 51.4 (37.3~45.6)"
             android:textSize="10sp"
-            android:textStyle="bold"
             />
         <TextView
             android:id="@+id/user_protein"
             android:layout_width="wrap_content"
                 android:layout_weight="1"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:text="(lbs)    13.4   (9.9~12.1)"
+            android:text="(lbs) 13.4 (9.9~12.1)"
             android:textSize="10sp"
-            android:textStyle="bold"
             />
         <TextView
             android:layout_width="wrap_content"
                 android:layout_weight="1"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:text="(lbs)    2.4   (3.44~4.19)"
+            android:text="(lbs) 2.4 (3.44~4.19)"
             android:textSize="10sp"
-            android:textStyle="bold"
             />
         <TextView
             android:layout_width="wrap_content"
                 android:layout_weight="1"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:text="(lbs)    91.7   (7.9~15.9)"
+            android:text="(lbs) 91.7 (7.9~15.9)"
             android:textSize="10sp"
-            android:textStyle="bold"
             />
         <TextView
             android:id="@+id/user_weight"
             android:layout_width="wrap_content"
                 android:layout_weight="1"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:text="(lbs)    159.8   (56.2~76.1)"
+            android:text="(lbs) 159.8 56.2~76.1)"
             android:textSize="10sp"
-            android:textStyle="bold"
             />
 
       </LinearLayout>
       <!--//肌肉脂肪分析-->
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="100dp"
-          android:layout_marginTop="68dp"
+          android:layout_height="83dp"
+          android:layout_marginTop="62dp"
           android:orientation="vertical"
           android:paddingLeft="100dp"
           >
-        <TextView
+        <com.fliggy.bodymachine.LbsView
+            android:id="@+id/lbs_weight_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text=""
-            android:textSize="16sp"
-            />
-        <TextView
+            >
+        </com.fliggy.bodymachine.LbsView>
+        <com.fliggy.bodymachine.LbsView
+            android:id="@+id/lbs_skeletalmuscle_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text=""
-            android:textSize="16sp"
-            />
-        <TextView
+            >
+        </com.fliggy.bodymachine.LbsView>
+        <com.fliggy.bodymachine.LbsView
+            android:id="@+id/lbs_fatweight_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text=""
-            android:textSize="16sp"
-            />
+            >
+        </com.fliggy.bodymachine.LbsView>
       </LinearLayout>
       <!--//肥胖分析-->
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="60dp"
-          android:layout_marginTop="75dp"
+          android:layout_height="54dp"
+          android:layout_marginTop="62dp"
           android:orientation="vertical"
           android:paddingLeft="100dp"
           >
-        <TextView
+        <com.fliggy.bodymachine.LbsView
+            android:id="@+id/lbs_physique_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text=""
-            android:textSize="16sp"
-            />
-        <TextView
+            >
+        </com.fliggy.bodymachine.LbsView>
+        <com.fliggy.bodymachine.LbsView
+            android:id="@+id/lbs_bodyfatpercentage_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text=""
-            android:textSize="16sp"
-            />
+            >
+        </com.fliggy.bodymachine.LbsView>
       </LinearLayout>
       <!--//均衡和阶段-->
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="170dp"
-          android:layout_marginTop="100dp"
+          android:layout_height="200dp"
+          android:layout_marginTop="50dp"
           android:orientation="horizontal"
           android:paddingLeft="30dp"
           android:paddingRight="15dp"

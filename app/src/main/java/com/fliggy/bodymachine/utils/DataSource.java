@@ -12,12 +12,12 @@ public class DataSource {
   @NonNull public  static DeviderModel getDevider(ArrayList<String> mWeightData, String num) {
     DeviderModel mDeviderModel = new DeviderModel();
     for (int i = 0; i < mWeightData.size(); i++) {
-      if (Integer.parseInt(mWeightData.get(i)) > Integer.parseInt(num)) {
+      if (Float.parseFloat(mWeightData.get(i)) > Float.parseFloat(num)) {
         mDeviderModel.devider_limit = i;
         break;
       }
     }
-    mDeviderModel.devider_limit_num = Integer.parseInt(num);
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
     mDeviderModel.devider_text = mWeightData;
     return mDeviderModel;
   }
