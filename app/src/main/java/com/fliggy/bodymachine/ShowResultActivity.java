@@ -8,23 +8,29 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.print.PrintHelper;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.fliggy.bodymachine.adapter.MachineAdapter;
 import com.fliggy.bodymachine.model.DeviderModel;
 import com.fliggy.bodymachine.utils.DataSource;
 import com.socks.library.KLog;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by dicallc on 2018/3/20.
  */
 
-public class TestActivity extends Activity {
+public class ShowResultActivity extends Activity {
 
   @BindView(R.id.user_id) TextView mUserId;
   @BindView(R.id.user_height) TextView mUserHeight;
@@ -50,27 +56,68 @@ public class TestActivity extends Activity {
   @BindView(R.id.ly_baseinfo) LinearLayout mLyBaseinfo;
   @BindView(R.id.lbs_physique_view) LbsView mLbsPhysiqueView;
   @BindView(R.id.lbs_bodyfatpercentage_view) LbsView mLbsBodyfatpercentageView;
+  @BindView(R.id.user_fatweight) TextView mUserFatweight;
+  @BindView(R.id.rl_weight) RecyclerView mRlWeight;
+  @BindView(R.id.rl_skeletalmuscle) RecyclerView mRlSkeletalmuscle;
+  @BindView(R.id.rl_fatweightpercent) RecyclerView mRlFatweightpercent;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.print_layout);
     ButterKnife.bind(this);
+    initView();
+    new Handler().postDelayed(new Runnable() {
+
+      @Override public void run() {
+        //do something
+        doPhotoPrint(mRootView);
+      }
+    }, 5000);    //延时1s执行
+  }
+
+  private void initView() {
     DeviderModel mWeightDevider = DataSource.getDevider(DataSource.getWeightData(), "115");
     mLbsWeightView.setData(mWeightDevider);
     mLbsSkeletalmuscleView.setData(
         DataSource.getDevider(DataSource.getSkeletalMuscleData(), "120"));
     mLbsFatweightView.setData(DataSource.getDevider(DataSource.getFatWeight(), "91.7"));
     mLbsPhysiqueView.setData(DataSource.getDevider(DataSource.getPhysiqueNum(), "53.1"));
-    mLbsBodyfatpercentageView.setData(DataSource.getDevider(DataSource.getBodyFatPercentage(), "45"));
-    new Handler().postDelayed(new Runnable() {
-
-      @Override public void run() {
-        //do something
-        //viewSaveToImage(mRootView);
-      }
-    }, 5000);    //延时1s执行
+    mLbsBodyfatpercentageView.setData(
+        DataSource.getDevider(DataSource.getBodyFatPercentage(), "45"));
+    initList();
   }
 
+  private void initList() {
+    LinearLayoutManager mManager = new LinearLayoutManager(this);
+    mManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+    LinearLayoutManager mManager1 = new LinearLayoutManager(this);
+    mManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+    LinearLayoutManager mManager2 = new LinearLayoutManager(this);
+    mManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+    List<String> arr=new ArrayList<>();
+    arr.add("159");
+    arr.add("168");
+    arr.add("178");
+    arr.add("178");
+    MachineAdapter mMachineAdapter = new MachineAdapter(arr);
+    mRlWeight.setLayoutManager(mManager);
+    mRlWeight.setAdapter(mMachineAdapter);
+    mRlSkeletalmuscle.setLayoutManager(mManager1);
+    mRlSkeletalmuscle.setAdapter(mMachineAdapter);
+    mRlFatweightpercent.setLayoutManager(mManager2);
+    mRlFatweightpercent.setAdapter(mMachineAdapter);
+  }
+  private void doPhotoPrint(View view) {
+    view.setDrawingCacheEnabled(true);
+    view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+    view.setDrawingCacheBackgroundColor(Color.WHITE);
+
+    // 把一个View转换成图片
+    Bitmap cachebmp = loadBitmapFromView(view);
+    PrintHelper photoPrinter = new PrintHelper(this);
+    photoPrinter.setScaleMode(PrintHelper.SCALE_MODE_FIT);
+    photoPrinter.printBitmap("droids.jpg - test print", cachebmp);
+  }
   private void viewSaveToImage(View view) {
     view.setDrawingCacheEnabled(true);
     view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);

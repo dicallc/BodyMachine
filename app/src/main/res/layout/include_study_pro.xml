@@ -11,7 +11,7 @@
       >
     <TextView
         android:layout_width="wrap_content"
-        android:textSize="10sp"
+        android:textSize="@dimen/big_title"
         android:textStyle="bold"
         android:text="研究项目:"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
     <TextView
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:textSize="10sp"
+        android:textSize="@dimen/sub_title"
         android:textStyle="bold"
         android:text="去脂体重"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:layout_width="0dp"
         android:textStyle="bold"
         android:id="@+id/txt_fat_free"
-        android:textSize="10sp"
+        android:textSize="@dimen/sub_title"
         android:text="59.5kg"
         android:layout_height="wrap_content"
         />
@@ -56,7 +56,7 @@
     <TextView
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:textSize="10sp"
+        android:textSize="@dimen/sub_title"
         android:textStyle="bold"
         android:text="基础代谢率"
         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:textStyle="bold"
-        android:textSize="10sp"
+        android:textSize="@dimen/sub_title"
         android:id="@+id/txt_basal_metabolism"
         android:text="1656kcal"
         android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
     <TextView
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:textSize="10sp"
+        android:textSize="@dimen/sub_title"
         android:textStyle="bold"
         android:text="肥胖度"
         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:textStyle="bold"
-        android:textSize="10sp"
+        android:textSize="@dimen/sub_title"
         android:id="@+id/txt_fat_degree"
         android:text="135%"
         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
     <TextView
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:textSize="10sp"
+        android:textSize="@dimen/sub_title"
         android:textStyle="bold"
         android:text="建议的热量摄入"
         android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:textStyle="bold"
-        android:textSize="10sp"
+        android:textSize="@dimen/sub_title"
         android:text="1656kcal"
         android:layout_height="wrap_content"
         />

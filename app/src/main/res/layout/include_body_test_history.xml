@@ -7,19 +7,21 @@
     android:layout_height="100dp"
     android:layout_marginTop="47dp"
     android:orientation="vertical"
-    android:paddingLeft="100dp"
+    android:paddingLeft="110dp"
     tools:showIn="@layout/print_layout"
     >
   <android.support.v7.widget.RecyclerView
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
+      android:id="@+id/rl_weight"
       android:orientation="vertical"
       >
   </android.support.v7.widget.RecyclerView>
   <android.support.v7.widget.RecyclerView
       android:layout_width="match_parent"
       android:layout_height="0dp"
+      android:id="@+id/rl_skeletalmuscle"
       android:layout_weight="1"
       android:orientation="vertical"
       >
@@ -28,6 +30,7 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
+      android:id="@+id/rl_fatweightpercent"
       android:orientation="vertical"
       >
   </android.support.v7.widget.RecyclerView>

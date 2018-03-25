@@ -13,7 +13,7 @@
       >
     <TextView
         android:layout_width="wrap_content"
-        android:textSize="12sp"
+        android:textSize="@dimen/big_title"
         android:textStyle="bold"
         android:text="肥胖评估"
         android:layout_height="wrap_content"
@@ -30,11 +30,11 @@
       android:orientation="horizontal"
       android:layout_marginTop="5dp"
       android:gravity="center_vertical"
-      android:layout_height="20dp"
+      android:layout_height="wrap_content"
       >
     <TextView
         android:layout_width="wrap_content"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:textStyle="bold"
         android:text="BMI:"
         android:layout_height="wrap_content"
@@ -47,21 +47,21 @@
         >
         <TextView
             android:layout_width="wrap_content"
-            android:textSize="9sp"
+            android:textSize="8sp"
             android:layout_marginLeft="5dp"
             android:layout_height="wrap_content"
             android:text="□正常"
             />
         <TextView
             android:layout_width="wrap_content"
-            android:textSize="9sp"
+            android:textSize="8sp"
             android:layout_marginLeft="5dp"
             android:layout_height="wrap_content"
             android:text="□低体重"
             />
         <TextView
             android:layout_width="wrap_content"
-            android:textSize="9sp"
+            android:textSize="8sp"
             android:layout_marginLeft="5dp"
             android:layout_height="wrap_content"
             android:text="□超重  "
@@ -73,22 +73,21 @@
   </LinearLayout>
   <TextView
       android:layout_width="wrap_content"
-      android:textSize="9sp"
+      android:textSize="@dimen/sub_title"
       android:layout_gravity="right"
-      android:layout_marginRight="20dp"
+      android:layout_marginRight="10dp"
       android:layout_height="wrap_content"
       android:text="□严重超重"
       />
   <LinearLayout
       android:layout_width="match_parent"
       android:orientation="horizontal"
-      android:layout_marginTop="5dp"
       android:gravity="center_vertical"
       android:layout_height="wrap_content"
       >
     <TextView
         android:layout_width="wrap_content"
-        android:textSize="10sp"
+        android:textSize="8sp"
         android:textStyle="bold"
         android:text="体重百分比:"
         android:layout_height="wrap_content"
@@ -106,15 +105,15 @@
           >
         <TextView
             android:layout_width="wrap_content"
-            android:textSize="9sp"
+            android:textSize="8sp"
             android:layout_height="wrap_content"
             android:text="□正常"
             />
         <TextView
             android:layout_width="wrap_content"
-            android:textSize="9sp"
+            android:textSize="8sp"
             android:layout_height="wrap_content"
-            android:text="□轻度肥胖"
+            android:text="□轻肥胖"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -134,7 +133,7 @@
       >
     <TextView
         android:layout_width="wrap_content"
-        android:textSize="10sp"
+        android:textSize="8sp"
         android:textStyle="bold"
         android:text="腰臂比:"
         android:layout_height="wrap_content"
@@ -174,7 +173,7 @@
           android:layout_width="match_parent"
           android:layout_weight="1"
           android:gravity="center"
-          android:textSize="12sp"
+          android:textSize="8sp"
           android:text="0.80 0.90"
           android:layout_height="0dp"
           />
@@ -194,7 +193,7 @@
       >
     <TextView
         android:layout_width="wrap_content"
-        android:textSize="10sp"
+        android:textSize="8sp"
         android:textStyle="bold"
         android:text="内脏脂肪等级:"
         android:layout_height="wrap_content"
@@ -234,7 +233,8 @@
       <TextView
           android:layout_width="match_parent"
           android:layout_weight="1"
-          android:textSize="12sp"
+          android:textSize="8sp"
+          android:layout_marginLeft="5dp"
           android:text="低标准 10 超标准"
           android:layout_height="0dp"
           />

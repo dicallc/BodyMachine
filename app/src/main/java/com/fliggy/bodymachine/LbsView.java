@@ -10,7 +10,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import com.fliggy.bodymachine.model.DeviderModel;
 import com.fliggy.bodymachine.utils.Arith;
-import com.socks.library.KLog;
 import java.util.ArrayList;
 
 /**
@@ -77,7 +76,7 @@ public class LbsView extends View {
   @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
     viewSize = w;//获取空间的尺寸，
-    KLog.e("Text", "viewSize:" + viewSize + "高度: " + h);
+    //KLog.e("Text", "viewSize:" + viewSize + "高度: " + h);
 
     //这个是我们上下左右需要用到的坐标点
     width_x_start = 0;
