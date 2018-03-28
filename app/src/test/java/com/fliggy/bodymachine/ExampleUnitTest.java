@@ -79,98 +79,98 @@ public class ExampleUnitTest {
     public void testFunction5() throws Exception {
       String mS = "5A0360009A10900C8C0C92083D085300D9009002130178007301040230021E001D011B009A0000030A00CD0215027600501D4100030077000B804B802B027600DE009B009E00A600A700D3001A0019006B006A016B034403CF03BF013A0139021C021927";
       //体重
-      String  weight= Utils.toResult(mS,6,10);
+      String  weight= Utils.toResultHasPoint(mS,6,10);
       //总阻抗
-      String  all_impedance= Utils.toResult(mS,10,14);
-      String  left_h_impedance= Utils.toResult(mS,14,18);
-      String  right_h_impedance= Utils.toResult(mS,18,22);
-      String  left_f_impedance= Utils.toResult(mS,22,26);
-      String  right_f_impedance= Utils.toResult(mS,26,30);
-      String  body_impedance= Utils.toResult(mS,30,34);
+      String  all_impedance= Utils.toResultHasPoint(mS,10,14);
+      String  left_h_impedance= Utils.toResultHasPoint(mS,14,18);
+      String  right_h_impedance= Utils.toResultHasPoint(mS,18,22);
+      String  left_f_impedance= Utils.toResultHasPoint(mS,22,26);
+      String  right_f_impedance= Utils.toResultHasPoint(mS,26,30);
+      String  body_impedance= Utils.toResultHasPoint(mS,30,34);
       //脂肪重
-      String  fat_weight= Utils.toResult(mS,34,38);
+      String  fat_weight= Utils.toResultHasPoint(mS,34,38);
       //肌肉重
-      String  muscle_weight= Utils.toResult(mS,38,42);
+      String  muscle_weight= Utils.toResultHasPoint(mS,38,42);
       //总水重
-      String  total_water_weight= Utils.toResult(mS,42,46);
+      String  total_water_weight= Utils.toResultHasPoint(mS,42,46);
       //细胞外液
-      String  extracellular_fluid= Utils.toResult(mS,46,50);
+      String  extracellular_fluid= Utils.toResultHasPoint(mS,46,50);
       //细胞内液
-      String  intracellular_Fluid= Utils.toResult(mS,50,54);
+      String  intracellular_Fluid= Utils.toResultHasPoint(mS,50,54);
       //去脂体重
-      String  fat_free= Utils.toResult(mS,54,58);
+      String  fat_free= Utils.toResultHasPoint(mS,54,58);
       //标准肌肉
-      String  Standard_muscle= Utils.toResult(mS,58,62);
+      String  Standard_muscle= Utils.toResultHasPoint(mS,58,62);
       //骨盐量
-      String  Bone_salt_content = Utils.toResult(mS,62,66);
+      String  Bone_salt_content = Utils.toResultHasPoint(mS,62,66);
       //骨骼肌重
-      String   skeletal_muscle = Utils.toResult(mS,66,70);
+      String   skeletal_muscle = Utils.toResultHasPoint(mS,66,70);
       //蛋白质
-      String    protein = Utils.toResult(mS,70,74);
+      String    protein = Utils.toResultHasPoint(mS,70,74);
       //体质指数
-      String    physique_num = Utils.toResult(mS,74,78);
+      String    physique_num = Utils.toResultHasPoint(mS,74,78);
       //基础代谢
-      String    basal_metabolism = Utils.toResult(mS,78,82);
+      String    basal_metabolism = Utils.toResultHasPoint(mS,78,82);
       //体脂百分比
-      String    Body_fat_percentage = Utils.toResult(mS,82,86);
+      String    Body_fat_percentage = Utils.toResultHasPoint(mS,82,86);
       //含水百分比
-      String    Percentage_of_water  = Utils.toResult(mS,86,90);
+      String    Percentage_of_water  = Utils.toResultHasPoint(mS,86,90);
       //标准体重
-      String    stander_weight  = Utils.toResult(mS,90,94);
+      String    stander_weight  = Utils.toResultHasPoint(mS,90,94);
       //内脏脂肪等级
-      String    visceral_fat  = Utils.toResult(mS,94,98);
+      String    visceral_fat  = Utils.toResultHasPoint(mS,94,98);
       //身体年龄
-      String    physical_age   = Utils.toResult(mS,98,100);
+      String    physical_age   = Utils.toResultHasPoint(mS,98,100);
       //身体评分
-      String    Body_score    = Utils.toResult(mS,100,102);
+      String    Body_score    = Utils.toResultHasPoint(mS,100,102);
       //水肿度
-      String    Edematous_degree    = Utils.toResult(mS,102,106);
+      String    Edematous_degree    = Utils.toResultHasPoint(mS,102,106);
       //肥胖度
-      String    Fat_degree     = Utils.toResult(mS,106,110);
+      String    Fat_degree     = Utils.toResultHasPoint(mS,106,110);
       //肌肉控制
-      String    Muscle_control     = Utils.toResult(mS,110,114);
+      String    Muscle_control     = Utils.toResultHasPoint(mS,110,114);
       //体重控制
-      String    Weight_control     = Utils.toResult(mS,114,118);
+      String    Weight_control     = Utils.toResultHasPoint(mS,114,118);
       //脂肪控制
-      String    Fat_control     = Utils.toResult(mS,118,122);
+      String    Fat_control     = Utils.toResultHasPoint(mS,118,122);
       //no
-      String    no_one     = Utils.toResult(mS,122,126);
+      String    no_one     = Utils.toResultHasPoint(mS,122,126);
       //躯干脂肪率
-      String    Trunk_fat_rate      = Utils.toResult(mS,126,130);
+      String    Trunk_fat_rate      = Utils.toResultHasPoint(mS,126,130);
       //右手脂肪率
-      String    Right_hand_fat_rate       = Utils.toResult(mS,130,134);
+      String    Right_hand_fat_rate       = Utils.toResultHasPoint(mS,130,134);
       //左手脂肪率
-      String    Left_hand_fat_ratio       = Utils.toResult(mS,134,138);
+      String    Left_hand_fat_ratio       = Utils.toResultHasPoint(mS,134,138);
       //右脚脂肪率
-      String    Right_foot_fat_ratio        = Utils.toResult(mS,138,142);
+      String    Right_foot_fat_ratio        = Utils.toResultHasPoint(mS,138,142);
       //左脚脂肪率
-      String    LEFT_foot_fat_ratio        = Utils.toResult(mS,142,146);
+      String    LEFT_foot_fat_ratio        = Utils.toResultHasPoint(mS,142,146);
       //躯干肌肉量
-      String    Trunk_muscle_volume        = Utils.toResult(mS,146,150);
+      String    Trunk_muscle_volume        = Utils.toResultHasPoint(mS,146,150);
       //右手肌肉量
-      String    Right_hand_muscle_volume        = Utils.toResult(mS,150,154);
+      String    Right_hand_muscle_volume        = Utils.toResultHasPoint(mS,150,154);
       //左手肌肉
-      String    LEFT_hand_muscle_volume        = Utils.toResult(mS,154,158);
+      String    LEFT_hand_muscle_volume        = Utils.toResultHasPoint(mS,154,158);
       //右脚肌肉
-      String    Right_root_muscle_volume        = Utils.toResult(mS,158,162);
+      String    Right_root_muscle_volume        = Utils.toResultHasPoint(mS,158,162);
       //左脚肌肉
-      String    LEFT_root_muscle_volume        = Utils.toResult(mS,162,166);
+      String    LEFT_root_muscle_volume        = Utils.toResultHasPoint(mS,162,166);
       //颈围
-      String    Neck_circumference        = Utils.toResult(mS,166,170);
+      String    Neck_circumference        = Utils.toResultHasPoint(mS,166,170);
       //腰围
-      String    waist        = Utils.toResult(mS,170,174);
+      String    waist        = Utils.toResultHasPoint(mS,170,174);
       //臀围
-      String    Hipline        = Utils.toResult(mS,174,178);
+      String    Hipline        = Utils.toResultHasPoint(mS,174,178);
       //胸围
-      String    Bust        = Utils.toResult(mS,178,182);
+      String    Bust        = Utils.toResultHasPoint(mS,178,182);
       //右上臂围
-      String    r_t_Hipline        = Utils.toResult(mS,182,186);
+      String    r_t_Hipline        = Utils.toResultHasPoint(mS,182,186);
       //左上臂围
-      String    l_t_Hipline        = Utils.toResult(mS,186,190);
+      String    l_t_Hipline        = Utils.toResultHasPoint(mS,186,190);
       //右大腿围
-      String    r_b_Hipline        = Utils.toResult(mS,190,194);
+      String    r_b_Hipline        = Utils.toResultHasPoint(mS,190,194);
       //左大腿围
-      String    l_b_Hipline        = Utils.toResult(mS,194,198);
+      String    l_b_Hipline        = Utils.toResultHasPoint(mS,194,198);
 
       KLog.e(weight);
     }
@@ -196,5 +196,11 @@ public class ExampleUnitTest {
   public void testFunction9() {
     String authKey = "5A040601F400000000AB";
     Utils.toResult(authKey,6,8);
+  }
+  @Test
+  public void testFunction10() {
+    float authKey = 154;
+    float mI = authKey / 10;
+    KLog.e(mI);
   }
 }
