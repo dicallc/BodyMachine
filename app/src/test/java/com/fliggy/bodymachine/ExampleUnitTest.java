@@ -2,6 +2,7 @@ package com.fliggy.bodymachine;
 
 import android.serialport.utils.NumUtils;
 import android.serialport.utils.Utils;
+import com.fliggy.bodymachine.utils.Arith;
 import com.socks.library.KLog;
 import java.io.File;
 import java.io.FileInputStream;
@@ -203,7 +204,7 @@ public class ExampleUnitTest {
     KLog.e(mDiv);
   }
   @Test
-  public void testFunction10() {
+  public void testFunction11() {
     float authKey = 154;
     float mI = authKey / 10;
     KLog.e(mI);

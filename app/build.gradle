@@ -51,5 +51,4 @@ dependencies {
     implementation project(':serialport_bin')
     compile project(':http-module')
     compile 'com.android.support:recyclerview-v7:27.0.2'
-    compile 'com.zhy:percent-support-extends:1.1.1'
 }
