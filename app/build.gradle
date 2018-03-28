@@ -6,6 +6,20 @@ realm {
 }
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    signingConfigs {
+        release {
+            keyAlias 'feitianzhu'
+            keyPassword 'kaisa008'
+            storeFile file('../key/product.jks')
+            storePassword 'bailtravel'
+        }
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('../key/debug.keystore')
+            storePassword 'android'
+        }
+    }
     defaultConfig {
         applicationId "com.fliggy.bodymachine"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -13,6 +27,11 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //APP的build.gradle设置支持的SO库架构
+            abiFilters 'armeabi'
+            //      abiFilters 'armeabi', 'armeabi-v7a'
+        }
     }
     buildTypes {
         release {
@@ -32,4 +51,5 @@ dependencies {
     implementation project(':serialport_bin')
     compile project(':http-module')
     compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile 'com.zhy:percent-support-extends:1.1.1'
 }

@@ -9,6 +9,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 import com.fliggy.bodymachine.model.DeviderModel;
+import com.fliggy.bodymachine.utils.Arith;
 import com.socks.library.KLog;
 import java.util.ArrayList;
 
@@ -32,14 +33,14 @@ public class LbsView extends View {
   private Paint mRectGrayPaint;
   private ArrayList<String> arrDeviderText;
   private int devider_limit;
-  private int devider_limit_num;
+  private float devider_limit_num;
 
   public LbsView(Context context, AttributeSet attrs) {
     super(context, attrs);
     //第一步，初始化对象
     linePaint = new Paint();
     linePaint.setColor(Color.BLACK);//线条的颜色
-    linePaint.setStrokeWidth(8);//线条的宽度
+    linePaint.setStrokeWidth(1);//线条的宽度
     linePaint.setAntiAlias(true);//取消锯齿
     linePaint.setStyle(Paint.Style.STROKE);//粗线
     initNormalR();
@@ -49,10 +50,10 @@ public class LbsView extends View {
 
     mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG | Paint.LINEAR_TEXT_FLAG);
     mTextPaint.setColor(Color.BLACK);
-    mTextPaint.setTextSize(36);
+    mTextPaint.setTextSize(8);
     mTextBigPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG | Paint.LINEAR_TEXT_FLAG);
     mTextBigPaint.setColor(Color.BLACK);
-    mTextBigPaint.setTextSize(54);
+    mTextBigPaint.setTextSize(10);
   }
 
   private void initNormalR() {
@@ -79,8 +80,8 @@ public class LbsView extends View {
     KLog.e("Text", "viewSize:" + viewSize + "高度: " + h);
 
     //这个是我们上下左右需要用到的坐标点
-    width_x_start = viewSize * (1 / 16f);
-    width_y_start = viewSize * (1 / 16f);
+    width_x_start = 0;
+    width_y_start = 0;
     height = h;
     width_x_end = viewSize * (15 / 16f);
   }
@@ -129,30 +130,39 @@ public class LbsView extends View {
     float preResult = width_x_start;
     for (int i = 0; i < 11; i++) {
       float devider_w1 = width_x_start + width_x_end * ((1 + (i * 2)) / 24f);
-      canvas.drawLine(devider_w1, width_y_start, devider_w1, width_y_start + 30, linePaint);
+      //画间隔线 间隔线高度是y轴1/6  0.16
+      float d_line_end_y = width_y_start + Arith.div(height+"", "6");
+      canvas.drawLine(devider_w1, width_y_start, devider_w1, d_line_end_y, linePaint);
+      //如果到最后需要画上一个百分号和一个数值
+      if (i == 10) {
+        canvas.drawText("%", width_x_end - 10, d_line_end_y+5, mTextPaint);
+      }
+      float d_num_end_y = width_y_start + Arith.div(height+"", "2.57");
       if (arrDeviderText.size() == 11) {
-        canvas.drawText(arrDeviderText.get(i) + "", devider_w1 - 30, width_y_start + 65,
+        //间隔标刻数字 x坐标-5是居中，y坐标 数字长度为高度1/4 0.25
+        canvas.drawText(arrDeviderText.get(i) + "", devider_w1-5 , d_num_end_y+2,
             mTextPaint);
       }
       //如果遍历循环i小与传入最大值才可以绘制
+      //区间矩形 y坐标开始是1.9 0.55
+      float d_rect_end_y = width_y_start + Arith.div(height+"", "1.9");
+      float d_rect_end_h = width_y_start + Arith.div(height+"", "4.5");
+      float d_rect_end_2h = d_rect_end_h*2;
       if (i < devider_limit) {
+
         if (i == 4 || i == 5) {
-          canvas.drawRect(preResult + 3, width_y_start + 95, devider_w1 - 3, width_y_start + 120,
+          canvas.drawRect(preResult + 3, d_rect_end_y+d_rect_end_h, devider_w1 - 3, d_rect_end_y + d_rect_end_2h,
               mRectGrayPaint);
         } else {
-          canvas.drawRect(preResult + 3, width_y_start + 95, devider_w1 - 3, width_y_start + 120,
+          canvas.drawRect(preResult+2, d_rect_end_y+d_rect_end_h, devider_w1, d_rect_end_y + d_rect_end_2h,
               mRectPaint);
         }
       }else if(i==devider_limit){
-        canvas.drawText(devider_limit_num+"", preResult + 10, width_y_start + 125, mTextBigPaint);
-
+        canvas.drawText(devider_limit_num+"", preResult, d_rect_end_y +d_rect_end_2h, mTextBigPaint);
       }else{
 
       }
-      //如果到最后需要画上一个百分号和一个数值
-      if (i == 10) {
-        canvas.drawText("%", width_x_end - 20, width_y_start + 40, mTextPaint);
-      }
+
       preResult = devider_w1;
     }
   }

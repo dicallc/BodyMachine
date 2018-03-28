@@ -10,6 +10,6 @@ public class DeviderModel {
 
   public ArrayList<String> devider_text;
   public int devider_limit;
-  public int devider_limit_num;
+  public float devider_limit_num;
 
 }

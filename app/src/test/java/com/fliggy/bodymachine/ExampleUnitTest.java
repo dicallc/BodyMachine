@@ -138,7 +138,7 @@ public class ExampleUnitTest {
       //躯干脂肪率
       String    Trunk_fat_rate      = Utils.toResultHasPoint(mS,126,130);
       //右手脂肪率
-      String    Right_hand_fat_rate       = Utils.toResultHasPoint(mS,130,134);
+      String    Right_hand_fat_rate       = Utils.toResult(mS,130,134);
       //左手脂肪率
       String    Left_hand_fat_ratio       = Utils.toResultHasPoint(mS,134,138);
       //右脚脂肪率
@@ -196,6 +196,11 @@ public class ExampleUnitTest {
   public void testFunction9() {
     String authKey = "5A040601F400000000AB";
     Utils.toResult(authKey,6,8);
+  }
+  @Test
+  public void testFunction10() {
+    double mDiv = Arith.div("95", "1.9");
+    KLog.e(mDiv);
   }
   @Test
   public void testFunction10() {
