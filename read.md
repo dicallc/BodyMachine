@@ -51,3 +51,6 @@ https://www.jianshu.com/p/e5004d75bd9c
 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 数据库框架使用
 http://blog.csdn.net/jack_king007/article/details/70227721#comments
+
+### wifi打印
+https://blog.csdn.net/m0_37686934/article/details/79373976
