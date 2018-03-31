@@ -198,102 +198,102 @@ public class Utils {
     stringBuffer.append("左大腿围："+l_b_Hipline+"\n");
     return stringBuffer.toString();
   }
-  public static BodyInfoModel toShowFinalResultModel(String mS){
-    BodyInfoModel mModel = new BodyInfoModel();
-    mModel.  weight= Utils.toResultHasPoint(mS,6,10);
-    //总阻抗
-    mModel.  all_impedance= Utils.toResultHasPoint(mS,10,14);
-    mModel.  left_h_impedance= Utils.toResultHasPoint(mS,14,18);
-    mModel.  right_h_impedance= Utils.toResultHasPoint(mS,18,22);
-    mModel.  left_f_impedance= Utils.toResultHasPoint(mS,22,26);
-    mModel.  right_f_impedance= Utils.toResultHasPoint(mS,26,30);
-    mModel.  body_impedance= Utils.toResultHasPoint(mS,30,34);
-    //脂肪重
-    mModel.  fat_weight= Utils.toResultHasPoint(mS,34,38);
-    //肌肉重
-    mModel.  muscle_weight= Utils.toResultHasPoint(mS,38,42);
-    //总水重
-    mModel.  total_water_weight= Utils.toResultHasPoint(mS,42,46);
-    //细胞外液
-    mModel.  extracellular_fluid= Utils.toResultHasPoint(mS,46,50);
-    //细胞内液
-    mModel.  intracellular_Fluid= Utils.toResultHasPoint(mS,50,54);
-    //去脂体重
-    mModel.  fat_free= Utils.toResultHasPoint(mS,54,58);
-    //标准肌肉
-    mModel.  Standard_muscle= Utils.toResultHasPoint(mS,58,62);
-    //骨盐量
-    mModel.  Bone_salt_content = Utils.toResultHasPoint(mS,62,66);
-    //骨骼肌重
-    mModel.   skeletal_muscle = Utils.toResultHasPoint(mS,66,70);
-    //蛋白质
-    mModel.    protein = Utils.toResultHasPoint(mS,70,74);
-    //体质指数
-    mModel.    physique_num = Utils.toResultHasPoint(mS,74,78);
-    //基础代谢
-    mModel.    basal_metabolism = Utils.toResultHasPoint(mS,78,82);
-    //体脂百分比
-    mModel.    Body_fat_percentage = Utils.toResultHasPoint(mS,82,86);
-    //含水百分比
-    mModel.    Percentage_of_water  = Utils.toResultHasPoint(mS,86,90);
-    //标准体重
-    mModel.    stander_weight  = Utils.toResultHasPoint(mS,90,94);
-    //内脏脂肪等级
-    mModel.    visceral_fat  = Utils.toResultHasPoint(mS,94,98);
-    //身体年龄
-    mModel.    physical_age   = Utils.toResultHasPoint(mS,98,100);
-    //身体评分
-    mModel.    Body_score    = Utils.toResultHasPoint(mS,100,102);
-    //水肿度
-    mModel.    Edematous_degree    = Utils.toResultHasPoint(mS,102,106);
-    //肥胖度
-    mModel.    Fat_degree     = Utils.toResultHasPoint(mS,106,110);
-    //肌肉控制
-    mModel.    Muscle_control     = Utils.toResultHasPoint(mS,110,114);
-    //体重控制
-    mModel.    Weight_control     = Utils.toResultHasPoint(mS,114,118);
-    //脂肪控制
-    mModel.    Fat_control     = Utils.toResultHasPoint(mS,118,122);
-    //no
-    mModel.    no_one     = Utils.toResultHasPoint(mS,122,126);
-    //躯干脂肪率
-    mModel.    Trunk_fat_rate      = Utils.toResultHasPoint(mS,126,130);
-    //右手脂肪率
-    mModel.    Right_hand_fat_rate       = Utils.toResultHasPoint(mS,130,134);
-    //左手脂肪率
-    mModel.    Left_hand_fat_ratio       = Utils.toResultHasPoint(mS,134,138);
-    //右脚脂肪率
-    mModel.    Right_foot_fat_ratio        = Utils.toResultHasPoint(mS,138,142);
-    //左脚脂肪率
-    mModel.    LEFT_foot_fat_ratio        = Utils.toResultHasPoint(mS,142,146);
-    //躯干肌肉量
-    mModel.    Trunk_muscle_volume        = Utils.toResultHasPoint(mS,146,150);
-    //右手肌肉量
-    mModel.    Right_hand_muscle_volume        = Utils.toResultHasPoint(mS,150,154);
-    //左手肌肉
-    mModel.    LEFT_hand_muscle_volume        = Utils.toResultHasPoint(mS,154,158);
-    //右脚肌肉
-    mModel.    Right_root_muscle_volume        = Utils.toResultHasPoint(mS,158,162);
-    //左脚肌肉
-    mModel.    LEFT_root_muscle_volume        = Utils.toResultHasPoint(mS,162,166);
-    //颈围
-    mModel.    Neck_circumference        = Utils.toResultHasPoint(mS,166,170);
-    //腰围
-    mModel.    waist        = Utils.toResultHasPoint(mS,170,174);
-    //臀围
-    mModel.    Hipline        = Utils.toResultHasPoint(mS,174,178);
-    //胸围
-    mModel.    Bust        = Utils.toResultHasPoint(mS,178,182);
-    //右上臂围
-    mModel.    r_t_Hipline        = Utils.toResultHasPoint(mS,182,186);
-    //左上臂围
-    mModel.    l_t_Hipline        = Utils.toResultHasPoint(mS,186,190);
-    //右大腿围
-    mModel.    r_b_Hipline        = Utils.toResultHasPoint(mS,190,194);
-    //左大腿围
-    mModel.    l_b_Hipline        = Utils.toResultHasPoint(mS,194,198);
-    return mModel;
-  }
+  //public static BodyInfoModel toShowFinalResultModel(String mS){
+  //  BodyInfoModel mModel = new BodyInfoModel();
+  //  mModel.  weight= Utils.toResultHasPoint(mS,6,10);
+  //  //总阻抗
+  //  mModel.  all_impedance= Utils.toResultHasPoint(mS,10,14);
+  //  mModel.  left_h_impedance= Utils.toResultHasPoint(mS,14,18);
+  //  mModel.  right_h_impedance= Utils.toResultHasPoint(mS,18,22);
+  //  mModel.  left_f_impedance= Utils.toResultHasPoint(mS,22,26);
+  //  mModel.  right_f_impedance= Utils.toResultHasPoint(mS,26,30);
+  //  mModel.  body_impedance= Utils.toResultHasPoint(mS,30,34);
+  //  //脂肪重
+  //  mModel.  fat_weight= Utils.toResultHasPoint(mS,34,38);
+  //  //肌肉重
+  //  mModel.  muscle_weight= Utils.toResultHasPoint(mS,38,42);
+  //  //总水重
+  //  mModel.  total_water_weight= Utils.toResultHasPoint(mS,42,46);
+  //  //细胞外液
+  //  mModel.  extracellular_fluid= Utils.toResultHasPoint(mS,46,50);
+  //  //细胞内液
+  //  mModel.  intracellular_Fluid= Utils.toResultHasPoint(mS,50,54);
+  //  //去脂体重
+  //  mModel.  fat_free= Utils.toResultHasPoint(mS,54,58);
+  //  //标准肌肉
+  //  mModel.  Standard_muscle= Utils.toResultHasPoint(mS,58,62);
+  //  //骨盐量
+  //  mModel.  Bone_salt_content = Utils.toResultHasPoint(mS,62,66);
+  //  //骨骼肌重
+  //  mModel.   skeletal_muscle = Utils.toResultHasPoint(mS,66,70);
+  //  //蛋白质
+  //  mModel.    protein = Utils.toResultHasPoint(mS,70,74);
+  //  //体质指数
+  //  mModel.    physique_num = Utils.toResultHasPoint(mS,74,78);
+  //  //基础代谢
+  //  mModel.    basal_metabolism = Utils.toResultHasPoint(mS,78,82);
+  //  //体脂百分比
+  //  mModel.    Body_fat_percentage = Utils.toResultHasPoint(mS,82,86);
+  //  //含水百分比
+  //  mModel.    Percentage_of_water  = Utils.toResultHasPoint(mS,86,90);
+  //  //标准体重
+  //  mModel.    stander_weight  = Utils.toResultHasPoint(mS,90,94);
+  //  //内脏脂肪等级
+  //  mModel.    visceral_fat  = Utils.toResultHasPoint(mS,94,98);
+  //  //身体年龄
+  //  mModel.    physical_age   = Utils.toResultHasPoint(mS,98,100);
+  //  //身体评分
+  //  mModel.    Body_score    = Utils.toResultHasPoint(mS,100,102);
+  //  //水肿度
+  //  mModel.    Edematous_degree    = Utils.toResultHasPoint(mS,102,106);
+  //  //肥胖度
+  //  mModel.    Fat_degree     = Utils.toResultHasPoint(mS,106,110);
+  //  //肌肉控制
+  //  mModel.    Muscle_control     = Utils.toResultHasPoint(mS,110,114);
+  //  //体重控制
+  //  mModel.    Weight_control     = Utils.toResultHasPoint(mS,114,118);
+  //  //脂肪控制
+  //  mModel.    Fat_control     = Utils.toResultHasPoint(mS,118,122);
+  //  //no
+  //  mModel.    no_one     = Utils.toResultHasPoint(mS,122,126);
+  //  //躯干脂肪率
+  //  mModel.    Trunk_fat_rate      = Utils.toResultHasPoint(mS,126,130);
+  //  //右手脂肪率
+  //  mModel.    Right_hand_fat_rate       = Utils.toResultHasPoint(mS,130,134);
+  //  //左手脂肪率
+  //  mModel.    Left_hand_fat_ratio       = Utils.toResultHasPoint(mS,134,138);
+  //  //右脚脂肪率
+  //  mModel.    Right_foot_fat_ratio        = Utils.toResultHasPoint(mS,138,142);
+  //  //左脚脂肪率
+  //  mModel.    LEFT_foot_fat_ratio        = Utils.toResultHasPoint(mS,142,146);
+  //  //躯干肌肉量
+  //  mModel.    Trunk_muscle_volume        = Utils.toResultHasPoint(mS,146,150);
+  //  //右手肌肉量
+  //  mModel.    Right_hand_muscle_volume        = Utils.toResultHasPoint(mS,150,154);
+  //  //左手肌肉
+  //  mModel.    LEFT_hand_muscle_volume        = Utils.toResultHasPoint(mS,154,158);
+  //  //右脚肌肉
+  //  mModel.    Right_root_muscle_volume        = Utils.toResultHasPoint(mS,158,162);
+  //  //左脚肌肉
+  //  mModel.    LEFT_root_muscle_volume        = Utils.toResultHasPoint(mS,162,166);
+  //  //颈围
+  //  mModel.    Neck_circumference        = Utils.toResultHasPoint(mS,166,170);
+  //  //腰围
+  //  mModel.    waist        = Utils.toResultHasPoint(mS,170,174);
+  //  //臀围
+  //  mModel.    Hipline        = Utils.toResultHasPoint(mS,174,178);
+  //  //胸围
+  //  mModel.    Bust        = Utils.toResultHasPoint(mS,178,182);
+  //  //右上臂围
+  //  mModel.    r_t_Hipline        = Utils.toResultHasPoint(mS,182,186);
+  //  //左上臂围
+  //  mModel.    l_t_Hipline        = Utils.toResultHasPoint(mS,186,190);
+  //  //右大腿围
+  //  mModel.    r_b_Hipline        = Utils.toResultHasPoint(mS,190,194);
+  //  //左大腿围
+  //  mModel.    l_b_Hipline        = Utils.toResultHasPoint(mS,194,198);
+  //  return mModel;
+  //}
 
   /**
    * 发送开始测量指令

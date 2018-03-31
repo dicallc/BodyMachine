@@ -67,4 +67,5 @@ dependencies {
     implementation project(':serialport_bin')
     compile project(':http-module')
     compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile 'org.greenrobot:eventbus:3.1.1'
 }

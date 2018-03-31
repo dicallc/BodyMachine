@@ -54,3 +54,7 @@ http://blog.csdn.net/jack_king007/article/details/70227721#comments
 
 ### wifi打印
 https://blog.csdn.net/m0_37686934/article/details/79373976
+
+### releam操作
+
+https://www.jianshu.com/p/28912c2f31db
