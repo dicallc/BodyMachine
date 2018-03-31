@@ -15,7 +15,7 @@ http://blog.csdn.net/junfeng120125/article/details/9328947
 
 ### keys:
 password:kaisa008
-alias:bodymachine
+alias:fliggy
 #### Android与串口设备通信的方案：
 
 * 直接用SDK的BluetoothSocket类来进行蓝牙通信，外部设备再用蓝牙转串口进行控制。这种方式有较高延时，蓝牙模块需要供电，低带宽。
@@ -51,3 +51,10 @@ https://www.jianshu.com/p/e5004d75bd9c
 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 数据库框架使用
 http://blog.csdn.net/jack_king007/article/details/70227721#comments
+
+### wifi打印
+https://blog.csdn.net/m0_37686934/article/details/79373976
+
+### releam操作
+
+https://www.jianshu.com/p/28912c2f31db
