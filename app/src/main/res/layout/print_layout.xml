@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_view"
     android:layout_height="match_parent"
-    android:background="@drawable/layout"
     android:orientation="vertical"
     >
   <include layout="@layout/include_base_info"/>

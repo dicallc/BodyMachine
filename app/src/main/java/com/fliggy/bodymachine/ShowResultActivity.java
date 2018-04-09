@@ -1,6 +1,5 @@
 package com.fliggy.bodymachine;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,7 +7,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.print.PrintHelper;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import com.fliggy.bodymachine.adapter.MachineAdapter;
 import com.fliggy.bodymachine.model.DeviderModel;
 import com.fliggy.bodymachine.utils.DataSource;
+import com.fliggy.bodymachine.view.LoadingDialogFragment;
 import com.socks.library.KLog;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,7 +32,7 @@ import java.util.List;
  * Created by dicallc on 2018/3/20.
  */
 
-public class ShowResultActivity extends Activity {
+public class ShowResultActivity extends AppCompatActivity {
 
   @BindView(R.id.user_id) TextView mUserId;
   @BindView(R.id.user_height) TextView mUserHeight;
@@ -63,6 +65,10 @@ public class ShowResultActivity extends Activity {
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    LoadingDialogFragment mdf = new LoadingDialogFragment();
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+    mdf.show(ft, "df");
     setContentView(R.layout.print_layout);
     ButterKnife.bind(this);
     initView();

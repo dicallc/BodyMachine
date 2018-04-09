@@ -1,11 +1,10 @@
 package com.fliggy.bodymachine;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import com.fliggy.bodymachine.model.BodyInfoModel;
 import android.serialport.utils.SerialDataUtils;
 import android.serialport.utils.SimpleSerialPortUtil;
 import android.serialport.utils.Utils;
@@ -17,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -27,9 +25,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.fliggy.bodymachine.base.BasePrintActivity;
-import com.fliggy.bodymachine.model.DeviderModel;
+import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.model.MessageEvent;
-import com.fliggy.bodymachine.utils.DataSource;
 import com.fliggy.bodymachine.utils.ToastUtils;
 import com.fliggy.bodymachine.utils.print.PrintUtil;
 import com.socks.library.KLog;
@@ -245,12 +242,15 @@ public class MainActivity extends BasePrintActivity {
   }
 
   private void StartPrint() {
-    if (null == mBodyInfoModel) {
-      ToastUtils.showShortToast("还没有得到数据，无法打印");
-      return;
-    }
-    buildProgressDialog("正在打印");
-    getPrintPic();
+    //if (null == mBodyInfoModel) {
+    //  ToastUtils.showShortToast("还没有得到数据，无法打印");
+    //  return;
+    //}
+
+    Intent mIntent=new Intent(this,ShowResultActivity.class);
+    startActivity(mIntent);
+    //buildProgressDialog("正在打印");
+    //getPrintPic();
   }
 
   private void StartClear() {
@@ -295,64 +295,16 @@ public class MainActivity extends BasePrintActivity {
     mSerialPort.sendCmds(str);
   }
 
-  private void saveData() {
-    //realm.executeTransaction(new Realm.Transaction() {
-    //  @Override public void execute(Realm realm) {
-    //
-    //  }
-    //});
-  }
 
-  @BindView(R.id.user_id) TextView mUserId;
-  @BindView(R.id.user_height) TextView mUserHeight;
-  @BindView(R.id.user_age) TextView mUserAge;
-  @BindView(R.id.user_sex) TextView mUserSex;
-  @BindView(R.id.user_test_time) TextView mUserTestTime;
-  @BindView(R.id.user_total_water_weight) TextView mUserTotalWaterWeight;
-  @BindView(R.id.user_protein) TextView mUserProtein;
-  @BindView(R.id.user_weight) TextView mUserWeight;
-  @BindView(R.id.ly_body_info) LinearLayout mLyBodyInfo;
-  @BindView(R.id.txt_body_score) TextView mTxtBodyScore;
-  @BindView(R.id.txt_weight_control) TextView mTxtWeightControl;
-  @BindView(R.id.txt_fat_control) TextView mTxtFatControl;
-  @BindView(R.id.txt_muscle_control) TextView mTxtMuscleControl;
-  @BindView(R.id.txt_visceral_fat) TextView mTxtVisceralFat;
-  @BindView(R.id.txt_fat_free) TextView mTxtFatFree;
-  @BindView(R.id.txt_basal_metabolism) TextView mTxtBasalMetabolism;
-  @BindView(R.id.txt_fat_degree) TextView mTxtFatDegree;
-  @BindView(R.id.root_view) LinearLayout mRootView;
-  @BindView(R.id.lbs_weight_view) LbsView mLbsWeightView;
-  @BindView(R.id.lbs_skeletalmuscle_view) LbsView mLbsSkeletalmuscleView;
-  @BindView(R.id.lbs_fatweight_view) LbsView mLbsFatweightView;
-  @BindView(R.id.ly_baseinfo) LinearLayout mLyBaseinfo;
-  @BindView(R.id.lbs_physique_view) LbsView mLbsPhysiqueView;
-  @BindView(R.id.lbs_bodyfatpercentage_view) LbsView mLbsBodyfatpercentageView;
 
-  private void getPrintPic() {
-    View mView = View.inflate(this, R.layout.print_layout, null);
-    ButterKnife.bind(this, mView);
-    DeviderModel mWeightDevider = DataSource.getDevider(DataSource.getWeightData(), "115");
-    mLbsWeightView.setData(mWeightDevider);
-    mLbsSkeletalmuscleView.setData(
-        DataSource.getDevider(DataSource.getSkeletalMuscleData(), "120"));
-    mLbsFatweightView.setData(DataSource.getDevider(DataSource.getFatWeight(), "91.7"));
-    mLbsPhysiqueView.setData(DataSource.getDevider(DataSource.getPhysiqueNum(), "53.1"));
-    mLbsBodyfatpercentageView.setData(
-        DataSource.getDevider(DataSource.getBodyFatPercentage(), "45"));
-    //保存前置
-    mRootView.setDrawingCacheEnabled(true);
-    mRootView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-    mRootView.setDrawingCacheBackgroundColor(Color.WHITE);
-    new Thread(mRunnable).start();
-  }
 
-  Runnable mRunnable = new Runnable() {
-    @Override public void run() {
-      String mImage = viewSaveToImage(mRootView);
-      MessageEvent mMessageEvent = new MessageEvent(MessageEvent.GET_PIC, mImage);
-      EventBus.getDefault().post(mMessageEvent);
-    }
-  };
+  //Runnable mRunnable = new Runnable() {
+  //  @Override public void run() {
+  //    String mImage = viewSaveToImage(mRootView);
+  //    MessageEvent mMessageEvent = new MessageEvent(MessageEvent.GET_PIC, mImage);
+  //    EventBus.getDefault().post(mMessageEvent);
+  //  }
+  //};
 
   @Subscribe(threadMode = ThreadMode.MAIN) public void Event(MessageEvent messageEvent) {
     switch (messageEvent.type) {
