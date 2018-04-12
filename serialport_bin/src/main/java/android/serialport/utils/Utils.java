@@ -64,9 +64,9 @@ public class Utils {
     String  right_f_impedance= Utils.toResultHasPoint(mS,26,30);
     String  body_impedance= Utils.toResultHasPoint(mS,30,34);
     stringBuffer.append("体重："+weight+"\n");
-    stringBuffer.append("总阻抗："+all_impedance+"\n");
+    //stringBuffer.append("总阻抗："+all_impedance+"\n");
     stringBuffer.append("左手："+left_h_impedance+"\n");
-    stringBuffer.append("左手："+right_h_impedance+"\n");
+    stringBuffer.append("右手："+right_h_impedance+"\n");
     stringBuffer.append("左脚："+left_f_impedance+"\n");
     stringBuffer.append("右脚："+right_f_impedance+"\n");
     stringBuffer.append("躯干："+body_impedance+"\n");
@@ -91,8 +91,8 @@ public class Utils {
     //骨骼肌重
     String   skeletal_muscle = Utils.toResultHasPoint(mS,66,70);
     stringBuffer.append("总水重："+total_water_weight+"\n");
-    stringBuffer.append("细胞外液："+extracellular_fluid+"\n");
-    stringBuffer.append("细胞内液："+intracellular_Fluid+"\n");
+    //stringBuffer.append("细胞外液："+extracellular_fluid+"\n");
+    //stringBuffer.append("细胞内液："+intracellular_Fluid+"\n");
     stringBuffer.append("去脂体重："+fat_free+"\n");
     stringBuffer.append("标准肌肉："+Standard_muscle+"\n");
     stringBuffer.append("骨盐量："+Bone_salt_content+"\n");
@@ -112,7 +112,7 @@ public class Utils {
     //内脏脂肪等级
     String    visceral_fat  = Utils.toResultHasPoint(mS,94,98);
     //身体年龄
-    String    physical_age   = Utils.toResultHasPoint(mS,98,100);
+    String    physical_age   = Utils.toResult(mS,98,100);
     //身体评分
     String    Body_score    = Utils.toResultHasPoint(mS,100,102);
     //水肿度
@@ -134,8 +134,8 @@ public class Utils {
     stringBuffer.append("内脏脂肪等级："+visceral_fat+"\n");
     stringBuffer.append("身体年龄："+physical_age+"\n");
     stringBuffer.append("身体评分："+Body_score+"\n");
-    stringBuffer.append("水肿度："+Edematous_degree+"\n");
-    stringBuffer.append("肥胖度："+Fat_degree+"\n");
+    //stringBuffer.append("水肿度："+Edematous_degree+"\n");
+    //stringBuffer.append("肥胖度："+Fat_degree+"\n");
     stringBuffer.append("肌肉控制："+Muscle_control+"\n");
     stringBuffer.append("体重控制："+Weight_control+"\n");
     stringBuffer.append("脂肪控制："+Fat_control+"\n");
@@ -189,13 +189,13 @@ public class Utils {
     //左大腿围
     String    l_b_Hipline        = Utils.toResultHasPoint(mS,194,198);
     stringBuffer.append("颈围："+Neck_circumference+"\n");
-    stringBuffer.append("腰围："+waist+"\n");
-    stringBuffer.append("臀围："+Hipline+"\n");
-    stringBuffer.append("胸围："+Bust+"\n");
-    stringBuffer.append("右上臂围："+r_t_Hipline+"\n");
-    stringBuffer.append("左上臂围："+l_t_Hipline+"\n");
-    stringBuffer.append("右大腿围："+r_b_Hipline+"\n");
-    stringBuffer.append("左大腿围："+l_b_Hipline+"\n");
+    //stringBuffer.append("腰围："+waist+"\n");
+    //stringBuffer.append("臀围："+Hipline+"\n");
+    //stringBuffer.append("胸围："+Bust+"\n");
+    //stringBuffer.append("右上臂围："+r_t_Hipline+"\n");
+    //stringBuffer.append("左上臂围："+l_t_Hipline+"\n");
+    //stringBuffer.append("右大腿围："+r_b_Hipline+"\n");
+    //stringBuffer.append("左大腿围："+l_b_Hipline+"\n");
     return stringBuffer.toString();
   }
   //public static BodyInfoModel toShowFinalResultModel(String mS){
