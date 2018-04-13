@@ -9,7 +9,7 @@ import java.net.SocketAddress;
 public class NetPrinter {
     public Socket socket;
     private static final String DEBUG_TAG="NetPrinter";  
-    public static final int POS_OPEN_NETPORT = 9100;  
+    public static final int POS_OPEN_NETPORT = 52999;
     public boolean IFOpen = false;  
     public int Net_ReceiveTimeout = 2500;  
     //网络打印机 打开网络打印机  

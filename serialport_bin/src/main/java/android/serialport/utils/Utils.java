@@ -17,7 +17,7 @@ public class Utils {
     } else {
       cmd = "00";
     }
-    String head_str = "CA0406";
+    String head_str = "CA0906";
     StringBuffer mBuffer = new StringBuffer(head_str);
     mBuffer.append(cmd);
     String tail_str = "0000000000";
@@ -94,7 +94,7 @@ public class Utils {
     //stringBuffer.append("细胞外液："+extracellular_fluid+"\n");
     //stringBuffer.append("细胞内液："+intracellular_Fluid+"\n");
     stringBuffer.append("去脂体重："+fat_free+"\n");
-    stringBuffer.append("标准肌肉："+Standard_muscle+"\n");
+    //stringBuffer.append("标准肌肉："+Standard_muscle+"\n");
     stringBuffer.append("骨盐量："+Bone_salt_content+"\n");
     stringBuffer.append("骨骼肌重："+skeletal_muscle+"\n");
     //蛋白质
@@ -102,7 +102,7 @@ public class Utils {
     //体质指数
     String    physique_num = Utils.toResultHasPoint(mS,74,78);
     //基础代谢
-    String    basal_metabolism = Utils.toResultHasPoint(mS,78,82);
+    String    basal_metabolism = Utils.toResult(mS,78,82);
     //体脂百分比
     String    Body_fat_percentage = Utils.toResultHasPoint(mS,82,86);
     //含水百分比
@@ -130,15 +130,15 @@ public class Utils {
     stringBuffer.append("基础代谢："+basal_metabolism+"\n");
     stringBuffer.append("体脂百分比："+Body_fat_percentage+"\n");
     stringBuffer.append("含水百分比："+Percentage_of_water+"\n");
-    stringBuffer.append("标准体重："+stander_weight+"\n");
+    //stringBuffer.append("标准体重："+stander_weight+"\n");
     stringBuffer.append("内脏脂肪等级："+visceral_fat+"\n");
     stringBuffer.append("身体年龄："+physical_age+"\n");
     stringBuffer.append("身体评分："+Body_score+"\n");
     //stringBuffer.append("水肿度："+Edematous_degree+"\n");
     //stringBuffer.append("肥胖度："+Fat_degree+"\n");
-    stringBuffer.append("肌肉控制："+Muscle_control+"\n");
-    stringBuffer.append("体重控制："+Weight_control+"\n");
-    stringBuffer.append("脂肪控制："+Fat_control+"\n");
+    //stringBuffer.append("肌肉控制："+Muscle_control+"\n");
+    //stringBuffer.append("体重控制："+Weight_control+"\n");
+    //stringBuffer.append("脂肪控制："+Fat_control+"\n");
     //no
     String    no_one     = Utils.toResultHasPoint(mS,122,126);
     //躯干脂肪率
@@ -188,7 +188,7 @@ public class Utils {
     String    r_b_Hipline        = Utils.toResultHasPoint(mS,190,194);
     //左大腿围
     String    l_b_Hipline        = Utils.toResultHasPoint(mS,194,198);
-    stringBuffer.append("颈围："+Neck_circumference+"\n");
+    //stringBuffer.append("颈围："+Neck_circumference+"\n");
     //stringBuffer.append("腰围："+waist+"\n");
     //stringBuffer.append("臀围："+Hipline+"\n");
     //stringBuffer.append("胸围："+Bust+"\n");

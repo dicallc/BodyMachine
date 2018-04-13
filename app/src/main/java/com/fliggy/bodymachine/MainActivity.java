@@ -49,6 +49,7 @@ public class MainActivity extends BasePrintActivity {
   @BindView(R.id.spinner1) Spinner mSpinner1;
   @BindView(R.id.start_clear) Button mStartClear;
   @BindView(R.id.start_print) Button mStartPrint;
+  @BindView(R.id.txt_cal_version) TextView mTxtCalVersion;
   private StringBuffer result = new StringBuffer();
   private MediaPlayer mediaPlayer;
   private SimpleSerialPortUtil mSerialPort;
@@ -129,7 +130,7 @@ public class MainActivity extends BasePrintActivity {
                   break;
                 case 2:
                   //上行体重数据
-                  String wd = Utils.toResult(str, 6, 10);
+                  String wd = Utils.toResultHasPoint(str, 6, 10);
                   mTextView.setText("体重是: " + wd + "kg");
                   break;
                 case 3:
@@ -160,15 +161,33 @@ public class MainActivity extends BasePrintActivity {
                   break;
                 case 6:
                   //查询是否准备好了
-
+                  String version = Utils.toResult(str, 6, 8);
+                  mTxtCalVersion.setText("当前版本是: "+version);
                   break;
                 case 7:
                   //用户数据回应是否收到
                   mTextView.setText("用户数据，模块已经收到");
                   break;
                 case 9:
-                  //测体脂回应
-
+                  //清理回复
+                  String clear_code = Utils.toResult(str, 6, 8);
+                  switch (clear_code) {
+                    case "1":
+                      mTextView.setText("零点读取完成");
+                      break;
+                    case "2":
+                      mTextView.setText("标定 50kg 完成");
+                      break;
+                    case "3":
+                      mTextView.setText("标定 100kg 完成");
+                      break;
+                    case "4":
+                      mTextView.setText("标定成功");
+                      break;
+                    case "5":
+                      mTextView.setText("标定失败");
+                      break;
+                  }
                   break;
                 //                case 8:
                 //                  //测体脂回应
@@ -247,7 +266,7 @@ public class MainActivity extends BasePrintActivity {
     //  return;
     //}
 
-    Intent mIntent=new Intent(this,ShowResultActivity.class);
+    Intent mIntent = new Intent(this, ShowResultActivity.class);
     startActivity(mIntent);
     //buildProgressDialog("正在打印");
     //getPrintPic();
@@ -294,9 +313,6 @@ public class MainActivity extends BasePrintActivity {
     String str = Utils.sendStartCmd();
     mSerialPort.sendCmds(str);
   }
-
-
-
 
   //Runnable mRunnable = new Runnable() {
   //  @Override public void run() {

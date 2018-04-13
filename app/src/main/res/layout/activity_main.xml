@@ -89,6 +89,14 @@
         android:layout_height="40dp"
         android:text="请等待机器有物体后，进行第一步操作"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:id="@+id/txt_cal_version"
+        android:gravity="center"
+        android:layout_height="40dp"
+        android:text=""
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -125,8 +133,8 @@
             android:id="@+id/start_clear"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="清零"
-            android:visibility="gone" />
+            android:text="重置"
+           />
     </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -156,6 +164,5 @@
                 android:text="Hello World!" />
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v4.widget.NestedScrollView>
-
 
 </android.support.v7.widget.LinearLayoutCompat>
