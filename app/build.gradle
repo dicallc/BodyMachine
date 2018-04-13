@@ -1,71 +1,81 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'realm-android'
+//apply from: 'tinker-support.gradle'
 realm {
-    syncEnabled = true;
+  syncEnabled = true;
 }
+
+
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    signingConfigs {
-        release {
-            keyAlias 'feitianzhu'
-            keyPassword 'kaisa008'
-            storeFile file('../key/product.jks')
-            storePassword 'bailtravel'
-        }
-        debug {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file('../key/debug.keystore')
-            storePassword 'android'
-        }
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  signingConfigs {
+    release {
+      keyAlias 'fliggy'
+      keyPassword 'kaisa008'
+      storeFile file('../key/product.jks')
+      storePassword 'kaisa008'
     }
-    //过滤掉不支持的平台
-//    packagingOptions {
-//        exclude "lib/arm64-v8a/librealm-jni.so"
-//        exclude "lib/mips/librealm-jni.so"
-//        exclude "lib/x86/librealm-jni.so"
-//        exclude "lib/x86_64/librealm-jni.so"
-//    }
+    debug {
+      keyAlias 'androiddebugkey'
+      keyPassword 'android'
+      storeFile file('../key/debug.keystore')
+      storePassword 'android'
+    }
+  }
+  //过滤掉不支持的平台
+  //    packagingOptions {
+  //        exclude "lib/arm64-v8a/librealm-jni.so"
+  //        exclude "lib/mips/librealm-jni.so"
+  //        exclude "lib/x86/librealm-jni.so"
+  //        exclude "lib/x86_64/librealm-jni.so"
+  //    }
 
-//    splits {
-//        abi {
-//            enable true
-//            reset()
-//            include 'armeabi', 'armeabi-v7a'
-//        }
-//    }
+  //    splits {
+  //        abi {
+  //            enable true
+  //            reset()
+  //            include 'armeabi', 'armeabi-v7a'
+  //        }
+  //    }
 
-    defaultConfig {
-        applicationId "com.fliggy.bodymachine"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        ndk {
-            //APP的build.gradle设置支持的SO库架构
-            abiFilters 'armeabi','armeabi-v7a','x86'
-            //      abiFilters 'armeabi', 'armeabi-v7a','x86'
-        }
+  defaultConfig {
+    applicationId "com.fliggy.bodymachine"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    versionCode rootProject.ext.versionCode
+    versionName rootProject.ext.versionName
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    ndk {
+      //APP的build.gradle设置支持的SO库架构
+      abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+      //      abiFilters 'armeabi', 'armeabi-v7a','x86'
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+  }
+  buildTypes {
+    release {
+      signingConfig signingConfigs.release
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+  }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation project(':serialport_bin')
-    compile project(':http-module')
-    compile 'com.android.support:recyclerview-v7:27.0.2'
-    compile 'org.greenrobot:eventbus:3.1.1'
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
+  compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+  annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'com.android.support.test:runner:1.0.1'
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+  implementation project(':serialport_bin')
+  compile project(':http-module')
+  compile 'com.android.support:recyclerview-v7:27.0.2'
+  compile 'org.greenrobot:eventbus:3.1.1'
+  compile "com.android.support:multidex:1.0.3"
+  compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+  //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+  compile 'com.tencent.bugly:nativecrashreport:latest.release'
+  //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+  compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

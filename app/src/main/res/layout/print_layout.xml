@@ -76,27 +76,27 @@
           android:orientation="vertical"
           android:paddingLeft="100dp"
           >
-        <com.fliggy.bodymachine.LbsView
+        <com.fliggy.bodymachine.widgets.LbsView
             android:id="@+id/lbs_weight_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             >
-        </com.fliggy.bodymachine.LbsView>
-        <com.fliggy.bodymachine.LbsView
+        </com.fliggy.bodymachine.widgets.LbsView>
+        <com.fliggy.bodymachine.widgets.LbsView
             android:id="@+id/lbs_skeletalmuscle_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             >
-        </com.fliggy.bodymachine.LbsView>
-        <com.fliggy.bodymachine.LbsView
+        </com.fliggy.bodymachine.widgets.LbsView>
+        <com.fliggy.bodymachine.widgets.LbsView
             android:id="@+id/lbs_fatweight_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             >
-        </com.fliggy.bodymachine.LbsView>
+        </com.fliggy.bodymachine.widgets.LbsView>
       </LinearLayout>
       <!--//肥胖分析-->
       <LinearLayout
@@ -106,20 +106,20 @@
           android:orientation="vertical"
           android:paddingLeft="100dp"
           >
-        <com.fliggy.bodymachine.LbsView
+        <com.fliggy.bodymachine.widgets.LbsView
             android:id="@+id/lbs_physique_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             >
-        </com.fliggy.bodymachine.LbsView>
-        <com.fliggy.bodymachine.LbsView
+        </com.fliggy.bodymachine.widgets.LbsView>
+        <com.fliggy.bodymachine.widgets.LbsView
             android:id="@+id/lbs_bodyfatpercentage_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             >
-        </com.fliggy.bodymachine.LbsView>
+        </com.fliggy.bodymachine.widgets.LbsView>
       </LinearLayout>
       <!--//均衡和阶段-->
       <LinearLayout

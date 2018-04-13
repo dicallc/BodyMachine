@@ -21,6 +21,7 @@ import com.fliggy.bodymachine.adapter.MachineAdapter;
 import com.fliggy.bodymachine.model.DeviderModel;
 import com.fliggy.bodymachine.utils.DataSource;
 import com.fliggy.bodymachine.view.LoadingDialogFragment;
+import com.fliggy.bodymachine.widgets.LbsView;
 import com.socks.library.KLog;
 import java.io.File;
 import java.io.FileOutputStream;

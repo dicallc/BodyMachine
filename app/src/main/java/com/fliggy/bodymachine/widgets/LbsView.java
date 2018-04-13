@@ -1,4 +1,4 @@
-package com.fliggy.bodymachine;
+package com.fliggy.bodymachine.widgets;
 
 import android.content.Context;
 import android.graphics.Canvas;
