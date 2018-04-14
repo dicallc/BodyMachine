@@ -216,7 +216,7 @@ public class MainActivity extends BasePrintActivity {
     switch (requestCode) {
       case 1:
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-          initAudio();
+          //initAudio();
         } else {
           Toast.makeText(this, "您禁止了权限，所以无法访问~", Toast.LENGTH_SHORT).show();
           finish();
