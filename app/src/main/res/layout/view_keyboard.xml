@@ -23,12 +23,13 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="1"
+          android:textColor="@android:color/white"
           android:textSize="144sp"
           />
       <ImageView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="-25dp"
+          android:layout_marginTop="-15dp"
           android:src="@drawable/shape_text_border_rect"
           />
     </LinearLayout>
@@ -44,12 +45,13 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="7"
+          android:textColor="@android:color/white"
           android:textSize="144sp"
           />
       <ImageView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="-25dp"
+          android:layout_marginTop="-15dp"
           android:src="@drawable/shape_text_border_rect"
           />
     </LinearLayout>
@@ -65,12 +67,14 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="8"
+          android:textColor="@android:color/white"
+
           android:textSize="144sp"
           />
       <ImageView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="-25dp"
+          android:layout_marginTop="-15dp"
           android:src="@drawable/shape_text_border_rect"
           />
     </LinearLayout>
@@ -78,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="cm"
+        android:textColor="@android:color/white"
         android:textSize="72sp"
         />
   </LinearLayout>
@@ -87,6 +92,7 @@
       android:layout_height="wrap_content"
       android:layout_marginLeft="-50dp"
       android:text="请输入身高"
+      android:textColor="@android:color/white"
       android:textSize="36sp"
       />
     <LinearLayout
@@ -106,7 +112,7 @@
       <ImageView
           android:id="@+id/img_del"
           android:layout_width="64dp"
-          android:background="@color/colorAccent"
+          android:src="@drawable/sl_delete"
           android:layout_height="64dp"
           />
     </LinearLayout>

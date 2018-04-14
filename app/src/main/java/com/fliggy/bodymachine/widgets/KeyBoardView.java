@@ -1,7 +1,7 @@
 package com.fliggy.bodymachine.widgets;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -53,11 +53,13 @@ public class KeyBoardView extends LinearLayout {
 
   // 初始化按钮上应该显示的数字
   private void setView() {
-    LinearLayoutManager mManager = new LinearLayoutManager(getContext());
-    mManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-    for (int i = 0; i < 10; i++) {
+    GridLayoutManager mManager = new GridLayoutManager(getContext(), 5);
+    //LinearLayoutManager mManager = new LinearLayoutManager(getContext());
+    //mManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+    for (int i = 1; i < 10; i++) {
       valueList.add(i + "");
     }
+    valueList.add(0 + "");
     KeyBoardAdapter mAdapter = new KeyBoardAdapter(valueList);
     mGridView.setLayoutManager(mManager);
     mGridView.setAdapter(mAdapter);

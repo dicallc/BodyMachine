@@ -1,0 +1,36 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    tools:context="com.fliggy.bodymachine.view.LoadWeightFragment"
+    >
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:shadowColor="#80000000"
+      android:shadowDx="6"
+      android:shadowDy="6"
+      android:shadowRadius="4"
+      android:textSize="144sp"
+      android:textColor="#ffffff"
+      android:text="55.6"
+      />
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="72sp"
+          android:textColor="#ffffff"
+          android:text="kg"
+          />
+    </LinearLayout>
+
+</LinearLayout>
