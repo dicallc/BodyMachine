@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.print.PrintHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +19,6 @@ import butterknife.ButterKnife;
 import com.fliggy.bodymachine.adapter.MachineAdapter;
 import com.fliggy.bodymachine.model.DeviderModel;
 import com.fliggy.bodymachine.utils.DataSource;
-import com.fliggy.bodymachine.view.LoadingDialogFragment;
 import com.fliggy.bodymachine.widgets.LbsView;
 import com.socks.library.KLog;
 import java.io.File;
@@ -66,10 +64,10 @@ public class ShowResultActivity extends AppCompatActivity {
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    LoadingDialogFragment mdf = new LoadingDialogFragment();
-    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-    mdf.show(ft, "df");
+    //LoadingDialogFragment mdf = new LoadingDialogFragment();
+    //FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+    //mdf.show(ft, "df");
     setContentView(R.layout.print_layout);
     ButterKnife.bind(this);
     initView();
