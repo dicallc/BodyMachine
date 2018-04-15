@@ -1,15 +1,35 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
     tools:context="com.fliggy.bodymachine.view.LoadMaleFragment"
     >
+  <LinearLayout
+          android:layout_width="match_parent"
+          android:orientation="vertical"
+      android:visibility="gone"
+      android:background="@mipmap/bg_tips"
+          android:gravity="center_vertical"
+          android:layout_height="125dp">
 
-  <!-- TODO: Update blank fragment layout -->
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:text="@string/hello_blank_fragment"
-      />
-
-</FrameLayout>
+  </LinearLayout>
+  <LinearLayout
+          android:layout_width="match_parent"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_height="110dp">
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/sl_gener"
+        />
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/sl_male"
+        />
+  </LinearLayout>
+</LinearLayout>

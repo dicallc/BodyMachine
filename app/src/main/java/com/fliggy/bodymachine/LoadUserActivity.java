@@ -90,6 +90,7 @@ public class LoadUserActivity extends SupportActivity {
         mTxtH.setBackgroundResource(R.mipmap.ic_weight_bg);
         mTxtA.setBackgroundResource(R.mipmap.ic__height_bg);
         mTxtM.setBackgroundResource(R.mipmap.ic_age_bg);
+        mShowText.setVisibility(View.GONE);
         break;
       case 2:
         mTxtW.setText(R.string.AGE);
@@ -100,6 +101,7 @@ public class LoadUserActivity extends SupportActivity {
         mTxtH.setBackgroundResource(R.mipmap.ic_sex_bg);
         mTxtA.setBackgroundResource(R.mipmap.ic_weight_bg);
         mTxtM.setBackgroundResource(R.mipmap.ic__height_bg);
+        mShowText.setVisibility(View.GONE);
         break;
       case 3:
         mTxtW.setText(R.string.MALE);
@@ -110,6 +112,8 @@ public class LoadUserActivity extends SupportActivity {
         mTxtH.setBackgroundResource(R.mipmap.ic_age_bg);
         mTxtA.setBackgroundResource(R.mipmap.ic_sex_bg);
         mTxtM.setBackgroundResource(R.mipmap.ic_weight_bg);
+        mShowText.setVisibility(View.VISIBLE);
+        mShowText.setText("请选择性别");
         break;
 
     }
