@@ -28,6 +28,7 @@ public class KeyBoardView extends LinearLayout {
   private ArrayList<String> valueList;
   private int currentIndex = -1;// 用于记录当前输入密码格位置
   private View mView;
+  private TextView mTips;
 
   public KeyBoardView(Context context) {
     this(context, null);
@@ -35,6 +36,9 @@ public class KeyBoardView extends LinearLayout {
   public KeyBoardView(Context context, AttributeSet attrs) {
     this(context, attrs,0);
 
+  }
+  public void setTips(String tips){
+    mTips.setText(tips);
   }
   public KeyBoardView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
@@ -44,6 +48,7 @@ public class KeyBoardView extends LinearLayout {
     mTextViewPsw[0] = (TextView) findViewById(R.id.height_p_one);
     mTextViewPsw[1] = (TextView) findViewById(R.id.height_p_two);
     mTextViewPsw[2] = (TextView) findViewById(R.id.height_p_three);
+    mTips = (TextView) findViewById(R.id.txt_show_tips);
     mImg_del = (ImageView) findViewById(R.id.img_del);
     mGridView = (RecyclerView) findViewById(R.id.rl_keyboard);
     setView();

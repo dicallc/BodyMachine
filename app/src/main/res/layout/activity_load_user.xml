@@ -21,13 +21,15 @@
         android:layout_marginLeft="177dp"
         android:background="@mipmap/ic_sex_bg"
         android:gravity="center"
-        android:text="WEIGHT"
+        android:id="@+id/txt_m"
+        android:text="MEAL"
         android:textColor="#ffffff"
         android:textSize="28sp"
         />
     <TextView
         android:layout_width="160dp"
         android:layout_height="64dp"
+        android:id="@+id/txt_a"
         android:layout_marginLeft="137dp"
         android:background="@mipmap/ic_age_bg"
         android:gravity="center"
@@ -41,6 +43,7 @@
         android:layout_marginLeft="80dp"
         android:background="@mipmap/ic__height_bg"
         android:gravity="center"
+        android:id="@+id/txt_h"
         android:text="HEIGHT"
         android:textColor="#ffffff"
         android:textSize="28sp"
@@ -52,6 +55,7 @@
         android:background="@mipmap/ic_weight_bg"
         android:gravity="center"
         android:text="WEIGHT"
+        android:id="@+id/txt_w"
         android:textColor="#ffffff"
         android:textSize="28sp"
         />

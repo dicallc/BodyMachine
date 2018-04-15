@@ -3,4 +3,8 @@
 
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="WEIGHT">WEIGHT</string>
+  <string name="HEIGHT">HEIGHT</string>
+  <string name="AGE">AGE</string>
+  <string name="MALE">MALE</string>
 </resources>

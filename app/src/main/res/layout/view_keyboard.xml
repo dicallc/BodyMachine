@@ -92,6 +92,7 @@
       android:layout_height="wrap_content"
       android:layout_marginLeft="-50dp"
       android:text="请输入身高"
+      android:id="@+id/txt_show_tips"
       android:textColor="@android:color/white"
       android:textSize="36sp"
       />
