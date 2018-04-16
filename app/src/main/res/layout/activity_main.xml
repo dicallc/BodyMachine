@@ -95,7 +95,7 @@
         android:id="@+id/txt_cal_version"
         android:gravity="center"
         android:layout_height="40dp"
-        android:text=""
+        android:text="当前版本是1.0.2，修改身体评分，显示控制等参数"
         />
 
     <LinearLayout

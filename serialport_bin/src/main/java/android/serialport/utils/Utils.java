@@ -64,7 +64,7 @@ public class Utils {
     String  right_f_impedance= Utils.toResultHasPoint(mS,26,30);
     String  body_impedance= Utils.toResultHasPoint(mS,30,34);
     stringBuffer.append("体重："+weight+"\n");
-    //stringBuffer.append("总阻抗："+all_impedance+"\n");
+    stringBuffer.append("总阻抗："+all_impedance+"\n");
     stringBuffer.append("左手："+left_h_impedance+"\n");
     stringBuffer.append("右手："+right_h_impedance+"\n");
     stringBuffer.append("左脚："+left_f_impedance+"\n");
@@ -114,7 +114,7 @@ public class Utils {
     //身体年龄
     String    physical_age   = Utils.toResult(mS,98,100);
     //身体评分
-    String    Body_score    = Utils.toResultHasPoint(mS,100,102);
+    String    Body_score    = Utils.toResult(mS,100,102);
     //水肿度
     String    Edematous_degree    = Utils.toResultHasPoint(mS,102,106);
     //肥胖度
@@ -130,15 +130,15 @@ public class Utils {
     stringBuffer.append("基础代谢："+basal_metabolism+"\n");
     stringBuffer.append("体脂百分比："+Body_fat_percentage+"\n");
     stringBuffer.append("含水百分比："+Percentage_of_water+"\n");
-    //stringBuffer.append("标准体重："+stander_weight+"\n");
+    stringBuffer.append("标准体重："+stander_weight+"\n");
     stringBuffer.append("内脏脂肪等级："+visceral_fat+"\n");
     stringBuffer.append("身体年龄："+physical_age+"\n");
     stringBuffer.append("身体评分："+Body_score+"\n");
     //stringBuffer.append("水肿度："+Edematous_degree+"\n");
-    //stringBuffer.append("肥胖度："+Fat_degree+"\n");
-    //stringBuffer.append("肌肉控制："+Muscle_control+"\n");
-    //stringBuffer.append("体重控制："+Weight_control+"\n");
-    //stringBuffer.append("脂肪控制："+Fat_control+"\n");
+    stringBuffer.append("肥胖度："+Fat_degree+"\n");
+    stringBuffer.append("肌肉控制："+Muscle_control+"\n");
+    stringBuffer.append("体重控制："+Weight_control+"\n");
+    stringBuffer.append("脂肪控制："+Fat_control+"\n");
     //no
     String    no_one     = Utils.toResultHasPoint(mS,122,126);
     //躯干脂肪率
