@@ -1,12 +1,17 @@
-package com.fliggy.bodymachine;
+package com.fliggy.bodymachine.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.view.LoadAgeFragment;
 import com.fliggy.bodymachine.view.LoadHeightFragment;
 import com.fliggy.bodymachine.view.LoadMaleFragment;
@@ -26,11 +31,17 @@ public class LoadUserActivity extends SupportActivity {
   @BindView(R.id.txt_a) TextView mTxtA;
   @BindView(R.id.txt_h) TextView mTxtH;
   @BindView(R.id.txt_w) TextView mTxtW;
+  @BindView(R.id.rl_contain) RelativeLayout mRlContain;
+  @BindView(R.id.fl_container) FrameLayout mFlContainer;
   private LoadHeightFragment mLoadHeightFragment;
   private LoadWeightFragment mLoadWeightFragment;
   private LoadAgeFragment mLoadAgeFragment;
   private LoadMaleFragment mLoadMaleFragment;
   private int position = 0;
+  private float mPosX;
+  private float mPosY;
+  private float mCurPosX;
+  private float mCurPosY;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -41,13 +52,48 @@ public class LoadUserActivity extends SupportActivity {
       mLoadHeightFragment = LoadHeightFragment.newInstance("", "");
       mLoadAgeFragment = LoadAgeFragment.newInstance("", "");
       mLoadMaleFragment = LoadMaleFragment.newInstance("", "");
-      loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment,
-          mLoadHeightFragment,mLoadAgeFragment,mLoadMaleFragment);  // 加载根Fragment
+      loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment, mLoadHeightFragment,
+          mLoadAgeFragment, mLoadMaleFragment);  // 加载根Fragment
       mSupportFragments.add(mLoadWeightFragment);
       mSupportFragments.add(mLoadHeightFragment);
       mSupportFragments.add(mLoadAgeFragment);
       mSupportFragments.add(mLoadMaleFragment);
     }
+  }
+
+  @Override public boolean onTouchEvent(MotionEvent event) {
+    //继承了Activity的onTouchEvent方法，直接监听点击事件
+    switch (event.getAction()) {
+
+      case MotionEvent.ACTION_DOWN:
+        mPosX = event.getX();
+        mPosY = event.getY();
+        break;
+      case MotionEvent.ACTION_MOVE:
+        mCurPosX = event.getX();
+        mCurPosY = event.getY();
+
+        break;
+      case MotionEvent.ACTION_UP:
+        if (mCurPosX - mPosX > 0 && (Math.abs(mCurPosX - mPosX) > 25)) {
+          KLog.e("向左滑動");
+
+
+          //向左滑動
+        } else if (mCurPosX - mPosX < 0 && (Math.abs(mCurPosX - mPosX) > 25)) {
+          toSettingUI();
+        }
+        break;
+    }
+    return super.onTouchEvent(event);
+  }
+
+  public void toSettingUI() {
+    Intent intent = new Intent();
+    intent.setClass(LoadUserActivity.this, SettingActivity.class);
+    startActivity(intent);
+    //设置切换动画，从右边进入，左边退出
+    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
   }
 
   @OnClick({ R.id.img_pre, R.id.img_next }) public void onViewClicked(View view) {
@@ -68,7 +114,7 @@ public class LoadUserActivity extends SupportActivity {
         showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 1));
         break;
     }
-    switch (position){
+    switch (position) {
       case 0:
         mTxtW.setText(R.string.WEIGHT);
         mTxtH.setText(R.string.HEIGHT);
@@ -78,7 +124,6 @@ public class LoadUserActivity extends SupportActivity {
         mTxtH.setBackgroundResource(R.mipmap.ic__height_bg);
         mTxtA.setBackgroundResource(R.mipmap.ic_age_bg);
         mTxtM.setBackgroundResource(R.mipmap.ic_sex_bg);
-
         mShowText.setVisibility(View.VISIBLE);
         break;
       case 1:
@@ -115,7 +160,6 @@ public class LoadUserActivity extends SupportActivity {
         mShowText.setVisibility(View.VISIBLE);
         mShowText.setText("请选择性别");
         break;
-
     }
   }
 }

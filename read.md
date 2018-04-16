@@ -58,3 +58,9 @@ https://blog.csdn.net/m0_37686934/article/details/79373976
 ### releam操作
 
 https://www.jianshu.com/p/28912c2f31db
+
+### 获取屏幕亮度
+
+https://blog.csdn.net/atgcu26/article/details/68593868
+
+https://blog.csdn.net/a1533588867/article/details/53738027
