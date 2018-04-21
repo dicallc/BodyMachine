@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -13,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.view.LoadAgeFragment;
+import com.fliggy.bodymachine.view.LoadDataingFragment;
 import com.fliggy.bodymachine.view.LoadHeightFragment;
 import com.fliggy.bodymachine.view.LoadMaleFragment;
 import com.fliggy.bodymachine.view.LoadWeightFragment;
@@ -33,6 +35,12 @@ public class LoadUserActivity extends SupportActivity {
   @BindView(R.id.txt_w) TextView mTxtW;
   @BindView(R.id.rl_contain) RelativeLayout mRlContain;
   @BindView(R.id.fl_container) FrameLayout mFlContainer;
+  @BindView(R.id.txt_load_data) TextView mTxtLoadData;
+  @BindView(R.id.txt_title_id) TextView mTxtTitleId;
+  @BindView(R.id.txt_title_height) TextView mTxtTitleHeight;
+  @BindView(R.id.txt_title_age) TextView mTxtTitleAge;
+  @BindView(R.id.txt_title_sex) TextView mTxtTitleSex;
+  @BindView(R.id.ly_title_person_msg) LinearLayout mLyTitlePersonMsg;
   private LoadHeightFragment mLoadHeightFragment;
   private LoadWeightFragment mLoadWeightFragment;
   private LoadAgeFragment mLoadAgeFragment;
@@ -42,6 +50,7 @@ public class LoadUserActivity extends SupportActivity {
   private float mPosY;
   private float mCurPosX;
   private float mCurPosY;
+  private LoadDataingFragment mLoadDataingFragment;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -52,12 +61,14 @@ public class LoadUserActivity extends SupportActivity {
       mLoadHeightFragment = LoadHeightFragment.newInstance("", "");
       mLoadAgeFragment = LoadAgeFragment.newInstance("", "");
       mLoadMaleFragment = LoadMaleFragment.newInstance("", "");
+      mLoadDataingFragment = LoadDataingFragment.newInstance("", "");
       loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment, mLoadHeightFragment,
-          mLoadAgeFragment, mLoadMaleFragment);  // 加载根Fragment
+          mLoadAgeFragment, mLoadMaleFragment, mLoadDataingFragment);  // 加载根Fragment
       mSupportFragments.add(mLoadWeightFragment);
       mSupportFragments.add(mLoadHeightFragment);
       mSupportFragments.add(mLoadAgeFragment);
       mSupportFragments.add(mLoadMaleFragment);
+      mSupportFragments.add(mLoadDataingFragment);
     }
   }
 
@@ -77,7 +88,6 @@ public class LoadUserActivity extends SupportActivity {
       case MotionEvent.ACTION_UP:
         if (mCurPosX - mPosX > 0 && (Math.abs(mCurPosX - mPosX) > 25)) {
           KLog.e("向左滑動");
-
 
           //向左滑動
         } else if (mCurPosX - mPosX < 0 && (Math.abs(mCurPosX - mPosX) > 25)) {
@@ -149,6 +159,10 @@ public class LoadUserActivity extends SupportActivity {
         mShowText.setVisibility(View.GONE);
         break;
       case 3:
+        mTxtW.setVisibility(View.VISIBLE);
+        mTxtH.setVisibility(View.VISIBLE);
+        mTxtA.setVisibility(View.VISIBLE);
+        mTxtM.setVisibility(View.VISIBLE);
         mTxtW.setText(R.string.MALE);
         mTxtH.setText(R.string.WEIGHT);
         mTxtA.setText(R.string.HEIGHT);
@@ -158,7 +172,31 @@ public class LoadUserActivity extends SupportActivity {
         mTxtA.setBackgroundResource(R.mipmap.ic_sex_bg);
         mTxtM.setBackgroundResource(R.mipmap.ic_weight_bg);
         mShowText.setVisibility(View.VISIBLE);
+        mTxtLoadData.setVisibility(View.GONE);
+        mLyTitlePersonMsg.setVisibility(View.GONE);
         mShowText.setText("请选择性别");
+        break;
+      case 4:
+        mTxtW.setVisibility(View.GONE);
+        mTxtH.setVisibility(View.GONE);
+        mTxtA.setVisibility(View.GONE);
+        mTxtM.setVisibility(View.GONE);
+        mTxtLoadData.setVisibility(View.VISIBLE);
+        mTxtLoadData.setText("PHYSICAL EXAMINATION");
+        mShowText.setVisibility(View.VISIBLE);
+        mLyTitlePersonMsg.setVisibility(View.VISIBLE);
+        mShowText.setText("正在加载中");
+        break;
+      case 5:
+        mTxtW.setVisibility(View.GONE);
+        mTxtH.setVisibility(View.GONE);
+        mTxtA.setVisibility(View.GONE);
+        mTxtM.setVisibility(View.GONE);
+        mTxtLoadData.setVisibility(View.VISIBLE);
+        mTxtLoadData.setText("DETECTION RESULT");
+        mShowText.setVisibility(View.VISIBLE);
+        mLyTitlePersonMsg.setVisibility(View.VISIBLE);
+        mShowText.setText("正在加载中");
         break;
     }
   }
