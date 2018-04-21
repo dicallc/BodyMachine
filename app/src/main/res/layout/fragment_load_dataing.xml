@@ -1,62 +1,93 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@android:color/black"
     tools:context="com.fliggy.bodymachine.view.LoadDataingFragment"
     >
-  <include layout="@layout/include_loading_qua"/>
-  <ImageView
-    android:layout_width="163dp"
-    android:id="@+id/img_show_sex"
-    android:layout_marginLeft="40dp"
-    android:layout_marginRight="40dp"
-    android:layout_height="392dp"
-    android:src="@mipmap/icon_male_body"
-    />
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="5dp"
+      android:layerType="software"
+      android:layout_marginBottom="15dp"
+      android:background="@drawable/bg_h_dotted_line"
+      />
   <LinearLayout
-      android:layout_width="240dp"
-      android:orientation="vertical"
-      android:gravity="left"
-      android:layout_height="392dp"
-      tools:showIn="@layout/fragment_load_dataing"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:orientation="horizontal"
       >
+    <include layout="@layout/include_loading_qua"/>
     <View
-        android:layout_width="127dp"
-        android:background="@drawable/shape_loding_border_rect"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
+        android:id="@+id/view"
+        android:layout_width="5dp"
+        android:layerType="software"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_v_dotted_line"
+        >
+    </View>
+    <ImageView
+        android:id="@+id/img_show_sex"
+        android:layout_width="163dp"
+        android:layout_height="392dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:src="@mipmap/icon_male_body"
         />
-    <View
-        android:layout_width="211dp"
-        android:background="@drawable/shape_loding_border_rect"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        />
-    <View
-        android:layout_width="237dp"
-        android:background="@drawable/shape_loding_border_rect"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        />
-    <View
-        android:layout_width="104dp"
-        android:background="@drawable/shape_loding_border_rect"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        />
-    <View
-        android:layout_width="95dp"
-        android:background="@drawable/shape_loding_border_rect"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        />
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="392dp"
+        android:gravity="left"
+        android:orientation="vertical"
+        tools:showIn="@layout/fragment_load_dataing"
+        >
+      <View
+          android:layout_width="127dp"
+          android:layout_height="0dp"
+          android:layout_marginBottom="10dp"
+          android:layout_weight="1"
+          android:background="@drawable/shape_loding_border_rect"
+          />
+      <View
+          android:layout_width="211dp"
+          android:layout_height="0dp"
+          android:layout_marginBottom="10dp"
+          android:layout_weight="1"
+          android:background="@drawable/shape_loding_border_rect"
+          />
+      <View
+          android:layout_width="237dp"
+          android:layout_height="0dp"
+          android:layout_marginBottom="10dp"
+          android:layout_weight="1"
+          android:background="@drawable/shape_loding_border_rect"
+          />
+      <View
+          android:layout_width="104dp"
+          android:layout_height="0dp"
+          android:layout_marginBottom="10dp"
+          android:layout_weight="1"
+          android:background="@drawable/shape_loding_border_rect"
+          />
+      <View
+          android:layout_width="95dp"
+          android:layout_height="0dp"
+          android:layout_marginBottom="10dp"
+          android:layout_weight="1"
+          android:background="@drawable/shape_loding_border_rect"
+          />
 
+    </LinearLayout>
   </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="5dp"
+      android:layerType="software"
+      android:layout_marginTop="15dp"
+      android:background="@drawable/bg_h_dotted_line"
+      />
 </LinearLayout>
