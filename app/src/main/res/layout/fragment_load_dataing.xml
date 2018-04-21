@@ -4,15 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@android:color/black"
     tools:context="com.fliggy.bodymachine.view.LoadDataingFragment"
     >
   <View
       android:layout_width="match_parent"
       android:layout_height="5dp"
-      android:layerType="software"
-      android:layout_marginBottom="15dp"
-      android:background="@drawable/bg_h_dotted_line"
+      android:background="@mipmap/bg_h_dotted_line"
       />
   <LinearLayout
       android:layout_width="match_parent"
@@ -22,20 +19,25 @@
       >
     <include layout="@layout/include_loading_qua"/>
     <View
-        android:id="@+id/view"
         android:layout_width="5dp"
-        android:layerType="software"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_v_dotted_line"
-        >
-    </View>
+        android:layout_marginLeft="10dp"
+        android:background="@mipmap/bg_v_dotted_line"
+        />
     <ImageView
         android:id="@+id/img_show_sex"
         android:layout_width="163dp"
+
         android:layout_height="392dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:src="@mipmap/icon_male_body"
+        />
+    <View
+        android:layout_width="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_v_dotted_line"
         />
     <LinearLayout
         android:layout_width="240dp"
@@ -87,7 +89,6 @@
       android:layout_width="match_parent"
       android:layout_height="5dp"
       android:layerType="software"
-      android:layout_marginTop="15dp"
-      android:background="@drawable/bg_h_dotted_line"
+      android:background="@mipmap/bg_h_dotted_line"
       />
 </LinearLayout>
