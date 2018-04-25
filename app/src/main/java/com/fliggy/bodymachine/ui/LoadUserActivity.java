@@ -63,12 +63,11 @@ public class LoadUserActivity extends SupportActivity {
       mLoadMaleFragment = LoadMaleFragment.newInstance("", "");
       mLoadDataingFragment = LoadDataingFragment.newInstance("", "");
       loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment, mLoadHeightFragment,
-          mLoadAgeFragment, mLoadMaleFragment, mLoadDataingFragment);  // 加载根Fragment
+          mLoadAgeFragment, mLoadMaleFragment);  // 加载根Fragment
       mSupportFragments.add(mLoadWeightFragment);
       mSupportFragments.add(mLoadHeightFragment);
       mSupportFragments.add(mLoadAgeFragment);
       mSupportFragments.add(mLoadMaleFragment);
-      mSupportFragments.add(mLoadDataingFragment);
     }
   }
 
@@ -118,7 +117,11 @@ public class LoadUserActivity extends SupportActivity {
         showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position + 1));
         break;
       case R.id.img_next:
-        if (position > mSupportFragments.size() - 2) return;
+        if (position > mSupportFragments.size() - 2){
+          Intent mIntent=new Intent(this,MeasureActivity.class);
+          startActivity(mIntent);
+          return;
+        }
         position++;
         mShowText.setVisibility(View.GONE);
         showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 1));
@@ -177,26 +180,18 @@ public class LoadUserActivity extends SupportActivity {
         mShowText.setText("请选择性别");
         break;
       case 4:
-        mTxtW.setVisibility(View.GONE);
-        mTxtH.setVisibility(View.GONE);
-        mTxtA.setVisibility(View.GONE);
-        mTxtM.setVisibility(View.GONE);
-        mTxtLoadData.setVisibility(View.VISIBLE);
-        mTxtLoadData.setText("PHYSICAL EXAMINATION");
-        mShowText.setVisibility(View.VISIBLE);
-        mLyTitlePersonMsg.setVisibility(View.VISIBLE);
-        mShowText.setText("正在加载中");
+
         break;
       case 5:
-        mTxtW.setVisibility(View.GONE);
-        mTxtH.setVisibility(View.GONE);
-        mTxtA.setVisibility(View.GONE);
-        mTxtM.setVisibility(View.GONE);
-        mTxtLoadData.setVisibility(View.VISIBLE);
-        mTxtLoadData.setText("DETECTION RESULT");
-        mShowText.setVisibility(View.VISIBLE);
-        mLyTitlePersonMsg.setVisibility(View.VISIBLE);
-        mShowText.setText("正在加载中");
+        //mTxtW.setVisibility(View.GONE);
+        //mTxtH.setVisibility(View.GONE);
+        //mTxtA.setVisibility(View.GONE);
+        //mTxtM.setVisibility(View.GONE);
+        //mTxtLoadData.setVisibility(View.VISIBLE);
+        //mTxtLoadData.setText("DETECTION RESULT");
+        //mShowText.setVisibility(View.VISIBLE);
+        //mLyTitlePersonMsg.setVisibility(View.VISIBLE);
+        //mShowText.setText("正在加载中");
         break;
     }
   }
