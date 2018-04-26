@@ -209,4 +209,14 @@ public class ExampleUnitTest {
     float mI = authKey / 10;
     KLog.e(mI);
   }
+  @Test
+  public void testFunction12() {
+    int n = 12 - 1;
+    n |= n >>> 1;
+    n |= n >>> 2;
+    n |= n >>> 4;
+    n |= n >>> 8;
+    n |= n >>> 16;
+    KLog.e(n);
+  }
 }

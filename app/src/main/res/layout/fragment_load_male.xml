@@ -17,23 +17,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:textSize="86.7sp"
+        android:textSize="86sp"
         android:textColor="#ffffff"
         android:text="GENDER"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:shadowColor="#80000000"
-        android:shadowDx="6"
-        android:shadowDy="6"
-        android:layout_centerInParent="true"
-        android:shadowRadius="4"
-        android:textSize="106.7sp"
-        android:textColor="#ffffff"
-        android:text="FEMALE"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+             android:textSize="100sp"
 
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:text="FEMALE"
+            />
   </RelativeLayout>
   <LinearLayout
           android:layout_width="match_parent"
