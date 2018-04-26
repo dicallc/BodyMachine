@@ -18,6 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:textSize="86sp"
+        android:alpha="0.1"
+        android:textStyle="italic"
         android:textColor="#ffffff"
         android:text="GENDER"
         />

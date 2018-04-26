@@ -25,7 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:text="HEIGHT"
-        android:textColor="#648893"
+        android:alpha="0.1"
+        android:textStyle="italic"
+        android:textColor="#ffffff"
         android:textSize="96sp"
         />
     <LinearLayout
@@ -107,6 +109,7 @@
           android:layout_height="wrap_content"
           android:text="cm"
           android:id="@+id/txt_wei"
+          android:textStyle="bold"
           android:textColor="@android:color/white"
           android:textSize="72sp"
           />

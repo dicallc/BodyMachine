@@ -1,6 +1,5 @@
 package com.fliggy.bodymachine.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,7 +56,6 @@ public class LoadAgeFragment extends SupportFragment implements View.OnClickList
     mAgeKeyboad.getImg_pre().setOnClickListener(this);
     mAgeKeyboad.getImg_next().setOnClickListener(this);
     mAgeKeyboad.getRl_bg().setBackgroundResource(R.mipmap.bg_sex);
-    mAgeKeyboad.getBg_text().setTextColor(Color.parseColor("#5A6985"));
     mAgeKeyboad.getBg_text().setText("AGE");
     mAgeKeyboad.setWei();
     mAgeKeyboad.getTxt_wei().setText("");
