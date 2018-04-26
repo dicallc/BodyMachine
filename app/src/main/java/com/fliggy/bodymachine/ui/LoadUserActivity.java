@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.view.LoadAgeFragment;
 import com.fliggy.bodymachine.view.LoadDataingFragment;
@@ -25,9 +23,6 @@ import me.yokeyword.fragmentation.SupportFragment;
 
 public class LoadUserActivity extends SupportActivity {
 
-  @BindView(R.id.img_pre) ImageView mImgPre;
-  @BindView(R.id.img_next) ImageView mImgNext;
-  @BindView(R.id.show_text) TextView mShowText;
   ArrayList<SupportFragment> mSupportFragments = new ArrayList<>();
   @BindView(R.id.txt_m) TextView mTxtM;
   @BindView(R.id.txt_a) TextView mTxtA;
@@ -105,93 +100,58 @@ public class LoadUserActivity extends SupportActivity {
     overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
   }
 
-  @OnClick({ R.id.img_pre, R.id.img_next }) public void onViewClicked(View view) {
-    switch (view.getId()) {
-      case R.id.img_pre:
-        KLog.e("img_pre");
-        if (position < 1) {
-          return;
-        }
+ public void NextPre(boolean isNext) {
+    if (isNext){
+      if (position > mSupportFragments.size() - 2) {
+        Intent mIntent = new Intent(this, MeasureActivity.class);
+        startActivity(mIntent);
+        return;
+      }
+      position++;
+      //mShowText.setVisibility(View.GONE);
+      showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 1));
+    }else{
+      KLog.e("img_pre");
+      if (position < 1) {
+        return;
+      }
 
-        position--;
-        showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position + 1));
-        break;
-      case R.id.img_next:
-        if (position > mSupportFragments.size() - 2){
-          Intent mIntent=new Intent(this,MeasureActivity.class);
-          startActivity(mIntent);
-          return;
-        }
-        position++;
-        mShowText.setVisibility(View.GONE);
-        showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 1));
-        break;
+      position--;
+      showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position + 1));
     }
     switch (position) {
       case 0:
-        mTxtW.setText(R.string.WEIGHT);
-        mTxtH.setText(R.string.HEIGHT);
-        mTxtA.setText(R.string.AGE);
-        mTxtM.setText(R.string.MALE);
-        mTxtW.setBackgroundResource(R.mipmap.ic_weight_bg);
-        mTxtH.setBackgroundResource(R.mipmap.ic__height_bg);
-        mTxtA.setBackgroundResource(R.mipmap.ic_age_bg);
-        mTxtM.setBackgroundResource(R.mipmap.ic_sex_bg);
-        mShowText.setVisibility(View.VISIBLE);
+        mTxtW.setVisibility(View.VISIBLE);
+        mTxtH.setVisibility(View.GONE);
+        mTxtA.setVisibility(View.GONE);
+        mTxtM.setVisibility(View.GONE);
+        //mShowText.setVisibility(View.VISIBLE);
         break;
       case 1:
-        mTxtW.setText(R.string.HEIGHT);
-        mTxtH.setText(R.string.WEIGHT);
-        mTxtA.setText(R.string.AGE);
-        mTxtM.setText(R.string.MALE);
-        mTxtW.setBackgroundResource(R.mipmap.ic_sex_bg);
-        mTxtH.setBackgroundResource(R.mipmap.ic_weight_bg);
-        mTxtA.setBackgroundResource(R.mipmap.ic__height_bg);
-        mTxtM.setBackgroundResource(R.mipmap.ic_age_bg);
-        mShowText.setVisibility(View.GONE);
+        mTxtH.setVisibility(View.VISIBLE);
+        mTxtW.setVisibility(View.GONE);
+        mTxtA.setVisibility(View.GONE);
+        mTxtM.setVisibility(View.GONE);
+        //mShowText.setVisibility(View.GONE);
+        //mDeviderTop.setVisibility(View.GONE);
+        //mDeviderBottom.setVisibility(View.GONE);
         break;
       case 2:
-        mTxtW.setText(R.string.AGE);
-        mTxtH.setText(R.string.WEIGHT);
-        mTxtA.setText(R.string.HEIGHT);
-        mTxtM.setText(R.string.MALE);
-        mTxtW.setBackgroundResource(R.mipmap.ic_age_bg);
-        mTxtH.setBackgroundResource(R.mipmap.ic_sex_bg);
-        mTxtA.setBackgroundResource(R.mipmap.ic_weight_bg);
-        mTxtM.setBackgroundResource(R.mipmap.ic__height_bg);
-        mShowText.setVisibility(View.GONE);
+        mTxtA.setVisibility(View.VISIBLE);
+        mTxtW.setVisibility(View.GONE);
+        mTxtH.setVisibility(View.GONE);
+        mTxtM.setVisibility(View.GONE);
+        //mShowText.setVisibility(View.GONE);
         break;
       case 3:
-        mTxtW.setVisibility(View.VISIBLE);
-        mTxtH.setVisibility(View.VISIBLE);
-        mTxtA.setVisibility(View.VISIBLE);
         mTxtM.setVisibility(View.VISIBLE);
-        mTxtW.setText(R.string.MALE);
-        mTxtH.setText(R.string.WEIGHT);
-        mTxtA.setText(R.string.HEIGHT);
-        mTxtM.setText(R.string.AGE);
-        mTxtW.setBackgroundResource(R.mipmap.ic__height_bg);
-        mTxtH.setBackgroundResource(R.mipmap.ic_age_bg);
-        mTxtA.setBackgroundResource(R.mipmap.ic_sex_bg);
-        mTxtM.setBackgroundResource(R.mipmap.ic_weight_bg);
-        mShowText.setVisibility(View.VISIBLE);
+        mTxtW.setVisibility(View.GONE);
+        mTxtH.setVisibility(View.GONE);
+        mTxtA.setVisibility(View.GONE);
+        //mShowText.setVisibility(View.VISIBLE);
         mTxtLoadData.setVisibility(View.GONE);
         mLyTitlePersonMsg.setVisibility(View.GONE);
-        mShowText.setText("请选择性别");
-        break;
-      case 4:
-
-        break;
-      case 5:
-        //mTxtW.setVisibility(View.GONE);
-        //mTxtH.setVisibility(View.GONE);
-        //mTxtA.setVisibility(View.GONE);
-        //mTxtM.setVisibility(View.GONE);
-        //mTxtLoadData.setVisibility(View.VISIBLE);
-        //mTxtLoadData.setText("DETECTION RESULT");
-        //mShowText.setVisibility(View.VISIBLE);
-        //mLyTitlePersonMsg.setVisibility(View.VISIBLE);
-        //mShowText.setText("正在加载中");
+        //mShowText.setText("请选择性别");
         break;
     }
   }

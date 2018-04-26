@@ -1,42 +1,37 @@
 package com.fliggy.bodymachine.view;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.ImageView;
+import android.widget.TextView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.ui.LoadUserActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoadMaleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoadMaleFragment extends SupportFragment {
-  // TODO: Rename parameter arguments, choose names that match
-  // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
+  @BindView(R.id.img_pre) ImageView mImgPre;
+  @BindView(R.id.devider_top) View mDeviderTop;
+  @BindView(R.id.show_text) TextView mShowText;
+  @BindView(R.id.devider_bottom) View mDeviderBottom;
+  @BindView(R.id.img_next) ImageView mImgNext;
+  Unbinder unbinder;
 
-  // TODO: Rename and change types of parameters
   private String mParam1;
   private String mParam2;
 
   public LoadMaleFragment() {
-    // Required empty public constructor
   }
 
-  /**
-   * Use this factory method to create a new instance of
-   * this fragment using the provided parameters.
-   *
-   * @param param1 Parameter 1.
-   * @param param2 Parameter 2.
-   * @return A new instance of fragment LoadMaleFragment.
-   */
-  // TODO: Rename and change types and number of parameters
   public static LoadMaleFragment newInstance(String param1, String param2) {
     LoadMaleFragment fragment = new LoadMaleFragment();
     Bundle args = new Bundle();
@@ -54,8 +49,33 @@ public class LoadMaleFragment extends SupportFragment {
     }
   }
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_load_male, container, false);
+  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_load_male, container, false);
+    unbinder = ButterKnife.bind(this, view);
+    return view;
+  }
+
+  @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    mShowText.setText("请选择性别");
+  }
+
+  @Override public void onDestroyView() {
+    super.onDestroyView();
+    unbinder.unbind();
+  }
+
+
+  @OnClick({ R.id.img_pre, R.id.img_next }) public void onViewClicked(View view) {
+    LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
+    switch (view.getId()) {
+      case R.id.img_pre:
+        mLoadUserActivity.NextPre(false);
+        break;
+      case R.id.img_next:
+        mLoadUserActivity.NextPre(true);
+        break;
+    }
   }
 }

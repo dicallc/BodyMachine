@@ -2,22 +2,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:layout_height="match_parent"
     tools:context="com.fliggy.bodymachine.view.LoadMaleFragment"
     >
-  <LinearLayout
+  <RelativeLayout
           android:layout_width="match_parent"
           android:orientation="vertical"
-      android:visibility="gone"
-      android:background="@mipmap/bg_tips"
+      android:paddingLeft="15dp"
+      android:background="@mipmap/bg_male"
           android:gravity="center_vertical"
           android:layout_height="125dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="86.7sp"
+        android:textColor="#ffffff"
+        android:text="GENDER"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#80000000"
+        android:shadowDx="6"
+        android:shadowDy="6"
+        android:layout_centerInParent="true"
+        android:shadowRadius="4"
+        android:textSize="106.7sp"
+        android:textColor="#ffffff"
+        android:text="FEMALE"
+        />
 
-  </LinearLayout>
+  </RelativeLayout>
   <LinearLayout
           android:layout_width="match_parent"
           android:orientation="horizontal"
           android:gravity="center"
+      android:layout_marginTop="10dp"
           android:layout_height="110dp">
     <ImageView
         android:layout_width="110dp"
@@ -32,4 +54,5 @@
         android:src="@drawable/sl_male"
         />
   </LinearLayout>
+  <include layout="@layout/include_lu_lr"/>
 </LinearLayout>

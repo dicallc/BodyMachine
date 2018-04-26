@@ -1,41 +1,36 @@
 package com.fliggy.bodymachine.view;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.ui.LoadUserActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoadWeightFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class LoadWeightFragment extends SupportFragment{
-  // TODO: Rename parameter arguments, choose names that match
-  // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class LoadWeightFragment extends SupportFragment {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
+  @BindView(R.id.txt_weight) TextView mTxtWeight;
+  @BindView(R.id.img_pre) ImageView mImgPre;
+  @BindView(R.id.devider_top) View mDeviderTop;
+  @BindView(R.id.show_text) TextView mShowText;
+  @BindView(R.id.devider_bottom) View mDeviderBottom;
+  @BindView(R.id.img_next) ImageView mImgNext;
+  Unbinder unbinder;
 
-  // TODO: Rename and change types of parameters
   private String mParam1;
   private String mParam2;
 
   public LoadWeightFragment() {
-    // Required empty public constructor
   }
 
-  /**
-   * Use this factory method to create a new instance of
-   * this fragment using the provided parameters.
-   *
-   * @param param1 Parameter 1.
-   * @param param2 Parameter 2.
-   * @return A new instance of fragment LoadWeightFragment.
-   */
-  // TODO: Rename and change types and number of parameters
   public static LoadWeightFragment newInstance(String param1, String param2) {
     LoadWeightFragment fragment = new LoadWeightFragment();
     Bundle args = new Bundle();
@@ -53,8 +48,28 @@ public class LoadWeightFragment extends SupportFragment{
     }
   }
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_load_weight, container, false);
+    View view = inflater.inflate(R.layout.fragment_load_weight, container, false);
+    unbinder = ButterKnife.bind(this, view);
+    return view;
+  }
+
+  @Override public void onDestroyView() {
+    super.onDestroyView();
+    unbinder.unbind();
+  }
+
+  @OnClick({ R.id.img_pre, R.id.img_next }) public void onViewClicked(View view) {
+   LoadUserActivity mLoadUserActivity= (LoadUserActivity) getActivity();
+    switch (view.getId()) {
+      case R.id.img_pre:
+        mLoadUserActivity.NextPre(false);
+        break;
+      case R.id.img_next:
+        mLoadUserActivity.NextPre(true);
+        break;
+    }
   }
 }
