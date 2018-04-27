@@ -84,11 +84,6 @@ public class LoadUserActivity extends SupportActivity {
 
   public void NextPre(boolean isNext) {
     if (isNext) {
-      if (position == 3) {
-        Intent mIntent = new Intent(this, MeasureActivity.class);
-        startActivityForResult(mIntent, result_ui_code);
-        return;
-      }
       position++;
       showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 1));
     } else {
@@ -128,6 +123,11 @@ public class LoadUserActivity extends SupportActivity {
         mLyTitlePersonMsg.setVisibility(View.GONE);
         break;
     }
+  }
+
+  public void ShowMeasureUI() {
+    Intent mIntent = new Intent(this, MeasureActivity.class);
+    startActivityForResult(mIntent, result_ui_code);
   }
 
   public void showResultUI() {

@@ -1,30 +1,24 @@
 package com.fliggy.bodymachine.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.ui.LoadUserActivity;
+import java.util.Timer;
+import java.util.TimerTask;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class WaitStandFragment extends SupportFragment {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
-  @BindView(R.id.ly_tips) LinearLayout mLyTips;
-  @BindView(R.id.img_pre) ImageView mImgPre;
-  @BindView(R.id.devider_top) View mDeviderTop;
-  @BindView(R.id.show_text) TextView mShowText;
-  @BindView(R.id.devider_bottom) View mDeviderBottom;
-  @BindView(R.id.img_next) ImageView mImgNext;
   Unbinder unbinder;
 
-  // TODO: Rename and change types of parameters
   private String mParam1;
   private String mParam2;
 
@@ -51,10 +45,28 @@ public class WaitStandFragment extends SupportFragment {
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_wait_stand, container, false);
     unbinder = ButterKnife.bind(this, view);
     return view;
+  }
+
+  @Override public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    if(!hidden){
+      Timer timer = new Timer();
+      timer.schedule(task, 3000);
+    }
+  }
+
+  TimerTask task = new TimerTask(){
+    public void run(){
+      LoadUserActivity mLoadUserActivity= (LoadUserActivity) getActivity();
+      mLoadUserActivity.ShowMeasureUI();
+    }
+  };
+  @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+
   }
 
   @Override public void onDestroyView() {
