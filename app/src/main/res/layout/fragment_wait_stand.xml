@@ -68,6 +68,5 @@
         android:layout_height="wrap_content"/>
 
   </LinearLayout>
-  <include layout="@layout/include_lu_lr"/>
 </RelativeLayout>
 
