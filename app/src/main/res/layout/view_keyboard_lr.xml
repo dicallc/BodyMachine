@@ -7,13 +7,12 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:layout_alignParentBottom="true"
     android:orientation="vertical"
     >
   <RelativeLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="200dp"
       android:id="@+id/rl_bg"
       android:background="@mipmap/bg_height"
       android:gravity="center_vertical"
@@ -26,7 +25,7 @@
         android:layout_centerVertical="true"
         android:text="HEIGHT"
         android:textColor="#648893"
-        android:textSize="96sp"
+        android:textSize="86sp"
         />
     <LinearLayout
         android:layout_width="wrap_content"

@@ -5,16 +5,18 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.utils.MyOnTouchListener;
 import com.fliggy.bodymachine.view.LoadAgeFragment;
-import com.fliggy.bodymachine.view.LoadDataingFragment;
 import com.fliggy.bodymachine.view.LoadHeightFragment;
 import com.fliggy.bodymachine.view.LoadMaleFragment;
+import com.fliggy.bodymachine.view.LoadResultFragment;
 import com.fliggy.bodymachine.view.LoadWeightFragment;
 import com.socks.library.KLog;
 import java.util.ArrayList;
@@ -36,16 +38,16 @@ public class LoadUserActivity extends SupportActivity {
   @BindView(R.id.txt_title_age) TextView mTxtTitleAge;
   @BindView(R.id.txt_title_sex) TextView mTxtTitleSex;
   @BindView(R.id.ly_title_person_msg) LinearLayout mLyTitlePersonMsg;
+  @BindView(R.id.logo) ImageView mLogo;
   private LoadHeightFragment mLoadHeightFragment;
   private LoadWeightFragment mLoadWeightFragment;
   private LoadAgeFragment mLoadAgeFragment;
   private LoadMaleFragment mLoadMaleFragment;
   private int position = 0;
-  private float mPosX;
-  private float mPosY;
-  private float mCurPosX;
-  private float mCurPosY;
-  private LoadDataingFragment mLoadDataingFragment;
+  private LoadResultFragment mLoadResultFragment;
+  private int result_ui_code = 0x110;
+  private float x1;
+  private float y1;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -56,41 +58,17 @@ public class LoadUserActivity extends SupportActivity {
       mLoadHeightFragment = LoadHeightFragment.newInstance("", "");
       mLoadAgeFragment = LoadAgeFragment.newInstance("", "");
       mLoadMaleFragment = LoadMaleFragment.newInstance("", "");
-      mLoadDataingFragment = LoadDataingFragment.newInstance("", "");
+      mLoadResultFragment = LoadResultFragment.newInstance("", "");
       loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment, mLoadHeightFragment,
-          mLoadAgeFragment, mLoadMaleFragment);  // 加载根Fragment
+          mLoadAgeFragment, mLoadMaleFragment, mLoadResultFragment);  // 加载根Fragment
       mSupportFragments.add(mLoadWeightFragment);
       mSupportFragments.add(mLoadHeightFragment);
       mSupportFragments.add(mLoadAgeFragment);
       mSupportFragments.add(mLoadMaleFragment);
+      mSupportFragments.add(mLoadResultFragment);
     }
   }
 
-  @Override public boolean onTouchEvent(MotionEvent event) {
-    //继承了Activity的onTouchEvent方法，直接监听点击事件
-    switch (event.getAction()) {
-
-      case MotionEvent.ACTION_DOWN:
-        mPosX = event.getX();
-        mPosY = event.getY();
-        break;
-      case MotionEvent.ACTION_MOVE:
-        mCurPosX = event.getX();
-        mCurPosY = event.getY();
-
-        break;
-      case MotionEvent.ACTION_UP:
-        if (mCurPosX - mPosX > 0 && (Math.abs(mCurPosX - mPosX) > 25)) {
-          KLog.e("向左滑動");
-
-          //向左滑動
-        } else if (mCurPosX - mPosX < 0 && (Math.abs(mCurPosX - mPosX) > 25)) {
-          toSettingUI();
-        }
-        break;
-    }
-    return super.onTouchEvent(event);
-  }
 
   public void toSettingUI() {
     Intent intent = new Intent();
@@ -100,17 +78,16 @@ public class LoadUserActivity extends SupportActivity {
     overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
   }
 
- public void NextPre(boolean isNext) {
-    if (isNext){
-      if (position > mSupportFragments.size() - 2) {
+  public void NextPre(boolean isNext) {
+    if (isNext) {
+      if (position == 3) {
         Intent mIntent = new Intent(this, MeasureActivity.class);
-        startActivity(mIntent);
+        startActivityForResult(mIntent, result_ui_code);
         return;
       }
       position++;
-      //mShowText.setVisibility(View.GONE);
       showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 1));
-    }else{
+    } else {
       KLog.e("img_pre");
       if (position < 1) {
         return;
@@ -125,34 +102,72 @@ public class LoadUserActivity extends SupportActivity {
         mTxtH.setVisibility(View.GONE);
         mTxtA.setVisibility(View.GONE);
         mTxtM.setVisibility(View.GONE);
-        //mShowText.setVisibility(View.VISIBLE);
         break;
       case 1:
         mTxtH.setVisibility(View.VISIBLE);
         mTxtW.setVisibility(View.GONE);
         mTxtA.setVisibility(View.GONE);
         mTxtM.setVisibility(View.GONE);
-        //mShowText.setVisibility(View.GONE);
-        //mDeviderTop.setVisibility(View.GONE);
-        //mDeviderBottom.setVisibility(View.GONE);
         break;
       case 2:
         mTxtA.setVisibility(View.VISIBLE);
         mTxtW.setVisibility(View.GONE);
         mTxtH.setVisibility(View.GONE);
         mTxtM.setVisibility(View.GONE);
-        //mShowText.setVisibility(View.GONE);
         break;
       case 3:
         mTxtM.setVisibility(View.VISIBLE);
         mTxtW.setVisibility(View.GONE);
         mTxtH.setVisibility(View.GONE);
         mTxtA.setVisibility(View.GONE);
-        //mShowText.setVisibility(View.VISIBLE);
         mTxtLoadData.setVisibility(View.GONE);
         mLyTitlePersonMsg.setVisibility(View.GONE);
-        //mShowText.setText("请选择性别");
         break;
     }
+  }
+
+  public void showResultUI() {
+    position++;
+    showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 1));
+    mTxtW.setVisibility(View.GONE);
+    mTxtH.setVisibility(View.GONE);
+    mTxtA.setVisibility(View.GONE);
+    mTxtM.setVisibility(View.GONE);
+    mLogo.setVisibility(View.GONE);
+    mTxtLoadData.setVisibility(View.VISIBLE);
+    mTxtLoadData.setText("DETECTION RESULT");
+    mLyTitlePersonMsg.setVisibility(View.VISIBLE);
+  }
+
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == result_ui_code) {
+      showResultUI();
+    }
+  }
+
+  // 保存MyTouchListener接口的列表
+  private ArrayList<MyOnTouchListener> myTouchListeners = new ArrayList<MyOnTouchListener>();
+
+  /**
+   * 提供给Fragment通过getActivity()方法来注册自己的触摸事件的方法
+   */
+  public void registerMyTouchListener(MyOnTouchListener listener) {
+    myTouchListeners.add(listener);
+  }
+
+  /**
+   * 提供给Fragment通过getActivity()方法来取消注册自己的触摸事件的方法
+   */
+  public void unRegisterMyTouchListener(MyOnTouchListener listener) {
+    myTouchListeners.remove(listener);
+  }
+
+  /**
+   * 分发触摸事件给所有注册了MyTouchListener的接口
+   */
+  @Override public boolean dispatchTouchEvent(MotionEvent ev) {
+    myTouchListeners.get(position).onTouchEvent(ev);
+    return super.dispatchTouchEvent(ev);
   }
 }

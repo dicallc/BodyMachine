@@ -10,11 +10,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.SwiperFragment;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.fliggy.bodymachine.widgets.KeyBoardViewWithLR;
-import me.yokeyword.fragmentation.SupportFragment;
 
-public class LoadHeightFragment extends SupportFragment implements View.OnClickListener {
+public class LoadHeightFragment extends SwiperFragment implements View.OnClickListener {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
   @BindView(R.id.kb_view) KeyBoardViewWithLR mKbView;

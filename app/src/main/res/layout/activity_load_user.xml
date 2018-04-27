@@ -20,6 +20,7 @@
         android:id="@+id/txt_load_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:text="PHYSICAL EXAMINATION"
         android:textColor="#ffffff"
         android:textSize="44sp"
@@ -52,7 +53,7 @@
         android:id="@+id/txt_h"
         android:layout_width="160dp"
         android:layout_height="64dp"
-        android:background="@mipmap/ic__height_bg"
+        android:background="@mipmap/ic_height_bg"
         android:gravity="center"
         android:text="HEIGHT"
         android:textColor="#ffffff"
@@ -74,6 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="right|center_vertical"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="gone"
         >
@@ -162,11 +164,13 @@
           android:shadowDy="2"
           android:shadowRadius="2"
           android:text="女"
+          android:layout_marginRight="10dp"
           android:textColor="#ffffff"
           android:textSize="24sp"
           />
     </LinearLayout>
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
@@ -178,9 +182,8 @@
       android:id="@+id/fl_container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginTop="124dp"
+      android:layout_marginTop="64dp"
       android:paddingBottom="65dp"
-      android:layout_centerInParent="true"
       >
   </FrameLayout>
 

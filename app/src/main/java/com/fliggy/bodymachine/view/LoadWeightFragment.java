@@ -11,10 +11,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.SwiperFragment;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
-import me.yokeyword.fragmentation.SupportFragment;
 
-public class LoadWeightFragment extends SupportFragment {
+public class LoadWeightFragment extends SwiperFragment {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
   @BindView(R.id.txt_weight) TextView mTxtWeight;
