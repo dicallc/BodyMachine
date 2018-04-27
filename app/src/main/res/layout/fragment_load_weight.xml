@@ -18,9 +18,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:textStyle="italic"
         android:layout_marginLeft="15dp"
         android:text="WEIGHT"
-        android:textColor="#4380B7"
+        android:alpha="0.1"
+        android:textColor="#ffffff"
         android:textSize="96sp"
         />
 
@@ -51,6 +53,7 @@
           android:layout_height="wrap_content"
           android:layout_marginLeft="15dp"
           android:text="kg"
+          android:textStyle="italic"
           android:textColor="#ffffff"
           android:textSize="72sp"
           />
