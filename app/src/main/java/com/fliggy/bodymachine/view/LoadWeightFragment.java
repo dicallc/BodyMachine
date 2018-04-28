@@ -69,7 +69,6 @@ public class LoadWeightFragment extends SwiperFragment {
 
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    mImgPre.setVisibility(View.GONE);
   }
 
   @Override public void onDestroyView() {
@@ -85,6 +84,7 @@ public class LoadWeightFragment extends SwiperFragment {
         mLoadUserActivity.NextPre(false);
         break;
       case R.id.img_next:
+        // todo 1
         isLock=true;
         if (mTxtWeight.getText().toString().equals("0")||!isLock){
           ToastUtils.showLongToast("体重尚未测出，请稍等");
