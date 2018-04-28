@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class KeyBoardViewWithLR extends LinearLayout {
   private ImageView mImg_del;
   private String mStringPassword; //输入的密码
-  private TextView[] mTextViewPsw; // 用数组保存6个TextView
+  private TextView[] mTextViewPsw;
   private RecyclerView mGridView; //支付键盘布局
   private ArrayList<String> valueList;
   private int currentIndex = -1;// 用于记录当前输入密码格位置
@@ -40,11 +40,12 @@ public class KeyBoardViewWithLR extends LinearLayout {
   public KeyBoardViewWithLR(Context context) {
     this(context, null);
   }
-  public KeyBoardViewWithLR(Context context, AttributeSet attrs) {
-    this(context, attrs,0);
 
+  public KeyBoardViewWithLR(Context context, AttributeSet attrs) {
+    this(context, attrs, 0);
   }
-  public void setTips(String tips){
+
+  public void setTips(String tips) {
     mTips.setText(tips);
   }
 
@@ -56,7 +57,7 @@ public class KeyBoardViewWithLR extends LinearLayout {
     super(context, attrs, defStyleAttr);
     LayoutInflater.from(context).inflate(R.layout.view_keyboard_lr, this);
     valueList = new ArrayList<>();
-    mTextViewPsw = new TextView[6];
+    mTextViewPsw = new TextView[3];
     mTextViewPsw[0] = (TextView) findViewById(R.id.height_p_one);
     mTextViewPsw[1] = (TextView) findViewById(R.id.height_p_two);
     mTextView = (TextView) findViewById(R.id.height_p_three);
@@ -66,15 +67,23 @@ public class KeyBoardViewWithLR extends LinearLayout {
     mGridView = (RecyclerView) findViewById(R.id.rl_keyboard);
     mImg_pre = (ImageView) findViewById(R.id.img_pre);
     mImg_next = (ImageView) findViewById(R.id.img_next);
-    mRl_bg = (RelativeLayout)findViewById(R.id.rl_bg);
-    mBg_text = (TextView)findViewById(R.id.bg_text);
+    mRl_bg = (RelativeLayout) findViewById(R.id.rl_bg);
+    mBg_text = (TextView) findViewById(R.id.bg_text);
     mTxt_wei = (TextView) findViewById(R.id.txt_wei);
     setView();
   }
-  public void setWei(){
-    mTextView.setVisibility(GONE);
-    mTextViewPsw[2]=null;
 
+  public void setWei() {
+    mTextView.setVisibility(GONE);
+    mTextViewPsw[2] = null;
+  }
+
+  public String getValue() {
+    StringBuffer value=new StringBuffer();
+    for (int i = 0; i <mTextViewPsw.length&&mTextViewPsw[i]!=null ; i++) {
+      value.append(mTextViewPsw[i].getText().toString().trim());
+    }
+    return value.toString();
   }
 
   public RelativeLayout getRl_bg() {

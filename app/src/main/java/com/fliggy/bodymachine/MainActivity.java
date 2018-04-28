@@ -317,7 +317,7 @@ public class MainActivity extends BasePrintActivity {
   //Runnable mRunnable = new Runnable() {
   //  @Override public void run() {
   //    String mImage = viewSaveToImage(mRootView);
-  //    MessageEvent mMessageEvent = new MessageEvent(MessageEvent.GET_PIC, mImage);
+  //    MessageEvent mMessageEvent = new MessageEvent(MessageEvent.WEIGHT, mImage);
   //    EventBus.getDefault().post(mMessageEvent);
   //  }
   //};

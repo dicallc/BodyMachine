@@ -17,9 +17,9 @@ public class MeasureActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_measure);
     ButterKnife.bind(this);
-    //finish();
-    //return;
-    setupVideo();
+    finish();
+    return;
+    //setupVideo();
   }
   private void setupVideo() {
     mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {

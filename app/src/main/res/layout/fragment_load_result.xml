@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@android:color/darker_gray"
     android:orientation="vertical"
     tools:context="com.fliggy.bodymachine.view.LoadResultFragment"
     >
@@ -20,6 +21,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
+        android:id="@+id/txt_bt_one"
         android:text="标准体重"
         android:textColor="@android:color/white"
         android:textSize="24sp"
@@ -29,6 +31,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
+        android:id="@+id/txt_bt_two"
         android:text="体脂肪率"
         android:textColor="@android:color/white"
         android:textSize="24sp"
@@ -39,6 +42,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="健康指数"
+        android:id="@+id/txt_bt_three"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         />
@@ -48,6 +52,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="身体质量指数"
+        android:id="@+id/txt_bt_four"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         />

@@ -17,6 +17,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:alpha="0.1"
+          android:id="@+id/txt_sub"
           android:layout_centerVertical="true"
           android:textSize="86sp"
           android:textColor="#ffffff"
@@ -24,6 +25,7 @@
           />
       <TextView
           android:layout_width="wrap_content"
+          android:id="@+id/txt_main"
           android:layout_height="wrap_content"
           android:textSize="100sp"
           android:layout_centerInParent="true"
@@ -36,6 +38,7 @@
       android:layout_width="match_parent"
       android:layout_marginTop="10dp"
       android:gravity="center"
+      android:id="@+id/rg_sex"
       android:layout_height="wrap_content"
       android:orientation="horizontal" >
 
@@ -43,11 +46,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
+        android:id="@+id/rb_gender"
         android:drawableTop="@drawable/sl_gener"
         android:button="@null"/>
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/rb_femail"
         android:layout_marginLeft="20dp"
         android:drawableTop="@drawable/sl_male"
         android:button="@null"/>

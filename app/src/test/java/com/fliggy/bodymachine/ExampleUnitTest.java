@@ -219,4 +219,10 @@ public class ExampleUnitTest {
     n |= n >>> 16;
     KLog.e(n);
   }
+  @Test
+  public void testFunction13() {
+      String num="000";
+    int mI = Integer.parseInt(num);
+    KLog.e(mI);
+  }
 }

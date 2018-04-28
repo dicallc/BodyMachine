@@ -9,8 +9,17 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 public class MessageEvent {
+  /**
+   * 获取图片
+   */
   public static final int GET_PIC = 1;
+  /**
+   * 打印成功
+   */
   public static final int PRINT_Y = 2;
+  /**
+   * 打印失败
+   */
   public static final int PRINT_N = 3;
 
   @IntDef({ GET_PIC, PRINT_Y, PRINT_N })

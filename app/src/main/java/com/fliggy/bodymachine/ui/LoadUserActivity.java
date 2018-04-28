@@ -51,10 +51,32 @@ public class LoadUserActivity extends SupportActivity {
   private float y1;
   private WaitStandFragment mWaitStandFragment;
 
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_load_user);
     ButterKnife.bind(this);
+    initUI();
+    SerialPortHelp.getInstance();
+  }
+
+  public TextView getTxtTitleId() {
+    return mTxtTitleId;
+  }
+
+  public TextView getTxtTitleHeight() {
+    return mTxtTitleHeight;
+  }
+
+  public TextView getTxtTitleAge() {
+    return mTxtTitleAge;
+  }
+
+  public TextView getTxtTitleSex() {
+    return mTxtTitleSex;
+  }
+
+  private void initUI() {
     if (findFragment(LoadWeightFragment.class) == null) {
       mLoadWeightFragment = LoadWeightFragment.newInstance("", "");
       mLoadHeightFragment = LoadHeightFragment.newInstance("", "");
@@ -72,7 +94,6 @@ public class LoadUserActivity extends SupportActivity {
       mSupportFragments.add(mLoadResultFragment);
     }
   }
-
 
   public void toSettingUI() {
     Intent intent = new Intent();
@@ -174,4 +195,6 @@ public class LoadUserActivity extends SupportActivity {
     myTouchListeners.get(position).onTouchEvent(ev);
     return super.dispatchTouchEvent(ev);
   }
+
+
 }

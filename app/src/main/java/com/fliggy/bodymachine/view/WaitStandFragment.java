@@ -9,10 +9,14 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import java.util.Timer;
 import java.util.TimerTask;
+import me.drakeet.materialdialog.MaterialDialog;
 import me.yokeyword.fragmentation.SupportFragment;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class WaitStandFragment extends SupportFragment {
   private static final String ARG_PARAM1 = "param1";
@@ -21,9 +25,12 @@ public class WaitStandFragment extends SupportFragment {
 
   private String mParam1;
   private String mParam2;
+  private String mHeight;
+  private String mAge;
+  private String mSex;
+  private String erromsg;
 
   public WaitStandFragment() {
-    // Required empty public constructor
   }
 
   public static WaitStandFragment newInstance(String param1, String param2) {
@@ -53,17 +60,46 @@ public class WaitStandFragment extends SupportFragment {
   @Override public void onHiddenChanged(boolean hidden) {
     super.onHiddenChanged(hidden);
     if(!hidden){
+
       Timer timer = new Timer();
       timer.schedule(task, 3000);
     }
   }
 
+  private boolean isYes=true;
   TimerTask task = new TimerTask(){
     public void run(){
-      LoadUserActivity mLoadUserActivity= (LoadUserActivity) getActivity();
-      mLoadUserActivity.ShowMeasureUI();
+      if (isYes){
+        //String str = Utils.loadUserInfoCmd(mHeight, mAge, mSex, "00");
+        //SimpleSerialPortUtil.getInstance().sendCmds(str);
+        LoadUserActivity mLoadUserActivity= (LoadUserActivity) getActivity();
+        mLoadUserActivity.ShowMeasureUI();
+      }else{
+        getActivity().runOnUiThread(new Runnable() {
+          @Override public void run() {
+            //erromsg="姿势可能错误了";
+            final MaterialDialog mMaterialDialog = initDialog(erromsg);
+            mMaterialDialog.setPositiveButton("OK", new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                mMaterialDialog.dismiss();
+              }
+            });
+            mMaterialDialog.show();
+          }
+        });
+
+      }
+
     }
   };
+
+  private MaterialDialog initDialog(String msg) {
+    final MaterialDialog mMaterialDialog =  new MaterialDialog(getActivity()).setTitle("友情提示")
+        .setMessage(msg);
+    return mMaterialDialog;
+  }
+
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
@@ -72,5 +108,25 @@ public class WaitStandFragment extends SupportFragment {
   @Override public void onDestroyView() {
     super.onDestroyView();
     unbinder.unbind();
+  }
+
+  @Subscribe(threadMode = ThreadMode.MAIN) public void Event(SerialEvent messageEvent) {
+    switch (messageEvent.type) {
+      case SerialEvent.HEIGHT:
+        mHeight = messageEvent.content+"";
+        break;
+      case SerialEvent.WEIGHT:
+        break;
+      case SerialEvent.AGE:
+        mAge = messageEvent.content+"";
+        break;
+      case SerialEvent.SEX:
+        mSex = messageEvent.content+"";
+        break;
+      case SerialEvent.LOAD_USER_DATA_ERRO:
+        isYes=false;
+        erromsg=messageEvent.content;
+        break;
+    }
   }
 }
