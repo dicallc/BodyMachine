@@ -225,4 +225,9 @@ public class ExampleUnitTest {
     int mI = Integer.parseInt(num);
     KLog.e(mI);
   }
+  @Test
+  public void testFunction14() {
+    float mV = Arith.MyDiv("65", 130);
+    System.out.print(mV);
+  }
 }

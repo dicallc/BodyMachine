@@ -1,4 +1,4 @@
-package com.fliggy.bodymachine;
+package com.fliggy.bodymachine.base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

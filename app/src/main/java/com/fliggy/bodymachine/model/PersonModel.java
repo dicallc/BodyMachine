@@ -1,9 +1,10 @@
-package com.fliggy.bodymachine;
+package com.fliggy.bodymachine.model;
 
 import io.realm.RealmObject;
 
 /**
  * Created by dicallc on 2018/3/10 0010.
+ * 数据库用户表
  */
 
 public class PersonModel extends RealmObject {

@@ -1,5 +1,6 @@
 package com.fliggy.bodymachine.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,9 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
-import com.fliggy.bodymachine.SwiperFragment;
+import com.fliggy.bodymachine.ShowResultActivity;
+import com.fliggy.bodymachine.base.SwiperFragment;
 import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
@@ -34,6 +37,12 @@ public class LoadResultFragment extends SwiperFragment {
   @BindView(R.id.txt_bt_two) TextView mTxtBtTwo;
   @BindView(R.id.txt_bt_three) TextView mTxtBtThree;
   @BindView(R.id.txt_bt_four) TextView mTxtBtFour;
+  @BindView(R.id.txt_weight) TextView mTxtWeight;
+  @BindView(R.id.txt_zhifan) TextView mTxtZhifan;
+  @BindView(R.id.txt_jirou) TextView mTxtJirou;
+  @BindView(R.id.txt_feirou) TextView mTxtFeirou;
+  @BindView(R.id.print) TextView mPrint;
+  @BindView(R.id.txt_back) TextView mTxtBack;
 
   private String mParam1;
   private String mParam2;
@@ -98,21 +107,27 @@ public class LoadResultFragment extends SwiperFragment {
     LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
     switch (messageEvent.type) {
       case SerialEvent.LOAD_USER_DATA:
-        //todo 体重等得出标准的数字计算百分比，和用户数字，还得计算得出id，然后打印,还得上传数据
+        //todo 肥胖度计算百分比,和用户数字，还得存数据库，打印,还得上传数据
         BodyInfoModel mBodyInfoModel = messageEvent.mBodyInfoModel;
-        setViewFullScreen(mBarWeight, 0.7f);
-        setViewFullScreen(mBarZhifan, 0.3f);
-        setViewFullScreen(mBarJirou, 0.2f);
+
+        mTxtWeight.setText(mBodyInfoModel.weight);
+        setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.weight, 180));
+        mTxtZhifan.setText(mBodyInfoModel.fat_weight);
+        setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.fat_weight, 130));
+        mTxtJirou.setText(mBodyInfoModel.muscle_weight);
+        setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.muscle_weight, 142.5));
+        mTxtFeirou.setText(mBodyInfoModel.Fat_degree);
+        //setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.Fat_degree, 142.5));
         setViewFullScreen(mBarFeirou, 0.9f);
         //标准体重
-        mTxtBtOne.setText(mBodyInfoModel.stander_weight);
-        //todo 体脂肪率 体脂肪量
-        //mTxtBtTwo.setText();
-        //todo 健康指数 肌肉量
-        //mTxtBtThree.setText();
-        //todo 身体质量指数
-        mTxtBtFour.setText(mBodyInfoModel.physique_num);
-        //肥胖度 Fat_degree
+        mTxtBtOne.setText("标准体重    " + mBodyInfoModel.stander_weight);
+        //体脂百分比
+        mTxtBtTwo.setText("体脂肪率    " + mBodyInfoModel.Body_fat_percentage);
+        // 身体评分
+        mTxtBtThree.setText("健康指数    " + mBodyInfoModel.Body_score);
+        // 身体质量指数
+        mTxtBtFour.setText("身体质量指数    " + mBodyInfoModel.physique_num);
+
         break;
       case SerialEvent.HEIGHT:
         mLoadUserActivity.getTxtTitleHeight().setText(messageEvent.content + "");
@@ -127,6 +142,17 @@ public class LoadResultFragment extends SwiperFragment {
         } else {
           mLoadUserActivity.getTxtTitleSex().setText("女");
         }
+        break;
+    }
+  }
+
+  @OnClick({ R.id.txt_back, R.id.print }) public void onViewClicked(View view) {
+    switch (view.getId()) {
+      case R.id.txt_back:
+        break;
+      case R.id.print:
+        Intent mIntent = new Intent(getActivity(), ShowResultActivity.class);
+        startActivity(mIntent);
         break;
     }
   }

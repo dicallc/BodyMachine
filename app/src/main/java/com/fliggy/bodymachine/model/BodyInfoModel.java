@@ -7,6 +7,9 @@ import io.realm.RealmObject;
  */
 
 public class BodyInfoModel extends RealmObject {
+  public String height;
+  public String age;
+  public String sex;
   public String weight;
   public String all_impedance;
   public String left_h_impedance;

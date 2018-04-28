@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
-import com.fliggy.bodymachine.SwiperFragment;
+import com.fliggy.bodymachine.base.SwiperFragment;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.fliggy.bodymachine.utils.ToastUtils;

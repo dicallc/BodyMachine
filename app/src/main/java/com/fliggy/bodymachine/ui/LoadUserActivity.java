@@ -192,7 +192,11 @@ public class LoadUserActivity extends SupportActivity {
    * 分发触摸事件给所有注册了MyTouchListener的接口
    */
   @Override public boolean dispatchTouchEvent(MotionEvent ev) {
-    myTouchListeners.get(position).onTouchEvent(ev);
+    try {
+      myTouchListeners.get(position).onTouchEvent(ev);
+    }catch (Exception e){
+      KLog.e(e.toString());
+    }
     return super.dispatchTouchEvent(ev);
   }
 

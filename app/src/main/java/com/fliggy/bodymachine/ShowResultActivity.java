@@ -1,8 +1,10 @@
 package com.fliggy.bodymachine;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -77,9 +79,15 @@ public class ShowResultActivity extends AppCompatActivity {
 
       @Override public void run() {
         //do something
-        doPhotoPrint(mRootView);
+        String imagePath = viewSaveToImage(mRootView);
+        Uri imageUri = Uri.fromFile(new File(imagePath));
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+        shareIntent.setType("image/*");
+        startActivity(Intent.createChooser(shareIntent, "分享到"));
       }
-    }, 5000);    //延时1s执行
+    }, 3000);    //延时1s执行
   }
 
   private void initView() {
@@ -125,7 +133,7 @@ public class ShowResultActivity extends AppCompatActivity {
     photoPrinter.setScaleMode(PrintHelper.SCALE_MODE_FIT);
     photoPrinter.printBitmap("droids.jpg - test print", cachebmp);
   }
-  private void viewSaveToImage(View view) {
+  private String viewSaveToImage(View view) {
     view.setDrawingCacheEnabled(true);
     view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
     view.setDrawingCacheBackgroundColor(Color.WHITE);
@@ -155,9 +163,15 @@ public class ShowResultActivity extends AppCompatActivity {
     } catch (Exception e) {
       e.printStackTrace();
     }
+    finally
+    {
+      cachebmp.recycle();   // 回收bitmap的内存
+      cachebmp = null;
+    }
     KLog.e("imagePath=" + imagePath);
 
     view.destroyDrawingCache();
+    return imagePath;
   }
 
   private Bitmap loadBitmapFromView(View v) {

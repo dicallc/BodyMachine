@@ -63,6 +63,11 @@ public class Arith{
     public static int div(String v1,String v2){
         return div(Double.parseDouble(v1),Double.parseDouble(v2),DEF_DIV_SCALE);
     }
+    public static float MyDiv(String v1,double v2){
+        BigDecimal b1 = new BigDecimal(v1);
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        return b1.divide(b2,DEF_DIV_SCALE,BigDecimal.ROUND_HALF_UP).floatValue();
+    }
 
     /** 
      * 提供（相对）精确的除法运算。当发生除不尽的情况时，由scale参数指 

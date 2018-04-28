@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_weight="1.8"
     android:orientation="vertical"
-    android:paddingLeft="10dp"
+    android:paddingLeft="30dp"
     android:paddingRight="30dp"
     android:paddingTop="40dp"
     tools:showIn="@layout/print_layout"

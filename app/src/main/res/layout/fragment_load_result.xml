@@ -21,9 +21,9 @@
         android:layout_weight="1"
         android:gravity="center"
         android:id="@+id/txt_bt_one"
-        android:text="标准体重"
+        android:text="标准体重    30"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="18sp"
         />
     <TextView
         android:layout_width="0dp"
@@ -31,29 +31,29 @@
         android:layout_weight="1"
         android:gravity="center"
         android:id="@+id/txt_bt_two"
-        android:text="体脂肪率"
+        android:text="体脂肪率    21%"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="18sp"
         />
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="健康指数"
+        android:text="健康指数    09"
         android:id="@+id/txt_bt_three"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="18sp"
         />
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="身体质量指数"
+        android:text="身体质量指数    22.6kg/m"
         android:id="@+id/txt_bt_four"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="18sp"
         />
   </LinearLayout>
   <LinearLayout
@@ -67,6 +67,7 @@
        android:layout_width="wrap_content"
        android:textSize="30sp"
        android:gravity="center"
+       android:id="@+id/txt_back"
        android:textColor="@android:color/white"
        android:background="@drawable/shape_result_rect_corner"
        android:text="返回"
@@ -75,6 +76,7 @@
    <TextView
        android:layout_width="wrap_content"
        android:textSize="30sp"
+       android:id="@+id/print"
        android:layout_marginLeft="50dp"
        android:gravity="center"
        android:textColor="@android:color/white"
