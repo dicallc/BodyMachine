@@ -1,6 +1,7 @@
 package com.fliggy.bodymachine;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,7 +11,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.print.PrintHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -80,6 +80,7 @@ public class ShowResultActivity extends AppCompatActivity {
       @Override public void run() {
         //do something
         String imagePath = viewSaveToImage(mRootView);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         Uri imageUri = Uri.fromFile(new File(imagePath));
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
@@ -121,17 +122,6 @@ public class ShowResultActivity extends AppCompatActivity {
     mRlSkeletalmuscle.setAdapter(mMachineAdapter);
     mRlFatweightpercent.setLayoutManager(mManager2);
     mRlFatweightpercent.setAdapter(mMachineAdapter);
-  }
-  private void doPhotoPrint(View view) {
-    view.setDrawingCacheEnabled(true);
-    view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-    view.setDrawingCacheBackgroundColor(Color.WHITE);
-
-    // 把一个View转换成图片
-    Bitmap cachebmp = loadBitmapFromView(view);
-    PrintHelper photoPrinter = new PrintHelper(this);
-    photoPrinter.setScaleMode(PrintHelper.SCALE_MODE_FIT);
-    photoPrinter.printBitmap("droids.jpg - test print", cachebmp);
   }
   private String viewSaveToImage(View view) {
     view.setDrawingCacheEnabled(true);
