@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -65,6 +66,13 @@ public class ShowResultActivity extends AppCompatActivity {
   @BindView(R.id.rl_weight) RecyclerView mRlWeight;
   @BindView(R.id.rl_skeletalmuscle) RecyclerView mRlSkeletalmuscle;
   @BindView(R.id.rl_fatweightpercent) RecyclerView mRlFatweightpercent;
+  private boolean isDone=false;
+  private String mImagePath;
+
+  @Override public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+    super.onSaveInstanceState(outState, outPersistentState);
+    outState.putBoolean("isDone",isDone);
+  }
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -74,14 +82,22 @@ public class ShowResultActivity extends AppCompatActivity {
     mdf.show(ft, "df");
     setContentView(R.layout.print_layout);
     ButterKnife.bind(this);
+    if(savedInstanceState != null){
+      isDone = savedInstanceState.getBoolean("isDone",true);
+    }
     initView();
+    if (isDone)return;
     new Handler().postDelayed(new Runnable() {
+
+
 
       @Override public void run() {
         //do something
-        String imagePath = viewSaveToImage(mRootView);
+        mImagePath = viewSaveToImage(mRootView);
+        KLog.e("测试顺序");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        Uri imageUri = Uri.fromFile(new File(imagePath));
+        isDone=true;
+        Uri imageUri = Uri.fromFile(new File(mImagePath));
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);

@@ -64,8 +64,8 @@ public class SerialPortHelp {
               case 3:
                 //上行体脂数据
                 //String s = Utils.toShowFinalResult(str);
-                mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(str);
-                EventBus.getDefault().post(new SerialEvent(SerialEvent.LOAD_USER_DATA,mBodyInfoModel));
+
+                EventBus.getDefault().post(new SerialEvent(SerialEvent.LOAD_USER_DATA,str));
                 break;
               case 4:
                 // 上行测脂报错

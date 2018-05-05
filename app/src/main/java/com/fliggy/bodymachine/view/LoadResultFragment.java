@@ -22,6 +22,7 @@ import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.fliggy.bodymachine.utils.Arith;
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -46,6 +47,9 @@ public class LoadResultFragment extends SwiperFragment {
 
   private String mParam1;
   private String mParam2;
+  private String mSex;
+  private String mAge;
+  private String mHeight;
 
   public LoadResultFragment() {
   }
@@ -61,6 +65,7 @@ public class LoadResultFragment extends SwiperFragment {
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    EventBus.getDefault().register(this);
     if (getArguments() != null) {
       mParam1 = getArguments().getString(ARG_PARAM1);
       mParam2 = getArguments().getString(ARG_PARAM2);
@@ -100,6 +105,7 @@ public class LoadResultFragment extends SwiperFragment {
 
   @Override public void onDestroyView() {
     super.onDestroyView();
+    EventBus.getDefault().unregister(this);
     unbinder.unbind();
   }
 
@@ -108,35 +114,37 @@ public class LoadResultFragment extends SwiperFragment {
     switch (messageEvent.type) {
       case SerialEvent.LOAD_USER_DATA:
         //todo 肥胖度计算百分比,和用户数字，还得存数据库，打印,还得上传数据
-        BodyInfoModel mBodyInfoModel = messageEvent.mBodyInfoModel;
+        BodyInfoModel mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight,mAge,mSex,messageEvent.content);
 
-        mTxtWeight.setText(mBodyInfoModel.weight);
-        setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.weight, 180));
-        mTxtZhifan.setText(mBodyInfoModel.fat_weight);
-        setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.fat_weight, 130));
-        mTxtJirou.setText(mBodyInfoModel.muscle_weight);
-        setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.muscle_weight, 142.5));
-        mTxtFeirou.setText(mBodyInfoModel.Fat_degree);
-        //setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.Fat_degree, 142.5));
+        mTxtWeight.setText(mBodyInfoModel.getWeight());
+        setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.getWeight(), 180));
+        mTxtZhifan.setText(mBodyInfoModel.getFat_weight());
+        setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.getFat_weight(), 130));
+        mTxtJirou.setText(mBodyInfoModel.getMuscle_weight());
+        setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), 142.5));
+        mTxtFeirou.setText(mBodyInfoModel.getFat_degree());
+        setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.getFat_degree(), 40));
         setViewFullScreen(mBarFeirou, 0.9f);
         //标准体重
-        mTxtBtOne.setText("标准体重    " + mBodyInfoModel.stander_weight);
+        mTxtBtOne.setText("标准体重    " + mBodyInfoModel.getStander_weight());
         //体脂百分比
-        mTxtBtTwo.setText("体脂肪率    " + mBodyInfoModel.Body_fat_percentage);
+        mTxtBtTwo.setText("体脂肪率    " + mBodyInfoModel.getBody_fat_percentage());
         // 身体评分
-        mTxtBtThree.setText("健康指数    " + mBodyInfoModel.Body_score);
+        mTxtBtThree.setText("健康指数    " + mBodyInfoModel.getBody_score());
         // 身体质量指数
-        mTxtBtFour.setText("身体质量指数    " + mBodyInfoModel.physique_num);
+        mTxtBtFour.setText("身体质量指数    " + mBodyInfoModel.getPhysique_num());
 
         break;
       case SerialEvent.HEIGHT:
+        mHeight = messageEvent.content;
         mLoadUserActivity.getTxtTitleHeight().setText(messageEvent.content + "");
         break;
       case SerialEvent.AGE:
+        mAge = messageEvent.content;
         mLoadUserActivity.getTxtTitleAge().setText(messageEvent.content + "");
         break;
       case SerialEvent.SEX:
-        String mSex = messageEvent.content + "";
+        mSex = messageEvent.content + "";
         if (mSex.equals("1")) {
           mLoadUserActivity.getTxtTitleSex().setText("男");
         } else {

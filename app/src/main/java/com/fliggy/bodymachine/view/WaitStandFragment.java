@@ -1,6 +1,8 @@
 package com.fliggy.bodymachine.view;
 
 import android.os.Bundle;
+import android.serialport.utils.SimpleSerialPortUtil;
+import android.serialport.utils.Utils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -29,6 +31,7 @@ public class WaitStandFragment extends SupportFragment {
   private String mAge;
   private String mSex;
   private String erromsg;
+  private Timer mTimer;
 
   public WaitStandFragment() {
   }
@@ -61,11 +64,15 @@ public class WaitStandFragment extends SupportFragment {
     super.onHiddenChanged(hidden);
     if(!hidden){
 
-      Timer timer = new Timer();
-      timer.schedule(task, 3000);
+      mTimer = new Timer();
+      mTimer.schedule(task, 3000);
+      startMesure();
     }
   }
-
+  private void startMesure() {
+    String str = Utils.sendStartCmd();
+    SimpleSerialPortUtil.getInstance().sendCmds(str);
+  }
   private boolean isYes=true;
   TimerTask task = new TimerTask(){
     public void run(){
@@ -83,6 +90,8 @@ public class WaitStandFragment extends SupportFragment {
               @Override
               public void onClick(View v) {
                 mMaterialDialog.dismiss();
+                mTimer.schedule(task, 3000);
+                startMesure();
               }
             });
             mMaterialDialog.show();

@@ -152,6 +152,7 @@ public class LoadUserActivity extends SupportActivity {
   }
 
   public void showResultUI() {
+
     position++;
     showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 1));
     mTxtW.setVisibility(View.GONE);
@@ -162,7 +163,9 @@ public class LoadUserActivity extends SupportActivity {
     mTxtLoadData.setVisibility(View.VISIBLE);
     mTxtLoadData.setText("DETECTION RESULT");
     mLyTitlePersonMsg.setVisibility(View.VISIBLE);
+
   }
+
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);

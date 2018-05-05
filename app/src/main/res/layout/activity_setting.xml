@@ -5,7 +5,6 @@
     android:id="@+id/rl_contain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_bg"
     android:orientation="vertical"
     android:paddingBottom="65dp"
     >

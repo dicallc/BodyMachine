@@ -85,7 +85,7 @@ public class LoadWeightFragment extends SwiperFragment {
         break;
       case R.id.img_next:
         // todo 1
-        isLock=true;
+        //isLock=true;
         if (mTxtWeight.getText().toString().equals("0")||!isLock){
           ToastUtils.showLongToast("体重尚未测出，请稍等");
           return;
