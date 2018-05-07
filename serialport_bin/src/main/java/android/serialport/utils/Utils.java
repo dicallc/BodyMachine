@@ -327,6 +327,14 @@ public class Utils {
     mBuffer.append(tail_str);
     return mBuffer.toString();
   }
+  public static String loadMacheInfoCmd() {
+    String head_str = "CA0606";
+    StringBuffer mBuffer = new StringBuffer(head_str);
+
+    String tail_str = "000000000000";
+    mBuffer.append(tail_str);
+    return mBuffer.toString();
+  }
 
 
   public static String checkXor(String data) {

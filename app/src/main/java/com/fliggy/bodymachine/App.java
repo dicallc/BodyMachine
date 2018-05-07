@@ -18,6 +18,7 @@ public class App extends Application{
   @Override
   public void onCreate() {
     super.onCreate();
+    Beta.canNotifyUserRestart = true;
     Bugly.init(getApplicationContext(), "9311e75ffa", true);
     Realm.init(this);
     RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm").build();

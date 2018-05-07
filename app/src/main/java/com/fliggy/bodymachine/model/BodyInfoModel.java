@@ -1,12 +1,18 @@
 package com.fliggy.bodymachine.model;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by dicallc on 2018/3/20 0020.
  */
 
 public class BodyInfoModel extends RealmObject {
+
+
+  @PrimaryKey
+  private String id;
+  public String time;
   public String height;
   public String age;
   public String sex;
@@ -59,6 +65,14 @@ public class BodyInfoModel extends RealmObject {
   public String l_t_Hipline;
   public String r_b_Hipline;
   public String l_b_Hipline;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String mId) {
+    id = mId;
+  }
 
   public String getHeight() {
     return height;
@@ -475,7 +489,13 @@ public class BodyInfoModel extends RealmObject {
   public void setL_b_Hipline(String mL_b_Hipline) {
     l_b_Hipline = mL_b_Hipline;
   }
+  public String getTime() {
+    return time;
+  }
 
+  public void setTime(String mTime) {
+    time = mTime;
+  }
   @Override public String toString() {
     return "BodyInfoModel{"
         + "weight='"

@@ -49,6 +49,7 @@
             android:layout_width="wrap_content"
                 android:layout_weight="1"
             android:layout_height="0dp"
+            android:id="@+id/user_mineral_salt"
             android:gravity="center"
             android:text="(lbs) 2.4 (3.44~4.19)"
             android:textSize="10sp"
@@ -146,12 +147,14 @@
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/user_trunk_muscle_volume"
               android:layout_centerInParent="true"
               android:text="躯干"
               android:textSize="16sp"
               />
           <TextView
               android:layout_width="wrap_content"
+              android:id="@+id/user_left_hand_muscle_volume"
               android:layout_height="wrap_content"
               android:layout_alignParentTop="true"
               android:text="左手"
@@ -160,6 +163,7 @@
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/user_right_hand_muscle_volume"
               android:layout_alignParentRight="true"
               android:layout_alignParentTop="true"
               android:text="右手"
@@ -168,6 +172,7 @@
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/user_left_root_muscle_volume"
               android:layout_alignParentBottom="true"
               android:text="左脚"
               android:textSize="16sp"
@@ -175,6 +180,7 @@
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/user_right_root_muscle_volume"
               android:layout_alignParentBottom="true"
               android:layout_alignParentRight="true"
               android:text="右脚"
@@ -194,12 +200,14 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_centerInParent="true"
+              android:id="@+id/user_trunk_fat_rate"
               android:text="躯干"
               android:textSize="16sp"
               />
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/user_left_hand_fat_ratio"
               android:layout_alignParentTop="true"
               android:text="左手"
               android:textSize="16sp"
@@ -208,6 +216,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_alignParentRight="true"
+              android:id="@+id/user_right_hand_fat_rate"
               android:layout_alignParentTop="true"
               android:text="右手"
               android:textSize="16sp"
@@ -216,12 +225,14 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_alignParentBottom="true"
+              android:id="@+id/user_left_foot_fat_ratio"
               android:text="左脚"
               android:textSize="16sp"
               />
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:id="@+id/user_right_foot_fat_ratio"
               android:layout_alignParentBottom="true"
               android:layout_alignParentRight="true"
               android:text="右脚"
