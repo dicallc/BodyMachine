@@ -38,8 +38,12 @@ public class SerialEvent {
    * 体重锁定
    */
   public static final int WEIGHT_LOCK = 7;
+  /**
+   * 获取机器信息
+   */
+  public static final int MACHE_INFO = 8;
 
-  @IntDef({ WEIGHT, HEIGHT, AGE ,SEX,LOAD_USER_DATA_ERRO,LOAD_USER_DATA,WEIGHT_LOCK})
+  @IntDef({ WEIGHT, HEIGHT, AGE ,SEX,LOAD_USER_DATA_ERRO,LOAD_USER_DATA,WEIGHT_LOCK,MACHE_INFO})
   @Retention(RetentionPolicy.SOURCE)
   public @interface MessageType {
   }
@@ -49,6 +53,8 @@ public class SerialEvent {
 
   public String message;
   public String content;
+  public String mache_id;
+  public String mache_version;
   public BodyInfoModel mBodyInfoModel;
   public int type;
 
@@ -56,6 +62,13 @@ public class SerialEvent {
     content = mContent;
     type = mType;
   }
+
+  public SerialEvent(int mType,String mMache_id, String mMache_version) {
+    mache_id = mMache_id;
+    mache_version = mMache_version;
+    type = mType;
+  }
+
   public SerialEvent(@MessageType int  mType,BodyInfoModel mContent) {
     mBodyInfoModel = mContent;
     type = mType;

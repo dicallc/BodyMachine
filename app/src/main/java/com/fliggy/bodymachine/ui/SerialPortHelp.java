@@ -88,8 +88,10 @@ public class SerialPortHelp {
                 EventBus.getDefault().post(new SerialEvent(SerialEvent.WEIGHT_LOCK,"已经稳定了，可以进行下一步"));
                 break;
               case 6:
-                //查询是否准备好了
+                //查询是否准备好了 5a060612xz00000000
                 String version = Utils.toResult(str, 6, 8);
+                String id = Utils.toResult(str, 10, 18);
+                EventBus.getDefault().post(new SerialEvent(SerialEvent.MACHE_INFO,id,version));
                 //mTxtCalVersion.setText("当前版本是: "+version);
                 break;
               case 7:

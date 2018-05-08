@@ -22,6 +22,7 @@ import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.fliggy.bodymachine.utils.Arith;
+import com.fliggy.bodymachine.utils.Constant;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -50,6 +51,7 @@ public class LoadResultFragment extends SwiperFragment {
   private String mSex;
   private String mAge;
   private String mHeight;
+  private String mId;
 
   public LoadResultFragment() {
   }
@@ -113,22 +115,22 @@ public class LoadResultFragment extends SwiperFragment {
     LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
     switch (messageEvent.type) {
       case SerialEvent.LOAD_USER_DATA:
-        //todo 肥胖度计算百分比,和用户数字，还得存数据库，打印,还得上传数据
+        //todo 还得上传数据
         BodyInfoModel mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight,mAge,mSex,messageEvent.content);
-
-        mTxtWeight.setText(mBodyInfoModel.getWeight());
+        Constant.CurentId = mBodyInfoModel.getId();
+        mTxtWeight.setText(mBodyInfoModel.getWeight()+"kg");
         setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.getWeight(), 180));
-        mTxtZhifan.setText(mBodyInfoModel.getFat_weight());
+        mTxtZhifan.setText(mBodyInfoModel.getFat_weight()+"kg");
         setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.getFat_weight(), 130));
-        mTxtJirou.setText(mBodyInfoModel.getMuscle_weight());
+        mTxtJirou.setText(mBodyInfoModel.getMuscle_weight()+"kg");
         setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), 142.5));
         mTxtFeirou.setText(mBodyInfoModel.getFat_degree());
         setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.getFat_degree(), 40));
         setViewFullScreen(mBarFeirou, 0.9f);
         //标准体重
-        mTxtBtOne.setText("标准体重    " + mBodyInfoModel.getStander_weight());
+        mTxtBtOne.setText("标准体重    " + mBodyInfoModel.getStander_weight()+"kg");
         //体脂百分比
-        mTxtBtTwo.setText("体脂肪率    " + mBodyInfoModel.getBody_fat_percentage());
+        mTxtBtTwo.setText("体脂肪率    " + mBodyInfoModel.getBody_fat_percentage()+"%");
         // 身体评分
         mTxtBtThree.setText("健康指数    " + mBodyInfoModel.getBody_score());
         // 身体质量指数
