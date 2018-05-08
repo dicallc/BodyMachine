@@ -230,4 +230,11 @@ public class ExampleUnitTest {
     float mV = Arith.MyDiv("65", 130);
     System.out.print(mV);
   }
+  @Test
+  public void testFunction15() {
+    String mTestSign = com.fliggy.bodymachine.utils.Utils.getTestSign();
+    String url="http://193.112.106.43:8080/v1/build?";
+    String mS = url + mTestSign;
+    System.out.print(mS);
+  }
 }
