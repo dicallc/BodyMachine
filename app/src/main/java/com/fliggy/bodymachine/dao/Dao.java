@@ -13,8 +13,10 @@ import com.lzy.okgo.model.Response;
 public class Dao {
 
   public static void postCelect(String id,final DaoCallBack<MsgModel> mLinstener) {
-    OkGo.<MsgModel>post("")
-        .params("commodity_id", id)
+    String mTestSign = com.fliggy.bodymachine.utils.Utils.getTestSign();
+    String url="http://193.112.106.43:8080/v1/build?";
+    String r_url = url + mTestSign;
+    OkGo.<MsgModel>post(r_url)
         .execute(new JCallBack<MsgModel>(MsgModel.class) {
 
           @Override public void onSuccess(Response<MsgModel> response) {

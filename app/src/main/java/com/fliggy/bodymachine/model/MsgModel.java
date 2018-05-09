@@ -8,72 +8,45 @@ import java.util.List;
 
 public class MsgModel {
 
+  /**
+   * code : 0000
+   * msg : insert record successful.
+   * response : {"AtUserID":["1"],"BMI":["1234567892"],"BasalMeta":["1234567892"],"BoneSalt":["1234567892"],"FatFreeBodyWt":["1234567892"],"FatWt":["1234567892"],"LhandFatRate":["1234567892"],"LhandMsclVal":["1234567892"],"LlegFatRate":["1234567892"],"LlegMsclVal":["1234567892"],"MuscleWt":["1234567892"],"ObesityDegree":["1234567892"],"PBF":["1234567892"],"PBW":["1234567892"],"PhysicalAge":["1234567892"],"PhysicalScore":["1234567892"],"Protein":["1234567892"],"RecID":["1234567892"],"RecTime":["1234567892"],"RhandFatRate":["1234567892"],"RhandMsclVal":["1234567892"],"RlegFatRate":["1234567892"],"RlegMsclVal":["1234567892"],"ToatalWatWt":["1234567892"],"TrunkFatRate":["1234567892"],"TrunkMsclVal":["1234567892"],"Wt":["1234567892"],"sign":["5e70e2bfff0587a6e870eaeae92ac4c129a2695a"],"time":["1521118780"]}
+   */
 
   public String code;
   public String msg;
   public ResponseBean response;
 
   public static class ResponseBean {
-    public List<RecordsBean> records;
-
-    public static class RecordsBean {
-      /**
-       * AtUserID : 1
-       * BMI : 1234570000
-       * BasalMeta : 1234570000
-       * BoneSalt : 1234570000
-       * FatFreeBodyWt : 1234570000
-       * FatWt : 1234570000
-       * LhandFatRate : 1234570000
-       * LhandMsclVal : 1234570000
-       * LlegFatRate : 1234570000
-       * LlegMsclVal : 1234570000
-       * MuscleWt : 1234570000
-       * ObesityDegree : 1234570000
-       * PBF : 1234570000
-       * PBW : 1234570000
-       * PhysicalAge : 1234570000
-       * PhysicalScore : 1234570000
-       * Protein : 1234570000
-       * RecID : 1234567890
-       * RecTime : 1234567890
-       * RhandFatRate : 1234570000
-       * RhandMsclVal : 1234570000
-       * RlegFatRate : 1234570000
-       * RlegMsclVal : 1234570000
-       * ToatalWatWt : 1234570000
-       * TrunkFatRateWt : 1234570000
-       * TrunkMsclVal : 1234570000
-       * Wt : 1234570000
-       */
-
-      public int AtUserID;
-      public int BMI;
-      public int BasalMeta;
-      public int BoneSalt;
-      public int FatFreeBodyWt;
-      public int FatWt;
-      public int LhandFatRate;
-      public int LhandMsclVal;
-      public int LlegFatRate;
-      public int LlegMsclVal;
-      public int MuscleWt;
-      public int ObesityDegree;
-      public int PBF;
-      public int PBW;
-      public int PhysicalAge;
-      public int PhysicalScore;
-      public int Protein;
-      public String RecID;
-      public int RecTime;
-      public int RhandFatRate;
-      public int RhandMsclVal;
-      public int RlegFatRate;
-      public int RlegMsclVal;
-      public int ToatalWatWt;
-      public int TrunkFatRateWt;
-      public int TrunkMsclVal;
-      public int Wt;
-    }
+    public List<String> AtUserID;
+    public List<String> BMI;
+    public List<String> BasalMeta;
+    public List<String> BoneSalt;
+    public List<String> FatFreeBodyWt;
+    public List<String> FatWt;
+    public List<String> LhandFatRate;
+    public List<String> LhandMsclVal;
+    public List<String> LlegFatRate;
+    public List<String> LlegMsclVal;
+    public List<String> MuscleWt;
+    public List<String> ObesityDegree;
+    public List<String> PBF;
+    public List<String> PBW;
+    public List<String> PhysicalAge;
+    public List<String> PhysicalScore;
+    public List<String> Protein;
+    public List<String> RecID;
+    public List<String> RecTime;
+    public List<String> RhandFatRate;
+    public List<String> RhandMsclVal;
+    public List<String> RlegFatRate;
+    public List<String> RlegMsclVal;
+    public List<String> ToatalWatWt;
+    public List<String> TrunkFatRate;
+    public List<String> TrunkMsclVal;
+    public List<String> Wt;
+    public List<String> sign;
+    public List<String> time;
   }
 }

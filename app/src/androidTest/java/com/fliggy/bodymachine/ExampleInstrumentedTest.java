@@ -1,13 +1,11 @@
 package com.fliggy.bodymachine;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-
+import com.fliggy.bodymachine.dao.Dao;
+import com.fliggy.bodymachine.model.MsgModel;
+import com.fliggy.http_module.http.callback.DaoCallBack;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -18,6 +16,14 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
+        Dao.postCelect("", new DaoCallBack<MsgModel>() {
+            @Override public void onSuccess(int code, MsgModel result) {
+                System.out.print(result);
+            }
 
+            @Override public void onFail(int code, String result) {
+                System.out.print(result);
+            }
+        });
     }
 }

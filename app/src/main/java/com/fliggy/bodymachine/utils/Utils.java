@@ -79,7 +79,7 @@ public class Utils {
     //AtUserID=1&BMI=1234567892&BasalMeta=1234567892&BoneSalt=1234567892&FatFreeBodyWt=1234567892&FatWt=1234567892&LhandFatRate=1234567892&LhandMsclVal=1234567892&
      String authKey="zp0adsxvtp1oeiw1k7isd3tz9pft";
     LinkedHashMap<String,String> mMap=new LinkedHashMap<>();
-    mMap.put("AtUserID","110");
+    mMap.put("AtUserID","111");
     mMap.put("BMI","1234567892");
     mMap.put("BasalMeta","1234567892");
     mMap.put("BoneSalt","1234567892");
@@ -99,7 +99,7 @@ public class Utils {
     mMap.put("PhysicalScore","1234567892");
 
     mMap.put("Protein","1234567892");
-    mMap.put("RecID","110");
+    mMap.put("RecID","111");
     mMap.put("RecTime","1234567892");
     mMap.put("RhandFatRate","1234567892");
     mMap.put("RhandMsclVal","1234567892");
