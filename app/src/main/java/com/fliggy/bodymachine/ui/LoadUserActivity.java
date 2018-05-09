@@ -1,5 +1,6 @@
 package com.fliggy.bodymachine.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -23,6 +24,7 @@ import com.socks.library.KLog;
 import java.util.ArrayList;
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LoadUserActivity extends SupportActivity {
 
@@ -204,5 +206,8 @@ public class LoadUserActivity extends SupportActivity {
     return super.dispatchTouchEvent(ev);
   }
 
-
+  @Override
+  protected void attachBaseContext(Context newBase) {
+    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+  }
 }

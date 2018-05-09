@@ -33,7 +33,6 @@ public class KeyBoardViewWithLR extends LinearLayout {
   private ImageView mImg_pre;
   private ImageView mImg_next;
   private RelativeLayout mRl_bg;
-  private TextView mBg_text;
   private TextView mTxt_wei;
   private TextView mTextView;
 
@@ -68,7 +67,6 @@ public class KeyBoardViewWithLR extends LinearLayout {
     mImg_pre = (ImageView) findViewById(R.id.img_pre);
     mImg_next = (ImageView) findViewById(R.id.img_next);
     mRl_bg = (RelativeLayout) findViewById(R.id.rl_bg);
-    mBg_text = (TextView) findViewById(R.id.bg_text);
     mTxt_wei = (TextView) findViewById(R.id.txt_wei);
     setView();
   }
@@ -90,9 +88,6 @@ public class KeyBoardViewWithLR extends LinearLayout {
     return mRl_bg;
   }
 
-  public TextView getBg_text() {
-    return mBg_text;
-  }
 
   public ImageView getImg_pre() {
     return mImg_pre;

@@ -61,8 +61,7 @@ public class LoadAgeFragment extends SwiperFragment implements View.OnClickListe
     mAgeKeyboad.setTips("请输入年龄");
     mAgeKeyboad.getImg_pre().setOnClickListener(this);
     mAgeKeyboad.getImg_next().setOnClickListener(this);
-    mAgeKeyboad.getRl_bg().setBackgroundResource(R.mipmap.bg_sex);
-    mAgeKeyboad.getBg_text().setText("AGE");
+    mAgeKeyboad.getRl_bg().setBackgroundResource(R.mipmap.bg_age_c);
     mAgeKeyboad.setWei();
     mAgeKeyboad.getTxt_wei().setText("");
   }

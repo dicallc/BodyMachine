@@ -28,9 +28,7 @@ public class LoadMaleFragment extends SwiperFragment implements RadioGroup.OnChe
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
   @BindView(R.id.img_pre) ImageView mImgPre;
-  @BindView(R.id.devider_top) View mDeviderTop;
   @BindView(R.id.show_text) TextView mShowText;
-  @BindView(R.id.devider_bottom) View mDeviderBottom;
   @BindView(R.id.img_next) ImageView mImgNext;
   Unbinder unbinder;
   @BindView(R.id.txt_sub) TextView mTxtSub;

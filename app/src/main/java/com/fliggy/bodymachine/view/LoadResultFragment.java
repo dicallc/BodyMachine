@@ -123,6 +123,18 @@ public class LoadResultFragment extends SwiperFragment {
       case SerialEvent.LOAD_USER_DATA:
         BodyInfoModel mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight,mAge,mSex,messageEvent.content);
         Constant.CurentId = mBodyInfoModel.getId();
+        if (TextUtils.isEmpty(mBodyInfoModel.getId())){
+            ToastUtils.showShortToast("数据库初始化失败");
+            return;
+        }
+        if (TextUtils.isEmpty(mBodyInfoModel.getWeight())){
+            ToastUtils.showShortToast("模块获取数据为空");
+            return;
+        }
+        if ("0".equals(mBodyInfoModel.getFat_weight())){
+            ToastUtils.showShortToast("模块获取数据为0");
+            return;
+        }
         mTxtWeight.setText(mBodyInfoModel.getWeight()+"kg");
         setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.getWeight(), 180));
         mTxtZhifan.setText(mBodyInfoModel.getFat_weight()+"kg");

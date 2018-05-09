@@ -1,61 +1,74 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:gravity="bottom"
     android:layout_height="match_parent"
+    tools:ignore="MissingPrefix"
     tools:context="com.fliggy.bodymachine.view.LoadMaleFragment"
     >
     <RelativeLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:paddingLeft="15dp"
+        android:layout_centerInParent="true"
         android:background="@mipmap/bg_male"
         android:gravity="center_vertical"
-        android:layout_height="200dp">
+        android:layout_height="117dp">
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:alpha="0.1"
           android:id="@+id/txt_sub"
+          fontPath="fonts/ArialBoldItalic.ttf"
           android:layout_centerVertical="true"
           android:textSize="86sp"
           android:textColor="#ffffff"
           android:text="GENDER"
           />
-      <TextView
-          android:layout_width="wrap_content"
-          android:id="@+id/txt_main"
-          android:layout_height="wrap_content"
-          android:textSize="100sp"
-          android:layout_centerInParent="true"
-          android:textColor="#ffffff"
-          android:text="FEMALE"
-          />
+
     </RelativeLayout>
+  <RelativeLayout
+      android:id="@+id/rl_center"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      >
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/txt_main"
+        android:layout_height="wrap_content"
+        fontPath="fonts/ArialBoldItalic.ttf"
+        android:textSize="100sp"
+        android:layout_centerInParent="true"
+        android:textColor="#ffffff"
+        android:text="FEMALE"
+
+        />
+  </RelativeLayout>
 
   <RadioGroup
       android:layout_width="match_parent"
       android:layout_marginTop="10dp"
-      android:gravity="center"
       android:id="@+id/rg_sex"
+      android:gravity="center"
+      android:layout_below="@+id/rl_center"
       android:layout_height="wrap_content"
       android:orientation="horizontal" >
-
     <RadioButton
+        android:id="@+id/rb_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:id="@+id/rb_gender"
+        android:layout_marginRight="87dp"
+        android:button="@null"
         android:drawableTop="@drawable/sl_gener"
-        android:button="@null"/>
+        />
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rb_femail"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="87dp"
         android:drawableTop="@drawable/sl_male"
         android:button="@null"/>
   </RadioGroup>
   <include layout="@layout/include_lu_lr"/>
-</LinearLayout>
+
+</RelativeLayout>

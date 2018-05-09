@@ -8,6 +8,7 @@ import com.tencent.bugly.beta.Beta;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import me.yokeyword.fragmentation.Fragmentation;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by dicallc on 2018/3/5.
@@ -29,6 +30,10 @@ public class App extends Application{
         .stackViewMode(Fragmentation.BUBBLE)
         .debug(BuildConfig.DEBUG)
              .install();
+    CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+        .setDefaultFontPath("fonts/ArialBoldItalic.ttf")
+        .setFontAttrId(R.attr.fontPath)
+        .build() );
   }
   public static Context getAppContext() {
     return context;
