@@ -29,12 +29,9 @@ public class Utils {
     }
     return buf.toString();
   }
-  public static String getSign(BodyInfoModel mBodyInfoModel){
+  public static String getSign(BodyInfoModel mBodyInfoModel, String mMache_id){
     String authKey="zp0adsxvtp1oeiw1k7isd3tz9pft";
     HashMap<String,String> mMap=new HashMap<>();
-    mMap.put("RecID",mBodyInfoModel.getId());
-    mMap.put("RecTime",mBodyInfoModel.getTime());
-    mMap.put("time",mBodyInfoModel.getTime());
     mMap.put("AtUserID",mBodyInfoModel.getId());
     mMap.put("BMI",mBodyInfoModel.getPhysique_num());
     mMap.put("BasalMeta",mBodyInfoModel.getBasal_metabolism());
@@ -53,14 +50,21 @@ public class Utils {
     mMap.put("PhysicalScore",mBodyInfoModel.getBody_score());
 
     mMap.put("Protein",mBodyInfoModel.getProtein());
+    mMap.put("RecID",mBodyInfoModel.getId()+"@"+mMache_id);
+    mMap.put("RecTime",mBodyInfoModel.getTime());
     mMap.put("RhandFatRate",mBodyInfoModel.getRight_hand_fat_rate());
     mMap.put("RhandMsclVal",mBodyInfoModel.getRight_hand_muscle_volume());
     mMap.put("RlegFatRate",mBodyInfoModel.getRight_foot_fat_ratio());
     mMap.put("RlegMsclVal",mBodyInfoModel.getRight_root_muscle_volume());
+
+    mMap.put("SktMuscleWt",mBodyInfoModel.getSkeletal_muscle());
     mMap.put("ToatalWatWt",mBodyInfoModel.getTotal_water_weight());
     mMap.put("TrunkFatRate",mBodyInfoModel.getTrunk_fat_rate());
     mMap.put("TrunkMsclVal",mBodyInfoModel.getTrunk_muscle_volume());
+
+    mMap.put("ViscAdiGrd",mBodyInfoModel.getVisceral_fat());
     mMap.put("Wt",mBodyInfoModel.getWeight());
+    mMap.put("time",System.currentTimeMillis()+"");
     StringBuffer mBuffer=new StringBuffer();
     for (String key : mMap.keySet()) {
       mBuffer.append(key+"="+mMap.get(key)+"&");
@@ -69,11 +73,12 @@ public class Utils {
     String finalStr=authKey+str+authKey;
     String mS = null;
     try {
-      mS = com.fliggy.bodymachine.utils.Utils.sha1(finalStr);
+      mS =sha1(finalStr);
     } catch (NoSuchAlgorithmException mE) {
       mE.printStackTrace();
     }
-    return mS;
+    String params = str + "&sign=" + mS;
+    return params;
   }
   public static String getTestSign(){
     //AtUserID=1&BMI=1234567892&BasalMeta=1234567892&BoneSalt=1234567892&FatFreeBodyWt=1234567892&FatWt=1234567892&LhandFatRate=1234567892&LhandMsclVal=1234567892&
@@ -88,8 +93,6 @@ public class Utils {
     mMap.put("LhandFatRate","1234567892");
     mMap.put("LhandMsclVal","1234567892");
     mMap.put("LlegFatRate","1234567892");
-    // LlegFatRate=1234567892&LlegMsclVal=1234567892&MuscleWt=1234567892&PBF=1234567892&PBW=1234567892&PhysicalAge=1234567892&PhysicalScore=1234567892&
-
     mMap.put("LlegMsclVal","1234567892");
     mMap.put("MuscleWt","1234567892");
     mMap.put("ObesityDegree","1234567892");

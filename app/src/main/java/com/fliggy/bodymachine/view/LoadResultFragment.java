@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +19,15 @@ import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.ShowResultActivity;
 import com.fliggy.bodymachine.base.SwiperFragment;
+import com.fliggy.bodymachine.dao.Dao;
 import com.fliggy.bodymachine.model.BodyInfoModel;
+import com.fliggy.bodymachine.model.MsgModel;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.fliggy.bodymachine.utils.Arith;
 import com.fliggy.bodymachine.utils.Constant;
+import com.fliggy.bodymachine.utils.ToastUtils;
+import com.fliggy.http_module.http.callback.DaoCallBack;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -52,6 +57,7 @@ public class LoadResultFragment extends SwiperFragment {
   private String mAge;
   private String mHeight;
   private String mId;
+  private String mMache_id;
 
   public LoadResultFragment() {
   }
@@ -115,7 +121,6 @@ public class LoadResultFragment extends SwiperFragment {
     LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
     switch (messageEvent.type) {
       case SerialEvent.LOAD_USER_DATA:
-        //todo 还得上传数据
         BodyInfoModel mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight,mAge,mSex,messageEvent.content);
         Constant.CurentId = mBodyInfoModel.getId();
         mTxtWeight.setText(mBodyInfoModel.getWeight()+"kg");
@@ -135,7 +140,19 @@ public class LoadResultFragment extends SwiperFragment {
         mTxtBtThree.setText("健康指数    " + mBodyInfoModel.getBody_score());
         // 身体质量指数
         mTxtBtFour.setText("身体质量指数    " + mBodyInfoModel.getPhysique_num());
+        if (TextUtils.isEmpty(mMache_id)){
+          ToastUtils.showShortToast("机器id为空");
+          return;
+        }
+        Dao.postCelect(mBodyInfoModel,mMache_id, new DaoCallBack<MsgModel>() {
+          @Override public void onSuccess(int code, MsgModel result) {
+            ToastUtils.showShortToast("上传数据成功");
+          }
 
+          @Override public void onFail(int code, String result) {
+            ToastUtils.showShortToast("上传数据失败");
+          }
+        });
         break;
       case SerialEvent.HEIGHT:
         mHeight = messageEvent.content;
@@ -153,6 +170,9 @@ public class LoadResultFragment extends SwiperFragment {
           mLoadUserActivity.getTxtTitleSex().setText("女");
         }
         break;
+        case SerialEvent.MACHE_INFO:
+          mMache_id = messageEvent.mache_id;
+          break;
     }
   }
 
