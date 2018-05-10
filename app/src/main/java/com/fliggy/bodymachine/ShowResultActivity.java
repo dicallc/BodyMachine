@@ -170,8 +170,7 @@ public class ShowResultActivity extends AppCompatActivity {
     mUserTotalWaterWeight.setText(
         "(lbs) " + mBodyInfoModel.getTotal_water_weight() + " (37.3~45.6)");
     mUserProtein.setText("(lbs) " + mBodyInfoModel.getProtein() + " (9.9~12.1)");
-    //todo 没有无机盐
-    //mUserMineralSalt.setText("(lbs) " + mBodyInfoModel.protein + " (9.9~12.1)");
+    mUserMineralSalt.setText("(lbs) " + mBodyInfoModel.getBone_salt_content() + " (9.9~12.1)");
     mUserFatweight.setText("(lbs) " + mBodyInfoModel.getFat_weight() + " (7.9~15.9)");
     mUserWeight.setText("(lbs) " + mBodyInfoModel.getWeight() + " (56.2~76.1)");
   }
