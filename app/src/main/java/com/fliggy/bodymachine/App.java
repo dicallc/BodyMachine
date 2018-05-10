@@ -31,7 +31,7 @@ public class App extends Application{
         .debug(BuildConfig.DEBUG)
              .install();
     CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-        .setDefaultFontPath("fonts/ArialBoldItalic.ttf")
+        //.setDefaultFontPath("fonts/ARIAL_BLACK.TTF")
         .setFontAttrId(R.attr.fontPath)
         .build() );
   }

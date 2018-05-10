@@ -232,9 +232,9 @@ public class ExampleUnitTest {
   }
   @Test
   public void testFunction15() {
-    String mTestSign = com.fliggy.bodymachine.utils.Utils.getTestSign(mMache_id);
-    String url="http://193.112.106.43:8080/v1/build?";
-    String mS = url + mTestSign;
-    System.out.print(mS);
+    //String mTestSign = com.fliggy.bodymachine.utils.Utils.getTestSign(mMache_id);
+    //String url="http://193.112.106.43:8080/v1/build?";
+    //String mS = url + mTestSign;
+    //System.out.print(mS);
   }
 }

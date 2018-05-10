@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.UUID;
 
 /**
  * Created by dicallc on 2018/3/16.
@@ -254,7 +255,7 @@ public class Utils {
     }
     Realm realm = Realm.getDefaultInstance();
     realm.beginTransaction();
-    BodyInfoModel mModel = realm.createObject(BodyInfoModel.class);
+    BodyInfoModel mModel = realm.createObject(BodyInfoModel.class, UUID.randomUUID().toString());
     //BodyInfoModel mModel = new BodyInfoModel();
     mModel.setAge(mAge);
     mModel.setHeight(mHeight);

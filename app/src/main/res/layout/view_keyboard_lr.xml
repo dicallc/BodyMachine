@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -25,7 +26,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="203dp"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="-30dp"
         android:gravity="center"
         android:orientation="horizontal"
         >
@@ -96,17 +97,22 @@
             android:src="@drawable/shape_text_border_rect"
             />
       </LinearLayout>
-      <TextView
-          android:id="@+id/txt_wei"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="cm"
-          android:textColor="@android:color/white"
-          android:textSize="72sp"
-          />
+
     </LinearLayout>
   </RelativeLayout>
-
+  <TextView
+      android:id="@+id/txt_wei"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignBottom="@+id/rl_bg"
+      android:layout_toEndOf="@+id/rl_center"
+      android:layout_toRightOf="@+id/rl_center"
+      android:text="cm"
+      android:textColor="@android:color/white"
+      android:textSize="72sp"
+      fontPath="fonts/ARIAL_BLACK.TTF"
+      tools:ignore="MissingPrefix"
+      />
   <TextView
       android:id="@+id/txt_show_tips"
       android:layout_width="match_parent"

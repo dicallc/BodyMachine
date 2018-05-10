@@ -37,26 +37,20 @@
         android:textColor="#ffffff"
         android:textSize="144sp"
         />
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
+        android:layout_alignBaseline="@+id/txt_weight"
+        android:layout_alignBottom="@+id/txt_weight"
+        android:layout_marginLeft="14dp"
+        android:layout_toEndOf="@+id/txt_weight"
         android:layout_toRightOf="@+id/txt_weight"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        >
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="15dp"
-          android:text="kg"
-          android:textColor="#ffffff"
-          android:textSize="72sp"
-          fontPath="fonts/ArialBoldItalic.ttf"
-          tools:ignore="MissingPrefix"
-          />
-    </LinearLayout>
+        android:text="kg"
+        android:textColor="#ffffff"
+        android:textSize="72sp"
+        fontPath="fonts/ARIAL_BLACK.TTF"
+        tools:ignore="MissingPrefix"
+        />
   </RelativeLayout>
   <include layout="@layout/include_lu_lr"/>
 </RelativeLayout>
