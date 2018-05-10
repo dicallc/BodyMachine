@@ -105,11 +105,6 @@ public class LoadResultFragment extends SwiperFragment {
     view.setLayoutParams(layoutParams);
   }
 
-  public int dp2px(float dpValue) {
-    final float scale = getResources().getDisplayMetrics().density;
-
-    return (int) (dpValue * scale + 0.5f);
-  }
 
   @Override public void onDestroyView() {
     super.onDestroyView();
