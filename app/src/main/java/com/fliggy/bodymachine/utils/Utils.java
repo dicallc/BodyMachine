@@ -8,7 +8,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.UUID;
 
@@ -32,7 +31,7 @@ public class Utils {
   }
   public static String getSign(BodyInfoModel mBodyInfoModel, String mMache_id){
     String authKey="zp0adsxvtp1oeiw1k7isd3tz9pft";
-    HashMap<String,String> mMap=new HashMap<>();
+    LinkedHashMap<String,String> mMap=new LinkedHashMap<>();
     mMap.put("AtUserID",mBodyInfoModel.getId());
     mMap.put("BMI",mBodyInfoModel.getPhysique_num());
     mMap.put("BasalMeta",mBodyInfoModel.getBasal_metabolism());
@@ -81,63 +80,63 @@ public class Utils {
     String params = str + "&sign=" + mS;
     return params;
   }
-  public static String getTestSign(){
-    //AtUserID=1&BMI=1234567892&BasalMeta=1234567892&BoneSalt=1234567892&FatFreeBodyWt=1234567892&FatWt=1234567892&LhandFatRate=1234567892&LhandMsclVal=1234567892&
-     String authKey="zp0adsxvtp1oeiw1k7isd3tz9pft";
-    LinkedHashMap<String,String> mMap=new LinkedHashMap<>();
-    mMap.put("AtUserID","111");
-    mMap.put("BMI","1234567892");
-    mMap.put("BasalMeta","1234567892");
-    mMap.put("BoneSalt","1234567892");
-    mMap.put("FatFreeBodyWt","1234567892");
-    mMap.put("FatWt","1234567892");
-    mMap.put("LhandFatRate","1234567892");
-    mMap.put("LhandMsclVal","1234567892");
-    mMap.put("LlegFatRate","1234567892");
-    mMap.put("LlegMsclVal","1234567892");
-    mMap.put("MuscleWt","1234567892");
-    mMap.put("ObesityDegree","1234567892");
-    mMap.put("PBF","1234567892");
-    mMap.put("PBW","1234567892");
-    mMap.put("PhysicalAge","1234567892");
-    mMap.put("PhysicalScore","1234567892");
-
-    mMap.put("Protein","1234567892");
-    mMap.put("RecID","111");
-    mMap.put("RecTime","1234567892");
-    mMap.put("RhandFatRate","1234567892");
-    mMap.put("RhandMsclVal","1234567892");
-    mMap.put("RlegFatRate","1234567892");
-    mMap.put("RlegMsclVal","1234567892");
-    //SktMuscleWt
-    mMap.put("SktMuscleWt","1234567892");
-    mMap.put("ToatalWatWt","1234567892");
-    mMap.put("TrunkFatRate","1234567892");
-    mMap.put("TrunkMsclVal","1234567892");
-    //skeletal_muscle
-    mMap.put("ViscAdiGrd","1234567892");
-    mMap.put("Wt","1234567892");
-    mMap.put("time",System.currentTimeMillis()+"");
-
-
-
-
-
-    StringBuffer mBuffer=new StringBuffer();
-    for (String key : mMap.keySet()) {
-      mBuffer.append(key+"="+mMap.get(key)+"&");
-    }
-    String str=mBuffer.toString().substring(0,mBuffer.length()-1);
-    String finalStr=authKey+str+authKey;
-    String mS = null;
-    try {
-      mS =sha1(finalStr);
-    } catch (NoSuchAlgorithmException mE) {
-      mE.printStackTrace();
-    }
-    String params = str + "&sign=" + mS;
-    return params;
-  }
+  //public static String getTestSign(){
+  //  //AtUserID=1&BMI=1234567892&BasalMeta=1234567892&BoneSalt=1234567892&FatFreeBodyWt=1234567892&FatWt=1234567892&LhandFatRate=1234567892&LhandMsclVal=1234567892&
+  //   String authKey="zp0adsxvtp1oeiw1k7isd3tz9pft";
+  //  LinkedHashMap<String,String> mMap=new LinkedHashMap<>();
+  //  mMap.put("AtUserID","111");
+  //  mMap.put("BMI","1234567892");
+  //  mMap.put("BasalMeta","1234567892");
+  //  mMap.put("BoneSalt","1234567892");
+  //  mMap.put("FatFreeBodyWt","1234567892");
+  //  mMap.put("FatWt","1234567892");
+  //  mMap.put("LhandFatRate","1234567892");
+  //  mMap.put("LhandMsclVal","1234567892");
+  //  mMap.put("LlegFatRate","1234567892");
+  //  mMap.put("LlegMsclVal","1234567892");
+  //  mMap.put("MuscleWt","1234567892");
+  //  mMap.put("ObesityDegree","1234567892");
+  //  mMap.put("PBF","1234567892");
+  //  mMap.put("PBW","1234567892");
+  //  mMap.put("PhysicalAge","1234567892");
+  //  mMap.put("PhysicalScore","1234567892");
+  //
+  //  mMap.put("Protein","1234567892");
+  //  mMap.put("RecID","111");
+  //  mMap.put("RecTime","1234567892");
+  //  mMap.put("RhandFatRate","1234567892");
+  //  mMap.put("RhandMsclVal","1234567892");
+  //  mMap.put("RlegFatRate","1234567892");
+  //  mMap.put("RlegMsclVal","1234567892");
+  //  //SktMuscleWt
+  //  mMap.put("SktMuscleWt","1234567892");
+  //  mMap.put("ToatalWatWt","1234567892");
+  //  mMap.put("TrunkFatRate","1234567892");
+  //  mMap.put("TrunkMsclVal","1234567892");
+  //  //skeletal_muscle
+  //  mMap.put("ViscAdiGrd","1234567892");
+  //  mMap.put("Wt","1234567892");
+  //  mMap.put("time",System.currentTimeMillis()+"");
+  //
+  //
+  //
+  //
+  //
+  //  StringBuffer mBuffer=new StringBuffer();
+  //  for (String key : mMap.keySet()) {
+  //    mBuffer.append(key+"="+mMap.get(key)+"&");
+  //  }
+  //  String str=mBuffer.toString().substring(0,mBuffer.length()-1);
+  //  String finalStr=authKey+str+authKey;
+  //  String mS = null;
+  //  try {
+  //    mS =sha1(finalStr);
+  //  } catch (NoSuchAlgorithmException mE) {
+  //    mE.printStackTrace();
+  //  }
+  //  String params = str + "&sign=" + mS;
+  //  return params;
+  //}
 
   public static BodyInfoModel toShowFinalResultModel(String mS) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
@@ -257,6 +256,8 @@ public class Utils {
     realm.beginTransaction();
     BodyInfoModel mModel = realm.createObject(BodyInfoModel.class, UUID.randomUUID().toString());
     //BodyInfoModel mModel = new BodyInfoModel();
+    mModel.getId();
+    mModel.setTime(System.currentTimeMillis()+"");
     mModel.setAge(mAge);
     mModel.setHeight(mHeight);
     mModel.setSex(mSex);
@@ -354,6 +355,7 @@ public class Utils {
     mModel.l_b_Hipline = android.serialport.utils.Utils.toResultHasPoint(mS, 194, 198);
     //保存数据
     realm.commitTransaction();
+    mModel.getTime();
     mModel.getAge();
     mModel.getHeight();
     mModel.getWeight();

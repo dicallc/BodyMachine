@@ -42,15 +42,15 @@
             android:id="@+id/height_p_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fontPath="fonts/ARIBLK.TTF"
             android:text="1"
             android:textColor="@android:color/white"
             android:textSize="140sp"
+            fontPath="fonts/ARIBLK.TTF"
             />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-30dp"
+            android:layout_marginTop="-20dp"
             android:src="@drawable/shape_text_border_rect"
             />
       </LinearLayout>
@@ -73,7 +73,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-30dp"
+            android:layout_marginTop="-20dp"
             android:src="@drawable/shape_text_border_rect"
             />
       </LinearLayout>
@@ -97,7 +97,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-30dp"
+            android:layout_marginTop="-20dp"
             android:src="@drawable/shape_text_border_rect"
             />
       </LinearLayout>
