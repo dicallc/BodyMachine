@@ -22,6 +22,8 @@ import java.util.ArrayList;
  */
 
 public class KeyBoardViewWithLR extends LinearLayout {
+  private  LinearLayout mHeight_ly;
+  private  TextView mShow_text;
   private ImageView mImg_del;
   private String mStringPassword; //输入的密码
   private TextView[] mTextViewPsw;
@@ -68,11 +70,13 @@ public class KeyBoardViewWithLR extends LinearLayout {
     mImg_next = (ImageView) findViewById(R.id.img_next);
     mRl_bg = (RelativeLayout) findViewById(R.id.rl_bg);
     mTxt_wei = (TextView) findViewById(R.id.txt_wei);
+    mHeight_ly = (LinearLayout) findViewById(R.id.height_ly);
+    mShow_text = (TextView) findViewById(R.id.show_text);
     setView();
   }
 
   public void setWei() {
-    mTextView.setVisibility(GONE);
+    mHeight_ly.setVisibility(GONE);
     mTextViewPsw[2] = null;
   }
 
@@ -99,6 +103,7 @@ public class KeyBoardViewWithLR extends LinearLayout {
 
   // 初始化按钮上应该显示的数字
   private void setView() {
+    mShow_text.setVisibility(GONE);
     GridLayoutManager mManager = new GridLayoutManager(getContext(), 5);
     //LinearLayoutManager mManager = new LinearLayoutManager(getContext());
     //mManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -111,6 +116,7 @@ public class KeyBoardViewWithLR extends LinearLayout {
     mGridView.setAdapter(mAdapter);
     mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
       @Override public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        if(currentIndex==mTextViewPsw.length-1)return;
         mTextViewPsw[++currentIndex].setText(valueList.get(position));
       }
     });

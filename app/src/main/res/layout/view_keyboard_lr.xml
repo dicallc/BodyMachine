@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:ignore="MissingPrefix"
     android:layout_height="match_parent"
     >
   <RelativeLayout
@@ -26,7 +27,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="203dp"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-10dp"
         android:gravity="center"
         android:orientation="horizontal"
         >
@@ -41,14 +42,15 @@
             android:id="@+id/height_p_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            fontPath="fonts/ARIBLK.TTF"
             android:text="1"
             android:textColor="@android:color/white"
-            android:textSize="144sp"
+            android:textSize="140sp"
             />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-15dp"
+            android:layout_marginTop="-30dp"
             android:src="@drawable/shape_text_border_rect"
             />
       </LinearLayout>
@@ -65,12 +67,13 @@
             android:layout_height="wrap_content"
             android:text="7"
             android:textColor="@android:color/white"
-            android:textSize="144sp"
+            fontPath="fonts/ARIBLK.TTF"
+            android:textSize="140sp"
             />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-15dp"
+            android:layout_marginTop="-30dp"
             android:src="@drawable/shape_text_border_rect"
             />
       </LinearLayout>
@@ -78,6 +81,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="center_vertical"
+          android:id="@+id/height_ly"
           android:orientation="vertical"
           android:paddingRight="10dp"
           >
@@ -86,14 +90,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="8"
+            fontPath="fonts/ARIBLK.TTF"
             android:textColor="@android:color/white"
-
-            android:textSize="144sp"
+            android:textSize="140sp"
             />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-15dp"
+            android:layout_marginTop="-30dp"
             android:src="@drawable/shape_text_border_rect"
             />
       </LinearLayout>
@@ -118,31 +122,24 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentEnd="true"
+      android:layout_marginTop="25dp"
       android:layout_alignParentRight="true"
-      android:layout_below="@+id/rl_center"
+      android:layout_below="@+id/rl_bg"
       android:gravity="center"
       android:text="请输入身高"
       android:textColor="@android:color/white"
       android:textSize="36sp"
       />
+
+  <include layout="@layout/include_lu_lr"/>
   <RelativeLayout
       android:layout_width="match_parent"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentRight="true"
-      android:layout_below="@+id/txt_show_tips"
+      android:layout_alignParentBottom="true"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       android:paddingLeft="65dp"
       android:paddingRight="65dp"
       >
-    <ImageView
-        android:id="@+id/img_pre"
-        android:layout_width="122dp"
-        android:layout_height="122dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/ic_back"
-        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -165,14 +162,5 @@
           />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_next"
-        android:layout_width="122dp"
-        android:layout_height="122dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="right"
-        android:src="@drawable/ic_confirm"
-        />
   </RelativeLayout>
 </RelativeLayout>
