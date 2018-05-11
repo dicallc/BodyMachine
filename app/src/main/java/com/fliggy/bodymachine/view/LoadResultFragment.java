@@ -2,6 +2,8 @@ package com.fliggy.bodymachine.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.serialport.utils.SimpleSerialPortUtil;
+import android.serialport.utils.Utils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -28,6 +30,8 @@ import com.fliggy.bodymachine.utils.Arith;
 import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.ToastUtils;
 import com.fliggy.http_module.http.callback.DaoCallBack;
+import com.socks.library.KLog;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -170,13 +174,17 @@ public class LoadResultFragment extends SwiperFragment {
         mLoadUserActivity.getTxtTitleAge().setText(messageEvent.content + "");
         break;
       case SerialEvent.SEX:
+        KLog.e("dicallc 已经发生了用户信息");
         mSex = messageEvent.content + "";
         if (mSex.equals("1")) {
           mLoadUserActivity.getTxtTitleSex().setText("男");
         } else {
           mLoadUserActivity.getTxtTitleSex().setText("女");
         }
-        break;
+        String str = Utils.loadUserInfoCmd(mHeight, mAge, mSex, "00");
+        SimpleSerialPortUtil.getInstance().sendCmds(str);
+
+          break;
         case SerialEvent.MACHE_INFO:
           mMache_id = messageEvent.mache_id;
           break;

@@ -67,7 +67,7 @@ public class SimpleSerialPortUtil {
     String mS = Utils.checkXor(str);
     mStringBuffer.append(mS);
     String msg = mStringBuffer.toString();
-    KLog.e("发送数据"+msg);
+    KLog.e("dicallc 发送数据"+msg);
     byte[] mBuffer = SerialDataUtils.HexToByteArr(msg);
     if (!isStop) {
       try {

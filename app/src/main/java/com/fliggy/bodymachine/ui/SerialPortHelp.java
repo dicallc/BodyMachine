@@ -49,7 +49,7 @@ public class SerialPortHelp {
             }
           }
           final String str = result.toString().trim();
-          KLog.e("dicallc: " + str);
+          KLog.e("接受：dicallc: " + str);
           final String code = str.substring(2, 4);
           {
             switch (Integer.parseInt(code, 16)) {
@@ -64,7 +64,7 @@ public class SerialPortHelp {
               case 3:
                 //上行体脂数据
                 //String s = Utils.toShowFinalResult(str);
-
+                KLog.e("上行体脂数据");
                 EventBus.getDefault().post(new SerialEvent(SerialEvent.LOAD_USER_DATA,str));
                 break;
               case 4:
