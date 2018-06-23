@@ -1,6 +1,7 @@
 package com.fliggy.bodymachine.dao;
 
 import com.fliggy.bodymachine.model.BodyInfoModel;
+import com.fliggy.bodymachine.model.MachineModel;
 import com.fliggy.bodymachine.model.MsgModel;
 import com.fliggy.http_module.http.callback.DaoCallBack;
 import com.fliggy.http_module.http.callback.JCallBack;
@@ -46,6 +47,25 @@ public class Dao {
           }
 
           @Override public void onError(Response<MsgModel> response) {
+            super.onError(response);
+          }
+        });
+  }
+  public static void postData(String content,final DaoCallBack<MachineModel> mLinstener) {
+    String url="http://varietyshop.cn/v1/machine";
+    OkGo.<MachineModel>post(url).params("content",content)
+        .execute(new JCallBack<MachineModel>(MachineModel.class) {
+
+          @Override public void onSuccess(Response<MachineModel> response) {
+            if ("ok".equals(response.body().status)){
+              mLinstener.onSuccess(200, null);
+            }else{
+              onError(null);
+            }
+
+          }
+
+          @Override public void onError(Response<MachineModel> response) {
             super.onError(response);
           }
         });

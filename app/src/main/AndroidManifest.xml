@@ -10,7 +10,9 @@
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
   <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
   <application
       android:name=".App"
       android:allowBackup="true"
@@ -29,12 +31,12 @@
     <activity
         android:name=".ShowResultActivity"
         android:screenOrientation="portrait">
-
     </activity>
     <activity
         android:name="com.tencent.bugly.beta.ui.BetaActivity"
         android:configChanges="keyboardHidden|orientation|screenSize|locale"
         android:theme="@android:style/Theme.Translucent"/>
+
     <provider
         android:name="android.support.v4.content.FileProvider"
         android:authorities="${applicationId}.fileProvider"
@@ -48,6 +50,11 @@
     <activity android:name=".ui.SettingActivity">
     </activity>
     <activity android:name=".ui.MeasureActivity">
+    </activity>
+    <activity android:name=".ui.ScreeActivity">
+
+    </activity>
+    <activity android:name=".ui.ScreenSaverActivity">
     </activity>
   </application>
 

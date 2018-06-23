@@ -44,6 +44,6 @@ public class App extends Application{
     super.attachBaseContext(base);
     MultiDex.install(base);
     // 安装tinker
-    Beta.installTinker();
+    //Beta.installTinker();
   }
 }

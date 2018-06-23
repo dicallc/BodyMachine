@@ -23,6 +23,7 @@ import com.fliggy.bodymachine.ShowResultActivity;
 import com.fliggy.bodymachine.base.SwiperFragment;
 import com.fliggy.bodymachine.dao.Dao;
 import com.fliggy.bodymachine.model.BodyInfoModel;
+import com.fliggy.bodymachine.model.MachineModel;
 import com.fliggy.bodymachine.model.MsgModel;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
@@ -31,7 +32,6 @@ import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.ToastUtils;
 import com.fliggy.http_module.http.callback.DaoCallBack;
 import com.socks.library.KLog;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -120,7 +120,17 @@ public class LoadResultFragment extends SwiperFragment {
     LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
     switch (messageEvent.type) {
       case SerialEvent.LOAD_USER_DATA:
+        Dao.postData(messageEvent.content, new DaoCallBack<MachineModel>() {
+          @Override public void onSuccess(int code, MachineModel result) {
+            KLog.e("成功了");
+          }
+
+          @Override public void onFail(int code, String result) {
+            KLog.e("失败了");
+          }
+        });
         BodyInfoModel mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight,mAge,mSex,messageEvent.content);
+
         Constant.CurentId = mBodyInfoModel.getId();
         if (TextUtils.isEmpty(mBodyInfoModel.getId())){
             ToastUtils.showShortToast("数据库初始化失败");
