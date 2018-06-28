@@ -30,7 +30,8 @@
     </activity>
     <activity
         android:name=".ShowResultActivity"
-        android:screenOrientation="portrait">
+        >
+
     </activity>
     <activity
         android:name="com.tencent.bugly.beta.ui.BetaActivity"

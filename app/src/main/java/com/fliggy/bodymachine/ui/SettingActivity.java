@@ -2,6 +2,7 @@ package com.fliggy.bodymachine.ui;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.fliggy.bodymachine.MainActivity;
 import com.fliggy.bodymachine.R;
 import com.xw.repo.BubbleSeekBar;
 
@@ -29,6 +31,7 @@ public class SettingActivity extends AppCompatActivity {
   @BindView(R.id.ly_weight) LinearLayout mLyWeight;
   @BindView(R.id.txt_voice) TextView mTxtVoice;
   @BindView(R.id.txt_bright) TextView mTxtBright;
+  @BindView(R.id.ly_mark_weight) LinearLayout mLyMarkWeight;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -40,11 +43,11 @@ public class SettingActivity extends AppCompatActivity {
   private void initView() {
     int mScreenBrightness = getScreenBrightness();
     mSeekBright.setProgress(mScreenBrightness);
-    mTxtBright.setText(mScreenBrightness+"");
+    mTxtBright.setText(mScreenBrightness + "");
     mSeekBright.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
       @Override public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress,
           float progressFloat) {
-        mTxtBright.setText(progress+"");
+        mTxtBright.setText(progress + "");
         setScreenBrightness(progress);
       }
 
@@ -61,12 +64,12 @@ public class SettingActivity extends AppCompatActivity {
     final AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
     //获取当前音量
     int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
-    mTxtVoice.setText(currentVolume+"");
+    mTxtVoice.setText(currentVolume + "");
     mSeekVoice.setProgress(currentVolume);
     mSeekVoice.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
       @Override public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress,
           float progressFloat) {
-        mTxtVoice.setText(progress+"");
+        mTxtVoice.setText(progress + "");
         am.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
       }
 
@@ -82,7 +85,7 @@ public class SettingActivity extends AppCompatActivity {
     });
   }
 
-  @OnClick({ R.id.img_back, R.id.ly_print, R.id.ly_calender, R.id.ly_weight })
+  @OnClick({ R.id.img_back, R.id.ly_print, R.id.ly_calender, R.id.ly_weight,R.id.ly_mark_weight})
   public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.img_back:
@@ -93,6 +96,10 @@ public class SettingActivity extends AppCompatActivity {
       case R.id.ly_calender:
         break;
       case R.id.ly_weight:
+        break;
+      case R.id.ly_mark_weight:
+        Intent mIntent=new Intent(this, MainActivity.class);
+        startActivity(mIntent);
         break;
     }
   }
@@ -110,6 +117,7 @@ public class SettingActivity extends AppCompatActivity {
       localException.printStackTrace();
     }
   }
+
   private void setScreenBrightness(int process) {
 
     //设置当前窗口的亮度值.这种方法需要权限android.permission.WRITE_EXTERNAL_STORAGE
@@ -118,9 +126,9 @@ public class SettingActivity extends AppCompatActivity {
     localLayoutParams.screenBrightness = f;
     getWindow().setAttributes(localLayoutParams);
     //修改系统的亮度值,以至于退出应用程序亮度保持
-    saveBrightness(getContentResolver(),process);
-
+    saveBrightness(getContentResolver(), process);
   }
+
   public static void saveBrightness(ContentResolver resolver, int brightness) {
     //改变系统的亮度值
     //这里需要权限android.permission.WRITE_SETTINGS
@@ -128,8 +136,8 @@ public class SettingActivity extends AppCompatActivity {
     Settings.System.putInt(resolver, Settings.System.SCREEN_BRIGHTNESS_MODE,
         Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
     //保存到系统中
-    Uri uri = android.provider.Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS);
-    android.provider.Settings.System.putInt(resolver, Settings.System.SCREEN_BRIGHTNESS, brightness);
+    Uri uri = Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS);
+    Settings.System.putInt(resolver, Settings.System.SCREEN_BRIGHTNESS, brightness);
     resolver.notifyChange(uri, null);
   }
 

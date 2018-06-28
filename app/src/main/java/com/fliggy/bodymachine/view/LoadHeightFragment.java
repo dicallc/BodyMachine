@@ -32,6 +32,13 @@ public class LoadHeightFragment extends SwiperFragment implements View.OnClickLi
   public LoadHeightFragment() {
   }
 
+  @Override public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    if (!hidden){
+      PlayAudio(R.raw.load_height);
+    }
+  }
+
   public static LoadHeightFragment newInstance(String param1, String param2) {
     LoadHeightFragment fragment = new LoadHeightFragment();
     Bundle args = new Bundle();
@@ -47,6 +54,7 @@ public class LoadHeightFragment extends SwiperFragment implements View.OnClickLi
       mParam1 = getArguments().getString(ARG_PARAM1);
       mParam2 = getArguments().getString(ARG_PARAM2);
     }
+
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,

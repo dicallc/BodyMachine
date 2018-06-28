@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
+    android:background="#efefef"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context="com.fliggy.bodymachine.MainActivity"
@@ -97,6 +98,45 @@
         android:layout_height="40dp"
         android:text=""
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="50dp"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:text="初始化操作区域"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+      <LinearLayout
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:layout_height="wrap_content">
+          <Button
+              android:id="@+id/mark_weight"
+              android:layout_width="150dp"
+              android:textSize="24sp"
+              android:layout_height="60dp"
+              android:text="标定体重"
+              android:visibility="visible" />
+      </LinearLayout>
+      <LinearLayout
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+          android:background="@android:color/white"
+              android:gravity="center_vertical"
+          android:paddingLeft="50dp"
+              android:layout_height="50dp">
+           <TextView
+               android:layout_width="wrap_content"
+               android:textSize="18sp"
+               android:text="步骤命令区域"
+               android:layout_height="wrap_content"/>
+      </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -147,12 +187,19 @@
             android:orientation="vertical"
             android:layout_marginTop="10dp"
             android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="信息返回显示区域"
-                android:textColor="@android:color/background_dark" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="50dp"
+                android:layout_height="50dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:text="信息返回显示区域"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
 
             <TextView

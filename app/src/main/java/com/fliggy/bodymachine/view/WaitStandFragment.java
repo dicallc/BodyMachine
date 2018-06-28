@@ -1,28 +1,21 @@
 package com.fliggy.bodymachine.view;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.serialport.utils.SimpleSerialPortUtil;
-import android.serialport.utils.Utils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
-import com.socks.library.KLog;
-
 import java.util.Timer;
 import java.util.TimerTask;
-
 import me.drakeet.materialdialog.MaterialDialog;
 import me.yokeyword.fragmentation.SupportFragment;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -39,6 +32,7 @@ public class WaitStandFragment extends SupportFragment {
     private String mSex;
     private String erromsg;
     private Timer mTimer;
+    private MediaPlayer mediaPlayer;
 
     public WaitStandFragment() {
     }
@@ -74,23 +68,26 @@ public class WaitStandFragment extends SupportFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-
             mTimer = new Timer();
-            mTimer.schedule(task, 3000);
-
+            mTimer.schedule(task, 10000);
+            PlayAudio(R.raw.standup);
         }
     }
 
-    private void startMesure() {
-        String str = Utils.sendStartCmd();
-        SimpleSerialPortUtil.getInstance().sendCmds(str);
+    protected void PlayAudio(int resid) {
+        try {
+            if (null == mediaPlayer) mediaPlayer = MediaPlayer.create(getActivity(), resid);//重新设置要播放的音频
+            mediaPlayer.start();//开始播放
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private boolean isYes = true;
     TimerTask task = new TimerTask() {
         public void run() {
-
-            startMesure();
+                LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
+                mLoadUserActivity.ShowMeasureUI();
+            //startMesure();
         }
     };
 
@@ -127,37 +124,31 @@ public class WaitStandFragment extends SupportFragment {
             case SerialEvent.SEX:
                 mSex = messageEvent.content + "";
                 break;
-            case SerialEvent.LOAD_USER_DATA:
-                KLog.e("LOAD_USER_DATA");
-                LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
-                mLoadUserActivity.ShowMeasureUI();
-                break;
-            case SerialEvent.LOAD_USER_DATA_ERRO:
-                isYes = false;
-                erromsg = messageEvent.content;
-//        if (isYes){
-//          LoadUserActivity mLoadUserActivity= (LoadUserActivity) getActivity();
-//          mLoadUserActivity.ShowMeasureUI();
-//        }else{
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //erromsg="姿势可能错误了";
-                        final MaterialDialog mMaterialDialog = initDialog(erromsg);
-                        mMaterialDialog.setPositiveButton("OK", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mMaterialDialog.dismiss();
-                                mTimer.schedule(task, 3000);
-                                startMesure();
-                            }
-                        });
-                        mMaterialDialog.show();
-                    }
-                });
-
-//        }
-                break;
+            //case SerialEvent.LOAD_USER_DATA:
+            //    KLog.e("LOAD_USER_DATA");
+            //    LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
+            //    mLoadUserActivity.ShowMeasureUI();
+            //    break;
+            //case SerialEvent.LOAD_USER_DATA_ERRO:
+            //    isYes = false;
+            //    erromsg = messageEvent.content;
+            //    getActivity().runOnUiThread(new Runnable() {
+            //        @Override
+            //        public void run() {
+            //            //erromsg="姿势可能错误了";
+            //            final MaterialDialog mMaterialDialog = initDialog(erromsg);
+            //            mMaterialDialog.setPositiveButton("OK", new View.OnClickListener() {
+            //                @Override
+            //                public void onClick(View v) {
+            //                    mMaterialDialog.dismiss();
+            //                    mTimer.schedule(task, 3000);
+            //                }
+            //            });
+            //            mMaterialDialog.show();
+            //        }
+            //    });
+            //
+            //    break;
         }
     }
 }

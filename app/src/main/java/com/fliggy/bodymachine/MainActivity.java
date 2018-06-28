@@ -50,6 +50,7 @@ public class MainActivity extends BasePrintActivity {
   @BindView(R.id.start_clear) Button mStartClear;
   @BindView(R.id.start_print) Button mStartPrint;
   @BindView(R.id.txt_cal_version) TextView mTxtCalVersion;
+  @BindView(R.id.mark_weight) Button mMarkWeight;
   private StringBuffer result = new StringBuffer();
   private MediaPlayer mediaPlayer;
   private SimpleSerialPortUtil mSerialPort;
@@ -162,7 +163,7 @@ public class MainActivity extends BasePrintActivity {
                 case 6:
                   //查询是否准备好了
                   String version = Utils.toResult(str, 6, 8);
-                  mTxtCalVersion.setText("当前版本是: "+version);
+                  mTxtCalVersion.setText("当前版本是: " + version);
                   break;
                 case 7:
                   //用户数据回应是否收到
@@ -239,7 +240,7 @@ public class MainActivity extends BasePrintActivity {
     }
   }
 
-  @OnClick({ R.id.start, R.id.start_test, R.id.test, R.id.start_clear, R.id.start_print })
+  @OnClick({ R.id.start, R.id.start_test, R.id.test, R.id.start_clear, R.id.start_print,R.id.mark_weight})
   public void onViewClicked(View mView) {
     switch (mView.getId()) {
       case R.id.start:
@@ -257,7 +258,15 @@ public class MainActivity extends BasePrintActivity {
       case R.id.start_print:
         StartPrint();
         break;
+      case R.id.mark_weight:
+        StartMark();
+        break;
     }
+  }
+
+  private void StartMark() {
+    String cmd = Utils.sendStartMarkWeight();
+    mSerialPort.sendCmds(cmd);
   }
 
   private void StartPrint() {

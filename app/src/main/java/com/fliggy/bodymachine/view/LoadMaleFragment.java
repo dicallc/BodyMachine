@@ -1,8 +1,6 @@
 package com.fliggy.bodymachine.view;
 
 import android.os.Bundle;
-import android.serialport.utils.SimpleSerialPortUtil;
-import android.serialport.utils.Utils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -45,6 +43,14 @@ public class LoadMaleFragment extends SwiperFragment implements RadioGroup.OnChe
   public LoadMaleFragment() {
   }
 
+  @Override public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    if (!hidden){
+      PlayAudio(R.raw.load_male);
+    }
+    mRbGender.setChecked(false);
+    mRbFemail.setChecked(false);
+  }
   public static LoadMaleFragment newInstance(String param1, String param2) {
     LoadMaleFragment fragment = new LoadMaleFragment();
     Bundle args = new Bundle();
@@ -73,6 +79,8 @@ public class LoadMaleFragment extends SwiperFragment implements RadioGroup.OnChe
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     mShowText.setText("请选择性别");
+
+
     mRgSex.setOnCheckedChangeListener(this);
   }
 

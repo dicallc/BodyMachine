@@ -18,5 +18,6 @@ public class Constant {
   public static final String PhysicalAge="PhysicalAge";
   public static final String PhysicalScore="PhysicalScore";
   public static final String ObesityDegree="ObesityDegree";
+  public static final int TEST_DATA_ERRO=404;
   public static  String CurentId="";
 }

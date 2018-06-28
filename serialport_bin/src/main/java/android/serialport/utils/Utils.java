@@ -309,6 +309,19 @@ public class Utils {
   }
 
   /**
+   * 发送开始标定体重
+   * @param
+   * @return
+   */
+  public static String sendStartMarkWeight() {
+    String head_str = "CA0906";
+    StringBuffer mBuffer = new StringBuffer(head_str);
+    String tail_str = "000000000000";
+    mBuffer.append(tail_str);
+    return mBuffer.toString();
+  }
+
+  /**
    * 发送用户数据
    * @param height
    * @param age
@@ -327,6 +340,11 @@ public class Utils {
     mBuffer.append(tail_str);
     return mBuffer.toString();
   }
+
+  /**
+   * 下行查询命令（0x06）
+   * @return
+   */
   public static String loadMacheInfoCmd() {
     String head_str = "CA0606";
     StringBuffer mBuffer = new StringBuffer(head_str);

@@ -1,5 +1,6 @@
 package com.fliggy.bodymachine.base;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ public class SwiperFragment extends SupportFragment {
   private float y1;
   private LoadUserActivity mLoadUserActivity;
   private MyOnTouchListener mMyTouchListener;
+  private MediaPlayer mediaPlayer;
 
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
@@ -27,21 +29,21 @@ public class SwiperFragment extends SupportFragment {
 
       @Override public boolean onTouchEvent(MotionEvent event) {
         //继承了Activity的onTouchEvent方法，直接监听点击事件
-        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
           //当手指按下的时候
           x1 = event.getX();
           y1 = event.getY();
         }
-        if(event.getAction() == MotionEvent.ACTION_UP) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
           //当手指离开的时候
           float x2 = event.getX();
           float y2 = event.getY();
-          if(y1 - y2 > 50) {
-          } else if(y2 - y1 > 50) {
-          } else if(x1 - x2 > 50) {
+          if (y1 - y2 > 50) {
+          } else if (y2 - y1 > 50) {
+          } else if (x1 - x2 > 50) {
 
             mLoadUserActivity.toSettingUI();
-          } else if(x2 - x1 > 50) {
+          } else if (x2 - x1 > 50) {
           }
         }
         return false;
@@ -51,8 +53,19 @@ public class SwiperFragment extends SupportFragment {
     mLoadUserActivity.registerMyTouchListener(mMyTouchListener);
   }
 
+  protected void PlayAudio(int resid) {
+    try {
+      if (null == mediaPlayer) mediaPlayer = MediaPlayer.create(getActivity(), resid);//重新设置要播放的音频
+      mediaPlayer.start();//开始播放
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   @Override public void onDestroyView() {
     super.onDestroyView();
+    if (null!=mediaPlayer)
+    mediaPlayer.release();
     mLoadUserActivity.unRegisterMyTouchListener(mMyTouchListener);
   }
 }

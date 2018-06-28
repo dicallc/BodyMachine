@@ -1,8 +1,12 @@
 package com.fliggy.bodymachine.ui;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.MyOnTouchListener;
 import com.fliggy.bodymachine.view.LoadAgeFragment;
 import com.fliggy.bodymachine.view.LoadHeightFragment;
@@ -26,6 +31,9 @@ import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+/**
+ * 首页
+ */
 public class LoadUserActivity extends SupportActivity {
 
   ArrayList<SupportFragment> mSupportFragments = new ArrayList<>();
@@ -53,14 +61,20 @@ public class LoadUserActivity extends SupportActivity {
   private float y1;
   private WaitStandFragment mWaitStandFragment;
 
-
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_load_user);
     ButterKnife.bind(this);
     initUI();
-    KLog.e("dicallc","1.0.1 -13.05测试等待5分钟，重启");
+    KLog.e("dicallc", "1.0.1 -13.05测试等待5分钟，重启");
     SerialPortHelp.getInstance();
+    //手动申请权限,视频音频权限为同一个
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.
+        WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(this, new String[] {
+          Manifest.permission.WRITE_EXTERNAL_STORAGE
+      }, 1);//权限返回码为1
+    }
   }
 
   public TextView getTxtTitleId() {
@@ -88,7 +102,8 @@ public class LoadUserActivity extends SupportActivity {
       mWaitStandFragment = WaitStandFragment.newInstance("", "");
       mLoadResultFragment = LoadResultFragment.newInstance("", "");
       loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment, mLoadHeightFragment,
-          mLoadAgeFragment, mLoadMaleFragment, mLoadResultFragment,mWaitStandFragment);  // 加载根Fragment
+          mLoadAgeFragment, mLoadMaleFragment, mLoadResultFragment,
+          mWaitStandFragment);  // 加载根Fragment
       mSupportFragments.add(mLoadWeightFragment);
       mSupportFragments.add(mLoadHeightFragment);
       mSupportFragments.add(mLoadAgeFragment);
@@ -106,6 +121,12 @@ public class LoadUserActivity extends SupportActivity {
     overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
   }
 
+  public void toOrgin() {
+    mTxtLoadData.setText("");
+    showHideFragment(mSupportFragments.get(0), mSupportFragments.get(mSupportFragments.size() - 1));
+    position = 0;
+  }
+
   public void NextPre(boolean isNext) {
     if (isNext) {
       position++;
@@ -115,7 +136,6 @@ public class LoadUserActivity extends SupportActivity {
       if (position < 1) {
         return;
       }
-
       position--;
       showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position + 1));
     }
@@ -125,18 +145,21 @@ public class LoadUserActivity extends SupportActivity {
         mTxtH.setVisibility(View.GONE);
         mTxtA.setVisibility(View.GONE);
         mTxtM.setVisibility(View.GONE);
+        mTxtLoadData.setVisibility(View.GONE);
         break;
       case 1:
         mTxtH.setVisibility(View.VISIBLE);
         mTxtW.setVisibility(View.GONE);
         mTxtA.setVisibility(View.GONE);
         mTxtM.setVisibility(View.GONE);
+        mTxtLoadData.setVisibility(View.GONE);
         break;
       case 2:
         mTxtA.setVisibility(View.VISIBLE);
         mTxtW.setVisibility(View.GONE);
         mTxtH.setVisibility(View.GONE);
         mTxtM.setVisibility(View.GONE);
+        mTxtLoadData.setVisibility(View.GONE);
         break;
       case 3:
         mTxtM.setVisibility(View.VISIBLE);
@@ -155,7 +178,6 @@ public class LoadUserActivity extends SupportActivity {
   }
 
   public void showResultUI() {
-
     position++;
     showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 1));
     mTxtW.setVisibility(View.GONE);
@@ -166,13 +188,14 @@ public class LoadUserActivity extends SupportActivity {
     mTxtLoadData.setVisibility(View.VISIBLE);
     mTxtLoadData.setText("DETECTION RESULT");
     mLyTitlePersonMsg.setVisibility(View.VISIBLE);
-
   }
-
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == result_ui_code) {
+    if (resultCode == Constant.TEST_DATA_ERRO) {
+
+      NextPre(false);
+    } else if (requestCode == result_ui_code) {
       showResultUI();
     }
   }
@@ -200,14 +223,13 @@ public class LoadUserActivity extends SupportActivity {
   @Override public boolean dispatchTouchEvent(MotionEvent ev) {
     try {
       myTouchListeners.get(position).onTouchEvent(ev);
-    }catch (Exception e){
+    } catch (Exception e) {
       KLog.e(e.toString());
     }
     return super.dispatchTouchEvent(ev);
   }
 
-  @Override
-  protected void attachBaseContext(Context newBase) {
+  @Override protected void attachBaseContext(Context newBase) {
     super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
   }
 }

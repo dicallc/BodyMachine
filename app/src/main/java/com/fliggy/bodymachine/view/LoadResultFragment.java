@@ -204,6 +204,8 @@ public class LoadResultFragment extends SwiperFragment {
   @OnClick({ R.id.txt_back, R.id.print }) public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.txt_back:
+        LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
+        mLoadUserActivity.toOrgin();
         break;
       case R.id.print:
         Intent mIntent = new Intent(getActivity(), ShowResultActivity.class);

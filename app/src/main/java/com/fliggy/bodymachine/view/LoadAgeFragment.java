@@ -65,6 +65,12 @@ public class LoadAgeFragment extends SwiperFragment implements View.OnClickListe
     mAgeKeyboad.setWei();
     mAgeKeyboad.getTxt_wei().setText("");
   }
+  @Override public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    if (!hidden){
+      PlayAudio(R.raw.load_age);
+    }
+  }
 
   @Override public void onDestroyView() {
     super.onDestroyView();
