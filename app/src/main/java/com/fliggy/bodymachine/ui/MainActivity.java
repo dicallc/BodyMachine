@@ -1,4 +1,4 @@
-package com.fliggy.bodymachine;
+package com.fliggy.bodymachine.ui;
 
 import android.Manifest;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.base.BasePrintActivity;
 import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.model.MessageEvent;

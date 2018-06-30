@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     >
-  <com.fliggy.bodymachine.widgets.LbsView
+  <com.fliggy.bodymachine.widgets.CareboDoubleLbsView
       android:id="@+id/lbs_view"
+      android:background="@android:color/holo_green_light"
       android:layout_width="match_parent"
       android:layout_height="70dp"
       >
-  </com.fliggy.bodymachine.widgets.LbsView>
+  </com.fliggy.bodymachine.widgets.CareboDoubleLbsView>
 
 </LinearLayout>

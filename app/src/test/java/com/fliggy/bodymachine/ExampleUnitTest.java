@@ -2,7 +2,9 @@ package com.fliggy.bodymachine;
 
 import android.serialport.utils.NumUtils;
 import android.serialport.utils.Utils;
+import com.fliggy.bodymachine.model.DeviderModel;
 import com.fliggy.bodymachine.utils.Arith;
+import com.fliggy.bodymachine.utils.DataSource;
 import com.socks.library.KLog;
 import java.io.File;
 import java.io.FileInputStream;
@@ -236,5 +238,11 @@ public class ExampleUnitTest {
     //String url="http://193.112.106.43:8080/v1/build?";
     //String mS = url + mTestSign;
     //System.out.print(mS);
+  }
+  @Test
+  public void testFunction16() {
+    DeviderModel mDevider = DataSource.getDeviderPercent(DataSource.getWeightData(), 130 + "");
+    float mDevider_percent = mDevider.devider_percent;
+    System.out.print(mDevider_percent);
   }
 }

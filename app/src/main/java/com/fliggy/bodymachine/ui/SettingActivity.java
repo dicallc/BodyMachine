@@ -16,7 +16,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.fliggy.bodymachine.MainActivity;
 import com.fliggy.bodymachine.R;
 import com.xw.repo.BubbleSeekBar;
 

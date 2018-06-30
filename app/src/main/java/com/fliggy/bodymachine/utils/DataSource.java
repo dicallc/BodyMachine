@@ -21,6 +21,16 @@ public class DataSource {
     mDeviderModel.devider_text = mWeightData;
     return mDeviderModel;
   }
+  @NonNull public  static DeviderModel getDeviderPercent(ArrayList<String> mWeightData, String num,int color) {
+    DeviderModel mDeviderModel = new DeviderModel();
+    String max_num = mWeightData.get(mWeightData.size() - 1);
+    float percent = Arith.MyDiv(num, max_num);
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = percent-0.1f;
+    return mDeviderModel;
+  }
   /**
    * 获取体重区间
    * @return
@@ -37,7 +47,6 @@ public class DataSource {
     list_text.add("160");
     list_text.add("175");
     list_text.add("190");
-    list_text.add("241");
     return list_text;
   }
 

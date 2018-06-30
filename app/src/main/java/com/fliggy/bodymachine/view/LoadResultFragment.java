@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
-import com.fliggy.bodymachine.ShowResultActivity;
+import com.fliggy.bodymachine.ui.ShowResultActivity;
 import com.fliggy.bodymachine.base.SwiperFragment;
 import com.fliggy.bodymachine.dao.Dao;
 import com.fliggy.bodymachine.model.BodyInfoModel;

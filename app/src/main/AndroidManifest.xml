@@ -13,6 +13,7 @@
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
   <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
   <application
       android:name=".App"
       android:allowBackup="true"
@@ -22,11 +23,8 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
     <activity android:name=".ui.LoadUserActivity">
-
     </activity>
-    <activity
-        android:name=".ShowResultActivity"
-        >
+    <activity android:name=".ui.ShowResultActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -53,12 +51,13 @@
     <activity android:name=".ui.MeasureActivity">
     </activity>
     <activity android:name=".ui.ScreeActivity">
-
     </activity>
-    <activity android:name=".MainActivity">
-
+    <activity android:name=".ui.MainActivity">
     </activity>
     <activity android:name=".ui.ScreenSaverActivity">
+    </activity>
+    <activity android:name=".TestActivity">
+
     </activity>
   </application>
 
