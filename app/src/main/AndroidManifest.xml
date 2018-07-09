@@ -23,13 +23,14 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
     <activity android:name=".ui.LoadUserActivity">
-    </activity>
-    <activity android:name=".ui.ShowResultActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+    </activity>
+    <activity android:name=".ui.ShowResultActivity">
+
     </activity>
     <activity
         android:name="com.tencent.bugly.beta.ui.BetaActivity"

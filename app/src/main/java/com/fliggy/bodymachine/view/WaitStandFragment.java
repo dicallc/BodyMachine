@@ -68,9 +68,21 @@ public class WaitStandFragment extends SupportFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
+            cancelTimer();
             mTimer = new Timer();
-            mTimer.schedule(task, 10000);
+            mTimer.schedule(new TimerTask() {
+                @Override public void run() {
+                    LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
+                    mLoadUserActivity.ShowMeasureUI();
+                }
+            }, 1000);
             PlayAudio(R.raw.standup);
+        }
+    }
+    private void cancelTimer() {
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
         }
     }
 
@@ -83,13 +95,11 @@ public class WaitStandFragment extends SupportFragment {
         }
     }
 
-    TimerTask task = new TimerTask() {
-        public void run() {
-                LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
-                mLoadUserActivity.ShowMeasureUI();
-            //startMesure();
-        }
-    };
+    //TimerTask task = new TimerTask() {
+    //    public void run() {
+    //
+    //    }
+    //};
 
     private MaterialDialog initDialog(String msg) {
         final MaterialDialog mMaterialDialog = new MaterialDialog(getActivity()).setTitle("友情提示")
