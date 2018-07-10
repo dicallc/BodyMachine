@@ -17,6 +17,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.ui.setting.SettingActivity;
 import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.MyOnTouchListener;
 import com.fliggy.bodymachine.view.LoadAgeFragment;

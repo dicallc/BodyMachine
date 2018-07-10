@@ -3,4 +3,6 @@
   <dimen name="big_title">10sp</dimen>
   <dimen name="sub_title">8sp</dimen>
   <dimen name="print_small">12sp</dimen>
+  <dimen name="date_magin">15dp</dimen>
+  <dimen name="date_half_magin">7.5dp</dimen>
 </resources>
