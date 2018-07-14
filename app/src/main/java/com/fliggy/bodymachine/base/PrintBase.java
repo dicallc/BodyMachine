@@ -82,7 +82,13 @@ public class PrintBase extends AppCompatActivity {
     View view = LayoutInflater.from(this).inflate(R.layout.print_layout_v2, null, false);
 
     layoutView(view, width, height);//去到指定view大小的函数
-    viewSaveToImage(view);
+    String mImage = viewSaveToImage(view);
+    Uri imageUri = Uri.fromFile(new File(mImage));
+    Intent shareIntent = new Intent();
+    shareIntent.setAction(Intent.ACTION_SEND);
+    shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+    shareIntent.setType("image/*");
+    startActivity(Intent.createChooser(shareIntent, "分享到"));
   }
 
   protected void layoutView(View v, int width, int height) {

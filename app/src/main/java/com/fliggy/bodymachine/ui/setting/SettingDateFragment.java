@@ -88,6 +88,7 @@ public class SettingDateFragment extends SupportFragment {
   @Override public void onHiddenChanged(boolean hidden) {
     super.onHiddenChanged(hidden);
     if (!hidden){
+      mShowText.setVisibility(View.GONE);
       KLog.e("是否开启root权限"+getRootAhth());
       Calendar calendar = Calendar.getInstance();
       //获取系统的日期

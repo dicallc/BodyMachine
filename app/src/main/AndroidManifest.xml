@@ -28,7 +28,11 @@
 
     </activity>
     <activity android:name=".ui.ShowResultActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
 
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
     </activity>
     <activity
         android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -46,11 +50,7 @@
     </provider>
 
     <activity android:name=".ui.setting.SettingActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
 
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
     </activity>
     <activity android:name=".ui.MeasureActivity">
     </activity>
