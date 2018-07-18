@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_centerVertical="true"
-        android:scaleType="centerCrop"
         android:src="@mipmap/ic_set_date"
         />
       <LinearLayout

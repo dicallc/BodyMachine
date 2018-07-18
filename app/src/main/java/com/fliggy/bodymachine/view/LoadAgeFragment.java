@@ -85,8 +85,8 @@ public class LoadAgeFragment extends SwiperFragment implements View.OnClickListe
         break;
       case R.id.img_next:
         String mValue = mAgeKeyboad.getValue();
-        if("0".equals(Integer.parseInt(mValue))){
-          ToastUtils.showShortToast("请输入年龄");
+        if(Integer.parseInt(mValue)<3&&Integer.parseInt(mValue)>99){
+          ToastUtils.showShortToast("输入的年龄不在范围内");
           return;
         }
         EventBus.getDefault().post(new SerialEvent(SerialEvent.AGE,mValue));

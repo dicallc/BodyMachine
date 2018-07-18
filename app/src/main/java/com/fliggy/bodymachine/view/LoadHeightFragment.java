@@ -83,8 +83,8 @@ public class LoadHeightFragment extends SwiperFragment implements View.OnClickLi
         break;
       case R.id.img_next:
         String mValue = mKbView.getValue();
-        if("0".equals(Integer.parseInt(mValue))){
-          ToastUtils.showShortToast("请输入身高");
+        if(90>Integer.parseInt(mValue)&&Integer.parseInt(mValue)>220){
+          ToastUtils.showShortToast("输入的身高不在范围内");
           return;
         }
         EventBus.getDefault().post(new SerialEvent(SerialEvent.HEIGHT,mValue));

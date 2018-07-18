@@ -25,10 +25,13 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
     <activity android:name=".ui.LoadUserActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
 
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
     </activity>
     <activity android:name=".ui.ShowResultActivity">
-
     </activity>
     <activity
         android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -46,11 +49,7 @@
     </provider>
 
     <activity android:name=".ui.setting.SettingActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
 
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
     </activity>
     <activity android:name=".ui.MeasureActivity">
     </activity>
@@ -61,6 +60,8 @@
     <activity android:name=".ui.ScreenSaverActivity">
     </activity>
     <activity android:name=".TestActivity">
+    </activity>
+    <activity android:name=".ui.InputIdActivity">
 
     </activity>
   </application>

@@ -18,6 +18,8 @@ import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.base.SwiperFragment;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
+import com.fliggy.bodymachine.utils.Constant;
+import com.fliggy.utils_module.utils.SPUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -106,7 +108,9 @@ public class LoadWeightFragment extends SwiperFragment {
   @Subscribe(threadMode = ThreadMode.MAIN) public void Event(SerialEvent messageEvent) {
     switch (messageEvent.type) {
       case SerialEvent.WEIGHT:
-        mTxtWeight.setText(messageEvent.content);
+        float WEIGHT_OFFEST = SPUtils.getFloat(getActivity(), Constant.WEIGHT_OFFEST, 0f);
+        float result = Float.parseFloat(messageEvent.content) - WEIGHT_OFFEST;
+        mTxtWeight.setText(result+"");
         break;
       case SerialEvent.WEIGHT_LOCK:
         isLock=true;

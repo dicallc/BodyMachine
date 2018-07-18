@@ -19,11 +19,12 @@ import com.fliggy.bodymachine.R;
 import com.socks.library.KLog;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
- * todo 回去测试拿到root权限后进行修改时间
+ *
  */
 public class SettingDateFragment extends SupportFragment {
   private static final String ARG_PARAM1 = "param1";
@@ -55,6 +56,7 @@ public class SettingDateFragment extends SupportFragment {
   private int mDay;
   private int mHour;
   private int mMinute;
+  private Calendar mCalendar;
 
   public SettingDateFragment() {
     // Required empty public constructor
@@ -88,24 +90,25 @@ public class SettingDateFragment extends SupportFragment {
   @Override public void onHiddenChanged(boolean hidden) {
     super.onHiddenChanged(hidden);
     if (!hidden){
+      mShowText.setText("");
       KLog.e("是否开启root权限"+getRootAhth());
-      Calendar calendar = Calendar.getInstance();
+      mCalendar = Calendar.getInstance();
       //获取系统的日期
       //年
-      mYear = calendar.get(Calendar.YEAR);
+      mYear = mCalendar.get(Calendar.YEAR);
       mTxtYear.setText(mYear +"");
       //月
-      mMonth = calendar.get(Calendar.MONTH)+1;
+      mMonth = mCalendar.get(Calendar.MONTH)+1;
       mTxtMonth.setText(mMonth +"");
       //日
-      mDay = calendar.get(Calendar.DAY_OF_MONTH);
+      mDay = mCalendar.get(Calendar.DAY_OF_MONTH);
       mTxtDay.setText(mDay +"");
       //获取系统时间
       //小时
-      mHour = calendar.get(Calendar.HOUR_OF_DAY);
+      mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
       mTxtHour.setText(mHour +"");
       //分钟
-      mMinute = calendar.get(Calendar.MINUTE);
+      mMinute = mCalendar.get(Calendar.MINUTE);
       mTxtMinute.setText(mMinute +"");
     }
   }
@@ -191,49 +194,64 @@ public class SettingDateFragment extends SupportFragment {
       case R.id.btn_year_add:
         mYear+=1;
         mTxtYear.setText(mYear +"");
-        setSysDate(mYear,mMonth,mDay);
+        testDate(mYear,Calendar.YEAR);
         break;
       case R.id.btn_year_reduce:
         mYear-=1;
         mTxtYear.setText(mYear +"");
-        setSysDate(mYear,mMonth,mDay);
+        testDate(mYear,Calendar.YEAR);
         break;
       case R.id.btn_month_add:
         mMonth+=1;
-        mTxtMonth.setText(mMonth);
-        setSysDate(mYear,mMonth,mDay);
+        mTxtMonth.setText(mMonth+"");
+        testDate(mMonth,Calendar.MONTH);
         break;
       case R.id.btn_month_reduce:
         mMonth-=1;
-        mTxtMonth.setText(mMonth);
-        setSysDate(mYear,mMonth,mDay);
+        mTxtMonth.setText(mMonth+"");
+        testDate(mMonth,Calendar.MONTH);
         break;
       case R.id.btn_day_add:
         mDay+=1;
-        mTxtDay.setText(mDay);
-        setSysDate(mYear,mMonth,mDay);
+        mTxtDay.setText(mDay+"");
+        testDate(mDay,Calendar.DAY_OF_MONTH);
         break;
       case R.id.btn_day_ruduce:
         mDay-=1;
-        mTxtDay.setText(mDay);
-        setSysDate(mYear,mMonth,mDay);
+        mTxtDay.setText(mDay+"");
+        testDate(mDay,Calendar.DAY_OF_MONTH);
         break;
       case R.id.btn_hour_add:
+        mHour-=1;
+        mTxtHour.setText(mHour+"");
+        testDate(mHour,Calendar.HOUR);
         break;
       case R.id.btn_hour_reduce:
+        mHour-=1;
+        mTxtHour.setText(mHour+"");
+        testDate(mHour,Calendar.HOUR);
         break;
       case R.id.btn_minute_add:
+        mMinute+=1;
+        mTxtMinute.setText(mMinute+"");
+        testDate(mMinute,Calendar.MINUTE);
         break;
       case R.id.btn_minute_reduce:
+        mMinute-=1;
+        mTxtMinute.setText(mMinute+"");
+        testDate(mMinute,Calendar.MINUTE);
         break;
       case R.id.img_pre:
-
+        mSettingActivity.showOrgin();
       case R.id.img_next:
         mSettingActivity.showOrgin();
         break;
     }
   }
-  public void testDate(String time){
+  public void testDate(int y,int field){
+    mCalendar.set(field,y);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd.HHmmss");
+    String time = sdf.format(mCalendar.getTime());
     try {
       Process process = Runtime.getRuntime().exec("su");
       String datetime = time; //测试的设置的时间【时间格式 yyyyMMdd.HHmmss】
