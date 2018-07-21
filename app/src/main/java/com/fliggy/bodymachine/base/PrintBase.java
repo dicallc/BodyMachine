@@ -38,7 +38,6 @@ import java.util.Calendar;
 public class PrintBase extends AppCompatActivity {
   protected boolean isDone = false;
   protected String mImagePath;
-
   @Override public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
     super.onSaveInstanceState(outState, outPersistentState);
     outState.putBoolean("isDone", isDone);
@@ -189,8 +188,14 @@ public class PrintBase extends AppCompatActivity {
     txtRightBtId250 = (TextView) findViewById(R.id.txt_right_bt_id_250);
     txtLeftBtId250 = (TextView) findViewById(R.id.txt_left_bt_id_250);
 
-    layoutView(view, width, height);
-    viewSaveToImage(view);
+    layoutView(view, width, height);//去到指定view大小的函数
+    String mImage = viewSaveToImage(view);
+    Uri imageUri = Uri.fromFile(new File(mImage));
+    Intent shareIntent = new Intent();
+    shareIntent.setAction(Intent.ACTION_SEND);
+    shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+    shareIntent.setType("image/*");
+    startActivity(Intent.createChooser(shareIntent, "分享到"));
   }
 
   protected void layoutView(View v, int width, int height) {

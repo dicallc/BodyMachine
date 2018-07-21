@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
     >
   <android.support.constraint.ConstraintLayout
 
       android:id="@+id/root_view"
       android:layout_width="match_parent"
+
       android:layout_height="match_parent"
-      android:background="@drawable/print_layout"
       >
     <include
         layout="@layout/print_left_v2"

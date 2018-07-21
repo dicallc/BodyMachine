@@ -56,7 +56,6 @@ public class SettingDateFragment extends SupportFragment {
   private int mDay;
   private int mHour;
   private int mMinute;
-  private Calendar mCalendar;
 
   public SettingDateFragment() {
     // Required empty public constructor

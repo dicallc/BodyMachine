@@ -9,9 +9,9 @@
     android:layout_height="0dp"
     android:orientation="vertical"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintHeight_percent="0.067"
+    app:layout_constraintHeight_percent="0.060"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.66999996"
+    app:layout_constraintVertical_bias="0.54"
     app:layout_constraintWidth_default="percent"
     tools:showIn="@layout/print_right_v2"
     >
