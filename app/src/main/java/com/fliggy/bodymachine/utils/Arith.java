@@ -46,7 +46,14 @@ public class Arith{
         BigDecimal b1 = new BigDecimal(Double.toString(v1));  
         BigDecimal b2 = new BigDecimal(Double.toString(v2));  
         return b1.multiply(b2).doubleValue();
-    }  
+    }
+
+    /**
+     * 乘法
+     * @param v1
+     * @param v2
+     * @return
+     */
     public static int mul(String v1,String v2){
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal(v2);

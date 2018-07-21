@@ -25,4 +25,5 @@ public class Constant {
   public static final String SETTING_ID="setting_id";
   public static final int TEST_DATA_ERRO=404;
   public static  String CurentId="";
+  public static  String MainId="";
 }

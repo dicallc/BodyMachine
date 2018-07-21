@@ -1,6 +1,5 @@
 package com.fliggy.bodymachine.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.serialport.utils.SimpleSerialPortUtil;
 import android.serialport.utils.Utils;
@@ -19,8 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
-import com.fliggy.bodymachine.ui.ShowResultActivity;
-import com.fliggy.bodymachine.base.SwiperFragment;
+import com.fliggy.bodymachine.base.PrintBaseFragment;
 import com.fliggy.bodymachine.dao.Dao;
 import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.model.MachineModel;
@@ -36,7 +34,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class LoadResultFragment extends SwiperFragment {
+public class LoadResultFragment extends PrintBaseFragment {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
   @BindView(R.id.bar_weight) LinearLayout mBarWeight;
@@ -62,6 +60,7 @@ public class LoadResultFragment extends SwiperFragment {
   private String mHeight;
   private String mId;
   private String mMache_id;
+  private BodyInfoModel mBodyInfoModel;
 
   public LoadResultFragment() {
   }
@@ -129,8 +128,9 @@ public class LoadResultFragment extends SwiperFragment {
             KLog.e("失败了");
           }
         });
-        BodyInfoModel mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight,mAge,mSex,messageEvent.content);
-
+        mBodyInfoModel =
+            com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight,mAge,mSex,messageEvent.content);
+        EventBus.getDefault().postSticky(mBodyInfoModel);
         Constant.CurentId = mBodyInfoModel.getId();
         if (TextUtils.isEmpty(mBodyInfoModel.getId())){
             ToastUtils.showShortToast("数据库初始化失败");
@@ -208,9 +208,9 @@ public class LoadResultFragment extends SwiperFragment {
         mLoadUserActivity.toOrgin();
         break;
       case R.id.print:
-        Intent mIntent = new Intent(getActivity(), ShowResultActivity.class);
-        startActivity(mIntent);
+        toPrint(mBodyInfoModel);
         break;
     }
   }
+
 }

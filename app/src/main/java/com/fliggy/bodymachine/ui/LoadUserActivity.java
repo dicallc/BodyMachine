@@ -22,6 +22,7 @@ import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.MyOnTouchListener;
 import com.fliggy.bodymachine.view.LoadAgeFragment;
 import com.fliggy.bodymachine.view.LoadHeightFragment;
+import com.fliggy.bodymachine.view.LoadIdFragment;
 import com.fliggy.bodymachine.view.LoadMaleFragment;
 import com.fliggy.bodymachine.view.LoadResultFragment;
 import com.fliggy.bodymachine.view.LoadWeightFragment;
@@ -51,6 +52,7 @@ public class LoadUserActivity extends SupportActivity {
   @BindView(R.id.txt_title_sex) TextView mTxtTitleSex;
   @BindView(R.id.ly_title_person_msg) LinearLayout mLyTitlePersonMsg;
   @BindView(R.id.logo) ImageView mLogo;
+  @BindView(R.id.txt_i) TextView mTxtI;
   private LoadHeightFragment mLoadHeightFragment;
   private LoadWeightFragment mLoadWeightFragment;
   private LoadAgeFragment mLoadAgeFragment;
@@ -61,6 +63,7 @@ public class LoadUserActivity extends SupportActivity {
   private float x1;
   private float y1;
   private WaitStandFragment mWaitStandFragment;
+  private LoadIdFragment mLoadIdFragment;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -97,15 +100,17 @@ public class LoadUserActivity extends SupportActivity {
   private void initUI() {
     if (findFragment(LoadWeightFragment.class) == null) {
       mLoadWeightFragment = LoadWeightFragment.newInstance("", "");
+      mLoadIdFragment = LoadIdFragment.newInstance("", "");
       mLoadHeightFragment = LoadHeightFragment.newInstance("", "");
       mLoadAgeFragment = LoadAgeFragment.newInstance("", "");
       mLoadMaleFragment = LoadMaleFragment.newInstance("", "");
       mWaitStandFragment = WaitStandFragment.newInstance("", "");
       mLoadResultFragment = LoadResultFragment.newInstance("", "");
-      loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment, mLoadHeightFragment,
-          mLoadAgeFragment, mLoadMaleFragment, mLoadResultFragment,
+      loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment, mLoadIdFragment,
+          mLoadHeightFragment, mLoadAgeFragment, mLoadMaleFragment, mLoadResultFragment,
           mWaitStandFragment);  // 加载根Fragment
       mSupportFragments.add(mLoadWeightFragment);
+      mSupportFragments.add(mLoadIdFragment);
       mSupportFragments.add(mLoadHeightFragment);
       mSupportFragments.add(mLoadAgeFragment);
       mSupportFragments.add(mLoadMaleFragment);
@@ -143,28 +148,40 @@ public class LoadUserActivity extends SupportActivity {
     switch (position) {
       case 0:
         mTxtW.setVisibility(View.VISIBLE);
+        mTxtI.setVisibility(View.GONE);
         mTxtH.setVisibility(View.GONE);
         mTxtA.setVisibility(View.GONE);
         mTxtM.setVisibility(View.GONE);
         mTxtLoadData.setVisibility(View.GONE);
         break;
       case 1:
-        mTxtH.setVisibility(View.VISIBLE);
         mTxtW.setVisibility(View.GONE);
+        mTxtI.setVisibility(View.VISIBLE);
+        mTxtH.setVisibility(View.GONE);
         mTxtA.setVisibility(View.GONE);
         mTxtM.setVisibility(View.GONE);
         mTxtLoadData.setVisibility(View.GONE);
         break;
       case 2:
-        mTxtA.setVisibility(View.VISIBLE);
+        mTxtH.setVisibility(View.VISIBLE);
         mTxtW.setVisibility(View.GONE);
-        mTxtH.setVisibility(View.GONE);
+        mTxtI.setVisibility(View.GONE);
+        mTxtA.setVisibility(View.GONE);
         mTxtM.setVisibility(View.GONE);
         mTxtLoadData.setVisibility(View.GONE);
         break;
       case 3:
+        mTxtA.setVisibility(View.VISIBLE);
+        mTxtW.setVisibility(View.GONE);
+        mTxtI.setVisibility(View.GONE);
+        mTxtH.setVisibility(View.GONE);
+        mTxtM.setVisibility(View.GONE);
+        mTxtLoadData.setVisibility(View.GONE);
+        break;
+      case 4:
         mTxtM.setVisibility(View.VISIBLE);
         mTxtW.setVisibility(View.GONE);
+        mTxtI.setVisibility(View.GONE);
         mTxtH.setVisibility(View.GONE);
         mTxtA.setVisibility(View.GONE);
         mTxtLoadData.setVisibility(View.GONE);

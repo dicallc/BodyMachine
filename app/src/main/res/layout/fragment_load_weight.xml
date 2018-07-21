@@ -14,9 +14,6 @@
       android:orientation="horizontal"
       tools:context="com.fliggy.bodymachine.view.LoadWeightFragment"
       >
-
-
-
   </RelativeLayout>
   <RelativeLayout
       android:layout_width="match_parent"
