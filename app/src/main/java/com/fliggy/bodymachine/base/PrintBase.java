@@ -148,7 +148,7 @@ public class PrintBase extends AppCompatActivity {
     txtTizhifangtizhong = (TextView) findViewById(R.id.txt_tizhifangtizhong);
     txtDanbaizhiTest = (TextView) findViewById(R.id.txt_danbaizhi_test);
     txtWujiyanTest = (TextView) findViewById(R.id.txt_wujiyan_test);
-    txtDanbaizhiTest2 = (TextView) findViewById(R.id.txt_danbaizhi_test2);
+    //txtDanbaizhiTest2 = (TextView) findViewById(R.id.txt_danbaizhi_test2);
     lbsTizhong = (CareboLbsView) findViewById(R.id.lbs_tizhong);
     lbsGugeji = (CareboLbsView) findViewById(R.id.lbs_gugeji);
     lbsTizhifang = (CareboLbsView) findViewById(R.id.lbs_tizhifang);

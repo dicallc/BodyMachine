@@ -25,7 +25,12 @@ public class Arith{
         BigDecimal b2 = new BigDecimal(Double.toString(v2));  
         return b1.add(b2).doubleValue();  
     }  
-    /** 
+    public static double add(String v1,String v2){
+        BigDecimal b1 = new BigDecimal(v1);
+        BigDecimal b2 = new BigDecimal(v2);
+        return b1.add(b2).doubleValue();
+    }
+    /**
      * 提供精确的减法运算。 
      * @param v1 被减数 
      * @param v2 减数 
@@ -67,7 +72,12 @@ public class Arith{
     public static String mulString(String v1,String v2){
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal(v2);
-        return b1.multiply(b2).intValue()+"";
+        return b1.multiply(b2).doubleValue()+"";
+    }
+    public static String toPercent(String v1){
+        BigDecimal b1 = new BigDecimal(v1);
+        BigDecimal b2 = new BigDecimal("0.01");
+        return b1.multiply(b2).doubleValue()+"";
     }
 
     /** 

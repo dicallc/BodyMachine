@@ -26,4 +26,7 @@ public class Constant {
   public static final int TEST_DATA_ERRO=404;
   public static  String CurentId="";
   public static  String MainId="";
+  public static  double low_height_pecent=0.000085;
+  public static  double high_height_pecent=0.000115;
+
 }

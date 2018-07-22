@@ -1,7 +1,6 @@
 package com.fliggy.bodymachine.ui;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -276,8 +275,8 @@ public class MainActivity extends BasePrintActivity {
     //  return;
     //}
 
-    Intent mIntent = new Intent(this, ShowResultActivity.class);
-    startActivity(mIntent);
+    //Intent mIntent = new Intent(this, ShowResultActivity.class);
+    //startActivity(mIntent);
     //buildProgressDialog("正在打印");
     //getPrintPic();
   }

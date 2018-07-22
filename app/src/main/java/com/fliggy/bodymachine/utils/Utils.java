@@ -255,7 +255,6 @@ public class Utils {
     Realm realm = Realm.getDefaultInstance();
     realm.beginTransaction();
     BodyInfoModel mModel = realm.createObject(BodyInfoModel.class, UUID.randomUUID().toString());
-    //BodyInfoModel mModel = new BodyInfoModel();
     mModel.getId();
     mModel.setTime(System.currentTimeMillis()+"");
     mModel.setAge(mAge);

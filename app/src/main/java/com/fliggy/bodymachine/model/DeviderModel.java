@@ -14,4 +14,6 @@ public class DeviderModel {
   public float devider_percent;
   public int paint_color;
 
+  public int coordinate;
+
 }

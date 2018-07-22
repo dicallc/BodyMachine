@@ -31,7 +31,6 @@ public class CareboLbsView extends View {
   private Paint mRectPaint;
   private Paint mRectGrayPaint;
   private ArrayList<String> arrDeviderText;
-  private int devider_limit;
   private float devider_limit_num;
   private float devider_percent;
   private int paint_color;
@@ -102,7 +101,6 @@ public class CareboLbsView extends View {
     if (mWeightDevider.devider_text.size() == 0) {
       throw new IllegalArgumentException("No data to display !");
     }
-    this.devider_limit = mWeightDevider.devider_limit;
     // 设置区间文字
     this.arrDeviderText = mWeightDevider.devider_text;
     this.devider_limit_num = mWeightDevider.devider_limit_num;

@@ -21,6 +21,7 @@ public class DataSource {
     mDeviderModel.devider_text = mWeightData;
     return mDeviderModel;
   }
+
   @NonNull public  static DeviderModel getDeviderPercent(ArrayList<String> mWeightData, String num,int color) {
     DeviderModel mDeviderModel = new DeviderModel();
     String max_num = mWeightData.get(mWeightData.size() - 1);
@@ -29,6 +30,98 @@ public class DataSource {
     mDeviderModel.devider_text = mWeightData;
     mDeviderModel.paint_color = color;
     mDeviderModel.devider_percent = percent-0.1f;
+    return mDeviderModel;
+  }
+  @NonNull public  static DeviderModel getWeightDeviderPercent(String num,String high,String low,int color) {
+
+    DeviderModel mDeviderModel = new DeviderModel();
+    ArrayList<String> mWeightData = getWeightData();
+    //计算出中间值
+    int mid = Arith.mul(high, low)/2;
+    float percent=Arith.MyDiv(num,mid);
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = percent;
+    return mDeviderModel;
+  }
+  @NonNull public  static DeviderModel getSkeletalMuscleDataDeviderPercent(String num,String high,String low,int color) {
+
+    DeviderModel mDeviderModel = new DeviderModel();
+    ArrayList<String> mWeightData = getSkeletalMuscleData();
+    //计算出中间值
+    int mid = Arith.mul(high, low)/2;
+    float percent=Arith.MyDiv(num,mid);
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = percent;
+    return mDeviderModel;
+  }
+  @NonNull public  static DeviderModel getFatWeightDeviderPercent(String num,String high,String low,int color) {
+
+    DeviderModel mDeviderModel = new DeviderModel();
+    ArrayList<String> mWeightData = getFatWeight();
+    if ((Integer.parseInt(low)-Integer.parseInt(num))<0){
+      mDeviderModel.coordinate=1;
+    }else if((Integer.parseInt(high)-Integer.parseInt(num))<0){
+      mDeviderModel.coordinate=3;
+    }else{
+      mDeviderModel.coordinate=2;
+    }
+    //计算出中间值
+    int mid = Arith.mul(high, low)/2;
+    float percent=Arith.MyDiv(num,mid);
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = percent;
+    return mDeviderModel;
+  }
+  @NonNull public  static DeviderModel getPhysiqueNumDeviderPercent(String num,String high,String low,int color) {
+    DeviderModel mDeviderModel = new DeviderModel();
+    ArrayList<String> mWeightData = getPhysiqueNum();
+    if ((Integer.parseInt(low)-Integer.parseInt(num))<0){
+      mDeviderModel.coordinate=1;
+    }else if((Integer.parseInt(high)-Integer.parseInt(num))<0){
+      mDeviderModel.coordinate=3;
+    }else{
+      mDeviderModel.coordinate=2;
+    }
+
+    //计算出中间值
+    int mid = Arith.mul(high, low)/2;
+    float percent=Arith.MyDiv(num,mid);
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = percent;
+    return mDeviderModel;
+  }
+  @NonNull public  static DeviderModel getBodyFatPercentagePercent(String num,String high,String low,int color) {
+
+    DeviderModel mDeviderModel = new DeviderModel();
+    ArrayList<String> mWeightData = getBodyFatPercentage();
+    //计算出中间值
+    int mid = Arith.mul(high, low)/2;
+    float percent=Arith.MyDiv(num,mid);
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = percent;
+    return mDeviderModel;
+  }
+  @NonNull public  static DeviderModel getYaoTunbi(String num,String high,String low,int color) {
+
+    DeviderModel mDeviderModel = new DeviderModel();
+    ArrayList<String> mWeightData = getYaoTunbi();
+    //计算出中间值
+    int mid = Arith.mul(high, low)/2;
+    float percent=Arith.MyDiv(num,mid);
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = percent;
     return mDeviderModel;
   }
   /**
@@ -86,7 +179,7 @@ public class DataSource {
     list_text.add("340");
     list_text.add("400");
     list_text.add("460");
-    list_text.add("922");
+    list_text.add("520");
     return list_text;
   }
 
@@ -127,6 +220,40 @@ public class DataSource {
     list_text.add("40.0");
     list_text.add("45.0");
     list_text.add("57.3");
+    return list_text;
+  }
+  /**
+   * 腰臀比
+   * @return
+   */
+  public  static ArrayList<String> getYaoTunbi(){
+    ArrayList<String> list_text=new ArrayList<>();
+    list_text.add("0.55");
+    list_text.add("0.65");
+    list_text.add("0.75");
+    list_text.add("0.85");
+    list_text.add("0.95");
+    list_text.add("1.05");
+    list_text.add("1.15");
+    list_text.add("1.25");
+    list_text.add("1.35");
+    list_text.add("1.45");
+    list_text.add("1.55");
+    return list_text;
+  }
+  public  static ArrayList<String> getVisceralFat(){
+    ArrayList<String> list_text=new ArrayList<>();
+    list_text.add("0.55");
+    list_text.add("0.65");
+    list_text.add("0.75");
+    list_text.add("0.85");
+    list_text.add("0.95");
+    list_text.add("1.05");
+    list_text.add("1.15");
+    list_text.add("1.25");
+    list_text.add("1.35");
+    list_text.add("1.45");
+    list_text.add("1.55");
     return list_text;
   }
 }

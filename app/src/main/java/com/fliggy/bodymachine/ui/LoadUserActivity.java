@@ -70,7 +70,7 @@ public class LoadUserActivity extends SupportActivity {
     setContentView(R.layout.activity_load_user);
     ButterKnife.bind(this);
     initUI();
-    KLog.e("dicallc", "1.0.1 -13.05测试等待5分钟，重启");
+    //KLog.e("dicallc", "1.0.1 -13.05测试等待5分钟，重启");
     SerialPortHelp.getInstance();
     //手动申请权限,视频音频权限为同一个
     if (ContextCompat.checkSelfPermission(this, Manifest.permission.

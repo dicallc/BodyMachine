@@ -130,7 +130,7 @@ public class LoadResultFragment extends PrintBaseFragment {
         });
         mBodyInfoModel =
             com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight,mAge,mSex,messageEvent.content);
-        EventBus.getDefault().postSticky(mBodyInfoModel);
+
         Constant.CurentId = mBodyInfoModel.getId();
         if (TextUtils.isEmpty(mBodyInfoModel.getId())){
             ToastUtils.showShortToast("数据库初始化失败");

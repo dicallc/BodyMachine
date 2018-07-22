@@ -16,7 +16,7 @@
     tools:showIn="@layout/print_right_v2"
     >
   <TextView
-      android:id="@+id/txt_cg_aim_weight"
+      android:id="@+id/txt_ce_age"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_marginLeft="112dp"
@@ -29,18 +29,18 @@
       app:layout_constraintWidth_percent="0.25"
       />
   <TextView
-      android:id="@+id/txt_cg_aim_weight_wei"
+      android:id="@+id/txt_ce_age_wei"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:gravity="center"
       android:text="岁"
       app:layout_constraintHeight_percent="0.25"
-      app:layout_constraintStart_toEndOf="@+id/txt_cg_aim_weight"
+      app:layout_constraintStart_toEndOf="@+id/txt_ce_age"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintWidth_percent="0.25"
       />
   <TextView
-      android:id="@+id/txt_cg_weight_control"
+      android:id="@+id/txt_ce_jichudaixie"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_marginLeft="112dp"
@@ -49,22 +49,22 @@
       android:text="1459"
       app:layout_constraintHeight_percent="0.25"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/txt_cg_aim_weight"
+      app:layout_constraintTop_toBottomOf="@+id/txt_ce_age"
       app:layout_constraintWidth_percent="0.25"
       />
   <TextView
-      android:id="@+id/txt_cg_weight_control_wei"
+      android:id="@+id/txt_ce_jichudaixie_wei"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:gravity="center"
       android:text="kcal"
       app:layout_constraintHeight_percent="0.25"
-      app:layout_constraintStart_toEndOf="@+id/txt_cg_weight_control"
-      app:layout_constraintTop_toBottomOf="@+id/txt_cg_aim_weight_wei"
+      app:layout_constraintStart_toEndOf="@+id/txt_ce_jichudaixie"
+      app:layout_constraintTop_toBottomOf="@+id/txt_ce_age_wei"
       app:layout_constraintWidth_percent="0.25"
       />
   <TextView
-      android:id="@+id/txt_cg_zhifan"
+      android:id="@+id/txt_ce_power"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_marginLeft="112dp"
@@ -73,11 +73,11 @@
       android:text="27.5"
       app:layout_constraintHeight_percent="0.25"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/txt_cg_weight_control"
+      app:layout_constraintTop_toBottomOf="@+id/txt_ce_jichudaixie"
       app:layout_constraintWidth_percent="0.25"
       />
   <TextView
-      android:id="@+id/txt_cg_zhifan_wei"
+      android:id="@+id/txt_ce_power_wei"
       android:layout_width="0dp"
       android:layout_height="22dp"
       android:layout_marginLeft="180dp"
@@ -86,11 +86,11 @@
       android:text="kcal"
       app:layout_constraintHeight_percent="0.25"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/txt_cg_weight_control_wei"
+      app:layout_constraintTop_toBottomOf="@+id/txt_ce_jichudaixie_wei"
       app:layout_constraintWidth_percent="0.25"
       />
   <TextView
-      android:id="@+id/txt_cg_jirou"
+      android:id="@+id/txt_ce_xibao"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_marginLeft="112dp"
@@ -99,11 +99,11 @@
       android:text="27.5"
       app:layout_constraintHeight_percent="0.25"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/txt_cg_zhifan_wei"
+      app:layout_constraintTop_toBottomOf="@+id/txt_ce_power_wei"
       app:layout_constraintWidth_percent="0.25"
       />
   <TextView
-      android:id="@+id/txt_cg_jirou_wei"
+      android:id="@+id/txt_ce_xibao_wei"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_marginLeft="180dp"
@@ -112,7 +112,7 @@
       android:text="kg"
       app:layout_constraintHeight_percent="0.25"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/txt_cg_zhifan_wei"
+      app:layout_constraintTop_toBottomOf="@+id/txt_ce_power_wei"
       app:layout_constraintWidth_percent="0.25"
       />
 

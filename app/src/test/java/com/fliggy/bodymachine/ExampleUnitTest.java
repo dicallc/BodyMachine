@@ -2,9 +2,7 @@ package com.fliggy.bodymachine;
 
 import android.serialport.utils.NumUtils;
 import android.serialport.utils.Utils;
-import com.fliggy.bodymachine.model.DeviderModel;
 import com.fliggy.bodymachine.utils.Arith;
-import com.fliggy.bodymachine.utils.DataSource;
 import com.socks.library.KLog;
 import java.io.File;
 import java.io.FileInputStream;
@@ -80,7 +78,7 @@ public class ExampleUnitTest {
     }
     @Test
     public void testFunction5() throws Exception {
-      String mS = "5A036002720000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000049";
+      String mS = "5A0360036C00000D340D1107CE07EB00E6000001ED000000000000000000000022013600690000038A018D01BA0288005A343400000000009680E380B20000019F017F019E0182018000DB001600160058005A0000000000000000000800000000000025";
       //体重
       String  weight= Utils.toResultHasPoint(mS,6,10);
       //总阻抗
@@ -241,8 +239,18 @@ public class ExampleUnitTest {
   }
   @Test
   public void testFunction16() {
-    DeviderModel mDevider = DataSource.getDeviderPercent(DataSource.getWeightData(), 130 + "");
-    float mDevider_percent = mDevider.devider_percent;
-    System.out.print(mDevider_percent);
+    double low = 175 * 175 * 22 * 0.85;
+    double low1 = low*0.0001;
+    //DeviderModel mDevider = DataSource.getDeviderPercent(DataSource.getWeightData(), 130 + "");
+    //float mDevider_percent = mDevider.devider_percent;
+    //System.out.print(mDevider_percent);
+  }
+  @Test
+  public void testFunction17() {
+      String str="10.5";
+    String mMul = Arith.mulString(str, "0.01");
+    //DeviderModel mDevider = DataSource.getDeviderPercent(DataSource.getWeightData(), 130 + "");
+    //float mDevider_percent = mDevider.devider_percent;
+    //System.out.print(mDevider_percent);
   }
 }
