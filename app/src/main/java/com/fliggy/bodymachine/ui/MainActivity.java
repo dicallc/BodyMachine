@@ -136,9 +136,9 @@ public class MainActivity extends BasePrintActivity {
                   break;
                 case 3:
                   //上行体脂数据
-                  String s = Utils.toShowFinalResult(str);
-                  mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(str);
-                  mTextView.setText(s);
+                  //String s = Utils.toShowFinalResult(str);
+                  //mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(str);
+                  //mTextView.setText(s);
                   break;
                 case 4:
                   // 上行测脂报错

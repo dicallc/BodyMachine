@@ -92,6 +92,12 @@ public class LoadResultFragment extends PrintBaseFragment {
 
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    TestFunction();
+  }
+
+  private void TestFunction() {
+    mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
+        "5A0360036C00000D340D1107CE07EB00E6000001ED000000000000000000000022013600690000038A018D01BA0288005A343400000000009680E380B20000019F017F019E0182018000DB001600160058005A0000000000000000000800000000000025");
   }
 
   private void setViewFullScreen(LinearLayout view, float bili) {
@@ -107,7 +113,6 @@ public class LoadResultFragment extends PrintBaseFragment {
     layoutParams.height = LinearLayout.LayoutParams.MATCH_PARENT;
     view.setLayoutParams(layoutParams);
   }
-
 
   @Override public void onDestroyView() {
     super.onDestroyView();
@@ -129,43 +134,44 @@ public class LoadResultFragment extends PrintBaseFragment {
           }
         });
         mBodyInfoModel =
-            com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight,mAge,mSex,messageEvent.content);
+            com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
+                messageEvent.content);
 
         Constant.CurentId = mBodyInfoModel.getId();
-        if (TextUtils.isEmpty(mBodyInfoModel.getId())){
-            ToastUtils.showShortToast("数据库初始化失败");
-            return;
+        if (TextUtils.isEmpty(mBodyInfoModel.getId())) {
+          ToastUtils.showShortToast("数据库初始化失败");
+          return;
         }
-        if (TextUtils.isEmpty(mBodyInfoModel.getWeight())){
-            ToastUtils.showShortToast("模块获取数据为空");
-            return;
+        if (TextUtils.isEmpty(mBodyInfoModel.getWeight())) {
+          ToastUtils.showShortToast("模块获取数据为空");
+          return;
         }
-        if ("0".equals(mBodyInfoModel.getFat_weight())){
-            ToastUtils.showShortToast("模块获取数据为0");
-            return;
+        if ("0".equals(mBodyInfoModel.getFat_weight())) {
+          ToastUtils.showShortToast("模块获取数据为0");
+          return;
         }
-        mTxtWeight.setText(mBodyInfoModel.getWeight()+"kg");
+        mTxtWeight.setText(mBodyInfoModel.getWeight() + "kg");
         setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.getWeight(), 180));
-        mTxtZhifan.setText(mBodyInfoModel.getFat_weight()+"kg");
+        mTxtZhifan.setText(mBodyInfoModel.getFat_weight() + "kg");
         setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.getFat_weight(), 130));
-        mTxtJirou.setText(mBodyInfoModel.getMuscle_weight()+"kg");
+        mTxtJirou.setText(mBodyInfoModel.getMuscle_weight() + "kg");
         setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), 142.5));
         mTxtFeirou.setText(mBodyInfoModel.getFat_degree());
         setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.getFat_degree(), 40));
         setViewFullScreen(mBarFeirou, 0.9f);
         //标准体重
-        mTxtBtOne.setText("标准体重    " + mBodyInfoModel.getStander_weight()+"kg");
+        mTxtBtOne.setText("标准体重    " + mBodyInfoModel.getStander_weight() + "kg");
         //体脂百分比
-        mTxtBtTwo.setText("体脂肪率    " + mBodyInfoModel.getBody_fat_percentage()+"%");
+        mTxtBtTwo.setText("体脂肪率    " + mBodyInfoModel.getBody_fat_percentage() + "%");
         // 身体评分
         mTxtBtThree.setText("健康指数    " + mBodyInfoModel.getBody_score());
         // 身体质量指数
         mTxtBtFour.setText("身体质量指数    " + mBodyInfoModel.getPhysique_num());
-        if (TextUtils.isEmpty(mMache_id)){
+        if (TextUtils.isEmpty(mMache_id)) {
           ToastUtils.showShortToast("机器id为空");
           return;
         }
-        Dao.postCelect(mBodyInfoModel,mMache_id, new DaoCallBack<MsgModel>() {
+        Dao.postCelect(mBodyInfoModel, mMache_id, new DaoCallBack<MsgModel>() {
           @Override public void onSuccess(int code, MsgModel result) {
             ToastUtils.showShortToast("上传数据成功");
           }
@@ -194,10 +200,10 @@ public class LoadResultFragment extends PrintBaseFragment {
         String str = Utils.loadUserInfoCmd(mHeight, mAge, mSex, "00");
         SimpleSerialPortUtil.getInstance().sendCmds(str);
 
-          break;
-        case SerialEvent.MACHE_INFO:
-          mMache_id = messageEvent.mache_id;
-          break;
+        break;
+      case SerialEvent.MACHE_INFO:
+        mMache_id = messageEvent.mache_id;
+        break;
     }
   }
 
@@ -212,5 +218,4 @@ public class LoadResultFragment extends PrintBaseFragment {
         break;
     }
   }
-
 }

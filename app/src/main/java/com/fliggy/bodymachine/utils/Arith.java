@@ -72,22 +72,22 @@ public class Arith{
     public static String mulString(String v1,String v2){
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal(v2);
-        return b1.multiply(b2).doubleValue()+"";
+        return b1.multiply(b2).floatValue()+"";
     }
     public static String toPercent(String v1){
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal("0.01");
-        return b1.multiply(b2).doubleValue()+"";
+        return b1.multiply(b2).floatValue()+"";
     }
 
     /** 
      * 提供（相对）精确的除法运算，当发生除不尽的情况时，精确到 
      * 小数点以后10位，以后的数字四舍五入。 
-     * @param v1 被除数 
-     * @param v2 除数 
-     * @return 两个参数的商 
+     * @param v1 被除数
+     * @param v2 除数
+     * @return 两个参数的商
      */  
-    public static int div(String v1,String v2){
+    public static float div(String v1,String v2){
         return div(Double.parseDouble(v1),Double.parseDouble(v2),DEF_DIV_SCALE);
     }
     public static float MyDiv(String v1,double v2){
@@ -104,19 +104,19 @@ public class Arith{
     /** 
      * 提供（相对）精确的除法运算。当发生除不尽的情况时，由scale参数指 
      * 定精度，以后的数字四舍五入。 
-     * @param v1 被除数 
-     * @param v2 除数 
-     * @param scale 表示表示需要精确到小数点以后几位。 
-     * @return 两个参数的商 
+     * @param v1 被除数
+     * @param v2 除数
+     * @param scale 表示表示需要精确到小数点以后几位。
+     * @return 两个参数的商
      */  
-    public static int div(double v1,double v2,int scale){
+    public static float div(double v1,double v2,int scale){
         if(scale<0){  
             throw new IllegalArgumentException(  
                 "The scale must be a positive integer or zero");  
         }  
         BigDecimal b1 = new BigDecimal(Double.toString(v1));  
         BigDecimal b2 = new BigDecimal(Double.toString(v2));  
-        return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).intValue();
+        return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).floatValue();
     }  
   
     /** 

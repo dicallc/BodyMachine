@@ -88,19 +88,19 @@ public class ExampleUnitTest {
       String  left_f_impedance= Utils.toResultHasPoint(mS,22,26);
       String  right_f_impedance= Utils.toResultHasPoint(mS,26,30);
       String  body_impedance= Utils.toResultHasPoint(mS,30,34);
-      //脂肪重
+      //脂肪重1
       String  fat_weight= Utils.toResultHasPoint(mS,34,38);
       //肌肉重
       String  muscle_weight= Utils.toResultHasPoint(mS,38,42);
-      //总水重
+      //总水重1
       String  total_water_weight= Utils.toResultHasPoint(mS,42,46);
-      //细胞外液
+      //细胞外液1
       String  extracellular_fluid= Utils.toResultHasPoint(mS,46,50);
-      //细胞内液
+      //细胞内液1
       String  intracellular_Fluid= Utils.toResultHasPoint(mS,50,54);
-      //去脂体重
+      //去脂体重1
       String  fat_free= Utils.toResultHasPoint(mS,54,58);
-      //标准肌肉
+      //标准肌肉1
       String  Standard_muscle= Utils.toResultHasPoint(mS,58,62);
       //骨盐量
       String  Bone_salt_content = Utils.toResultHasPoint(mS,62,66);
@@ -110,7 +110,7 @@ public class ExampleUnitTest {
       String    protein = Utils.toResultHasPoint(mS,70,74);
       //体质指数
       String    physique_num = Utils.toResultHasPoint(mS,74,78);
-      //基础代谢
+      //基础代谢1
       String    basal_metabolism = Utils.toResultHasPoint(mS,78,82);
       //体脂百分比
       String    Body_fat_percentage = Utils.toResultHasPoint(mS,82,86);
@@ -124,9 +124,9 @@ public class ExampleUnitTest {
       String    physical_age   = Utils.toResultHasPoint(mS,98,100);
       //身体评分
       String    Body_score    = Utils.toResultHasPoint(mS,100,102);
-      //水肿度
+      //水肿度1
       String    Edematous_degree    = Utils.toResultHasPoint(mS,102,106);
-      //肥胖度
+      //肥胖度1
       String    Fat_degree     = Utils.toResultHasPoint(mS,106,110);
       //肌肉控制
       String    Muscle_control     = Utils.toResultHasPoint(mS,110,114);
@@ -156,21 +156,21 @@ public class ExampleUnitTest {
       String    Right_root_muscle_volume        = Utils.toResultHasPoint(mS,158,162);
       //左脚肌肉
       String    LEFT_root_muscle_volume        = Utils.toResultHasPoint(mS,162,166);
-      //颈围
+      //颈围1
       String    Neck_circumference        = Utils.toResultHasPoint(mS,166,170);
-      //腰围
+      //腰围1
       String    waist        = Utils.toResultHasPoint(mS,170,174);
-      //臀围
+      //臀围1
       String    Hipline        = Utils.toResultHasPoint(mS,174,178);
-      //胸围
+      //胸围1
       String    Bust        = Utils.toResultHasPoint(mS,178,182);
       //右上臂围
       String    r_t_Hipline        = Utils.toResultHasPoint(mS,182,186);
-      //左上臂围
+      //左上臂围1
       String    l_t_Hipline        = Utils.toResultHasPoint(mS,186,190);
-      //右大腿围
+      //右大腿围1
       String    r_b_Hipline        = Utils.toResultHasPoint(mS,190,194);
-      //左大腿围
+      //左大腿围1
       String    l_b_Hipline        = Utils.toResultHasPoint(mS,194,198);
 
       KLog.e(weight);
@@ -252,5 +252,11 @@ public class ExampleUnitTest {
     //DeviderModel mDevider = DataSource.getDeviderPercent(DataSource.getWeightData(), 130 + "");
     //float mDevider_percent = mDevider.devider_percent;
     //System.out.print(mDevider_percent);
+  }
+  @Test
+  public void testFunction18() {
+      if(Float.parseFloat("18.1")-Float.parseFloat("18.2")<0){
+        System.out.print("成功");
+      }
   }
 }

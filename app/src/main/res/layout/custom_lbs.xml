@@ -5,12 +5,12 @@
     android:gravity="center"
     android:orientation="vertical"
     >
-  <com.fliggy.bodymachine.widgets.CareboDoubleLbsView
+  <com.fliggy.bodymachine.widgets.CareboLbsWaistToHipView
       android:id="@+id/lbs_view"
       android:background="@android:color/holo_green_light"
       android:layout_width="match_parent"
       android:layout_height="70dp"
       >
-  </com.fliggy.bodymachine.widgets.CareboDoubleLbsView>
+  </com.fliggy.bodymachine.widgets.CareboLbsWaistToHipView>
 
 </LinearLayout>
