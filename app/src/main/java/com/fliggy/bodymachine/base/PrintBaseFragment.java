@@ -327,8 +327,8 @@ public class PrintBaseFragment extends SwiperFragment {
       txtWujiyanTest.setText(
           getTextOfThreshold(mBodyInfoModel.getBone_salt_content(), gugeji_low, gugeji_high));
       lbsGugeji.setData(
-          DataSource.getSkeletalMuscleDataDeviderPercent(mBodyInfoModel.getBone_salt_content(),
-              gugeji_high, gugeji_low, R.color.s_black));
+          DataSource.getCommonDeviderPercent(DataSource.getSkeletalMuscleData(),mBodyInfoModel.getBone_salt_content(),
+               R.color.s_black));
     } else {
       txtMale.setText("性别\n女");
       //身体总水分正常范围	女：45%--60% 男	55%--65%
@@ -388,9 +388,9 @@ public class PrintBaseFragment extends SwiperFragment {
       }
       //lbs 脂肪重
       DeviderModel mFatWeightDeviderPercent =
-          DataSource.getFatWeightDeviderPercent(tizhifan, tizhifan_high, tizhifan_low,
-              R.color.s_s_black);
-      mFatWeighCoordinate = mFatWeightDeviderPercent.coordinate;
+          DataSource.getCommonDeviderPercent(DataSource.getFatWeight(),tizhifan,
+             getResources().getColor( R.color.s_s_black));
+      mFatWeighCoordinate = DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
       lbsTizhifang.setData(mFatWeightDeviderPercent);
 
       //去脂体重
@@ -420,9 +420,9 @@ public class PrintBaseFragment extends SwiperFragment {
       }
       //lbs 脂肪重
       DeviderModel mFatWeightDeviderPercent =
-          DataSource.getFatWeightDeviderPercent(tizhifan, tizhifan_high, tizhifan_low,
-              R.color.s_s_black);
-      mFatWeighCoordinate = mFatWeightDeviderPercent.coordinate;
+          DataSource.getCommonDeviderPercent(DataSource.getFatWeight(),tizhifan,
+              getResources().getColor( R.color.s_s_black));
+      mFatWeighCoordinate = DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
       lbsTizhifang.setData(mFatWeightDeviderPercent);
       //去脂体重
       txtQuzhitizhong.setText(

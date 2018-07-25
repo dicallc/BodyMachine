@@ -18,7 +18,12 @@ public class BigDecimalUtils {
     BigDecimal b2 = new BigDecimal(v2);
     return b1.add(b2).floatValue();
   }
-
+  /**
+   * 提供精确的减法运算。
+   * @param v1 被减数
+   * @param v2 减数
+   * @return 两个参数的差
+   */
   public static float sub(String v1, String v2) {
     BigDecimal b1 = new BigDecimal(v1);
     BigDecimal b2 = new BigDecimal(v2);

@@ -3,6 +3,7 @@ package com.fliggy.bodymachine;
 import android.serialport.utils.NumUtils;
 import android.serialport.utils.Utils;
 import com.fliggy.bodymachine.utils.Arith;
+import com.fliggy.bodymachine.utils.BigDecimalUtils;
 import com.socks.library.KLog;
 import java.io.File;
 import java.io.FileInputStream;
@@ -258,5 +259,12 @@ public class ExampleUnitTest {
       if(Float.parseFloat("18.1")-Float.parseFloat("18.2")<0){
         System.out.print("成功");
       }
+  }
+  @Test
+  public void testFunction19() {
+      String str="34.7772";
+    String mRound = BigDecimalUtils.round(str, 2);
+    float mSub = BigDecimalUtils.sub(mRound, "40");
+    System.out.print(mSub);
   }
 }
