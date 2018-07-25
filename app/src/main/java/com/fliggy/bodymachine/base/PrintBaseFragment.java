@@ -326,9 +326,11 @@ public class PrintBaseFragment extends SwiperFragment {
       String gugeji_high = "3.2";
       txtWujiyanTest.setText(
           getTextOfThreshold(mBodyInfoModel.getBone_salt_content(), gugeji_low, gugeji_high));
-      lbsGugeji.setData(
-          DataSource.getCommonDeviderPercent(DataSource.getSkeletalMuscleData(),mBodyInfoModel.getBone_salt_content(),
-               R.color.s_black));
+      //算出骨骼肌正常值
+      String mMul = BigDecimalUtils.mul(mBodyInfoModel.getMuscle_weight(), "0.6");
+      float gugeji_pecent = BigDecimalUtils.numPecent(mBodyInfoModel.getSkeletal_muscle(), mMul);
+      lbsGugeji.setData(DataSource.getCommonDeviderPercent_l(DataSource.getSkeletalMuscleData(),
+          mBodyInfoModel.getSkeletal_muscle(), gugeji_pecent, R.color.s_black));
     } else {
       txtMale.setText("性别\n女");
       //身体总水分正常范围	女：45%--60% 男	55%--65%
@@ -348,9 +350,12 @@ public class PrintBaseFragment extends SwiperFragment {
       String gugeji_high = "2.5";
       txtWujiyanTest.setText(
           getTextOfThreshold(mBodyInfoModel.getBone_salt_content(), gugeji_low, gugeji_high));
-      lbsGugeji.setData(
-          DataSource.getSkeletalMuscleDataDeviderPercent(mBodyInfoModel.getBone_salt_content(),
-              gugeji_high, gugeji_low, R.color.s_black));
+      //骨骼肌
+      //算出骨骼肌正常值
+      String mMul = BigDecimalUtils.mul(mBodyInfoModel.getMuscle_weight(), "0.6");
+      float gugeji_pecent = BigDecimalUtils.numPecent(mBodyInfoModel.getSkeletal_muscle(), mMul);
+      lbsGugeji.setData(DataSource.getCommonDeviderPercent_l(DataSource.getSkeletalMuscleData(),
+          mBodyInfoModel.getSkeletal_muscle(), gugeji_pecent, R.color.s_black));
     }
   }
 
@@ -373,24 +378,36 @@ public class PrintBaseFragment extends SwiperFragment {
       //体脂肪
       String tizhifan_low = "";
       String tizhifan_high = "";
+      String tizhifan_mid = "";
       if (mD_age <= 39) {
         tizhifan_low = Arith.mulString(mBodyInfoModel.getWeight(), "0.27");
         tizhifan_high = Arith.mulString(mBodyInfoModel.getWeight(), "0.34");
+        tizhifan_mid = Arith.mulString(mBodyInfoModel.getWeight(), "0.305");
         txtTizhifangtizhong.setText(getTextOfThreshold(tizhifan, tizhifan_low, tizhifan_high));
       } else if (mD_age <= 59) {
         tizhifan_low = Arith.mulString(mBodyInfoModel.getWeight(), "0.28");
         tizhifan_high = Arith.mulString(mBodyInfoModel.getWeight(), "0.35");
+        tizhifan_mid = Arith.mulString(mBodyInfoModel.getWeight(), "0.315");
         txtTizhifangtizhong.setText(getTextOfThreshold(tizhifan, tizhifan_low, tizhifan_high));
       } else {
+        tizhifan_low = Arith.mulString(mBodyInfoModel.getWeight(), "0.29");
+        tizhifan_high = Arith.mulString(mBodyInfoModel.getWeight(), "0.36");
+        tizhifan_mid = Arith.mulString(mBodyInfoModel.getWeight(), "0.325");
         txtTizhifangtizhong.setText(
-            getTextOfThreshold(tizhifan, Arith.mulString(mBodyInfoModel.getWeight(), "0.29"),
-                Arith.mulString(mBodyInfoModel.getWeight(), "0.36")));
+            getTextOfThreshold(tizhifan, tizhifan_low,
+                tizhifan_high));
+
       }
+
+      float zhifanzhong_pecent = BigDecimalUtils.numPecent(tizhifan, tizhifan_mid);
+      lbsTizhifang.setData(DataSource.getCommonDeviderPercent_l(DataSource.getFatWeight(),tizhifan
+          , zhifanzhong_pecent, R.color.s_black));
       //lbs 脂肪重
       DeviderModel mFatWeightDeviderPercent =
-          DataSource.getCommonDeviderPercent(DataSource.getFatWeight(),tizhifan,
-             getResources().getColor( R.color.s_s_black));
-      mFatWeighCoordinate = DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
+          DataSource.getCommonDeviderPercent(DataSource.getFatWeight(), tizhifan,
+              getResources().getColor(R.color.s_s_black));
+      mFatWeighCoordinate =
+          DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
       lbsTizhifang.setData(mFatWeightDeviderPercent);
 
       //去脂体重
@@ -420,9 +437,10 @@ public class PrintBaseFragment extends SwiperFragment {
       }
       //lbs 脂肪重
       DeviderModel mFatWeightDeviderPercent =
-          DataSource.getCommonDeviderPercent(DataSource.getFatWeight(),tizhifan,
-              getResources().getColor( R.color.s_s_black));
-      mFatWeighCoordinate = DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
+          DataSource.getCommonDeviderPercent(DataSource.getFatWeight(), tizhifan,
+              getResources().getColor(R.color.s_s_black));
+      mFatWeighCoordinate =
+          DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
       lbsTizhifang.setData(mFatWeightDeviderPercent);
       //去脂体重
       txtQuzhitizhong.setText(

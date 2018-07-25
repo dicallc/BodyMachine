@@ -53,6 +53,15 @@ public class BigDecimalUtils {
     BigDecimal one = new BigDecimal("1");
     return b.divide(one, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
   }
+  public static float round(float v, int scale) {
+
+    if (scale < 0) {
+      throw new IllegalArgumentException("The scale must be a positive integer or zero");
+    }
+    BigDecimal b = new BigDecimal(Double.toString(v));
+    BigDecimal one = new BigDecimal("1");
+    return b.divide(one, scale, BigDecimal.ROUND_HALF_UP).floatValue();
+  }
   public static float roundF(double v, int scale) {
 
     if (scale < 0) {
@@ -83,6 +92,11 @@ public class BigDecimalUtils {
 
   public static float div(String v1, String v2) {
     return div(Double.parseDouble(v1), Double.parseDouble(v2), DEF_DIV_SCALE);
+  }
+  public static float numPecent(String v1, String v2) {
+    float mV = div(Double.parseDouble(v1), Double.parseDouble(v2), DEF_DIV_SCALE);
+    float mMul = mul(mV, 100f);
+    return round(mMul,2);
   }
 
   public static float div(double v1, double v2, int scale) {

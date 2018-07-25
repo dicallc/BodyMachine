@@ -63,7 +63,44 @@ public class DataSource {
     mDeviderModel.devider_percent = a5;
     return mDeviderModel;
   }
+
+  @NonNull public  static DeviderModel getCommonDeviderPercent_l(ArrayList<String> mWeightData, String num,float pecent,int color) {
+
+    int low=0;
+    for (int i = 0; i <mWeightData.size() ; i++) {
+      if (Float.parseFloat(mWeightData.get(i))>pecent){
+        if (i==0)low=0;
+        else{
+          low=i-1;
+        }
+        break;
+      }
+    }
+    String low_data = mWeightData.get(low);
+    String mid_data = mWeightData.get(low+1);
+    float a2 = BigDecimalUtils.sub(pecent+"", low_data);
+    float a5=0;
+    if (a2<0){
+      //如果A2小于0说明值比第一个还要小
+      a5=0.02f;
+    }else{
+      float a1 = BigDecimalUtils.sub(mid_data, low_data);
+
+      float a3 = a2 / a1;
+      float mRound = BigDecimalUtils.roundF(a3, 2);
+      float a4 = low + mRound;
+       a5 = BigDecimalUtils.mul(a4, 0.1f);
+    }
+
+    DeviderModel mDeviderModel = new DeviderModel();
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = a5;
+    return mDeviderModel;
+  }
   @NonNull public  static DeviderModel getCommonDeviderPercent(ArrayList<String> mWeightData, String num,int color) {
+
     int low=0;
     for (int i = 0; i <mWeightData.size() ; i++) {
       if (Float.parseFloat(mWeightData.get(i))>Float.parseFloat(num)){
