@@ -48,6 +48,24 @@ public class BigDecimalUtils {
     BigDecimal one = new BigDecimal("1");
     return b.divide(one, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
   }
+  public static float roundF(double v, int scale) {
+
+    if (scale < 0) {
+      throw new IllegalArgumentException("The scale must be a positive integer or zero");
+    }
+    BigDecimal b = new BigDecimal(Double.toString(v));
+    BigDecimal one = new BigDecimal("1");
+    return b.divide(one, scale, BigDecimal.ROUND_HALF_UP).floatValue();
+  }
+  public static String round(String v, int scale) {
+
+    if (scale < 0) {
+      throw new IllegalArgumentException("The scale must be a positive integer or zero");
+    }
+    BigDecimal b = new BigDecimal(v);
+    BigDecimal one = new BigDecimal("1");
+    return b.divide(one, scale, BigDecimal.ROUND_HALF_UP).toString();
+  }
 
   public static String subString(String v1, String v2) {
     BigDecimal b1 = new BigDecimal(v1);
@@ -56,7 +74,7 @@ public class BigDecimalUtils {
   }
 
   //默认除法运算精度
-  private static final int DEF_DIV_SCALE = 10;
+  private static final int DEF_DIV_SCALE = 2;
 
   public static float div(String v1, String v2) {
     return div(Double.parseDouble(v1), Double.parseDouble(v2), DEF_DIV_SCALE);
@@ -69,5 +87,29 @@ public class BigDecimalUtils {
     BigDecimal b1 = new BigDecimal(Double.toString(v1));
     BigDecimal b2 = new BigDecimal(Double.toString(v2));
     return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).floatValue();
+  }
+  public static float  div(String v1, String v2, int scale) {
+    if (scale < 0) {
+      throw new IllegalArgumentException("The scale must be a positive integer or zero");
+    }
+    BigDecimal b1 = new BigDecimal(v1);
+    BigDecimal b2 = new BigDecimal(v2);
+    return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).floatValue();
+  }
+  /**
+   * 乘法
+   * @param v1
+   * @param v2
+   * @return
+   */
+  public static String mul(String v1,String v2){
+    BigDecimal b1 = new BigDecimal(v1);
+    BigDecimal b2 = new BigDecimal(v2);
+    return b1.multiply(b2).toString();
+  }
+  public static float mul(float v1,float v2){
+    BigDecimal b1 = new BigDecimal(v1);
+    BigDecimal b2 = new BigDecimal(v2);
+    return b1.multiply(b2).floatValue();
   }
 }

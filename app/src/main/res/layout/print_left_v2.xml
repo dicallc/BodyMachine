@@ -143,7 +143,7 @@
       app:layout_constraintVertical_bias="0.275"
       app:layout_constraintWidth_default="percent"
       >
-    <com.fliggy.bodymachine.widgets.CareboLbsView
+    <com.fliggy.bodymachine.widgets.CareboLbsBaseView
         android:id="@+id/lbs_tizhong"
         android:layout_width="match_parent"
         android:layout_height="0dp"

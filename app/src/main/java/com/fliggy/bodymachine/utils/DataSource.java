@@ -32,18 +32,35 @@ public class DataSource {
     mDeviderModel.devider_percent = percent-0.1f;
     return mDeviderModel;
   }
-  @NonNull public  static DeviderModel getWeightDeviderPercent(String num,String high,String low,int color) {
 
+  /**
+   *  根据输入的体重 在区间里面找X轴 在一个节段 算百分比 加上到X轴 就得到百分比
+   * @param mWeightData
+   * @param num
+   * @param color
+   * @return
+   */
+  @NonNull public  static DeviderModel getWeightDeviderPercent(ArrayList<String> mWeightData, String num,int color) {
+    int low=0;
+    for (int i = 0; i <mWeightData.size() ; i++) {
+      if (Float.parseFloat(mWeightData.get(i))>Float.parseFloat(num)){
+        low=i-1;
+        break;
+      }
+    }
+    String low_data = mWeightData.get(low);
+    String mid_data = mWeightData.get(low+1);
+    float a1 = BigDecimalUtils.sub(mid_data, low_data);
+    float a2 = BigDecimalUtils.sub(num, low_data);
+    float a3 = a2 / a1;
+    float mRound = BigDecimalUtils.roundF(a3, 2);
+    float a4 = low + mRound;
+    float a5 = BigDecimalUtils.mul(a4, 0.1f);
     DeviderModel mDeviderModel = new DeviderModel();
-    ArrayList<String> mWeightData = getWeightData();
-    //计算出中间值
-    double half_mid = BigDecimalUtils.sub(high, low,2)/2;
-    double mid = BigDecimalUtils.add(low, half_mid + "");
-    float percent=BigDecimalUtils.addFloat(num,mid+"");
     mDeviderModel.devider_limit_num = Float.parseFloat(num);
     mDeviderModel.devider_text = mWeightData;
     mDeviderModel.paint_color = color;
-    mDeviderModel.devider_percent = percent;
+    mDeviderModel.devider_percent = a5;
     return mDeviderModel;
   }
   @NonNull public  static DeviderModel getSkeletalMuscleDataDeviderPercent(String num,String high,String low,int color) {
