@@ -373,7 +373,7 @@ public class PrintBaseFragment extends SwiperFragment {
       txt_tizhong_one.setText(getTextOfThreshold(mBodyInfoModel.getWeight(), low + "", high + ""));
       //lbs 体重
       DeviderModel mWeightDeviderPercent =
-          DataSource.getWeightDeviderPercent(mBodyInfoModel.getWeight(), high, low + "",
+          DataSource.getDeviderPercent(DataSource.getWeightData(),mBodyInfoModel.getWeight(),
               R.color.black);
       lbsTizhong.setData(mWeightDeviderPercent);
       //体脂肪
