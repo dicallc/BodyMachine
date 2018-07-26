@@ -229,45 +229,87 @@ public class DataSource {
       return 2;
     }
   }
-  @NonNull public  static DeviderModel getPhysiqueNumDeviderPercent(String num,String high,String low,int color) {
+  @NonNull public  static DeviderModel getPhysiqueNumDeviderPercent(ArrayList<String> mWeightData, String num,int color) {
     DeviderModel mDeviderModel = new DeviderModel();
-    ArrayList<String> mWeightData = getPhysiqueNum();
-    if ((Float.parseFloat(low)-Float.parseFloat(num))<0){
+    if ((Float.parseFloat("18")-Float.parseFloat(num))<0){
       mDeviderModel.coordinate=1;
-    }else if((Float.parseFloat(high)-Float.parseFloat(num))<0){
+    }else if((Float.parseFloat("24.5")-Float.parseFloat(num))<0){
       mDeviderModel.coordinate=3;
     }else{
       mDeviderModel.coordinate=2;
     }
-
-    String max_num = mWeightData.get(mWeightData.size() - 1);
-    float percent = Arith.MyDiv(num, max_num);
+    int low=0;
+    for (int i = 0; i <mWeightData.size() ; i++) {
+      if (Float.parseFloat(mWeightData.get(i))>Float.parseFloat(num)){
+        if (i==0)low=0;
+        else{
+          low=i-1;
+        }
+        break;
+      }
+    }
+    String low_data = mWeightData.get(low);
+    String mid_data = mWeightData.get(low+1);
+    float a2 = BigDecimalUtils.sub(num, low_data);
+    float a5=0;
+    if (a2<0){
+      //如果A2小于0说明值比第一个还要小
+      a5=0.02f;
+    }else{
+      float a1 = BigDecimalUtils.sub(mid_data, low_data);
+      //得到大于区间值
+      float a3 = a2 / a1;
+      float mRound = BigDecimalUtils.roundF(a3, 2);
+      //这里的round是要乘区段的
+      float a4 = low + mRound+1;
+      a5 = BigDecimalUtils.mul(a4, 0.1f);
+    }
     mDeviderModel.devider_limit_num = Float.parseFloat(num);
     mDeviderModel.devider_text = mWeightData;
     mDeviderModel.paint_color = color;
-    mDeviderModel.devider_percent = percent-0.1f;
+    mDeviderModel.devider_percent = a5;
     //计算出中间值
-    //double half_mid = BigDecimalUtils.sub(high, low,2)/2;
-    //double mid = BigDecimalUtils.add(low, half_mid + "");
-    //float percent=BigDecimalUtils.addFloat(num,mid+"");
-    //mDeviderModel.devider_limit_num = Float.parseFloat(num);
-    //mDeviderModel.devider_text = mWeightData;
-    //mDeviderModel.paint_color = color;
-    //mDeviderModel.devider_percent = percent;
     return mDeviderModel;
   }
-  @NonNull public  static DeviderModel getBodyFatPercentagePercent(String num,String high,String low,int color) {
 
+  /**
+   * 计算体脂比
+   * @param num
+   * @param color
+   * @return
+   */
+  @NonNull public  static DeviderModel getBodyFatPercentagePercent(ArrayList<String> mWeightData, String num,int color) {
     DeviderModel mDeviderModel = new DeviderModel();
-    ArrayList<String> mWeightData = getBodyFatPercentage();
-    //计算出中间值
-    double half_mid = BigDecimalUtils.sub(high, low,2)/2;
-    double mid = BigDecimalUtils.add(low, half_mid + "");
-    float percent=BigDecimalUtils.addFloat(num,mid+"");
+    int low=0;
+    for (int i = 0; i <mWeightData.size() ; i++) {
+      if (Float.parseFloat(mWeightData.get(i))>Float.parseFloat(num)){
+        if (i==0)low=0;
+        else{
+          low=i-1;
+        }
+        break;
+      }
+    }
+    String low_data = mWeightData.get(low);
+    String mid_data = mWeightData.get(low+1);
+    float a2 = BigDecimalUtils.sub(num, low_data);
+    float a5=0;
+    if (a2<0){
+      //如果A2小于0说明值比第一个还要小
+      a5=0.02f;
+    }else{
+      float a1 = BigDecimalUtils.sub(mid_data, low_data);
+      //得到大于区间值
+      float a3 = a2 / a1;
+      float mRound = BigDecimalUtils.roundF(a3, 2);
+      //这里的round是要乘区段的
+      float a4 = low + mRound+1;
+      a5 = BigDecimalUtils.mul(a4, 0.1f);
+    }
     mDeviderModel.devider_limit_num = Float.parseFloat(num);
     mDeviderModel.devider_text = mWeightData;
     mDeviderModel.paint_color = color;
-    mDeviderModel.devider_percent = percent;
+    mDeviderModel.devider_percent = a5;
     return mDeviderModel;
   }
   @NonNull public  static DeviderModel getYaoTunbi(String num,String high,String low,int color) {
