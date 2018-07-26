@@ -22,7 +22,9 @@ import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.DataSource;
 import com.fliggy.bodymachine.widgets.CareboDoubleLbsView;
 import com.fliggy.bodymachine.widgets.CareboLbsBaseView;
+import com.fliggy.bodymachine.widgets.CareboLbsFatView;
 import com.fliggy.bodymachine.widgets.CareboLbsView;
+import com.fliggy.bodymachine.widgets.CareboLbsWaistToHipView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.socks.library.KLog;
 import java.io.File;
@@ -81,8 +83,8 @@ public class PrintBaseFragment extends SwiperFragment {
   private CareboDoubleLbsView dlbsBody;
   private CareboDoubleLbsView dlbsRightBottom;
   private CareboDoubleLbsView dlbsLeftBottom;
-  private CareboLbsView lbsYaotunBi;
-  private CareboLbsView lbsZhifanLevel;
+  private CareboLbsWaistToHipView lbsYaotunBi;
+  private CareboLbsFatView lbsZhifanLevel;
   private LineChart chartWeight;
   private LineChart chartGuluoji;
   private LineChart chartTizhifan;
@@ -124,63 +126,22 @@ public class PrintBaseFragment extends SwiperFragment {
         DataSource.getPhysiqueNumDeviderPercent(mBodyInfoModel.getPhysique_num(), "24", "18",
             R.color.black));
     //体脂百分比
-    lbsTizhiPercent = (CareboLbsView) mView.findViewById(R.id.lbs_tizhi_percent);
-    String TizhiPercent_low = "";
-    String TizhiPercent_high = "";
-    if (Integer.parseInt(mBodyInfoModel.getSex()) == 1) {
-      //男
-      if (Integer.parseInt(mBodyInfoModel.getAge()) <= 39) {
-        TizhiPercent_low = "10";
-        TizhiPercent_high = "21";
-      } else if (Integer.parseInt(mBodyInfoModel.getAge()) <= 59) {
-        TizhiPercent_low = "11";
-        TizhiPercent_high = "22";
-      } else {
-        TizhiPercent_low = "13";
-        TizhiPercent_high = "24";
-      }
-      DeviderModel mPhysiqueNumDeviderPercent =
-          DataSource.getPhysiqueNumDeviderPercent(mBodyInfoModel.getPhysique_num(),
-              TizhiPercent_high, TizhiPercent_low, R.color.s_black);
-      mPhysiqueNumDeviderPercentCoordinate = mPhysiqueNumDeviderPercent.coordinate;
-      lbsTizhiPercent.setData(mPhysiqueNumDeviderPercent);
-    } else {
-      //女
-      if (Integer.parseInt(mBodyInfoModel.getAge()) <= 39) {
-        TizhiPercent_low = "20";
-        TizhiPercent_high = "34";
-      } else if (Integer.parseInt(mBodyInfoModel.getAge()) <= 59) {
-        TizhiPercent_low = "21";
-        TizhiPercent_high = "35";
-      } else {
-        TizhiPercent_low = "22";
-        TizhiPercent_high = "36";
-      }
-      DeviderModel mPhysiqueNumDeviderPercent =
-          DataSource.getPhysiqueNumDeviderPercent(mBodyInfoModel.getPhysique_num(),
-              TizhiPercent_high, TizhiPercent_low, R.color.s_black);
-      mPhysiqueNumDeviderPercentCoordinate = mPhysiqueNumDeviderPercent.coordinate;
-      lbsTizhiPercent.setData(mPhysiqueNumDeviderPercent);
-    }
+    initTiZhiPecent(mBodyInfoModel);
 
     dlbsRightTop = (CareboDoubleLbsView) mView.findViewById(R.id.dlbs_right_top);
     dlbsLeftTop = (CareboDoubleLbsView) mView.findViewById(R.id.dlbs_left_top);
     dlbsBody = (CareboDoubleLbsView) mView.findViewById(R.id.dlbs_body);
     dlbsRightBottom = (CareboDoubleLbsView) mView.findViewById(R.id.dlbs_right_bottom);
     dlbsLeftBottom = (CareboDoubleLbsView) mView.findViewById(R.id.dlbs_left_bottom);
-    lbsYaotunBi = (CareboLbsView) mView.findViewById(R.id.lbs_yaotun_bi);
+    lbsYaotunBi = (CareboLbsWaistToHipView) mView.findViewById(R.id.lbs_yaotun_bi);
     String yaotunbi = Arith.mulString(mBodyInfoModel.getWaist(), mBodyInfoModel.getHipline());
-    String ytb_high = "";
-    String ytb_low = "";
-    if (Integer.parseInt(mBodyInfoModel.getSex()) == 1) {
-      ytb_high = "0.9";
-      ytb_low = "0.75";
-    } else {
-      ytb_high = "0.85";
-      ytb_low = "0.7";
-    }
-    lbsYaotunBi.setData(DataSource.getYaoTunbi(yaotunbi, ytb_high, ytb_low, R.color.black));
-    lbsZhifanLevel = (CareboLbsView) mView.findViewById(R.id.lbs_zhifan_level);
+    lbsZhifanLevel = (CareboLbsFatView) mView.findViewById(R.id.lbs_zhifan_level);
+    lbsYaotunBi.setData(
+        DataSource.getDeviderPercent(DataSource.getWaistToHip(), "0.78"+"", Color.RED));
+    lbsZhifanLevel.setData(
+        DataSource.getTiZhiDeviderPercent(DataSource.getVisceralFat(), mBodyInfoModel.getVisceral_fat()+"", getResources().getColor(R.color.s_black)));
+
+
     chartWeight = (LineChart) mView.findViewById(R.id.chart_weight);
     chartGuluoji = (LineChart) mView.findViewById(R.id.chart_guluoji);
     chartTizhifan = (LineChart) mView.findViewById(R.id.chart_tizhifan);
@@ -251,6 +212,48 @@ public class PrintBaseFragment extends SwiperFragment {
 
     layoutView(mView, width, height);
     viewSaveToImage(mView);
+  }
+
+  private void initTiZhiPecent(BodyInfoModel mBodyInfoModel) {
+    lbsTizhiPercent = (CareboLbsView) mView.findViewById(R.id.lbs_tizhi_percent);
+    String TizhiPercent_low="";
+    String TizhiPercent_high="";
+    if (Integer.parseInt(mBodyInfoModel.getSex()) == 1) {
+      //男
+      if (Integer.parseInt(mBodyInfoModel.getAge()) <= 39) {
+        TizhiPercent_low = "10";
+        TizhiPercent_high = "21";
+      } else if (Integer.parseInt(mBodyInfoModel.getAge()) <= 59) {
+        TizhiPercent_low = "11";
+        TizhiPercent_high = "22";
+      } else {
+        TizhiPercent_low = "13";
+        TizhiPercent_high = "24";
+      }
+      DeviderModel mPhysiqueNumDeviderPercent =
+          DataSource.getBodyFatPercentagePercent(mBodyInfoModel.getBody_fat_percentage(),
+              TizhiPercent_high, TizhiPercent_low, R.color.s_black);
+      mPhysiqueNumDeviderPercentCoordinate = mPhysiqueNumDeviderPercent.coordinate;
+      lbsTizhiPercent.setData(mPhysiqueNumDeviderPercent);
+      //体脂百分比
+    } else {
+      //女
+      if (Integer.parseInt(mBodyInfoModel.getAge()) <= 39) {
+        TizhiPercent_low = "20";
+        TizhiPercent_high = "34";
+      } else if (Integer.parseInt(mBodyInfoModel.getAge()) <= 59) {
+        TizhiPercent_low = "21";
+        TizhiPercent_high = "35";
+      } else {
+        TizhiPercent_low = "22";
+        TizhiPercent_high = "36";
+      }
+      DeviderModel mPhysiqueNumDeviderPercent =
+          DataSource.getBodyFatPercentagePercent(mBodyInfoModel.getPhysique_num(),
+              TizhiPercent_high, TizhiPercent_low, R.color.s_black);
+      mPhysiqueNumDeviderPercentCoordinate = mPhysiqueNumDeviderPercent.coordinate;
+      lbsTizhiPercent.setData(mPhysiqueNumDeviderPercent);
+    }
   }
 
   private void initBase(BodyInfoModel mBodyInfoModel) {

@@ -286,7 +286,7 @@ public class Utils {
     //蛋白质
     mModel.protein = android.serialport.utils.Utils.toResultHasPoint(mS, 70, 74);
     //体质指数
-    mModel.physique_num = android.serialport.utils.Utils.toResultHasPoint(mS, 74, 78);
+    mModel.physique_num = "19.5";
     //基础代谢
     mModel.basal_metabolism = android.serialport.utils.Utils.toResultHasPoint(mS, 78, 82);
     //体脂百分比

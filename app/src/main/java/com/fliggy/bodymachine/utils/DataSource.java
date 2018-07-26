@@ -44,7 +44,10 @@ public class DataSource {
     int low=0;
     for (int i = 0; i <mWeightData.size() ; i++) {
       if (Float.parseFloat(mWeightData.get(i))>Float.parseFloat(num)){
-        low=i-1;
+        if (i==0)low=0;
+        else{
+          low=i-1;
+        }
         break;
       }
     }
@@ -55,6 +58,53 @@ public class DataSource {
     float a3 = a2 / a1;
     float mRound = BigDecimalUtils.roundF(a3, 2);
     float a4 = low + mRound;
+    float a5 = BigDecimalUtils.mul(a4, 0.1f);
+    DeviderModel mDeviderModel = new DeviderModel();
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = a5;
+    return mDeviderModel;
+  }
+  @NonNull public  static DeviderModel getTiZhiDeviderPercent(ArrayList<String> mWeightData, String num,int color) {
+    int low=0;
+    for (int i = 0; i <mWeightData.size() ; i++) {
+      if (Float.parseFloat(mWeightData.get(i))>Float.parseFloat(num)){
+        if (i==0)low=0;
+        else{
+          low=i-1;
+        }
+        break;
+      }
+    }
+    String low_data = mWeightData.get(low);
+    String mid_data = mWeightData.get(low+1);
+    float a1 = BigDecimalUtils.sub(mid_data, low_data);
+    float a2 = BigDecimalUtils.sub(num, low_data);
+    float a3 = a2 / a1;
+    float mRound = BigDecimalUtils.roundF(a3, 2);
+    float a4=0f;
+    switch (low){
+      case 0:
+        a4=2+ mRound;
+        break;
+      case 1:
+        a4=4+ mRound;
+        break;
+      case 2:
+        a4=5+ mRound;
+        break;
+      case 3:
+        a4=8+ mRound;
+        break;
+      case 4:
+        a4=9+ mRound;
+        break;
+        default:
+          a4 = low + mRound;
+          break;
+    }
+
     float a5 = BigDecimalUtils.mul(a4, 0.1f);
     DeviderModel mDeviderModel = new DeviderModel();
     mDeviderModel.devider_limit_num = Float.parseFloat(num);
@@ -190,14 +240,20 @@ public class DataSource {
       mDeviderModel.coordinate=2;
     }
 
-    //计算出中间值
-    double half_mid = BigDecimalUtils.sub(high, low,2)/2;
-    double mid = BigDecimalUtils.add(low, half_mid + "");
-    float percent=BigDecimalUtils.addFloat(num,mid+"");
+    String max_num = mWeightData.get(mWeightData.size() - 1);
+    float percent = Arith.MyDiv(num, max_num);
     mDeviderModel.devider_limit_num = Float.parseFloat(num);
     mDeviderModel.devider_text = mWeightData;
     mDeviderModel.paint_color = color;
-    mDeviderModel.devider_percent = percent;
+    mDeviderModel.devider_percent = percent-0.1f;
+    //计算出中间值
+    //double half_mid = BigDecimalUtils.sub(high, low,2)/2;
+    //double mid = BigDecimalUtils.add(low, half_mid + "");
+    //float percent=BigDecimalUtils.addFloat(num,mid+"");
+    //mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    //mDeviderModel.devider_text = mWeightData;
+    //mDeviderModel.paint_color = color;
+    //mDeviderModel.devider_percent = percent;
     return mDeviderModel;
   }
   @NonNull public  static DeviderModel getBodyFatPercentagePercent(String num,String high,String low,int color) {
@@ -313,17 +369,17 @@ public class DataSource {
    */
   public  static ArrayList<String> getBodyFatPercentage(){
     ArrayList<String> list_text=new ArrayList<>();
-    list_text.add("0");
-    list_text.add("5.0");
-    list_text.add("10.0");
-    list_text.add("15.0");
+    list_text.add("12.5");
+    list_text.add("15");
+    list_text.add("17.5");
     list_text.add("20.0");
-    list_text.add("25.0");
-    list_text.add("30.0");
-    list_text.add("35.0");
-    list_text.add("40.0");
-    list_text.add("45.0");
-    list_text.add("57.3");
+    list_text.add("22.5");
+    list_text.add("25");
+    list_text.add("27.5");
+    list_text.add("30");
+    list_text.add("32.5");
+    list_text.add("35");
+    list_text.add("37.5");
     return list_text;
   }
   /**
