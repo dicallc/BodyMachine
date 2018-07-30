@@ -145,6 +145,24 @@ public class LoadUserActivity extends SupportActivity {
       position--;
       showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position + 1));
     }
+    switchFunction();
+  }
+  public void NextPre(boolean isNext,boolean isShowId) {
+    if (isNext) {
+      position+=2;
+      showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 2));
+    } else {
+      KLog.e("img_pre");
+      if (position < 1) {
+        return;
+      }
+      position-=2;
+      showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position + 2));
+    }
+    switchFunction();
+  }
+
+  private void switchFunction() {
     switch (position) {
       case 0:
         mTxtW.setVisibility(View.VISIBLE);

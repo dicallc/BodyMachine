@@ -13,8 +13,10 @@ import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.base.SwiperFragment;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
+import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.ToastUtils;
 import com.fliggy.bodymachine.widgets.KeyBoardViewWithLR;
+import com.fliggy.utils_module.utils.SPUtils;
 import org.greenrobot.eventbus.EventBus;
 
 /**
@@ -79,7 +81,12 @@ public class LoadHeightFragment extends SwiperFragment implements View.OnClickLi
     LoadUserActivity mLoadUserActivity= (LoadUserActivity) getActivity();
     switch (mView.getId()){
       case R.id.img_pre:
+        int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
+        if (ids_model==0)
         mLoadUserActivity.NextPre(false);
+        else{
+          mLoadUserActivity.NextPre(false,false);
+        }
         break;
       case R.id.img_next:
         String mValue = mKbView.getValue();

@@ -93,7 +93,13 @@ public class LoadWeightFragment extends SwiperFragment {
         //  ToastUtils.showLongToast("体重尚未测出，请稍等");
         //  return;
         //}
-        mLoadUserActivity.NextPre(true);
+        int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
+        if (ids_model==0)
+          mLoadUserActivity.NextPre(true);
+        else{
+          mLoadUserActivity.NextPre(true,false);
+        }
+
         break;
     }
   }

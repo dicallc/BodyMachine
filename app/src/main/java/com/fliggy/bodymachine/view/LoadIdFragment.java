@@ -1,12 +1,16 @@
 package com.fliggy.bodymachine.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -62,7 +66,27 @@ public class LoadIdFragment extends SwiperFragment {
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     mShowText.setText("请输入自己的姓名或者手机号");
+
+    mEtId.setOnEditorActionListener(mOnEditorActionListener);
   }
+  TextView.OnEditorActionListener mOnEditorActionListener=new TextView.OnEditorActionListener() {
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+      //当actionId == XX_SEND 或者 XX_DONE时都触发
+      //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
+      //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
+      if (actionId == EditorInfo.IME_ACTION_SEND
+          || actionId == EditorInfo.IME_ACTION_DONE
+          || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+        //处理事件
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(mEtId,InputMethodManager.SHOW_FORCED);
+        imm.hideSoftInputFromWindow(mEtId.getWindowToken(), 0);
+      }
+      return false;
+    }
+  };
 
   @Override public void onDestroyView() {
     super.onDestroyView();
