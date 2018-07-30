@@ -48,6 +48,15 @@ public class LoadIdFragment extends SwiperFragment {
     return fragment;
   }
 
+  @Override public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    if (!hidden){
+      mEtId.setText("");
+      mEtId.setSelection(mEtId.getText().length());
+
+    }
+  }
+
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (getArguments() != null) {

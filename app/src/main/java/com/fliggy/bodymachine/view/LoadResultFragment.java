@@ -29,6 +29,7 @@ import com.fliggy.bodymachine.utils.Arith;
 import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.ToastUtils;
 import com.fliggy.http_module.http.callback.DaoCallBack;
+import com.fliggy.utils_module.utils.SPUtils;
 import com.socks.library.KLog;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -97,7 +98,8 @@ public class LoadResultFragment extends PrintBaseFragment {
 
   private void TestFunction() {
     mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
-        "5A0360036C00000D340D1107CE07EB00E6000001ED000000000000000000000022013600690000038A018D01BA0288005A343400000000009680E380B20000019F017F019E0182018000DB001600160058005A0000000000000000000800000000000025");
+        "5A0360036C00000D340D1107CE07EB00E6000001ED000000000000000000000022013600690000038A018D01BA0288005A343400000000009680E380B20000019F017F019E0182018000DB001600160058005A0000000000000000000800000000000025",
+        true);
   }
 
   private void setViewFullScreen(LinearLayout view, float bili) {
@@ -133,9 +135,16 @@ public class LoadResultFragment extends PrintBaseFragment {
             KLog.e("失败了");
           }
         });
+        int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
+        boolean noRecord;
+        if (ids_model==1){
+          noRecord=false;
+        }else{
+          noRecord= true;
+        }
         mBodyInfoModel =
             com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
-                messageEvent.content);
+                messageEvent.content,noRecord);
 
         Constant.CurentId = mBodyInfoModel.getId();
         if (TextUtils.isEmpty(mBodyInfoModel.getId())) {

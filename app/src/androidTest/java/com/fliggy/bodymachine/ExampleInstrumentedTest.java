@@ -1,12 +1,8 @@
 package com.fliggy.bodymachine;
 
 import android.support.test.runner.AndroidJUnit4;
-import com.fliggy.bodymachine.dao.Dao;
 import com.fliggy.bodymachine.model.BodyInfoModel;
-import com.fliggy.bodymachine.model.MachineModel;
 import com.fliggy.bodymachine.utils.Utils;
-import com.fliggy.http_module.http.callback.DaoCallBack;
-import com.socks.library.KLog;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,6 +15,6 @@ import org.junit.runner.RunWith;
   @Test public void useAppContext() throws Exception {
     String content =
         "5A036001EB00000D5A0D37079107A80151000001AF00000000000000000000001C00F2007100000387003F0288028807A35031000000008046009C004600000037002800280028002800B300120012005500570000000000000000000600000000000004";
-    BodyInfoModel mBodyInfoModel = Utils.toShowFinalResultModel("175", "19", "1", content);
+    BodyInfoModel mBodyInfoModel = Utils.toShowFinalResultModel("175", "19", "1", content, noRecord);
   }
 }

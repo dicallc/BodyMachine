@@ -27,51 +27,52 @@ public class Utils {
     }
     return buf.toString();
   }
-  public static String getSign(BodyInfoModel mBodyInfoModel, String mMache_id){
-    String authKey="zp0adsxvtp1oeiw1k7isd3tz9pft";
-    LinkedHashMap<String,String> mMap=new LinkedHashMap<>();
-    mMap.put("AtUserID",mBodyInfoModel.getId());
-    mMap.put("BMI",mBodyInfoModel.getPhysique_num());
-    mMap.put("BasalMeta",mBodyInfoModel.getBasal_metabolism());
-    mMap.put("BoneSalt",mBodyInfoModel.getBone_salt_content());
-    mMap.put("FatFreeBodyWt",mBodyInfoModel.getFat_free());
-    mMap.put("FatWt",mBodyInfoModel.getFat_weight());
-    mMap.put("LhandFatRate",mBodyInfoModel.getLeft_hand_fat_ratio());
-    mMap.put("LhandMsclVal",mBodyInfoModel.getLEFT_hand_muscle_volume());
-    mMap.put("LlegFatRate",mBodyInfoModel.getLEFT_foot_fat_ratio());
-    mMap.put("LlegMsclVal",mBodyInfoModel.getLEFT_root_muscle_volume());
-    mMap.put("MuscleWt",mBodyInfoModel.getMuscle_weight());
-    mMap.put("ObesityDegree",mBodyInfoModel.getFat_degree());
-    mMap.put("PBF",mBodyInfoModel.getBody_fat_percentage());
-    mMap.put("PBW",mBodyInfoModel.getPercentage_of_water());
-    mMap.put("PhysicalAge",mBodyInfoModel.getPhysical_age());
-    mMap.put("PhysicalScore",mBodyInfoModel.getBody_score());
 
-    mMap.put("Protein",mBodyInfoModel.getProtein());
-    mMap.put("RecID",mBodyInfoModel.getId()+"@"+mMache_id);
-    mMap.put("RecTime",mBodyInfoModel.getTime());
-    mMap.put("RhandFatRate",mBodyInfoModel.getRight_hand_fat_rate());
-    mMap.put("RhandMsclVal",mBodyInfoModel.getRight_hand_muscle_volume());
-    mMap.put("RlegFatRate",mBodyInfoModel.getRight_foot_fat_ratio());
-    mMap.put("RlegMsclVal",mBodyInfoModel.getRight_root_muscle_volume());
+  public static String getSign(BodyInfoModel mBodyInfoModel, String mMache_id) {
+    String authKey = "zp0adsxvtp1oeiw1k7isd3tz9pft";
+    LinkedHashMap<String, String> mMap = new LinkedHashMap<>();
+    mMap.put("AtUserID", mBodyInfoModel.getId());
+    mMap.put("BMI", mBodyInfoModel.getPhysique_num());
+    mMap.put("BasalMeta", mBodyInfoModel.getBasal_metabolism());
+    mMap.put("BoneSalt", mBodyInfoModel.getBone_salt_content());
+    mMap.put("FatFreeBodyWt", mBodyInfoModel.getFat_free());
+    mMap.put("FatWt", mBodyInfoModel.getFat_weight());
+    mMap.put("LhandFatRate", mBodyInfoModel.getLeft_hand_fat_ratio());
+    mMap.put("LhandMsclVal", mBodyInfoModel.getLEFT_hand_muscle_volume());
+    mMap.put("LlegFatRate", mBodyInfoModel.getLEFT_foot_fat_ratio());
+    mMap.put("LlegMsclVal", mBodyInfoModel.getLEFT_root_muscle_volume());
+    mMap.put("MuscleWt", mBodyInfoModel.getMuscle_weight());
+    mMap.put("ObesityDegree", mBodyInfoModel.getFat_degree());
+    mMap.put("PBF", mBodyInfoModel.getBody_fat_percentage());
+    mMap.put("PBW", mBodyInfoModel.getPercentage_of_water());
+    mMap.put("PhysicalAge", mBodyInfoModel.getPhysical_age());
+    mMap.put("PhysicalScore", mBodyInfoModel.getBody_score());
 
-    mMap.put("SktMuscleWt",mBodyInfoModel.getSkeletal_muscle());
-    mMap.put("ToatalWatWt",mBodyInfoModel.getTotal_water_weight());
-    mMap.put("TrunkFatRate",mBodyInfoModel.getTrunk_fat_rate());
-    mMap.put("TrunkMsclVal",mBodyInfoModel.getTrunk_muscle_volume());
+    mMap.put("Protein", mBodyInfoModel.getProtein());
+    mMap.put("RecID", mBodyInfoModel.getId() + "@" + mMache_id);
+    mMap.put("RecTime", mBodyInfoModel.getTime());
+    mMap.put("RhandFatRate", mBodyInfoModel.getRight_hand_fat_rate());
+    mMap.put("RhandMsclVal", mBodyInfoModel.getRight_hand_muscle_volume());
+    mMap.put("RlegFatRate", mBodyInfoModel.getRight_foot_fat_ratio());
+    mMap.put("RlegMsclVal", mBodyInfoModel.getRight_root_muscle_volume());
 
-    mMap.put("ViscAdiGrd",mBodyInfoModel.getVisceral_fat());
-    mMap.put("Wt",mBodyInfoModel.getWeight());
-    mMap.put("time",System.currentTimeMillis()+"");
-    StringBuffer mBuffer=new StringBuffer();
+    mMap.put("SktMuscleWt", mBodyInfoModel.getSkeletal_muscle());
+    mMap.put("ToatalWatWt", mBodyInfoModel.getTotal_water_weight());
+    mMap.put("TrunkFatRate", mBodyInfoModel.getTrunk_fat_rate());
+    mMap.put("TrunkMsclVal", mBodyInfoModel.getTrunk_muscle_volume());
+
+    mMap.put("ViscAdiGrd", mBodyInfoModel.getVisceral_fat());
+    mMap.put("Wt", mBodyInfoModel.getWeight());
+    mMap.put("time", System.currentTimeMillis() + "");
+    StringBuffer mBuffer = new StringBuffer();
     for (String key : mMap.keySet()) {
-      mBuffer.append(key+"="+mMap.get(key)+"&");
+      mBuffer.append(key + "=" + mMap.get(key) + "&");
     }
-    String str=mBuffer.toString().substring(0,mBuffer.length()-1);
-    String finalStr=authKey+str+authKey;
+    String str = mBuffer.toString().substring(0, mBuffer.length() - 1);
+    String finalStr = authKey + str + authKey;
     String mS = null;
     try {
-      mS =sha1(finalStr);
+      mS = sha1(finalStr);
     } catch (NoSuchAlgorithmException mE) {
       mE.printStackTrace();
     }
@@ -246,15 +247,22 @@ public class Utils {
   //}
 
   public static BodyInfoModel toShowFinalResultModel(String mHeight, String mAge, String mSex,
-      String mS) {
+      String mS, boolean mNoRecord) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
       KLog.e("UI");
     }
-    Realm realm = Realm.getDefaultInstance();
-    realm.beginTransaction();
-    BodyInfoModel mModel = realm.createObject(BodyInfoModel.class, UUID.randomUUID().toString());
+    BodyInfoModel mModel;
+    Realm realm = null;
+    if (mNoRecord) {
+      realm = Realm.getDefaultInstance();
+      realm.beginTransaction();
+      mModel = realm.createObject(BodyInfoModel.class, UUID.randomUUID().toString());
+    } else {
+      mModel = new BodyInfoModel();
+    }
+
     mModel.getId();
-    mModel.setTime(System.currentTimeMillis()+"");
+    mModel.setTime(System.currentTimeMillis() + "");
     mModel.setAge(mAge);
     mModel.setHeight(mHeight);
     mModel.setSex(mSex);
@@ -292,7 +300,7 @@ public class Utils {
     //体脂百分比
     mModel.Body_fat_percentage = android.serialport.utils.Utils.toResultHasPoint(mS, 82, 86);
     //脂肪重
-    mModel.fat_weight = Arith.div(mModel.weight+"",mModel.Body_fat_percentage+"")+"";
+    mModel.fat_weight = Arith.div(mModel.weight + "", mModel.Body_fat_percentage + "") + "";
     //含水百分比
     mModel.Percentage_of_water = android.serialport.utils.Utils.toResultHasPoint(mS, 86, 90);
     //标准体重
@@ -352,11 +360,11 @@ public class Utils {
     //左大腿围
     mModel.l_b_Hipline = android.serialport.utils.Utils.toResultHasPoint(mS, 194, 198);
     //保存数据
-    realm.commitTransaction();
-    mModel.getTime();
-    mModel.getAge();
-    mModel.getHeight();
-    mModel.getWeight();
+    if (mNoRecord) realm.commitTransaction();
+    //mModel.getTime();
+    //mModel.getAge();
+    //mModel.getHeight();
+    //mModel.getWeight();
     return mModel;
   }
 }
