@@ -67,6 +67,10 @@ public class BodyInfoModel extends RealmObject {
   public String r_b_Hipline;
   public String l_b_Hipline;
 
+  public String getUser_id() {
+    return user_id;
+  }
+
   public String getId() {
     return id;
   }

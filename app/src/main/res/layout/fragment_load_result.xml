@@ -81,7 +81,6 @@
        android:id="@+id/txt_history"
        android:textColor="@android:color/white"
        android:background="@mipmap/img_look_history"
-       android:text="历史记录"
        android:layout_marginRight="50dp"
        android:layout_height="wrap_content"/>
    <TextView

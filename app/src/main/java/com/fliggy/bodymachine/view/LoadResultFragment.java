@@ -1,10 +1,9 @@
 package com.fliggy.bodymachine.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.serialport.utils.SimpleSerialPortUtil;
 import android.serialport.utils.Utils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -23,6 +22,7 @@ import com.fliggy.bodymachine.dao.Dao;
 import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.model.MsgModel;
 import com.fliggy.bodymachine.model.SerialEvent;
+import com.fliggy.bodymachine.ui.HostoryActivity;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.fliggy.bodymachine.utils.Arith;
 import com.fliggy.bodymachine.utils.Constant;
@@ -91,28 +91,30 @@ public class LoadResultFragment extends PrintBaseFragment {
     return view;
   }
 
-  @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-
-    //如果不开id记录，没必要显示历史记录
-    int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
-    if (ids_model == 0) {
-      //开了id输入，去寻找数据库是否有这个id
-      mTxtHistory.setVisibility(View.VISIBLE);
-    } else {
-      //不看
-      mTxtHistory.setVisibility(View.GONE);
+  @Override public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    if (!hidden){
+      //如果不开id记录，没必要显示历史记录
+      int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
+      if (ids_model == 0) {
+        //开了id输入，去寻找数据库是否有这个id
+        mTxtHistory.setVisibility(View.VISIBLE);
+      } else {
+        //不看
+        mTxtHistory.setVisibility(View.GONE);
+      }
+      TestFunction();
     }
-    TestFunction();
   }
+
 
 
 
   private void TestFunction() {
     String str="5A0360036C00000D340D1107CE07EB00E6000001ED000000000000000000000022013600690000038A018D01BA0288005A343400000000009680E380B20000019F017F019E0182018000DB001600160058005A0000000000000000000800000000000025";
-    mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
-        "",
-        true);
+    //mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
+    //    str,
+    //    true);
     MainLoadResult(str);
   }
 
@@ -185,9 +187,12 @@ public class LoadResultFragment extends PrintBaseFragment {
     } else {
       noRecord = true;
     }
-    mBodyInfoModel =
-        com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
-            content, noRecord);
+    //mBodyInfoModel =
+    //    com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
+    //        content, noRecord);
+    mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
+        content,
+        true);
 
     if (TextUtils.isEmpty(mBodyInfoModel.getId())) {
       ToastUtils.showShortToast("数据库初始化失败");
@@ -233,7 +238,7 @@ public class LoadResultFragment extends PrintBaseFragment {
     });
   }
 
-  @OnClick({ R.id.txt_back, R.id.print }) public void onViewClicked(View view) {
+  @OnClick({ R.id.txt_back, R.id.print,R.id.txt_history}) public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.txt_back:
         LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
@@ -241,6 +246,10 @@ public class LoadResultFragment extends PrintBaseFragment {
         break;
       case R.id.print:
         toPrint(mBodyInfoModel);
+        break;
+      case R.id.txt_history:
+        Intent mIntent=new Intent(getActivity(), HostoryActivity.class);
+        startActivity(mIntent);
         break;
     }
   }

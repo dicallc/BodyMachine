@@ -6,7 +6,10 @@ import com.socks.library.KLog;
 import io.realm.Realm;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -302,7 +305,7 @@ public class Utils {
     //体脂百分比
     mModel.Body_fat_percentage = android.serialport.utils.Utils.toResultHasPoint(mS, 82, 86);
     //脂肪重
-    mModel.fat_weight = Arith.div(mModel.weight + "", mModel.Body_fat_percentage + "") + "";
+    mModel.fat_weight = BigDecimalUtils.roundString(Arith.div(mModel.weight + "", mModel.Body_fat_percentage + "")+"",2);
     //含水百分比
     mModel.Percentage_of_water = android.serialport.utils.Utils.toResultHasPoint(mS, 86, 90);
     //标准体重
@@ -369,4 +372,29 @@ public class Utils {
     //mModel.getWeight();
     return mModel;
   }
+  public static String TimeTo(String time) {
+    SimpleDateFormat sdr = new SimpleDateFormat("yyyy.MM.dd HH:mm",
+        Locale.CHINA);
+    Date date;
+    String times = null;
+    try {
+      date = sdr.parse(time);
+      long l = date.getTime();
+      String stf = String.valueOf(l);
+      times = stf.substring(0, 10);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return times;
+  }
+  public static String getDateToString(long milSecond, String pattern) {
+    Date date = new Date(milSecond);
+    SimpleDateFormat format = new SimpleDateFormat(pattern);
+    return format.format(date);
+  }
+  public static long getCurTimeLong(){
+    long time=System.currentTimeMillis();
+    return time;
+  }
+
 }

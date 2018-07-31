@@ -5,16 +5,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.adapter.HistoryAdapter;
 import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.utils.Constant;
+import com.fliggy.bodymachine.utils.Utils;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -42,6 +45,7 @@ public class HostoryActivity extends AppCompatActivity {
   @BindView(R.id.fl_container) RelativeLayout mFlContainer;
   @BindView(R.id.rl_contain) RelativeLayout mRlContain;
   @BindView(R.id.rl_time) RecyclerView mRlTime;
+  private HistoryAdapter mHistoryAdapter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -53,12 +57,12 @@ public class HostoryActivity extends AppCompatActivity {
 
   private void initView() {
     initChart(mChartWeight);
-    setWeightData(mChartWeight, 20, 30);
+
     initChart(mChatGugeji);
-    setGugejiData(mChatGugeji, 20, 30);
+
     initChart(mChatTizhifang);
-    setTizhifang(mChatTizhifang, 20, 30);
-    HistoryAdapter mHistoryAdapter = new HistoryAdapter(null);
+
+    mHistoryAdapter = new HistoryAdapter(null);
     //创建LinearLayoutManager
     LinearLayoutManager manager = new LinearLayoutManager(this);
     //设置为横向滑动
@@ -66,11 +70,7 @@ public class HostoryActivity extends AppCompatActivity {
     //设置
     mRlTime.setLayoutManager(manager);
     mRlTime.setAdapter(mHistoryAdapter);
-    List<String> mStrings=new ArrayList<>();
-    for (int i = 0; i <10 ; i++) {
-      mStrings.add(i+"");
-    }
-    mHistoryAdapter.addData(mStrings);
+
   }
 
   private void initChart(LineChart mChart) {
@@ -103,25 +103,41 @@ public class HostoryActivity extends AppCompatActivity {
     mRealm.executeTransaction(new Realm.Transaction() {
       @Override public void execute(Realm realm) {
         RealmResults<BodyInfoModel> mAll =
-            realm.where(BodyInfoModel.class).equalTo("id", mMainId).findAll();
+            realm.where(BodyInfoModel.class).equalTo("user_id", mMainId).findAll();
         List<BodyInfoModel> mBodyInfoModels = null;
         if (mAll.size() > 10) {
           mBodyInfoModels = mAll.subList(0, 10);
         } else {
-          mBodyInfoModels = mAll;
+          mBodyInfoModels = mAll.subList(0,mAll.size());
         }
+        //选最后一条的数据做最后参考
+        BodyInfoModel mBodyInfoModel = mAll.get(mAll.size() - 1);
+        mTxtTitleId.setText("ID"+mBodyInfoModel.getUser_id());
+        mTxtTitleHeight.setText(mBodyInfoModel.getHeight());
+        mTxtTitleAge.setText(mBodyInfoModel.getAge());
+        if (mBodyInfoModel.getSex().equals("1")) {
+          mTxtTitleSex.setText("男");
+        } else {
+          mTxtTitleSex.setText("女");
+        }
+        setWeightData(mChartWeight,mAll);
+        setGugejiData(mChatGugeji, mAll);
+        setTizhifang(mChatTizhifang, mAll);
+        List<String> mStrings = new ArrayList<>();
+        for (int i = 0; i < mBodyInfoModels.size(); i++) {
+          mStrings.add(Utils.getDateToString(Long.parseLong(mBodyInfoModels.get(i).getTime()),"yy-MM-dd HH:mm"));
+        }
+        mHistoryAdapter.addData(mStrings);
       }
     });
   }
 
-  private void setWeightData(LineChart mChart, int count, float range) {
+  private void setWeightData(LineChart mChart,List<BodyInfoModel> mBodyInfoModels) {
 
     ArrayList<Entry> yVals1 = new ArrayList<Entry>();
 
-    for (int i = 0; i < count; i++) {
-      float mult = range / 2f;
-      float val = (float) (Math.random() * mult) + 50;
-      yVals1.add(new Entry(i, val));
+    for (int i = 0; i < mBodyInfoModels.size(); i++) {
+      yVals1.add(new Entry(i,Float.parseFloat(mBodyInfoModels.get(i).getWeight()) ));
     }
     LineDataSet set1;
 
@@ -150,13 +166,11 @@ public class HostoryActivity extends AppCompatActivity {
     }
   }
 
-  private void setGugejiData(LineChart mChart, int count, float range) {
+  private void setGugejiData(LineChart mChart ,List<BodyInfoModel> mBodyInfoModels) {
     ArrayList<Entry> yVals1 = new ArrayList<Entry>();
 
-    for (int i = 0; i < count; i++) {
-      float mult = range / 2f;
-      float val = (float) (Math.random() * mult) + 50;
-      yVals1.add(new Entry(i, val));
+    for (int i = 0; i < mBodyInfoModels.size(); i++) {
+      yVals1.add(new Entry(i,Float.parseFloat(mBodyInfoModels.get(i).getSkeletal_muscle()) ));
     }
     LineDataSet set1;
 
@@ -184,14 +198,13 @@ public class HostoryActivity extends AppCompatActivity {
     }
   }
 
-  private void setTizhifang(LineChart mChart, int count, float range) {
+  private void setTizhifang(LineChart mChart,List<BodyInfoModel> mBodyInfoModels) {
 
     ArrayList<Entry> yVals1 = new ArrayList<Entry>();
 
-    for (int i = 0; i < count; i++) {
-      float mult = range / 2f;
-      float val = (float) (Math.random() * mult) + 50;
-      yVals1.add(new Entry(i, val));
+    for (int i = 0; i < mBodyInfoModels.size(); i++) {
+      BodyInfoModel mBodyInfoModel = mBodyInfoModels.get(i);
+      yVals1.add(new Entry(i, Float.parseFloat(mBodyInfoModel.getFat_weight())));
     }
     LineDataSet set1;
 
@@ -217,6 +230,17 @@ public class HostoryActivity extends AppCompatActivity {
       data.setValueTextColor(Color.WHITE);
       data.setValueTextSize(9f);
       mChart.setData(data);
+    }
+  }
+
+  @OnClick({ R.id.img_back, R.id.img_test }) public void onViewClicked(View view) {
+    switch (view.getId()) {
+      case R.id.img_back:
+        finish();
+        break;
+      case R.id.img_test:
+        finish();
+        break;
     }
   }
 }

@@ -300,4 +300,12 @@ public class ExampleUnitTest {
 
     //-0.98666 + 9.0326 * 1/(Height/100) - 0.37064 * 1/Age - 106.4763 * 1/Weight –0.1656* BMI - 0.00040719 * Age + 0.051186 * Weight
   }
+
+
+  @Test public void testFunction21() {
+    long mCurTimeLong = com.fliggy.bodymachine.utils.Utils.getCurTimeLong();
+    String mDateToString =
+        com.fliggy.bodymachine.utils.Utils.getDateToString(mCurTimeLong, "yy-MM-dd HH:mm");
+    System.out.print(mDateToString);
+  }
 }
