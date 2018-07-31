@@ -75,7 +75,7 @@ public class WaitStandFragment extends SupportFragment {
                     LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
                     mLoadUserActivity.ShowMeasureUI();
                 }
-            }, 1000);
+            }, 10000);
             PlayAudio(R.raw.standup);
         }
     }

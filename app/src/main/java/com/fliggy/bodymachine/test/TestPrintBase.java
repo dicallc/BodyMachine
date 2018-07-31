@@ -1,16 +1,11 @@
 package com.fliggy.bodymachine.test;
 
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -18,11 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.model.BodyInfoModel;
-import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.view.LoadingDialogFragment;
 import com.socks.library.KLog;
-import io.realm.Realm;
-import io.realm.RealmResults;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Calendar;
@@ -39,37 +31,37 @@ class TestPrintBase extends AppCompatActivity {
     outState.putBoolean("isDone", isDone);
   }
 
-  protected void toPrint(@Nullable Bundle savedInstanceState, final View mRootView) {
-    if (savedInstanceState != null) {
-      isDone = savedInstanceState.getBoolean("isDone", true);
-    }
-    RealmResults<BodyInfoModel> mBodyInfoModels = Realm.getDefaultInstance()
-        .where(BodyInfoModel.class)
-        .equalTo("id", Constant.CurentId)
-        .findAll();
-    if (mBodyInfoModels.size() == 0) {
-      KLog.e("获取数据库数据出错");
-      return;
-    }
-    BodyInfoModel mBodyInfoModel = mBodyInfoModels.get(0);
-    initView(mBodyInfoModel);
-    if (isDone) return;
-    new Handler().postDelayed(new Runnable() {
-      @Override public void run() {
-        //do something
-        mImagePath = viewSaveToImage(mRootView);
-        KLog.e("测试顺序");
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        isDone = true;
-        Uri imageUri = Uri.fromFile(new File(mImagePath));
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-        shareIntent.setType("image/*");
-        startActivity(Intent.createChooser(shareIntent, "分享到"));
-      }
-    }, 3000);    //延时1s执行
-  }
+  //protected void toPrint(@Nullable Bundle savedInstanceState, final View mRootView) {
+  //  if (savedInstanceState != null) {
+  //    isDone = savedInstanceState.getBoolean("isDone", true);
+  //  }
+  //  RealmResults<BodyInfoModel> mBodyInfoModels = Realm.getDefaultInstance()
+  //      .where(BodyInfoModel.class)
+  //      .equalTo("id", Constant.CurentId)
+  //      .findAll();
+  //  if (mBodyInfoModels.size() == 0) {
+  //    KLog.e("获取数据库数据出错");
+  //    return;
+  //  }
+  //  BodyInfoModel mBodyInfoModel = mBodyInfoModels.get(0);
+  //  initView(mBodyInfoModel);
+  //  if (isDone) return;
+  //  new Handler().postDelayed(new Runnable() {
+  //    @Override public void run() {
+  //      //do something
+  //      mImagePath = viewSaveToImage(mRootView);
+  //      KLog.e("测试顺序");
+  //      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+  //      isDone = true;
+  //      Uri imageUri = Uri.fromFile(new File(mImagePath));
+  //      Intent shareIntent = new Intent();
+  //      shareIntent.setAction(Intent.ACTION_SEND);
+  //      shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+  //      shareIntent.setType("image/*");
+  //      startActivity(Intent.createChooser(shareIntent, "分享到"));
+  //    }
+  //  }, 3000);    //延时1s执行
+  //}
 
   protected void Test() {
     DisplayMetrics metric = new DisplayMetrics();

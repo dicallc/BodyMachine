@@ -12,6 +12,7 @@ public class BodyInfoModel extends RealmObject {
 
   @PrimaryKey
   private String id;
+  public String user_id;
   public String time;
   public String height;
   public String age;

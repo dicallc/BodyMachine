@@ -1,16 +1,13 @@
 package com.fliggy.bodymachine.base;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -20,14 +17,11 @@ import android.view.View;
 import android.widget.TextView;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.model.BodyInfoModel;
-import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.view.LoadingDialogFragment;
 import com.fliggy.bodymachine.widgets.CareboDoubleLbsView;
 import com.fliggy.bodymachine.widgets.CareboLbsView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.socks.library.KLog;
-import io.realm.Realm;
-import io.realm.RealmResults;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Calendar;
@@ -43,37 +37,37 @@ public class PrintBase extends AppCompatActivity {
     outState.putBoolean("isDone", isDone);
   }
 
-  protected void toPrint(@Nullable Bundle savedInstanceState, final View mRootView) {
-    if (savedInstanceState != null) {
-      isDone = savedInstanceState.getBoolean("isDone", true);
-    }
-    RealmResults<BodyInfoModel> mBodyInfoModels = Realm.getDefaultInstance()
-        .where(BodyInfoModel.class)
-        .equalTo("id", Constant.CurentId)
-        .findAll();
-    if (mBodyInfoModels.size() == 0) {
-      KLog.e("获取数据库数据出错");
-      return;
-    }
-    BodyInfoModel mBodyInfoModel = mBodyInfoModels.get(0);
-    initView(mBodyInfoModel);
-    if (isDone) return;
-    new Handler().postDelayed(new Runnable() {
-      @Override public void run() {
-        //do something
-        mImagePath = viewSaveToImage(mRootView);
-        KLog.e("测试顺序");
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        isDone = true;
-        Uri imageUri = Uri.fromFile(new File(mImagePath));
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-        shareIntent.setType("image/*");
-        startActivity(Intent.createChooser(shareIntent, "分享到"));
-      }
-    }, 3000);    //延时1s执行
-  }
+  //protected void toPrint(@Nullable Bundle savedInstanceState, final View mRootView) {
+  //  if (savedInstanceState != null) {
+  //    isDone = savedInstanceState.getBoolean("isDone", true);
+  //  }
+  //  RealmResults<BodyInfoModel> mBodyInfoModels = Realm.getDefaultInstance()
+  //      .where(BodyInfoModel.class)
+  //      .equalTo("id", Constant.CurentId)
+  //      .findAll();
+  //  if (mBodyInfoModels.size() == 0) {
+  //    KLog.e("获取数据库数据出错");
+  //    return;
+  //  }
+  //  BodyInfoModel mBodyInfoModel = mBodyInfoModels.get(0);
+  //  initView(mBodyInfoModel);
+  //  if (isDone) return;
+  //  new Handler().postDelayed(new Runnable() {
+  //    @Override public void run() {
+  //      //do something
+  //      mImagePath = viewSaveToImage(mRootView);
+  //      KLog.e("测试顺序");
+  //      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+  //      isDone = true;
+  //      Uri imageUri = Uri.fromFile(new File(mImagePath));
+  //      Intent shareIntent = new Intent();
+  //      shareIntent.setAction(Intent.ACTION_SEND);
+  //      shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+  //      shareIntent.setType("image/*");
+  //      startActivity(Intent.createChooser(shareIntent, "分享到"));
+  //    }
+  //  }, 3000);    //延时1s执行
+  //}
   private ConstraintLayout rootView;
   private TextView txtId;
   private TextView txtHeight;

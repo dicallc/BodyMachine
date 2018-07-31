@@ -123,9 +123,8 @@ public class PrintBaseFragment extends SwiperFragment {
     initBodyCompostionAnalysis(mBodyInfoModel);
     //身体质量指数
     lbsZhiliangzhishu = (CareboLbsView) mView.findViewById(R.id.lbs_zhiliangzhishu);
-    lbsZhiliangzhishu.setData(
-        DataSource.getPhysiqueNumDeviderPercent(DataSource.getPhysiqueNum(),mBodyInfoModel.getPhysique_num(),
-            getResources().getColor(R.color.black)));
+    lbsZhiliangzhishu.setData(DataSource.getPhysiqueNumDeviderPercent(DataSource.getPhysiqueNum(),
+        mBodyInfoModel.getPhysique_num(), getResources().getColor(R.color.black)));
     //体脂百分比
     initTiZhiPecent(mBodyInfoModel);
 
@@ -219,7 +218,8 @@ public class PrintBaseFragment extends SwiperFragment {
     if (Integer.parseInt(mBodyInfoModel.getSex()) == 1) {
       //男
       DeviderModel mPhysiqueNumDeviderPercent =
-          DataSource.getBodyFatPercentagePercent(TiZhiData.getTiZhiForMan(),mBodyInfoModel.getBody_fat_percentage(), getResources().getColor(R.color.s_black));
+          DataSource.getBodyFatPercentagePercent(TiZhiData.getTiZhiForMan(),
+              mBodyInfoModel.getBody_fat_percentage(), getResources().getColor(R.color.s_black));
 
       if (Float.parseFloat(mBodyInfoModel.getBody_fat_percentage()) < 10) {
         mPhysiqueNumDeviderPercent.coordinate = 1;
@@ -234,7 +234,8 @@ public class PrintBaseFragment extends SwiperFragment {
     } else {
       //女
       DeviderModel mPhysiqueNumDeviderPercent =
-          DataSource.getBodyFatPercentagePercent(TiZhiData.getTiZhiForMan(),mBodyInfoModel.getBody_fat_percentage(), getResources().getColor(R.color.s_black));
+          DataSource.getBodyFatPercentagePercent(TiZhiData.getTiZhiForMan(),
+              mBodyInfoModel.getBody_fat_percentage(), getResources().getColor(R.color.s_black));
       if (Float.parseFloat(mBodyInfoModel.getBody_fat_percentage()) < 20) {
         mPhysiqueNumDeviderPercent.coordinate = 1;
       } else if (Float.parseFloat(mBodyInfoModel.getBody_fat_percentage()) < 30) {
@@ -324,7 +325,8 @@ public class PrintBaseFragment extends SwiperFragment {
       String mMul = BigDecimalUtils.mul(mBodyInfoModel.getMuscle_weight(), "0.6");
       float gugeji_pecent = BigDecimalUtils.numPecent(mBodyInfoModel.getSkeletal_muscle(), mMul);
       lbsGugeji.setData(DataSource.getCommonDeviderPercent_l(DataSource.getSkeletalMuscleData(),
-          mBodyInfoModel.getSkeletal_muscle(), gugeji_pecent, getResources().getColor(R.color.s_black)));
+          mBodyInfoModel.getSkeletal_muscle(), gugeji_pecent,
+          getResources().getColor(R.color.s_black)));
     } else {
       txtMale.setText("性别\n女");
       //身体总水分正常范围	女：45%--60% 男	55%--65%
@@ -349,7 +351,8 @@ public class PrintBaseFragment extends SwiperFragment {
       String mMul = BigDecimalUtils.mul(mBodyInfoModel.getMuscle_weight(), "0.6");
       float gugeji_pecent = BigDecimalUtils.numPecent(mBodyInfoModel.getSkeletal_muscle(), mMul);
       lbsGugeji.setData(DataSource.getCommonDeviderPercent_l(DataSource.getSkeletalMuscleData(),
-          mBodyInfoModel.getSkeletal_muscle(), gugeji_pecent, getResources().getColor(R.color.s_black)));
+          mBodyInfoModel.getSkeletal_muscle(), gugeji_pecent,
+          getResources().getColor(R.color.s_black)));
     }
   }
 
@@ -430,7 +433,7 @@ public class PrintBaseFragment extends SwiperFragment {
       //lbs 脂肪重
       float zhifanzhong_pecent = BigDecimalUtils.numPecent(tizhifan, tizhifan_mid);
       lbsTizhifang.setData(DataSource.getCommonDeviderPercent_l(DataSource.getFatWeight(), tizhifan,
-          zhifanzhong_pecent,getResources().getColor(R.color.s_black)));
+          zhifanzhong_pecent, getResources().getColor(R.color.s_black)));
       mFatWeighCoordinate =
           DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
       //去脂体重

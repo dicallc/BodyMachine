@@ -25,11 +25,7 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
     <activity android:name=".ui.LoadUserActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
 
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
     </activity>
     <activity
         android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -61,6 +57,11 @@
     <activity android:name=".test.ShowResultActivity">
     </activity>
     <activity android:name=".ui.HostoryActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
     </activity>
   </application>
 

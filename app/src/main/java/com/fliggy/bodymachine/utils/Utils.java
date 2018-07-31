@@ -257,6 +257,7 @@ public class Utils {
       realm = Realm.getDefaultInstance();
       realm.beginTransaction();
       mModel = realm.createObject(BodyInfoModel.class, UUID.randomUUID().toString());
+      mModel.user_id=Constant.MainId;
     } else {
       mModel = new BodyInfoModel();
     }
@@ -266,6 +267,7 @@ public class Utils {
     mModel.setAge(mAge);
     mModel.setHeight(mHeight);
     mModel.setSex(mSex);
+
     mModel.weight = android.serialport.utils.Utils.toResultHasPoint(mS, 6, 10);
     //总阻抗
     mModel.all_impedance = android.serialport.utils.Utils.toResultHasPoint(mS, 10, 14);

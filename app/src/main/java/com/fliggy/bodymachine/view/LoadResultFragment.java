@@ -21,7 +21,6 @@ import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.base.PrintBaseFragment;
 import com.fliggy.bodymachine.dao.Dao;
 import com.fliggy.bodymachine.model.BodyInfoModel;
-import com.fliggy.bodymachine.model.MachineModel;
 import com.fliggy.bodymachine.model.MsgModel;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
@@ -110,9 +109,11 @@ public class LoadResultFragment extends PrintBaseFragment {
 
 
   private void TestFunction() {
+    String str="5A0360036C00000D340D1107CE07EB00E6000001ED000000000000000000000022013600690000038A018D01BA0288005A343400000000009680E380B20000019F017F019E0182018000DB001600160058005A0000000000000000000800000000000025";
     mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
-        "5A0360036C00000D340D1107CE07EB00E6000001ED000000000000000000000022013600690000038A018D01BA0288005A343400000000009680E380B20000019F017F019E0182018000DB001600160058005A0000000000000000000800000000000025",
+        "",
         true);
+    MainLoadResult(str);
   }
 
   private void setViewFullScreen(LinearLayout view, float bili) {
@@ -139,69 +140,7 @@ public class LoadResultFragment extends PrintBaseFragment {
     LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
     switch (messageEvent.type) {
       case SerialEvent.LOAD_USER_DATA:
-        Dao.postData(messageEvent.content, new DaoCallBack<MachineModel>() {
-          @Override public void onSuccess(int code, MachineModel result) {
-            KLog.e("成功了");
-          }
-
-          @Override public void onFail(int code, String result) {
-            KLog.e("失败了");
-          }
-        });
-        int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
-        boolean noRecord;
-        if (ids_model == 1) {
-          noRecord = false;
-        } else {
-          noRecord = true;
-        }
-        mBodyInfoModel =
-            com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
-                messageEvent.content, noRecord);
-
-        Constant.CurentId = mBodyInfoModel.getId();
-        if (TextUtils.isEmpty(mBodyInfoModel.getId())) {
-          ToastUtils.showShortToast("数据库初始化失败");
-          return;
-        }
-        if (TextUtils.isEmpty(mBodyInfoModel.getWeight())) {
-          ToastUtils.showShortToast("模块获取数据为空");
-          return;
-        }
-        if ("0".equals(mBodyInfoModel.getFat_weight())) {
-          ToastUtils.showShortToast("模块获取数据为0");
-          return;
-        }
-        mTxtWeight.setText(mBodyInfoModel.getWeight() + "kg");
-        setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.getWeight(), 180));
-        mTxtZhifan.setText(mBodyInfoModel.getFat_weight() + "kg");
-        setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.getFat_weight(), 130));
-        mTxtJirou.setText(mBodyInfoModel.getMuscle_weight() + "kg");
-        setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), 142.5));
-        mTxtFeirou.setText(mBodyInfoModel.getFat_degree());
-        setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.getFat_degree(), 40));
-        setViewFullScreen(mBarFeirou, 0.9f);
-        //标准体重
-        mTxtBtOne.setText("标准体重    " + mBodyInfoModel.getStander_weight() + "kg");
-        //体脂百分比
-        mTxtBtTwo.setText("体脂肪率    " + mBodyInfoModel.getBody_fat_percentage() + "%");
-        // 身体评分
-        mTxtBtThree.setText("健康指数    " + mBodyInfoModel.getBody_score());
-        // 身体质量指数
-        mTxtBtFour.setText("身体质量指数    " + mBodyInfoModel.getPhysique_num());
-        if (TextUtils.isEmpty(mMache_id)) {
-          ToastUtils.showShortToast("机器id为空");
-          return;
-        }
-        Dao.postCelect(mBodyInfoModel, mMache_id, new DaoCallBack<MsgModel>() {
-          @Override public void onSuccess(int code, MsgModel result) {
-            ToastUtils.showShortToast("上传数据成功");
-          }
-
-          @Override public void onFail(int code, String result) {
-            ToastUtils.showShortToast("上传数据失败");
-          }
-        });
+        MainLoadResult(messageEvent.content);
         break;
       case SerialEvent.HEIGHT:
         mHeight = messageEvent.content;
@@ -227,6 +166,71 @@ public class LoadResultFragment extends PrintBaseFragment {
         mMache_id = messageEvent.mache_id;
         break;
     }
+  }
+
+  private void MainLoadResult(String content) {
+    //Dao.postData(content, new DaoCallBack<MachineModel>() {
+    //  @Override public void onSuccess(int code, MachineModel result) {
+    //    KLog.e("成功了");
+    //  }
+    //
+    //  @Override public void onFail(int code, String result) {
+    //    KLog.e("失败了");
+    //  }
+    //});
+    int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
+    boolean noRecord;
+    if (ids_model == 1) {
+      noRecord = false;
+    } else {
+      noRecord = true;
+    }
+    mBodyInfoModel =
+        com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
+            content, noRecord);
+
+    if (TextUtils.isEmpty(mBodyInfoModel.getId())) {
+      ToastUtils.showShortToast("数据库初始化失败");
+      return;
+    }
+    if (TextUtils.isEmpty(mBodyInfoModel.getWeight())) {
+      ToastUtils.showShortToast("模块获取数据为空");
+      return;
+    }
+    if ("0".equals(mBodyInfoModel.getFat_weight())) {
+      ToastUtils.showShortToast("模块获取数据为0");
+      return;
+    }
+    mTxtWeight.setText(mBodyInfoModel.getWeight() + "kg");
+    setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.getWeight(), 180));
+    mTxtZhifan.setText(mBodyInfoModel.getFat_weight() + "kg");
+    setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.getFat_weight(), 130));
+    mTxtJirou.setText(mBodyInfoModel.getMuscle_weight() + "kg");
+    setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), 142.5));
+    mTxtFeirou.setText(mBodyInfoModel.getFat_degree());
+    setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.getFat_degree(), 40));
+    setViewFullScreen(mBarFeirou, 0.9f);
+    //标准体重
+    mTxtBtOne.setText("标准体重    " + mBodyInfoModel.getStander_weight() + "kg");
+    //体脂百分比
+    mTxtBtTwo.setText("体脂肪率    " + mBodyInfoModel.getBody_fat_percentage() + "%");
+    // 身体评分
+    mTxtBtThree.setText("健康指数    " + mBodyInfoModel.getBody_score());
+    // 身体质量指数
+    mTxtBtFour.setText("身体质量指数    " + mBodyInfoModel.getPhysique_num());
+    if (TextUtils.isEmpty(mMache_id)) {
+      ToastUtils.showShortToast("机器id为空");
+      return;
+    }
+    Dao.postCelect(mBodyInfoModel, mMache_id, new DaoCallBack<MsgModel>() {
+      @Override public void onSuccess(int code, MsgModel result) {
+        ToastUtils.showShortToast("上传数据成功");
+      }
+
+      @Override public void onFail(int code, String result) {
+        ToastUtils.showShortToast("上传数据失败");
+      }
+    });
   }
 
   @OnClick({ R.id.txt_back, R.id.print }) public void onViewClicked(View view) {

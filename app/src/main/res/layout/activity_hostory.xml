@@ -129,14 +129,6 @@
           android:textSize="24sp"
           />
     </LinearLayout>
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
-        android:src="@mipmap/logo"
-        tools:visibility="visible"
-        />
   </FrameLayout>
   <RelativeLayout
       android:id="@+id/fl_container"
@@ -177,14 +169,14 @@
               android:textSize="30sp"
               android:gravity="center"
               android:textColor="#ffffff"
-              tools:text="体重"
+              android:text="体重"
               />
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textSize="21.3sp"
               android:textColor="#ffffff"
-              tools:text="kg"
+              android:text="kg"
               />
         </LinearLayout>
         <LinearLayout
@@ -203,14 +195,14 @@
               android:gravity="center"
               android:textColor="#ffffff"
               android:textSize="30sp"
-              tools:text="骨骼肌"
+              android:text="骨骼肌"
               />
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textSize="21.3sp"
               android:textColor="#ffffff"
-              tools:text="kg"
+              android:text="kg"
               />
         </LinearLayout>
         <LinearLayout
@@ -229,14 +221,14 @@
               android:gravity="center"
               android:textColor="#ffffff"
               android:textSize="30sp"
-              tools:text="体脂肪"
+              android:text="体脂肪"
               />
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textSize="21.3sp"
               android:textColor="#ffffff"
-              tools:text="kg"
+              android:text="kg"
               />
         </LinearLayout>
       </LinearLayout>
@@ -313,7 +305,7 @@
           android:layout_height="wrap_content"
           android:textSize="26.7sp"
           android:textColor="#ffffff"
-          tools:text="测试时间"
+          android:text="测试时间"
           />
 
       </LinearLayout>
@@ -324,6 +316,10 @@
           android:gravity="center_vertical"
           android:orientation="vertical"
           >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rl_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
       </LinearLayout>
 
     </LinearLayout>
