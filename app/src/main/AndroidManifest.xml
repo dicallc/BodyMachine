@@ -47,7 +47,6 @@
     </provider>
 
     <activity android:name=".ui.setting.SettingActivity">
-
     </activity>
     <activity android:name=".ui.MeasureActivity">
     </activity>
@@ -58,10 +57,10 @@
     <activity android:name=".ui.ScreenSaverActivity">
     </activity>
     <activity android:name=".TestActivity">
-
     </activity>
-    <activity android:name="com.fliggy.bodymachine.test.ShowResultActivity">
-
+    <activity android:name=".test.ShowResultActivity">
+    </activity>
+    <activity android:name=".ui.HostoryActivity">
     </activity>
   </application>
 

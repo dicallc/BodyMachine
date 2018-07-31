@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    tools:background="@color/black_de"
     tools:context="com.fliggy.bodymachine.view.LoadResultFragment"
     >
   <include layout="@layout/include_load_result_title"/>
@@ -70,6 +71,16 @@
        android:id="@+id/txt_back"
        android:textColor="@android:color/white"
        android:background="@drawable/shape_result_rect_corner"
+       android:text="返回"
+       android:layout_marginRight="50dp"
+       android:layout_height="wrap_content"/>
+   <TextView
+       android:layout_width="wrap_content"
+       android:textSize="30sp"
+       android:gravity="center"
+       android:id="@+id/txt_history"
+       android:textColor="@android:color/white"
+       android:background="@mipmap/img_look_history"
        android:text="返回"
        android:layout_marginRight="50dp"
        android:layout_height="wrap_content"/>

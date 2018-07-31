@@ -53,6 +53,7 @@ public class LoadResultFragment extends PrintBaseFragment {
   @BindView(R.id.txt_feirou) TextView mTxtFeirou;
   @BindView(R.id.print) TextView mPrint;
   @BindView(R.id.txt_back) TextView mTxtBack;
+  @BindView(R.id.txt_history) TextView mTxtHistory;
 
   private String mParam1;
   private String mParam2;
@@ -93,8 +94,20 @@ public class LoadResultFragment extends PrintBaseFragment {
 
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+
+    //如果不开id记录，没必要显示历史记录
+    int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
+    if (ids_model == 0) {
+      //开了id输入，去寻找数据库是否有这个id
+      mTxtHistory.setVisibility(View.VISIBLE);
+    } else {
+      //不看
+      mTxtHistory.setVisibility(View.GONE);
+    }
     TestFunction();
   }
+
+
 
   private void TestFunction() {
     mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
@@ -137,14 +150,14 @@ public class LoadResultFragment extends PrintBaseFragment {
         });
         int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
         boolean noRecord;
-        if (ids_model==1){
-          noRecord=false;
-        }else{
-          noRecord= true;
+        if (ids_model == 1) {
+          noRecord = false;
+        } else {
+          noRecord = true;
         }
         mBodyInfoModel =
             com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
-                messageEvent.content,noRecord);
+                messageEvent.content, noRecord);
 
         Constant.CurentId = mBodyInfoModel.getId();
         if (TextUtils.isEmpty(mBodyInfoModel.getId())) {
