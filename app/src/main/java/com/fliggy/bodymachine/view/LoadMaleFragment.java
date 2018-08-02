@@ -108,7 +108,7 @@ public class LoadMaleFragment extends SwiperFragment implements RadioGroup.OnChe
           return;
         }
         EventBus.getDefault().post(new SerialEvent(SerialEvent.SEX,femail));
-        mLoadUserActivity.NextPre(true);
+        mLoadUserActivity.ShowMeasureUI(femail);
         break;
     }
   }

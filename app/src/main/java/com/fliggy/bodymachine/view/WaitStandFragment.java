@@ -11,7 +11,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.model.SerialEvent;
-import com.fliggy.bodymachine.ui.LoadUserActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 import me.drakeet.materialdialog.MaterialDialog;
@@ -72,8 +71,8 @@ public class WaitStandFragment extends SupportFragment {
             mTimer = new Timer();
             mTimer.schedule(new TimerTask() {
                 @Override public void run() {
-                    LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
-                    mLoadUserActivity.ShowMeasureUI();
+                    //LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
+                    //mLoadUserActivity.ShowMeasureUI();
                 }
             }, 10000);
             PlayAudio(R.raw.standup);
@@ -95,11 +94,6 @@ public class WaitStandFragment extends SupportFragment {
         }
     }
 
-    //TimerTask task = new TimerTask() {
-    //    public void run() {
-    //
-    //    }
-    //};
 
     private MaterialDialog initDialog(String msg) {
         final MaterialDialog mMaterialDialog = new MaterialDialog(getActivity()).setTitle("友情提示")
@@ -134,31 +128,6 @@ public class WaitStandFragment extends SupportFragment {
             case SerialEvent.SEX:
                 mSex = messageEvent.content + "";
                 break;
-            //case SerialEvent.LOAD_USER_DATA:
-            //    KLog.e("LOAD_USER_DATA");
-            //    LoadUserActivity mLoadUserActivity = (LoadUserActivity) getActivity();
-            //    mLoadUserActivity.ShowMeasureUI();
-            //    break;
-            //case SerialEvent.LOAD_USER_DATA_ERRO:
-            //    isYes = false;
-            //    erromsg = messageEvent.content;
-            //    getActivity().runOnUiThread(new Runnable() {
-            //        @Override
-            //        public void run() {
-            //            //erromsg="姿势可能错误了";
-            //            final MaterialDialog mMaterialDialog = initDialog(erromsg);
-            //            mMaterialDialog.setPositiveButton("OK", new View.OnClickListener() {
-            //                @Override
-            //                public void onClick(View v) {
-            //                    mMaterialDialog.dismiss();
-            //                    mTimer.schedule(task, 3000);
-            //                }
-            //            });
-            //            mMaterialDialog.show();
-            //        }
-            //    });
-            //
-            //    break;
         }
     }
 }

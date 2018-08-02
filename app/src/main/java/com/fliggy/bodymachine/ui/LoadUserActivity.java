@@ -26,7 +26,6 @@ import com.fliggy.bodymachine.view.LoadIdFragment;
 import com.fliggy.bodymachine.view.LoadMaleFragment;
 import com.fliggy.bodymachine.view.LoadResultFragment;
 import com.fliggy.bodymachine.view.LoadWeightFragment;
-import com.fliggy.bodymachine.view.WaitStandFragment;
 import com.socks.library.KLog;
 import java.util.ArrayList;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -62,7 +61,6 @@ public class LoadUserActivity extends SupportActivity {
   private int result_ui_code = 0x110;
   private float x1;
   private float y1;
-  private WaitStandFragment mWaitStandFragment;
   private LoadIdFragment mLoadIdFragment;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -104,17 +102,14 @@ public class LoadUserActivity extends SupportActivity {
       mLoadHeightFragment = LoadHeightFragment.newInstance("", "");
       mLoadAgeFragment = LoadAgeFragment.newInstance("", "");
       mLoadMaleFragment = LoadMaleFragment.newInstance("", "");
-      mWaitStandFragment = WaitStandFragment.newInstance("", "");
       mLoadResultFragment = LoadResultFragment.newInstance("", "");
       loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment, mLoadIdFragment,
-          mLoadHeightFragment, mLoadAgeFragment, mLoadMaleFragment, mLoadResultFragment,
-          mWaitStandFragment);  // 加载根Fragment
+          mLoadHeightFragment, mLoadAgeFragment, mLoadMaleFragment, mLoadResultFragment);  // 加载根Fragment
       mSupportFragments.add(mLoadWeightFragment);
       mSupportFragments.add(mLoadIdFragment);
       mSupportFragments.add(mLoadHeightFragment);
       mSupportFragments.add(mLoadAgeFragment);
       mSupportFragments.add(mLoadMaleFragment);
-      mSupportFragments.add(mWaitStandFragment);
       mSupportFragments.add(mLoadResultFragment);
     }
   }
@@ -208,8 +203,9 @@ public class LoadUserActivity extends SupportActivity {
     }
   }
 
-  public void ShowMeasureUI() {
+  public void ShowMeasureUI(String sex) {
     Intent mIntent = new Intent(this, MeasureActivity.class);
+    mIntent.putExtra("INTENT_SEX",sex);
     startActivityForResult(mIntent, result_ui_code);
   }
 

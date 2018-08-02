@@ -51,7 +51,7 @@ public class LoadIdFragment extends SwiperFragment {
   @Override public void onHiddenChanged(boolean hidden) {
     super.onHiddenChanged(hidden);
     if (!hidden){
-      mEtId.setText("");
+      //mEtId.setText("");
       mEtId.setSelection(mEtId.getText().length());
 
     }
