@@ -1,18 +1,15 @@
 package com.fliggy.bodymachine.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.Button;
-import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.utils.ScreenService;
 import java.util.Date;
 
-public class ScreeActivity extends Activity {
+public class ScreeActivity extends AppCompatActivity {
 
   private Handler mHandler01 = new Handler();
   private Handler mHandler02 = new Handler();
@@ -34,17 +31,9 @@ public class ScreeActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_scree);
-    ((Button)findViewById(R.id.start_screen_Saver)).setOnClickListener(new View.OnClickListener() {
-
-      @Override
-      public void onClick(View v) {
-        Intent mService = new Intent(ScreeActivity.this, ScreenService.class);
-        mService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startService(mService);
-      }
-    });
-
+    Intent mService = new Intent(ScreeActivity.this, ScreenService.class);
+    mService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startService(mService);
     /* 初始取得User可触碰屏幕的时间 */
     lastUpdateTime = new Date(System.currentTimeMillis());
   }
@@ -53,7 +42,6 @@ public class ScreeActivity extends Activity {
    * 计时线程
    */
   private Runnable mTask01 = new Runnable() {
-
     @Override
     public void run() {
       Date timeNow = new Date(System.currentTimeMillis());

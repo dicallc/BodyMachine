@@ -21,15 +21,12 @@ public class ScreenService extends Service {
   }
   @Override
   public void onCreate() {
-    //Log.e("ScreenService","onCreate()");
     startScreenService();
     super.onCreate();
   }
 
   @Override
   public void onStart(Intent intent, int startId) {
-    // Log.e("ScreenService","onStart");
-    // TODO Auto-generated method stub
     startScreenService();
   }
 
@@ -59,7 +56,6 @@ public class ScreenService extends Service {
 
   @Override
   public void onDestroy() {
-    //Log.e("ScreenService","onDestroy()");
     super.onDestroy();
     unregisterReceiver(mMasterResetReciever);
     ScreenService.this.stopSelf();
