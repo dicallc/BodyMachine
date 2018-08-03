@@ -1,9 +1,11 @@
 package com.fliggy.bodymachine.base;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -27,10 +29,18 @@ import com.fliggy.bodymachine.widgets.CareboLbsFatView;
 import com.fliggy.bodymachine.widgets.CareboLbsView;
 import com.fliggy.bodymachine.widgets.CareboLbsWaistToHipView;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.socks.library.KLog;
+import io.realm.Realm;
+import io.realm.RealmResults;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by dicallc on 2018/7/21 0021.
@@ -208,9 +218,159 @@ public class PrintBaseFragment extends SwiperFragment {
     //txtBodyId250 = (TextView) mView.findViewById(R.id.txt_body_id_250);
     //txtRightBtId250 = (TextView) mView.findViewById(R.id.txt_right_bt_id_250);
     //txtLeftBtId250 = (TextView) mView.findViewById(R.id.txt_left_bt_id_250);
-
+    //------------------历史----------------------------
+    initChart(chartWeight);
+    initChart(chartGuluoji);
+    initChart(chartTizhifan);
+    initHostoryData();
     layoutView(mView, width, height);
-    viewSaveToImage(mView);
+    String mImagePath = viewSaveToImage(mView);
+    Uri imageUri = Uri.fromFile(new File(mImagePath));
+    Intent shareIntent = new Intent();
+    shareIntent.setAction(Intent.ACTION_SEND);
+    shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+    shareIntent.setType("image/*");
+    startActivity(Intent.createChooser(shareIntent, "分享到"));
+
+  }
+  private void initHostoryData() {
+    final String mMainId = Constant.MainId;
+    final Realm mRealm = Realm.getDefaultInstance();
+    mRealm.executeTransaction(new Realm.Transaction() {
+      @Override public void execute(Realm realm) {
+        RealmResults<BodyInfoModel> mAll =
+            realm.where(BodyInfoModel.class).equalTo("user_id", mMainId).findAll();
+        List<BodyInfoModel> mBodyInfoModels = null;
+        if (mAll.size() > 10) {
+          mBodyInfoModels = mAll.subList(0, 10);
+        } else {
+          mBodyInfoModels = mAll.subList(0,mAll.size());
+        }
+        //选最后一条的数据做最后参考
+        setWeightData(chartWeight,mAll);
+        setGugejiData(chartGuluoji, mAll);
+        setTizhifang(chartTizhifan, mAll);
+      }
+    });
+  }
+  private void setWeightData(LineChart mChart,List<BodyInfoModel> mBodyInfoModels) {
+
+    ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+
+    for (int i = 0; i < mBodyInfoModels.size(); i++) {
+      yVals1.add(new Entry(i,Float.parseFloat(mBodyInfoModels.get(i).getWeight()) ));
+    }
+    LineDataSet set1;
+
+    if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
+      set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
+      set1.setValues(yVals1);
+      mChart.getData().notifyDataChanged();
+      mChart.notifyDataSetChanged();
+    } else {
+      set1 = new LineDataSet(yVals1, "DataSet 1");
+
+      set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+      set1.setColor(getResources().getColor(R.color.black));
+      set1.setCircleColor(Color.WHITE);
+      set1.setLineWidth(2f);
+      set1.setDrawValues(false);
+      set1.setCircleRadius(3f);
+      set1.setFillAlpha(65);
+      set1.setFillColor(Color.parseColor("#0087ff"));
+      set1.setHighLightColor(Color.rgb(244, 117, 117));
+      set1.setDrawCircleHole(false);
+      LineData data = new LineData(set1);
+      data.setValueTextColor(Color.WHITE);
+      data.setValueTextSize(9f);
+      mChart.setData(data);
+    }
+  }
+
+  private void setGugejiData(LineChart mChart ,List<BodyInfoModel> mBodyInfoModels) {
+    ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+
+    for (int i = 0; i < mBodyInfoModels.size(); i++) {
+      yVals1.add(new Entry(i,Float.parseFloat(mBodyInfoModels.get(i).getSkeletal_muscle()) ));
+    }
+    LineDataSet set1;
+
+    if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
+      set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
+      set1.setValues(yVals1);
+      mChart.getData().notifyDataChanged();
+      mChart.notifyDataSetChanged();
+    } else {
+      set1 = new LineDataSet(yVals1, "DataSet 1");
+
+      set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+      set1.setColor(getResources().getColor(R.color.black));
+      set1.setCircleColor(Color.WHITE);
+      set1.setLineWidth(2f);
+      set1.setDrawValues(false);
+      set1.setCircleRadius(3f);
+      set1.setFillAlpha(65);
+      set1.setHighLightColor(Color.rgb(244, 117, 117));
+      set1.setDrawCircleHole(false);
+      LineData data = new LineData(set1);
+      data.setValueTextColor(Color.WHITE);
+      data.setValueTextSize(9f);
+      mChart.setData(data);
+    }
+  }
+
+  private void setTizhifang(LineChart mChart,List<BodyInfoModel> mBodyInfoModels) {
+
+    ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+
+    for (int i = 0; i < mBodyInfoModels.size(); i++) {
+      BodyInfoModel mBodyInfoModel = mBodyInfoModels.get(i);
+      yVals1.add(new Entry(i, Float.parseFloat(mBodyInfoModel.getFat_weight())));
+    }
+    LineDataSet set1;
+
+    if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
+      set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
+      set1.setValues(yVals1);
+      mChart.getData().notifyDataChanged();
+      mChart.notifyDataSetChanged();
+    } else {
+      set1 = new LineDataSet(yVals1, "DataSet 1");
+
+      set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+      set1.setColor(getResources().getColor(R.color.black));
+      set1.setCircleColor(Color.WHITE);
+      set1.setLineWidth(2f);
+      set1.setDrawValues(false);
+      set1.setCircleRadius(3f);
+      set1.setFillAlpha(65);
+      set1.setFillColor(Color.parseColor("#e8bd21"));
+      set1.setHighLightColor(Color.rgb(244, 117, 117));
+      set1.setDrawCircleHole(false);
+      LineData data = new LineData(set1);
+      data.setValueTextColor(Color.WHITE);
+      data.setValueTextSize(9f);
+      mChart.setData(data);
+    }
+  }
+  private void initChart(LineChart mChart) {
+    mChart.getDescription().setEnabled(false);
+    mChart.setTouchEnabled(false);
+    mChart.setDragDecelerationFrictionCoef(0.9f);
+    mChart.setDragEnabled(false);
+    mChart.setScaleEnabled(false);
+    mChart.setDrawGridBackground(false);
+    mChart.setHighlightPerDragEnabled(true);
+    mChart.setPinchZoom(true);
+    mChart.getLegend().setEnabled(false);
+    YAxis y = mChart.getAxisLeft();
+    y.setDrawGridLines(false);
+    y.setDrawAxisLine(false);
+    mChart.getLegend().setEnabled(false);
+    mChart.getAxisRight().setEnabled(false);
+    mChart.getAxisLeft().setEnabled(false);
+    mChart.getXAxis().setEnabled(false);
+    mChart.getDescription().setEnabled(false);
   }
 
   private void initTiZhiPecent(BodyInfoModel mBodyInfoModel) {

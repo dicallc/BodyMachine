@@ -103,7 +103,7 @@ public class LoadResultFragment extends PrintBaseFragment {
         //不看
         mTxtHistory.setVisibility(View.GONE);
       }
-      //TestFunction();
+      TestFunction();
     }
   }
 
@@ -112,9 +112,9 @@ public class LoadResultFragment extends PrintBaseFragment {
 
   private void TestFunction() {
     String str="5A0360036C00000D340D1107CE07EB00E6000001ED000000000000000000000022013600690000038A018D01BA0288005A343400000000009680E380B20000019F017F019E0182018000DB001600160058005A0000000000000000000800000000000025";
-    //mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
-    //    str,
-    //    true);
+    mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
+        str,
+        true);
     MainLoadResult(str);
   }
 
@@ -187,12 +187,12 @@ public class LoadResultFragment extends PrintBaseFragment {
     } else {
       noRecord = true;
     }
-    mBodyInfoModel =
-        com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
-            content, noRecord);
-    //mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
-    //    content,
-    //    true);
+    //mBodyInfoModel =
+    //    com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
+    //        content, noRecord);
+    mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
+        content,
+        true);
 
     if (TextUtils.isEmpty(mBodyInfoModel.getId())) {
       ToastUtils.showShortToast("数据库初始化失败");
