@@ -62,6 +62,11 @@ public class HostoryActivity extends AppCompatActivity {
 
     initChart(mChatTizhifang);
 
+    initTime();
+
+  }
+
+  private void initTime() {
     mHistoryAdapter = new HistoryAdapter(null);
     //创建LinearLayoutManager
     LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -70,7 +75,6 @@ public class HostoryActivity extends AppCompatActivity {
     //设置
     mRlTime.setLayoutManager(manager);
     mRlTime.setAdapter(mHistoryAdapter);
-
   }
 
   private void initChart(LineChart mChart) {

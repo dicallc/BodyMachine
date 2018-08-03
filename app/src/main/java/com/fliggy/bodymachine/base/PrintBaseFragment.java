@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.adapter.PrintHistoryAdapter;
 import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.model.DeviderModel;
 import com.fliggy.bodymachine.utils.Arith;
@@ -23,6 +26,7 @@ import com.fliggy.bodymachine.utils.BigDecimalUtils;
 import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.DataSource;
 import com.fliggy.bodymachine.utils.TiZhiData;
+import com.fliggy.bodymachine.utils.Utils;
 import com.fliggy.bodymachine.widgets.CareboDoubleLbsView;
 import com.fliggy.bodymachine.widgets.CareboLbsBaseView;
 import com.fliggy.bodymachine.widgets.CareboLbsFatView;
@@ -56,6 +60,7 @@ public class PrintBaseFragment extends SwiperFragment {
   private int mFatWeighCoordinate;
   private int mPhysiqueNumDeviderPercentCoordinate;
   private TextView show_core;
+  private RecyclerView rl_time;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -154,6 +159,7 @@ public class PrintBaseFragment extends SwiperFragment {
     chartWeight = (LineChart) mView.findViewById(R.id.chart_weight);
     chartGuluoji = (LineChart) mView.findViewById(R.id.chart_guluoji);
     chartTizhifan = (LineChart) mView.findViewById(R.id.chart_tizhifan);
+    rl_time = (RecyclerView) mView.findViewById(R.id.rl_time);
     show_core = (TextView) mView.findViewById(R.id.show_core);
     //-----------综合评分---------------------------
     show_core.setText(mBodyInfoModel.getBody_score() + "分");
@@ -222,8 +228,12 @@ public class PrintBaseFragment extends SwiperFragment {
     initChart(chartWeight);
     initChart(chartGuluoji);
     initChart(chartTizhifan);
-    initHostoryData();
-    layoutView(mView, width, height);
+    initHostoryData(width, height);
+
+
+  }
+
+  private void toShare() {
     String mImagePath = viewSaveToImage(mView);
     Uri imageUri = Uri.fromFile(new File(mImagePath));
     Intent shareIntent = new Intent();
@@ -231,9 +241,9 @@ public class PrintBaseFragment extends SwiperFragment {
     shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
     shareIntent.setType("image/*");
     startActivity(Intent.createChooser(shareIntent, "分享到"));
-
   }
-  private void initHostoryData() {
+
+  private void initHostoryData(final int mWidth, final int mHeight) {
     final String mMainId = Constant.MainId;
     final Realm mRealm = Realm.getDefaultInstance();
     mRealm.executeTransaction(new Realm.Transaction() {
@@ -250,8 +260,31 @@ public class PrintBaseFragment extends SwiperFragment {
         setWeightData(chartWeight,mAll);
         setGugejiData(chartGuluoji, mAll);
         setTizhifang(chartTizhifan, mAll);
+        initTime(mBodyInfoModels);
+        getActivity().runOnUiThread(new Runnable() {
+          @Override public void run() {
+            layoutView(mView, mWidth,mHeight);
+            toShare();
+          }
+        });
       }
     });
+  }
+
+  private void initTime(List<BodyInfoModel> mBodyInfoModels) {
+    List<String> mStrings = new ArrayList<>();
+    for (int i = 0; i < mBodyInfoModels.size(); i++) {
+      mStrings.add(
+          Utils.getDateToString(Long.parseLong(mBodyInfoModels.get(i).getTime()),"yy-MM-dd HH:mm"));
+    }
+    PrintHistoryAdapter mHistoryAdapter = new PrintHistoryAdapter(mStrings);
+    //创建LinearLayoutManager
+    LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+    //设置为横向滑动
+    manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+    //设置
+    rl_time.setLayoutManager(manager);
+    rl_time.setAdapter(mHistoryAdapter);
   }
   private void setWeightData(LineChart mChart,List<BodyInfoModel> mBodyInfoModels) {
 
@@ -277,6 +310,7 @@ public class PrintBaseFragment extends SwiperFragment {
       set1.setDrawValues(false);
       set1.setCircleRadius(3f);
       set1.setFillAlpha(65);
+      set1.setCircleColor(getResources().getColor(R.color.black));
       set1.setFillColor(Color.parseColor("#0087ff"));
       set1.setHighLightColor(Color.rgb(244, 117, 117));
       set1.setDrawCircleHole(false);
@@ -307,6 +341,7 @@ public class PrintBaseFragment extends SwiperFragment {
       set1.setColor(getResources().getColor(R.color.black));
       set1.setCircleColor(Color.WHITE);
       set1.setLineWidth(2f);
+      set1.setCircleColor(getResources().getColor(R.color.black));
       set1.setDrawValues(false);
       set1.setCircleRadius(3f);
       set1.setFillAlpha(65);
@@ -343,6 +378,7 @@ public class PrintBaseFragment extends SwiperFragment {
       set1.setLineWidth(2f);
       set1.setDrawValues(false);
       set1.setCircleRadius(3f);
+      set1.setCircleColor(getResources().getColor(R.color.black));
       set1.setFillAlpha(65);
       set1.setFillColor(Color.parseColor("#e8bd21"));
       set1.setHighLightColor(Color.rgb(244, 117, 117));

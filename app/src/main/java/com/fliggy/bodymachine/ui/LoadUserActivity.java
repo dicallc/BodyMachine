@@ -104,7 +104,8 @@ public class LoadUserActivity extends SupportActivity {
       mLoadMaleFragment = LoadMaleFragment.newInstance("", "");
       mLoadResultFragment = LoadResultFragment.newInstance("", "");
       loadMultipleRootFragment(R.id.fl_container, 0, mLoadWeightFragment, mLoadIdFragment,
-          mLoadHeightFragment, mLoadAgeFragment, mLoadMaleFragment, mLoadResultFragment);  // 加载根Fragment
+          mLoadHeightFragment, mLoadAgeFragment, mLoadMaleFragment,
+          mLoadResultFragment);  // 加载根Fragment
       mSupportFragments.add(mLoadWeightFragment);
       mSupportFragments.add(mLoadIdFragment);
       mSupportFragments.add(mLoadHeightFragment);
@@ -142,16 +143,17 @@ public class LoadUserActivity extends SupportActivity {
     }
     switchFunction();
   }
-  public void NextPre(boolean isNext,boolean isShowId) {
+
+  public void NextPre(boolean isNext, boolean isShowId) {
     if (isNext) {
-      position+=2;
+      position += 2;
       showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position - 2));
     } else {
       KLog.e("img_pre");
       if (position < 1) {
         return;
       }
-      position-=2;
+      position -= 2;
       showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position + 2));
     }
     switchFunction();
@@ -204,10 +206,18 @@ public class LoadUserActivity extends SupportActivity {
   }
 
   public void ShowMeasureUI(String sex) {
+
     Intent mIntent = new Intent(this, MeasureActivity.class);
-    mIntent.putExtra("INTENT_SEX",sex);
+    mIntent.putExtra("INTENT_SEX", sex);
     startActivityForResult(mIntent, result_ui_code);
+    mTxtI.postDelayed(detayShowResult, 3000);
   }
+
+  Runnable detayShowResult = new Runnable() {
+    @Override public void run() {
+      showResultUI();
+    }
+  };
 
   public void showResultUI() {
     position++;
@@ -228,7 +238,7 @@ public class LoadUserActivity extends SupportActivity {
 
       NextPre(false);
     } else if (requestCode == result_ui_code) {
-      showResultUI();
+
     }
   }
 
