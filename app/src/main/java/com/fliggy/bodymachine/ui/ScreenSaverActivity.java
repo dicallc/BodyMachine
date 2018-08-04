@@ -1,23 +1,28 @@
 package com.fliggy.bodymachine.ui;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.widget.VideoView;
+import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.ui.video.MyGsyVideo;
+import com.fliggy.bodymachine.utils.FileStorageHelper;
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
+import java.io.File;
 
 public class ScreenSaverActivity extends AppCompatActivity {
 
   protected static final String TAG = "ScreenSaverActivity";
   private static PowerManager.WakeLock mWakeLock;
-  @BindView(R.id.video) VideoView mVideoPlayer;
+  @BindView(R.id.video_player) MyGsyVideo mVideoPlayer;
+  private String mVideoPath;
+  private String mVideoFilePath;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -27,8 +32,15 @@ public class ScreenSaverActivity extends AppCompatActivity {
     mWakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP
         | PowerManager.SCREEN_DIM_WAKE_LOCK
         | PowerManager.ON_AFTER_RELEASE, "SimpleTimer");
-  }
+    String mAbsolutePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+    mVideoFilePath = mAbsolutePath + "/" + "BodyMachine";
+    mVideoPath = mAbsolutePath + "/" + "BodyMachine/screen.mp4";
+    if (!new File(mVideoPath).exists()){
+      FileStorageHelper.copyFilesFromRaw(this,R.raw.screen,"screen.mp4", mVideoFilePath);
+    }
 
+
+  }
   @Override protected void onResume() {
     mWakeLock.acquire();
     startVideo();
@@ -37,27 +49,24 @@ public class ScreenSaverActivity extends AppCompatActivity {
 
   @Override protected void onDestroy() {
     super.onDestroy();
-    if (mVideoPlayer != null) {
-      mVideoPlayer.suspend();  //将VideoView所占用的资源释放掉
-      mVideoPlayer = null;
-    }
+    GSYVideoManager.releaseAllVideos();
   }
 
   private void startVideo() {
-    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/" + R.raw.screen);
-    mVideoPlayer.setVideoURI(uri);
-    mVideoPlayer.requestFocus();
-    mVideoPlayer.start();
+    //Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/" + R.raw.screen);
+    mVideoPlayer.setUp("file://"+mVideoPath, true, "");
+    //增加title
+    mVideoPlayer.getTitleTextView().setVisibility(View.GONE);
+    //设置返回键
+    mVideoPlayer.getBackButton().setVisibility(View.GONE);
 
-    mVideoPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-      @Override public void onPrepared(MediaPlayer mp) {
-        mp.setLooping(true);
-      }
-    });
+    mVideoPlayer.setLooping(true);
+    mVideoPlayer.startPlayLogic();
   }
 
   @Override protected void onPause() {
     mWakeLock.release();
+    mVideoPlayer.onVideoPause();
     super.onPause();
   }
 
@@ -68,7 +77,6 @@ public class ScreenSaverActivity extends AppCompatActivity {
     } else if (keyCode == KeyEvent.KEYCODE_HOME) {
       //由于Home键为系统键，此处不能捕获，需要重写onAttachedToWindow()
       toMainUI();
-      //return false;
     }
     return super.onKeyDown(keyCode, event);
   }
