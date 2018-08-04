@@ -19,22 +19,32 @@ public class App extends Application{
   @Override
   public void onCreate() {
     super.onCreate();
-    Beta.canNotifyUserRestart = true;
-    Bugly.init(getApplicationContext(), "9311e75ffa", true);
-    Realm.init(this);
-    RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm").build();
-    Realm.setDefaultConfiguration(config);
+    initThirdService();
     context = this;
-    Fragmentation.builder()
-        // 显示悬浮球 ; 其他Mode:SHAKE: 摇一摇唤出   NONE：隐藏
-        .stackViewMode(Fragmentation.BUBBLE)
-        .debug(BuildConfig.DEBUG)
-             .install();
-    CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-        //.setDefaultFontPath("fonts/ARIAL_BLACK.TTF")
-        .setFontAttrId(R.attr.fontPath)
-        .build() );
+
   }
+
+  private void initThirdService() {
+    new Thread(new Runnable() {
+      @Override public void run() {
+        Beta.canNotifyUserRestart = true;
+        Bugly.init(getApplicationContext(), "9311e75ffa", true);
+        Realm.init(context);
+        RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm").build();
+        Realm.setDefaultConfiguration(config);
+        Fragmentation.builder()
+            // 显示悬浮球 ; 其他Mode:SHAKE: 摇一摇唤出   NONE：隐藏
+            .stackViewMode(Fragmentation.BUBBLE)
+            .debug(BuildConfig.DEBUG)
+            .install();
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+            //.setDefaultFontPath("fonts/ARIAL_BLACK.TTF")
+            .setFontAttrId(R.attr.fontPath)
+            .build() );
+      }
+    }).start();
+  }
+
   public static Context getAppContext() {
     return context;
   }

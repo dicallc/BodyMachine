@@ -47,15 +47,16 @@
     <activity android:name=".ui.MeasureActivity">
     </activity>
     <activity android:name=".ui.ScreeActivity">
+
+    </activity>
+    <activity android:name=".ui.MainActivity">
+    </activity>
+    <activity android:name=".ui.ScreenSaverActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-    </activity>
-    <activity android:name=".ui.MainActivity">
-    </activity>
-    <activity android:name=".ui.ScreenSaverActivity">
     </activity>
     <activity android:name=".TestActivity">
     </activity>

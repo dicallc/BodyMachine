@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
+import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 
@@ -25,7 +26,11 @@ public class MyGsyVideo extends StandardGSYVideoPlayer {
 
   @Override protected void init(Context context) {
     super.init(context);
-    setAlphaTo0f(mLockScreen, mBottomContainer, mBottomProgressBar);
+    //setAlphaTo0f(mLockScreen, mBottomContainer, mBottomProgressBar);
+  }
+
+  @Override public int getLayoutId() {
+    return R.layout.view_video_layout_standard;
   }
 
   @Override protected void onClickUiToggle() {

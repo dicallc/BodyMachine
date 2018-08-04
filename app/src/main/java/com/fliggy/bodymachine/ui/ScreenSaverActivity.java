@@ -7,7 +7,6 @@ import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fliggy.bodymachine.R;
@@ -56,9 +55,9 @@ public class ScreenSaverActivity extends AppCompatActivity {
     //Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/" + R.raw.screen);
     mVideoPlayer.setUp("file://"+mVideoPath, true, "");
     //增加title
-    mVideoPlayer.getTitleTextView().setVisibility(View.GONE);
+    //mVideoPlayer.getTitleTextView().setVisibility(View.GONE);
     //设置返回键
-    mVideoPlayer.getBackButton().setVisibility(View.GONE);
+    //mVideoPlayer.getBackButton().setVisibility(View.GONE);
 
     mVideoPlayer.setLooping(true);
     mVideoPlayer.startPlayLogic();
