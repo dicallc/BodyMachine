@@ -11,11 +11,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.ui.video.MyGsyVideo;
+import com.fliggy.bodymachine.ui.video.onConnectionFinishLinstener;
 import com.fliggy.bodymachine.utils.FileStorageHelper;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import java.io.File;
 
-public class ScreenSaverActivity extends AppCompatActivity {
+public class ScreenSaverActivity extends AppCompatActivity implements onConnectionFinishLinstener {
 
   protected static final String TAG = "ScreenSaverActivity";
   private static PowerManager.WakeLock mWakeLock;
@@ -58,7 +59,7 @@ public class ScreenSaverActivity extends AppCompatActivity {
     //mVideoPlayer.getTitleTextView().setVisibility(View.GONE);
     //设置返回键
     //mVideoPlayer.getBackButton().setVisibility(View.GONE);
-
+    mVideoPlayer.setOnClickLinstener(this);
     mVideoPlayer.setLooping(true);
     mVideoPlayer.startPlayLogic();
   }
@@ -83,6 +84,7 @@ public class ScreenSaverActivity extends AppCompatActivity {
   private void toMainUI() {
     Intent mIntent=new Intent(this,LoadUserActivity.class);
     startActivity(mIntent);
+    finish();
   }
 
   @Override public boolean onTouchEvent(MotionEvent event) {
@@ -94,5 +96,9 @@ public class ScreenSaverActivity extends AppCompatActivity {
   @Override public boolean onSearchRequested() {
     toMainUI();
     return super.onSearchRequested();
+  }
+
+  @Override public void onSuccess(int code, Object result) {
+    toMainUI();
   }
 }
