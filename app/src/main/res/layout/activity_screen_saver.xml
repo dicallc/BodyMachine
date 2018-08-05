@@ -5,6 +5,7 @@
     android:layout_height="match_parent" >
   <com.fliggy.bodymachine.ui.video.MyGsyVideo
       android:id="@+id/video_player"
+      android:background="@android:color/black"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
      />

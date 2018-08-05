@@ -14,6 +14,7 @@ import com.fliggy.bodymachine.ui.video.MyGsyVideo;
 import com.fliggy.bodymachine.ui.video.onConnectionFinishLinstener;
 import com.fliggy.bodymachine.utils.FileStorageHelper;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
+import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
 import java.io.File;
 
 public class ScreenSaverActivity extends AppCompatActivity implements onConnectionFinishLinstener {
@@ -53,6 +54,7 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
   }
 
   private void startVideo() {
+    GSYVideoType.setShowType(GSYVideoType.SCREEN_MATCH_FULL);
     //Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/" + R.raw.screen);
     mVideoPlayer.setUp("file://"+mVideoPath, true, "");
     //增加title
