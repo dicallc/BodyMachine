@@ -136,12 +136,18 @@ public class LoadUserActivity extends SupportActivity {
     } else {
       KLog.e("img_pre");
       if (position < 1) {
+        toShowScreenSaver();
         return;
       }
       position--;
       showHideFragment(mSupportFragments.get(position), mSupportFragments.get(position + 1));
     }
     switchFunction();
+  }
+
+  private void toShowScreenSaver() {
+    Intent mIntent=new Intent(this,ScreenSaverActivity.class);
+    startActivity(mIntent);
   }
 
   public void NextPre(boolean isNext, boolean isShowId) {

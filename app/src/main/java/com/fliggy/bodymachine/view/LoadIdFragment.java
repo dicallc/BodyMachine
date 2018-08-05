@@ -74,7 +74,7 @@ public class LoadIdFragment extends SwiperFragment {
 
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    mShowText.setText("请输入自己的姓名或者手机号");
+    mShowText.setText("请输入ID");
 
     mEtId.setOnEditorActionListener(mOnEditorActionListener);
   }

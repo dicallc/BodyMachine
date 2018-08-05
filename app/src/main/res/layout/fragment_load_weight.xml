@@ -28,9 +28,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:shadowColor="#80000000"
-        android:shadowDx="6"
-        android:shadowDy="6"
         fontPath="fonts/ARIBLK.TTF"
         android:shadowRadius="4"
         android:text="70"
@@ -49,7 +46,6 @@
         android:textColor="#ffffff"
         android:textSize="72sp"
         fontPath="fonts/ARIAL_BLACK.TTF"
-
         />
   </RelativeLayout>
   <include layout="@layout/include_lu_lr"/>
