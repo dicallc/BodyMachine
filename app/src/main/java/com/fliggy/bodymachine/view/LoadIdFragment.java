@@ -19,12 +19,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
-import com.fliggy.bodymachine.base.SwiperFragment;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.ToastUtils;
 
-public class LoadIdFragment extends SwiperFragment {
+public class LoadIdFragment extends BaseAudioFragment {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
   @BindView(R.id.et_id) EditText mEtId;
@@ -51,9 +50,8 @@ public class LoadIdFragment extends SwiperFragment {
   @Override public void onHiddenChanged(boolean hidden) {
     super.onHiddenChanged(hidden);
     if (!hidden){
-      //mEtId.setText("");
+      PlayAudio(R.raw.load_id);
       mEtId.setSelection(mEtId.getText().length());
-
     }
   }
 

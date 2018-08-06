@@ -15,7 +15,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
-import com.fliggy.bodymachine.base.SwiperFragment;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.fliggy.bodymachine.utils.Constant;
@@ -27,7 +26,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 测量体重
  */
-public class LoadWeightFragment extends SwiperFragment {
+public class LoadWeightFragment extends BaseAudioFragment {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
   @BindView(R.id.txt_weight) TextView mTxtWeight;
@@ -61,6 +60,7 @@ public class LoadWeightFragment extends SwiperFragment {
     }
     String str = Utils.loadMacheInfoCmd();
     SimpleSerialPortUtil.getInstance().sendCmds(str);
+    PlayAudio(R.raw.load_weight);
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,6 +108,8 @@ public class LoadWeightFragment extends SwiperFragment {
     super.onHiddenChanged(hidden);
     if(hidden){
       isLock=false;
+    }else{
+      PlayAudio(R.raw.load_weight);
     }
   }
 

@@ -1,6 +1,7 @@
 package com.fliggy.bodymachine.ui;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
@@ -12,6 +13,7 @@ import butterknife.ButterKnife;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.ui.video.MyGsyVideo;
 import com.fliggy.bodymachine.ui.video.onConnectionFinishLinstener;
+import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.FileStorageHelper;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
@@ -24,11 +26,14 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
   @BindView(R.id.video_player) MyGsyVideo mVideoPlayer;
   private String mVideoPath;
   private String mVideoFilePath;
+  private MediaPlayer mediaPlayer;
+  private boolean mIsPlayaudio;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_screen_saver);
     ButterKnife.bind(this);
+    InitLocal();
     PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
     mWakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP
         | PowerManager.SCREEN_DIM_WAKE_LOCK
@@ -39,9 +44,22 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
     if (!new File(mVideoPath).exists()){
       FileStorageHelper.copyFilesFromRaw(this,R.raw.screen,"screen.mp4", mVideoFilePath);
     }
-
-
   }
+
+  private void InitLocal() {
+    Intent mIntent = getIntent();
+    mIsPlayaudio = mIntent.getBooleanExtra(Constant.ISPLAYAUDIO,false);
+  }
+
+  protected void PlayAudio(int resid) {
+    try {
+      if (null == mediaPlayer) mediaPlayer = MediaPlayer.create(this, resid);//重新设置要播放的音频
+      mediaPlayer.start();//开始播放
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   @Override protected void onResume() {
     mWakeLock.acquire();
     startVideo();
@@ -50,6 +68,8 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
 
   @Override protected void onDestroy() {
     super.onDestroy();
+    if (null!=mediaPlayer)
+      mediaPlayer.release();
     GSYVideoManager.releaseAllVideos();
   }
 
@@ -64,6 +84,8 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
     mVideoPlayer.setOnClickLinstener(this);
     mVideoPlayer.setLooping(true);
     mVideoPlayer.startPlayLogic();
+    if (!mIsPlayaudio)
+    PlayAudio(R.raw.wecarefulebody);
   }
 
   @Override protected void onPause() {
