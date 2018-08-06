@@ -27,6 +27,7 @@ public class MeasureActivity extends AppCompatActivity {
   @BindView(R.id.videoView) VideoView mVideoView;
   private String mSex;
   private boolean mIsStand;
+  private int mStandUrl;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -64,28 +65,28 @@ public class MeasureActivity extends AppCompatActivity {
   };
 
   private void setupVideo(boolean isStand) {
-    int standUrl;
+    mIsStand=isStand;
     if (isStand){
       mVideoView.setOnCompletionListener(null);
       if (mSex.equals("1")) {
         //男
-        standUrl = R.raw.stand_man;
+        mStandUrl = R.raw.stand_man;
       } else {
-        standUrl = R.raw.stand_woman;
+        mStandUrl = R.raw.stand_woman;
       }
     }else{
       mVideoView.setOnCompletionListener(mOnVideoCompletionListener);
       if (mSex.equals("1")) {
         //男
-        standUrl = R.raw.meature_man;
+        mStandUrl = R.raw.meature_man;
       } else {
-        standUrl = R.raw.meature_woman;
+        mStandUrl = R.raw.meature_woman;
       }
     }
 
     mVideoView.setOnPreparedListener(mListener);
     try {
-      Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/" + standUrl);
+      Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/" + mStandUrl);
       mVideoView.setVideoURI(uri);
       mVideoView.requestFocus();
       mVideoView.start();
@@ -96,7 +97,11 @@ public class MeasureActivity extends AppCompatActivity {
 
   MediaPlayer.OnPreparedListener mListener = new MediaPlayer.OnPreparedListener() {
     @Override public void onPrepared(MediaPlayer mp) {
+      if (mIsStand)
       mp.setLooping(true);
+      else{
+        mp.setLooping(false);
+      }
     }
   };
 
