@@ -3,13 +3,15 @@ package com.fliggy.bodymachine.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.ScreenService;
+import com.fliggy.bodymachine.utils.ServiceUtils;
 import java.util.Date;
+import me.yokeyword.fragmentation.SupportActivity;
 
-public class ScreeActivity extends AppCompatActivity {
+public class ScreeActivity extends SupportActivity {
 
   private Handler mHandler01 = new Handler();
   private Handler mHandler02 = new Handler();
@@ -20,7 +22,7 @@ public class ScreeActivity extends AppCompatActivity {
   private long timePeriod;
 
   /* 静止超过N秒将自动进入屏保 */
-  private float mHoldStillTime = 10;
+  private float mHoldStillTime = 60;
   /*标识当前是否进入了屏保*/
   private boolean isRunScreenSaver;
 
@@ -31,9 +33,14 @@ public class ScreeActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Intent mService = new Intent(ScreeActivity.this, ScreenService.class);
-    mService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startService(mService);
+    boolean mServiceRunning =
+        ServiceUtils.isServiceRunning(this, "com.fliggy.bodymachine.utils.ScreenService");
+    if (!mServiceRunning){
+      Intent mService = new Intent(ScreeActivity.this, ScreenService.class);
+      mService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      startService(mService);
+    }
+
     /* 初始取得User可触碰屏幕的时间 */
     lastUpdateTime = new Date(System.currentTimeMillis());
   }
@@ -94,6 +101,7 @@ public class ScreeActivity extends AppCompatActivity {
   private void showScreenSaver(){
     Log.d("danxx", "显示屏保------>");
     Intent intent = new Intent(ScreeActivity.this, ScreenSaverActivity.class);
+    intent.putExtra(Constant.ISPLAYAUDIO,true);
     startActivity(intent);
 
   }

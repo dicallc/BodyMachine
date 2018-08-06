@@ -28,14 +28,13 @@ import com.fliggy.bodymachine.view.LoadResultFragment;
 import com.fliggy.bodymachine.view.LoadWeightFragment;
 import com.socks.library.KLog;
 import java.util.ArrayList;
-import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * 首页
  */
-public class LoadUserActivity extends SupportActivity {
+public class LoadUserActivity extends ScreeActivity {
 
   ArrayList<SupportFragment> mSupportFragments = new ArrayList<>();
   @BindView(R.id.txt_m) TextView mTxtM;
