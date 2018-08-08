@@ -151,8 +151,9 @@ public class PrintBaseFragment extends SwiperFragment {
     lbsYaotunBi = (CareboLbsWaistToHipView) mView.findViewById(R.id.lbs_yaotun_bi);
     String yaotunbi = Arith.mulString(mBodyInfoModel.getWaist(), mBodyInfoModel.getHipline());
     lbsZhifanLevel = (CareboLbsFatView) mView.findViewById(R.id.lbs_zhifan_level);
+    //腰臀比
     lbsYaotunBi.setData(
-        DataSource.getDeviderPercent(DataSource.getWaistToHip(), "0.78" + "", Color.RED));
+        DataSource.getDeviderPercent(DataSource.getWaistToHip(), mBodyInfoModel.getYaotunbi() + "", Color.RED));
     lbsZhifanLevel.setData(DataSource.getTiZhiDeviderPercent(DataSource.getVisceralFat(),
         mBodyInfoModel.getVisceral_fat() + "", getResources().getColor(R.color.s_black)));
 
@@ -453,7 +454,7 @@ public class PrintBaseFragment extends SwiperFragment {
     txtAge.setText("年龄\n" + mBodyInfoModel.getAge());
     txtMale = (TextView) mView.findViewById(R.id.txt_male);
     txtTestTime = (TextView) mView.findViewById(R.id.txt_test_time);
-    txtTestTime.setText("测试时间\n" + mBodyInfoModel.getTime());
+    txtTestTime.setText("测试时间\n" + Utils.getStrTime(mBodyInfoModel.getTime()));
   }
 
   private void InitBodyType() {

@@ -163,7 +163,7 @@ public class ExampleUnitTest {
     String waist = Utils.toResultHasPoint(mS, 170, 174);
     //臀围1
     String Hipline = Utils.toResultHasPoint(mS, 174, 178);
-    //胸围1
+    //腰臀比
     String Bust = Utils.toResultHasPoint(mS, 178, 182);
     //右上臂围
     String r_t_Hipline = Utils.toResultHasPoint(mS, 182, 186);

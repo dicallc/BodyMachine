@@ -66,6 +66,15 @@ public class BodyInfoModel extends RealmObject {
   public String l_t_Hipline;
   public String r_b_Hipline;
   public String l_b_Hipline;
+  public String yaotunbi;
+
+  public String getYaotunbi() {
+    return yaotunbi;
+  }
+
+  public void setYaotunbi(String mYaotunbi) {
+    yaotunbi = mYaotunbi;
+  }
 
   public String getUser_id() {
     return user_id;

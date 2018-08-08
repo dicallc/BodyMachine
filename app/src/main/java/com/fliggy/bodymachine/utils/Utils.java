@@ -298,8 +298,11 @@ public class Utils {
     mModel.skeletal_muscle = android.serialport.utils.Utils.toResultHasPoint(mS, 66, 70);
     //蛋白质
     mModel.protein = android.serialport.utils.Utils.toResultHasPoint(mS, 70, 74);
-    //体质指数
-    mModel.physique_num = "19.5";
+    //身体质量指数 BMI=体重（kg）/身高（m^2）
+    String shengaopingfang = BigDecimalUtils.mul(mHeight, mHeight);
+    String shengaopingfang_result = BigDecimalUtils.mul(shengaopingfang, "0.0001");
+    mModel.physique_num = BigDecimalUtils.div(mModel.getWeight(),
+        shengaopingfang_result)+"";
     //基础代谢
     mModel.basal_metabolism = android.serialport.utils.Utils.toResultHasPoint(mS, 78, 82);
     //体脂百分比
@@ -357,7 +360,7 @@ public class Utils {
     //胸围
     mModel.Bust = android.serialport.utils.Utils.toResultHasPoint(mS, 178, 182);
     //右上臂围
-    mModel.r_t_Hipline = android.serialport.utils.Utils.toResultHasPoint(mS, 182, 186);
+    mModel.yaotunbi = android.serialport.utils.Utils.toResultHasPoint(mS, 182, 186);
     //左上臂围
     mModel.l_t_Hipline = android.serialport.utils.Utils.toResultHasPoint(mS, 186, 190);
     //右大腿围
@@ -386,6 +389,14 @@ public class Utils {
       e.printStackTrace();
     }
     return times;
+  }
+  //时间戳转字符串
+  public static String getStrTime(String timeStamp){
+    String timeString = null;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm");
+    long  l = Long.valueOf(timeStamp);
+    timeString = sdf.format(new Date(l));//单位秒
+    return timeString;
   }
   public static String getDateToString(long milSecond, String pattern) {
     Date date = new Date(milSecond);
