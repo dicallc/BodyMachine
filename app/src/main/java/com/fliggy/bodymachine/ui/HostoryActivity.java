@@ -19,6 +19,7 @@ import com.fliggy.bodymachine.model.BodyInfoModel;
 import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.Utils;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -109,8 +110,8 @@ public class HostoryActivity extends AppCompatActivity {
         RealmResults<BodyInfoModel> mAll =
             realm.where(BodyInfoModel.class).equalTo("user_id", mMainId).findAll();
         List<BodyInfoModel> mBodyInfoModels = null;
-        if (mAll.size() > 10) {
-          mBodyInfoModels = mAll.subList(0, 10);
+        if (mAll.size() > 7) {
+          mBodyInfoModels = mAll.subList(0, 8);
         } else {
           mBodyInfoModels = mAll.subList(0,mAll.size());
         }
@@ -124,9 +125,9 @@ public class HostoryActivity extends AppCompatActivity {
         } else {
           mTxtTitleSex.setText("女");
         }
-        setWeightData(mChartWeight,mAll);
-        setGugejiData(mChatGugeji, mAll);
-        setTizhifang(mChatTizhifang, mAll);
+        setWeightData(mChartWeight,mBodyInfoModels);
+        setGugejiData(mChatGugeji, mBodyInfoModels);
+        setTizhifang(mChatTizhifang, mBodyInfoModels);
         List<String> mStrings = new ArrayList<>();
         for (int i = 0; i < mBodyInfoModels.size(); i++) {
           mStrings.add(Utils.getDateToString(Long.parseLong(mBodyInfoModels.get(i).getTime()),"yy-MM-dd HH:mm"));
@@ -152,7 +153,8 @@ public class HostoryActivity extends AppCompatActivity {
       mChart.notifyDataSetChanged();
     } else {
       set1 = new LineDataSet(yVals1, "DataSet 1");
-
+      XAxis xAxisPrice = mChart.getXAxis();
+      xAxisPrice.setLabelCount(7, true);
       set1.setAxisDependency(YAxis.AxisDependency.LEFT);
       set1.setColor(Color.parseColor("#0087ff"));
       set1.setCircleColor(Color.WHITE);
@@ -185,7 +187,8 @@ public class HostoryActivity extends AppCompatActivity {
       mChart.notifyDataSetChanged();
     } else {
       set1 = new LineDataSet(yVals1, "DataSet 1");
-
+      XAxis xAxisPrice = mChart.getXAxis();
+      xAxisPrice.setLabelCount(7, true);
       set1.setAxisDependency(YAxis.AxisDependency.LEFT);
       set1.setColor(Color.parseColor("#e84576"));
       set1.setCircleColor(Color.WHITE);
@@ -219,7 +222,8 @@ public class HostoryActivity extends AppCompatActivity {
       mChart.notifyDataSetChanged();
     } else {
       set1 = new LineDataSet(yVals1, "DataSet 1");
-
+      XAxis xAxisPrice = mChart.getXAxis();
+      xAxisPrice.setLabelCount(7, true);
       set1.setAxisDependency(YAxis.AxisDependency.LEFT);
       set1.setColor(Color.parseColor("#e8bd21"));
       set1.setCircleColor(Color.WHITE);

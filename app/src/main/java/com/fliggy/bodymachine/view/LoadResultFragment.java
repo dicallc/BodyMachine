@@ -103,7 +103,7 @@ public class LoadResultFragment extends PrintBaseFragment {
         //不看
         mTxtHistory.setVisibility(View.GONE);
       }
-      //TestFunction();
+      TestFunction();
     }
   }
 
@@ -187,12 +187,12 @@ public class LoadResultFragment extends PrintBaseFragment {
     } else {
       noRecord = true;
     }
-    mBodyInfoModel =
-        com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
-            content, noRecord);
-    //mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
-    //    content,
-    //    true);
+    //mBodyInfoModel =
+    //    com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
+    //        content, noRecord);
+    mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
+        content,
+        true);
 
     if (TextUtils.isEmpty(mBodyInfoModel.getId())) {
       ToastUtils.showShortToast("数据库初始化失败");

@@ -48,6 +48,7 @@ public class LoadMaleFragment extends SwiperFragment implements RadioGroup.OnChe
     if (!hidden){
       PlayAudio(R.raw.load_male);
     }
+    mRgSex.clearCheck();
     mRbGender.setChecked(false);
     mRbFemail.setChecked(false);
   }
