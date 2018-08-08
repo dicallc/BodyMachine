@@ -149,13 +149,13 @@ public class ExampleUnitTest {
     String LEFT_foot_fat_ratio = Utils.toResultHasPoint(mS, 142, 146);
     //躯干肌肉量
     String Trunk_muscle_volume = Utils.toResultHasPoint(mS, 146, 150);
-    //右手肌肉量
+    //右手肌肉量2.2
     String Right_hand_muscle_volume = Utils.toResultHasPoint(mS, 150, 154);
-    //左手肌肉
+    //左手肌肉2.2
     String LEFT_hand_muscle_volume = Utils.toResultHasPoint(mS, 154, 158);
-    //右脚肌肉
+    //右脚肌肉8.8
     String Right_root_muscle_volume = Utils.toResultHasPoint(mS, 158, 162);
-    //左脚肌肉
+    //左脚肌肉9.0
     String LEFT_root_muscle_volume = Utils.toResultHasPoint(mS, 162, 166);
     //颈围1
     String Neck_circumference = Utils.toResultHasPoint(mS, 166, 170);
@@ -271,33 +271,44 @@ public class ExampleUnitTest {
 
   @Test public void testFunction20() {
     //Weight(kg),Height(cm),BMI = Weight/((Height/100)^2)。
-    String height = "175";
-    String Weight = "80";
-    String sex = "0";
-    String Age = "25";
-    //BMI
-    String BMI= Float.parseFloat(Weight)/((Integer.parseInt(height)/100)^2)+"";
-    //9.0326 * 1/(Height/100)
-    String a1 = BigDecimalUtils.mul("9.0326", BigDecimalUtils.divString(height, "100", 4));
-
-    //0.37064 * 1/Age
-    String a2 = BigDecimalUtils.mul("0.37064", Age);
-    //106.4763 * 1/Weight
-    String a3 = BigDecimalUtils.mul("106.4763", Weight);
-    //0.1656* BMI
-    String a4 = BigDecimalUtils.divString("0.1656", BMI, 4);
-    //0.00040719 * Age
-    String a5 = BigDecimalUtils.divString("0.00040719", Age);
-    //0.051186 * Weight
-    String a6 = BigDecimalUtils.divString("0.051186", Weight);
-    String a7 = BigDecimalUtils.addString("-0.98666", a1);
-    String a8 = BigDecimalUtils.subString(a7, a2);
-    String a9 = BigDecimalUtils.subString(a8, a3);
-    String a10= BigDecimalUtils.subString(a9, a4);
-    String a11= BigDecimalUtils.subString(a10, a5);
-    String a12= BigDecimalUtils.subString(a11, a6);
-    System.out.print("a12"+a12);
-
+    //String height = "175";
+    //String Weight = "80";
+    //String sex = "0";
+    //String Age = "25";
+    ////BMI
+    //String BMI= Float.parseFloat(Weight)/((Integer.parseInt(height)/100)^2)+"";
+    ////9.0326 * 1/(Height/100)
+    //String a1 = BigDecimalUtils.mul("9.0326", BigDecimalUtils.divString(height, "100", 4));
+    //
+    ////0.37064 * 1/Age
+    //String a2 = BigDecimalUtils.mul("0.37064", Age);
+    ////106.4763 * 1/Weight
+    //String a3 = BigDecimalUtils.mul("106.4763", Weight);
+    ////0.1656* BMI
+    //String a4 = BigDecimalUtils.divString("0.1656", BMI, 4);
+    ////0.00040719 * Age
+    //String a5 = BigDecimalUtils.divString("0.00040719", Age);
+    ////0.051186 * Weight
+    //String a6 = BigDecimalUtils.divString("0.051186", Weight);
+    //String a7 = BigDecimalUtils.addString("-0.98666", a1);
+    //String a8 = BigDecimalUtils.subString(a7, a2);
+    //String a9 = BigDecimalUtils.subString(a8, a3);
+    //String a10= BigDecimalUtils.subString(a9, a4);
+    //String a11= BigDecimalUtils.subString(a10, a5);
+    //String a12= BigDecimalUtils.subString(a11, a6);
+    //System.out.print("a12"+a12);
+    double height = 1.7;
+    double Weight = 60;
+    //double sex = "0";
+    double Age = 28;
+    double BMI=Weight/(height*height);
+    double A1 = -0.98666 + 9.0326 * 1 / height
+        - 0.37064 / Age
+        - 106.4763 / Weight
+        - 0.1656 * BMI
+        - 0.00040719 * Age + 0.051186 * Weight;
+    System.out.print(A1);
+    //2.160488371052892
     //-0.98666 + 9.0326 * 1/(Height/100) - 0.37064 * 1/Age - 106.4763 * 1/Weight –0.1656* BMI - 0.00040719 * Age + 0.051186 * Weight
   }
 

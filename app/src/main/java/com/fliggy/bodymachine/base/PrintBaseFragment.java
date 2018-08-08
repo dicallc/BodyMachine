@@ -153,7 +153,7 @@ public class PrintBaseFragment extends SwiperFragment {
     lbsZhifanLevel = (CareboLbsFatView) mView.findViewById(R.id.lbs_zhifan_level);
     //腰臀比
     lbsYaotunBi.setData(
-        DataSource.getDeviderPercent(DataSource.getWaistToHip(), mBodyInfoModel.getYaotunbi() + "", Color.RED));
+        DataSource.getDeviderPercent(DataSource.getWaistToHip(), mBodyInfoModel.getYaotunbi() + "", getResources().getColor(R.color.black)));
     lbsZhifanLevel.setData(DataSource.getTiZhiDeviderPercent(DataSource.getVisceralFat(),
         mBodyInfoModel.getVisceral_fat() + "", getResources().getColor(R.color.s_black)));
 
