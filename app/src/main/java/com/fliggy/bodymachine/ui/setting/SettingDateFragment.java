@@ -183,7 +183,14 @@ public class SettingDateFragment extends SupportFragment {
     super.onDestroyView();
     unbinder.unbind();
   }
-
+  public  int getCurrentMonthLastDay()
+  {
+    Calendar a = Calendar.getInstance();
+    a.set(Calendar.DATE, 1);//把日期设置为当月第一天
+    a.roll(Calendar.DATE, -1);//日期回滚一天，也就是最后一天
+    int maxDate = a.get(Calendar.DATE);
+    return maxDate;
+  }
   @OnClick({
       R.id.btn_year_add, R.id.btn_year_reduce, R.id.btn_month_add, R.id.btn_month_reduce,
       R.id.btn_day_add, R.id.btn_day_ruduce, R.id.btn_hour_add, R.id.btn_hour_reduce,
@@ -202,42 +209,49 @@ public class SettingDateFragment extends SupportFragment {
         testDate(mYear,Calendar.YEAR);
         break;
       case R.id.btn_month_add:
+        if (mMonth==12)return;
         mMonth+=1;
         mTxtMonth.setText(mMonth+"");
         testDate(mMonth,Calendar.MONTH);
         break;
       case R.id.btn_month_reduce:
+        if (mMonth==1)return;
         mMonth-=1;
-        if (mMonth<0)mMonth=12;
         mTxtMonth.setText(mMonth+"");
         testDate(mMonth,Calendar.MONTH);
         break;
       case R.id.btn_day_add:
+        if (getCurrentMonthLastDay()==mDay)return;
         mDay+=1;
         mTxtDay.setText(mDay+"");
         testDate(mDay,Calendar.DAY_OF_MONTH);
         break;
       case R.id.btn_day_ruduce:
+        if (mDay==1)return;
         mDay-=1;
         mTxtDay.setText(mDay+"");
         testDate(mDay,Calendar.DAY_OF_MONTH);
         break;
       case R.id.btn_hour_add:
+        if (mHour==59)return;
         mHour-=1;
         mTxtHour.setText(mHour+"");
         testDate(mHour,Calendar.HOUR);
         break;
       case R.id.btn_hour_reduce:
+        if (mHour==1)return;
         mHour-=1;
         mTxtHour.setText(mHour+"");
         testDate(mHour,Calendar.HOUR);
         break;
       case R.id.btn_minute_add:
+        if (mMinute==59)return;
         mMinute+=1;
         mTxtMinute.setText(mMinute+"");
         testDate(mMinute,Calendar.MINUTE);
         break;
       case R.id.btn_minute_reduce:
+        if (mMinute==1)return;
         mMinute-=1;
         mTxtMinute.setText(mMinute+"");
         testDate(mMinute,Calendar.MINUTE);
