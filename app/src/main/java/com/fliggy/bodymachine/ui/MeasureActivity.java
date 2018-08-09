@@ -28,6 +28,7 @@ public class MeasureActivity extends AppCompatActivity {
   private String mSex;
   private boolean mIsStand;
   private int mStandUrl;
+  private MediaPlayer mMeasureMediaPlayer;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -35,38 +36,92 @@ public class MeasureActivity extends AppCompatActivity {
     ButterKnife.bind(this);
     EventBus.getDefault().register(this);
     mSex = getIntent().getStringExtra("INTENT_SEX");
-    PlayAudio(R.raw.standup);
-
+    PlayStandAudio(R.raw.standup);
   }
 
   private MediaPlayer mediaPlayer;
 
-  protected void PlayAudio(int resid) {
+  /**
+   * 播放站立语音 请安正确方式站立 握紧电极
+   */
+  protected void PlayStandAudio(int resid) {
     try {
-      if (null == mediaPlayer) mediaPlayer = MediaPlayer.create(this, resid);
-
-      mediaPlayer.setOnCompletionListener(mOnCompletionListener);
-      mediaPlayer.setOnPreparedListener(mOnMp3PreparedListener);
+      if (null == mediaPlayer) {
+        mediaPlayer = MediaPlayer.create(this, resid);
+      }
+      mediaPlayer.setOnCompletionListener(mOnStandCompletionListener);
+      mediaPlayer.setOnPreparedListener(mOnStandMp3PreparedListener);
       mediaPlayer.start();//开始播放
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
-  MediaPlayer.OnCompletionListener mOnCompletionListener=new MediaPlayer.OnCompletionListener() {
-    @Override public void onCompletion(MediaPlayer mp) {
+
+  protected void PlayMeasureAudio(int resid) {
+    try {
+      if (null == mMeasureMediaPlayer) {
+        mMeasureMediaPlayer = MediaPlayer.create(this, resid);
+      }
+      mediaPlayer.setOnCompletionListener(mOnMeasureCompletionListener);
+      mMeasureMediaPlayer.setOnPreparedListener(mOnMeasureMp3PreparedListener);
+      mMeasureMediaPlayer.start();//开始播放
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  //protected void PlayMeasureFinishAudio(int resid) {
+  //  try {
+  //    if (null == mMeasureMediaPlayer) {
+  //      mMeasureMediaPlayer = MediaPlayer.create(this, resid);
+  //    } else {
+  //      Uri setDataSourceuri = Uri.parse("android.resource://com.android.sim/" + resid);
+  //      mMeasureMediaPlayer.setDataSource(this, setDataSourceuri);
+  //    }
+  //    mediaPlayer.setOnCompletionListener(mOnMeasureFinishtionListener);
+  //    mMeasureMediaPlayer.start();//开始播放
+  //  } catch (Exception e) {
+  //    e.printStackTrace();
+  //  }
+  //}
+
+  MediaPlayer.OnCompletionListener mOnStandCompletionListener =
+      new MediaPlayer.OnCompletionListener() {
+        @Override public void onCompletion(MediaPlayer mp) {
+          //播放结束后多少秒进行测量视频
+          mVideoView.postDelayed(startMeasure, 10000);
+        }
+      };
+  MediaPlayer.OnCompletionListener mOnMeasureCompletionListener =
+      new MediaPlayer.OnCompletionListener() {
+        @Override public void onCompletion(MediaPlayer mp) {
+          //播放结束后多少秒进行测量视频
+          EventBus.getDefault().post(new SerialEvent(SerialEvent.PLAY_MEASURE_FINISH,""));
+          finish();
+        }
+      };
+  Runnable startMeasure = new Runnable() {
+    @Override public void run() {
       stopPlaybackVideo();
     }
   };
 
-  MediaPlayer.OnPreparedListener mOnMp3PreparedListener= new MediaPlayer.OnPreparedListener() {
-    @Override public void onPrepared(MediaPlayer mp) {
-      setupVideo(true);
-    }
-  };
+  MediaPlayer.OnPreparedListener mOnStandMp3PreparedListener =
+      new MediaPlayer.OnPreparedListener() {
+        @Override public void onPrepared(MediaPlayer mp) {
+          setupVideo(true);
+        }
+      };
+  MediaPlayer.OnPreparedListener mOnMeasureMp3PreparedListener =
+      new MediaPlayer.OnPreparedListener() {
+        @Override public void onPrepared(MediaPlayer mp) {
+          setupVideo(false);
+        }
+      };
 
   private void setupVideo(boolean isStand) {
-    mIsStand=isStand;
-    if (isStand){
+    mIsStand = isStand;
+    if (isStand) {
       mVideoView.setOnCompletionListener(null);
       if (mSex.equals("1")) {
         //男
@@ -74,7 +129,7 @@ public class MeasureActivity extends AppCompatActivity {
       } else {
         mStandUrl = R.raw.stand_woman;
       }
-    }else{
+    } else {
       mVideoView.setOnCompletionListener(mOnVideoCompletionListener);
       if (mSex.equals("1")) {
         //男
@@ -97,24 +152,27 @@ public class MeasureActivity extends AppCompatActivity {
 
   MediaPlayer.OnPreparedListener mListener = new MediaPlayer.OnPreparedListener() {
     @Override public void onPrepared(MediaPlayer mp) {
-      if (mIsStand)
-      mp.setLooping(true);
-      else{
+      if (mIsStand) {
+        mp.setLooping(true);
+      } else {
         mp.setLooping(false);
       }
     }
   };
 
-  MediaPlayer.OnCompletionListener mOnVideoCompletionListener=new MediaPlayer.OnCompletionListener() {
-    @Override public void onCompletion(MediaPlayer mp) {
-      finish();
-    }
-  };
+  MediaPlayer.OnCompletionListener mOnVideoCompletionListener =
+      new MediaPlayer.OnCompletionListener() {
+        @Override public void onCompletion(MediaPlayer mp) {
+          finish();
+        }
+      };
 
   private void releaseMedea() {
     mVideoView.stopPlayback();
     mediaPlayer.stop();
     mediaPlayer.release();
+    mMeasureMediaPlayer.stop();
+    mMeasureMediaPlayer.release();
   }
 
   private void startMesure() {
@@ -145,7 +203,7 @@ public class MeasureActivity extends AppCompatActivity {
   private void stopPlaybackVideo() {
     try {
       startMesure();
-      setupVideo(false);
+      PlayMeasureAudio(R.raw.metureup);
     } catch (Exception e) {
       e.printStackTrace();
     }

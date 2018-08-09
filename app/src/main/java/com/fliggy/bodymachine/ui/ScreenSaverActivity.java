@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.video.MyGsyVideo;
 import com.fliggy.bodymachine.ui.video.onConnectionFinishLinstener;
 import com.fliggy.bodymachine.utils.Constant;
@@ -18,6 +19,9 @@ import com.fliggy.bodymachine.utils.FileStorageHelper;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
 import java.io.File;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class ScreenSaverActivity extends AppCompatActivity implements onConnectionFinishLinstener {
 
@@ -33,6 +37,7 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_screen_saver);
     ButterKnife.bind(this);
+    EventBus.getDefault().register(this);
     InitLocal();
     PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
     mWakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP
@@ -71,6 +76,7 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
     if (null!=mediaPlayer)
       mediaPlayer.release();
     GSYVideoManager.releaseAllVideos();
+    EventBus.getDefault().unregister(this);
   }
 
   private void startVideo() {
@@ -120,6 +126,14 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
   @Override public boolean onSearchRequested() {
     toMainUI();
     return super.onSearchRequested();
+  }
+
+  @Subscribe(threadMode = ThreadMode.MAIN) public void Event(SerialEvent messageEvent) {
+    switch (messageEvent.type) {
+      case SerialEvent.WEIGHT:
+        finish();
+        break;
+    }
   }
 
   @Override public void onSuccess(int code, Object result) {

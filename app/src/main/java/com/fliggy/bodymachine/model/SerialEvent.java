@@ -42,8 +42,9 @@ public class SerialEvent {
    * 获取机器信息
    */
   public static final int MACHE_INFO = 8;
+  public static final int PLAY_MEASURE_FINISH = 9;
 
-  @IntDef({ WEIGHT, HEIGHT, AGE ,SEX,LOAD_USER_DATA_ERRO,LOAD_USER_DATA,WEIGHT_LOCK,MACHE_INFO})
+  @IntDef({ WEIGHT, HEIGHT, AGE ,SEX,LOAD_USER_DATA_ERRO,LOAD_USER_DATA,WEIGHT_LOCK,MACHE_INFO,PLAY_MEASURE_FINISH})
   @Retention(RetentionPolicy.SOURCE)
   public @interface MessageType {
   }

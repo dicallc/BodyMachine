@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -62,6 +63,7 @@ public class LoadUserActivity extends SupportActivity {
   private float x1;
   private float y1;
   private LoadIdFragment mLoadIdFragment;
+  private MediaPlayer mediaPlayer;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -244,10 +246,17 @@ public class LoadUserActivity extends SupportActivity {
 
       NextPre(false);
     } else if (requestCode == result_ui_code) {
-
+      PlayAudio(R.raw.metureup_finish);
     }
   }
-
+  protected void PlayAudio(int resid) {
+    try {
+      if (null == mediaPlayer) mediaPlayer = MediaPlayer.create(this, resid);//重新设置要播放的音频
+      mediaPlayer.start();//开始播放
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
   // 保存MyTouchListener接口的列表
   private ArrayList<MyOnTouchListener> myTouchListeners = new ArrayList<MyOnTouchListener>();
 

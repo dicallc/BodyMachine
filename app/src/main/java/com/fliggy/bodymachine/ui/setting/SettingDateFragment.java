@@ -208,6 +208,7 @@ public class SettingDateFragment extends SupportFragment {
         break;
       case R.id.btn_month_reduce:
         mMonth-=1;
+        if (mMonth<0)mMonth=12;
         mTxtMonth.setText(mMonth+"");
         testDate(mMonth,Calendar.MONTH);
         break;

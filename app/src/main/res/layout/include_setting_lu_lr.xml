@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="122dp"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    android:orientation="horizontal"
+    android:paddingLeft="65dp"
+    android:paddingRight="65dp"
+    >
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_centerInParent="true"
+      android:layout_height="42dp"
+      android:src="@mipmap/ly_bg_line"
+      />
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+    <ImageView
+        android:id="@+id/img_pre"
+        android:layout_width="122dp"
+        android:scaleType="center"
+        android:layout_gravity="left"
+        android:layout_height="122dp"
+        android:src="@drawable/ic_back"
+        />
+
+    <ImageView
+        android:id="@+id/img_next"
+        android:layout_width="122dp"
+        android:layout_height="122dp"
+        android:layout_gravity="right"
+        android:src="@mipmap/ic_setting_yes"
+        />
+  </FrameLayout>
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      >
+    <TextView
+        android:id="@+id/show_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:text="正在测量体重"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        />
+  </FrameLayout>
+
+</RelativeLayout>
