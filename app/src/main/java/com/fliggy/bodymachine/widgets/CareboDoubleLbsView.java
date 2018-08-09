@@ -36,6 +36,8 @@ public class CareboDoubleLbsView extends View {
   private float devider_percent;
   private int paint_color;
   private Paint mRectPaint2;
+  private float devider_Two_limit_num;
+  private float devider_Two_percent;
 
   public CareboDoubleLbsView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -111,7 +113,9 @@ public class CareboDoubleLbsView extends View {
     // 设置区间文字
     this.arrDeviderText = mWeightDevider.devider_text;
     this.devider_limit_num = mWeightDevider.devider_limit_num;
+    this.devider_Two_limit_num = mWeightDevider.devider_Two_limit_num;
     this.devider_percent=mWeightDevider.devider_percent;
+    this.devider_Two_percent=mWeightDevider.devider_Two_percent;
     this.paint_color=mWeightDevider.paint_color;
     invalidate();
   }
@@ -161,10 +165,10 @@ public class CareboDoubleLbsView extends View {
           canvas.drawRect(width_x_start, d_rect_start_h, width_x_end*devider_percent, d_rect_end_h,
               mRectPaint);
         canvas.drawText(devider_limit_num+"", width_x_end*devider_percent+10, d_rect_end_h, mTextBigPaint);
-
-          canvas.drawRect(width_x_start, d_rect_start_h_two, width_x_end*devider_percent, d_rect_end_h_two,
+        //第二根
+          canvas.drawRect(width_x_start, d_rect_start_h_two, width_x_end*devider_Two_percent, d_rect_end_h_two,
               mRectPaint2);
-        canvas.drawText(devider_limit_num+"", width_x_end*devider_percent+10, d_rect_end_h_two, mTextBigPaint);
+        canvas.drawText(devider_Two_limit_num+"", width_x_end*devider_Two_percent+10, d_rect_end_h_two, mTextBigPaint);
       }
 
     }

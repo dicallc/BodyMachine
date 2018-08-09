@@ -184,6 +184,59 @@ public class DataSource {
     mDeviderModel.devider_percent = a5;
     return mDeviderModel;
   }
+
+  /**
+   * 注意传进来就是百分比
+   * @param mWeightData
+   * @param num
+   * @param num_two
+   * @param color
+   * @return
+   */
+  @NonNull public  static DeviderModel getQuKuaiDeviderPercent(ArrayList<String> mWeightData, String num,String num_two,int color) {
+
+    float a5 = getPecent(mWeightData, num);
+    float a6 = getPecent(mWeightData, num_two);
+
+    DeviderModel mDeviderModel = new DeviderModel();
+    mDeviderModel.devider_limit_num = Float.parseFloat(num);
+    mDeviderModel.devider_limit_num = Float.parseFloat(num_two);
+    mDeviderModel.devider_text = mWeightData;
+    mDeviderModel.paint_color = color;
+    mDeviderModel.devider_percent = a5;
+    mDeviderModel.devider_Two_percent = a6;
+    return mDeviderModel;
+  }
+
+  private static float getPecent(ArrayList<String> mWeightData, String num) {
+    int low=0;
+    for (int i = 0; i <mWeightData.size() ; i++) {
+      if (Float.parseFloat(mWeightData.get(i))>Float.parseFloat(num)){
+        if (i==0)low=0;
+        else{
+          low=i-1;
+        }
+        break;
+      }
+    }
+    String low_data = mWeightData.get(low);
+    String mid_data = mWeightData.get(low+1);
+    float a2 = BigDecimalUtils.sub(num, low_data);
+    float a5=0;
+    if (a2<0){
+      //如果A2小于0说明值比第一个还要小
+      a5=0.02f;
+    }else{
+      float a1 = BigDecimalUtils.sub(mid_data, low_data);
+
+      float a3 = a2 / a1;
+      float mRound = BigDecimalUtils.roundF(a3, 2);
+      float a4 = low + mRound;
+       a5 = BigDecimalUtils.mul(a4, 0.1f);
+    }
+    return a5;
+  }
+
   @NonNull public  static DeviderModel getSkeletalMuscleDataDeviderPercent(String num,String high,String low,int color) {
 
     DeviderModel mDeviderModel = new DeviderModel();
@@ -465,6 +518,25 @@ public class DataSource {
     list_text.add("0.75");
     list_text.add("0.95");
     list_text.add("1.65");
+    return list_text;
+  }
+
+  /**
+   * 获取区段数据
+   * @return
+   */
+  public  static ArrayList<String> getqukuai(){
+    ArrayList<String> list_text=new ArrayList<>();
+    list_text.add("40");
+    list_text.add("60");
+    list_text.add("80");
+    list_text.add("100");
+    list_text.add("120");
+    list_text.add("140");
+    list_text.add("160");
+    list_text.add("180");
+    list_text.add("200");
+    list_text.add("220");
     return list_text;
   }
 }

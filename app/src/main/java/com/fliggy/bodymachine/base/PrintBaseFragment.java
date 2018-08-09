@@ -149,6 +149,10 @@ public class PrintBaseFragment extends SwiperFragment {
     dlbsRightBottom = (CareboDoubleLbsView) mView.findViewById(R.id.dlbs_right_bottom);
     dlbsLeftBottom = (CareboDoubleLbsView) mView.findViewById(R.id.dlbs_left_bottom);
     lbsYaotunBi = (CareboLbsWaistToHipView) mView.findViewById(R.id.lbs_yaotun_bi);
+    //区段分析
+    initqukuaifenxi(mBodyInfoModel);
+    //dlbsRightTop.setData();
+
     String yaotunbi = Arith.mulString(mBodyInfoModel.getWaist(), mBodyInfoModel.getHipline());
     lbsZhifanLevel = (CareboLbsFatView) mView.findViewById(R.id.lbs_zhifan_level);
     //腰臀比
@@ -232,6 +236,27 @@ public class PrintBaseFragment extends SwiperFragment {
     initHostoryData(width, height);
 
 
+  }
+
+  private void initqukuaifenxi(BodyInfoModel mBodyInfoModel) {
+    if (Integer.parseInt(mBodyInfoModel.getSex()) == 1) {
+      //男
+
+    }else{
+      double height = Double.parseDouble(mBodyInfoModel.getHeight());
+      double Weight = Double.parseDouble(mBodyInfoModel.getWeight());
+      //double sex = "0";
+      double Age = Double.parseDouble(mBodyInfoModel.getAge());
+      double BMI=Weight/(height*height);
+      double A1 = -0.98666 + 9.0326 * 1 / height
+          - 0.37064 / Age
+          - 106.4763 / Weight
+          - 0.1656 * BMI
+          - 0.00040719 * Age + 0.051186 * Weight;
+      String mMul = BigDecimalUtils.mul(mBodyInfoModel.getRight_hand_muscle_volume(), A1 + "");
+      dlbsRightTop.setData(DataSource.getQuKuaiDeviderPercent(DataSource.getqukuai(),mBodyInfoModel.getRight_hand_fat_rate(),mMul,
+          getResources().getColor(R.color.black)));
+    }
   }
 
   private void toShare() {
