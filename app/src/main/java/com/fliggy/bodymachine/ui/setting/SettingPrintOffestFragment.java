@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
+import com.fliggy.bodymachine.utils.BigDecimalUtils;
 import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.utils_module.utils.SPUtils;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -83,20 +84,19 @@ public class SettingPrintOffestFragment extends SupportFragment {
     SettingActivity mSettingActivity= (SettingActivity) getActivity();
     switch (view.getId()) {
       case R.id.btn_height_add:
-        mHeightFloat+=0.1f;
+        mHeightFloat= BigDecimalUtils.addFloat(mHeightFloat,0.1f,1);
         mTxtHeight.setText(mHeightFloat +"");
         break;
       case R.id.btn_height_reduce:
-        mHeightFloat-=0.1f;
+        mHeightFloat= (float) BigDecimalUtils.sub(mHeightFloat,0.1f,1);
         mTxtHeight.setText(mHeightFloat +"");
-
         break;
       case R.id.btn_width_add:
-        mWidthFloat+=0.1f;
+        mWidthFloat= BigDecimalUtils.addFloat(mWidthFloat,0.1f,1);
         mTxtWidth.setText(mWidthFloat +"");
         break;
       case R.id.btn_width_reduce:
-        mWidthFloat-=0.1f;
+        mWidthFloat= (float) BigDecimalUtils.sub(mWidthFloat,0.1f,1);
         mTxtWidth.setText(mWidthFloat +"");
         break;
       case R.id.img_pre:

@@ -23,6 +23,17 @@ public class BigDecimalUtils {
     BigDecimal b2 = new BigDecimal(v2);
     return b1.add(b2).floatValue();
   }
+  public static float addFloat(float v1, float v2) {
+    BigDecimal b1 = new BigDecimal(v1);
+    BigDecimal b2 = new BigDecimal(v2);
+    return b1.add(b2).floatValue();
+  }
+  public static float addFloat(float v1, float v2,int wei) {
+    BigDecimal b1 = new BigDecimal(v1);
+    BigDecimal b2 = new BigDecimal(v2);
+    float mRound = round(b1.add(b2).floatValue(), wei);
+    return mRound;
+  }
   /**
    * 提供精确的减法运算。
    * @param v1 被减数
@@ -48,6 +59,12 @@ public class BigDecimalUtils {
   }
 
   public static double sub(double v1, double v2, int wei) {
+    BigDecimal b1 = new BigDecimal(v1);
+    BigDecimal b2 = new BigDecimal(v2);
+    double mValue = b1.subtract(b2).doubleValue();
+    return round(mValue, wei);
+  }
+  public static double sub(float v1, float v2, int wei) {
     BigDecimal b1 = new BigDecimal(v1);
     BigDecimal b2 = new BigDecimal(v2);
     double mValue = b1.subtract(b2).doubleValue();
