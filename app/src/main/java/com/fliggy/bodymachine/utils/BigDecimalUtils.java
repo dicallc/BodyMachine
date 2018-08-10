@@ -56,6 +56,7 @@ public class BigDecimalUtils {
     return b1.subtract(b2).toString();
   }
 
+
   public static double sub(String v1, String v2, int wei) {
     BigDecimal b1 = new BigDecimal(v1);
     BigDecimal b2 = new BigDecimal(v2);
@@ -189,5 +190,11 @@ public class BigDecimalUtils {
     BigDecimal b1 = new BigDecimal(v1);
     BigDecimal b2 = new BigDecimal(v2);
     return b1.multiply(b2).floatValue();
+  }
+  public static String mulString(String v1,String v2){
+    BigDecimal b1 = new BigDecimal(v1);
+    BigDecimal b2 = new BigDecimal(v2);
+
+    return  roundF(b1.multiply(b2).floatValue(),1)+"";
   }
 }

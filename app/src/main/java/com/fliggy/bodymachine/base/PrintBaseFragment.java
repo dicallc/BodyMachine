@@ -614,7 +614,7 @@ public class PrintBaseFragment extends SwiperFragment {
 
 
       txtAllBodyWaterTest.setText(
-          water_num + "\n" + Arith.mul(mBodyInfoModel.getWeight(),
+          BigDecimalUtils.round(water_num,0) + "\n" + Arith.mul(mBodyInfoModel.getWeight(),
               "0.45") + "-" + Arith.mul(mBodyInfoModel.getWeight(), "0.6"));
       //肌肉量
       if (Integer.parseInt(mBodyInfoModel.getHeight()) < 160) {
@@ -673,7 +673,7 @@ public class PrintBaseFragment extends SwiperFragment {
     txtQuzhitizhong = (TextView) mView.findViewById(R.id.txt_quzhitizhong);
     lbsTizhong = (CareboLbsBaseView) mView.findViewById(R.id.lbs_tizhong);
     lbsTizhifang = (CareboLbsView) mView.findViewById(R.id.lbs_tizhifang);
-    String tizhifan = Arith.mulString(mBodyInfoModel.getWeight(),
+    String tizhifan = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(),
         Arith.mulString(mBodyInfoModel.getBody_fat_percentage(), "0.01"));
     if (mBodyInfoModel.getSex().equals("1")) {
       //男 lbs 体重----------
@@ -685,19 +685,19 @@ public class PrintBaseFragment extends SwiperFragment {
       String tizhifan_high = "";
       String tizhifan_mid = "";
       if (mD_age <= 39) {
-        tizhifan_low = Arith.mulString(mBodyInfoModel.getWeight(), "0.27");
-        tizhifan_high = Arith.mulString(mBodyInfoModel.getWeight(), "0.34");
-        tizhifan_mid = Arith.mulString(mBodyInfoModel.getWeight(), "0.305");
+        tizhifan_low = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.27");
+        tizhifan_high = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.34");
+        tizhifan_mid = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.305");
         txtTizhifangtizhong.setText(getTextOfThreshold(tizhifan, tizhifan_low, tizhifan_high));
       } else if (mD_age <= 59) {
-        tizhifan_low = Arith.mulString(mBodyInfoModel.getWeight(), "0.28");
-        tizhifan_high = Arith.mulString(mBodyInfoModel.getWeight(), "0.35");
-        tizhifan_mid = Arith.mulString(mBodyInfoModel.getWeight(), "0.315");
+        tizhifan_low = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.28");
+        tizhifan_high = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.35");
+        tizhifan_mid = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.315");
         txtTizhifangtizhong.setText(getTextOfThreshold(tizhifan, tizhifan_low, tizhifan_high));
       } else {
-        tizhifan_low = Arith.mulString(mBodyInfoModel.getWeight(), "0.29");
-        tizhifan_high = Arith.mulString(mBodyInfoModel.getWeight(), "0.36");
-        tizhifan_mid = Arith.mulString(mBodyInfoModel.getWeight(), "0.325");
+        tizhifan_low = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.29");
+        tizhifan_high = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.36");
+        tizhifan_mid = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.325");
         txtTizhifangtizhong.setText(getTextOfThreshold(tizhifan, tizhifan_low, tizhifan_high));
       }
       //lbs 脂肪重
@@ -755,9 +755,9 @@ public class PrintBaseFragment extends SwiperFragment {
     txtDanbaizhiTest = (TextView) mView.findViewById(R.id.txt_danbaizhi_test);
     String mToPercent = Arith.toPercent(mBodyInfoModel.getProtein());
     txtDanbaizhiTest.setText(
-        getTextOfThreshold(Arith.mulString(mBodyInfoModel.getWeight(), mToPercent),
-            Arith.mulString(mBodyInfoModel.getWeight(), "0.16"),
-            Arith.mulString(mBodyInfoModel.getWeight(), "0.20")));
+        getTextOfThreshold(BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), mToPercent),
+            BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.16"),
+            BigDecimalUtils.mulString(mBodyInfoModel.getWeight(), "0.20")));
   }
 
   protected void layoutView(View v, int width, int height) {

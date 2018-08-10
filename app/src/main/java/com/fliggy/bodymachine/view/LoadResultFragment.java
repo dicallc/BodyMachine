@@ -132,10 +132,10 @@ public class LoadResultFragment extends PrintBaseFragment {
     DisplayMetrics outMetrics = new DisplayMetrics();
     manager.getDefaultDisplay().getMetrics(outMetrics);
     int width = outMetrics.widthPixels;
-    double f_width = width * 0.7;
+    double f_width = width * 0.5;
     ViewGroup.MarginLayoutParams margin = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(margin);
-    int mMul = Arith.mul(width * 0.7 + "", bili + "");
+    int mMul = Arith.mul(f_width + "", bili + "");
     layoutParams.width = mMul;
     layoutParams.height = LinearLayout.LayoutParams.MATCH_PARENT;
     view.setLayoutParams(layoutParams);
@@ -244,7 +244,28 @@ public class LoadResultFragment extends PrintBaseFragment {
     setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.getBody_fat_percentage(), fat_stander));
     //体脂肪
     mTxtJirou.setText(mBodyInfoModel.getMuscle_weight() + "kg");
-    setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), 142.5));
+    int mHeight = Integer.parseInt(mBodyInfoModel.getHeight());
+    float jirou_stander=0;
+    if (mBodyInfoModel.getSex().equals("1")){
+      if (mHeight<160){
+        jirou_stander=42.5f;
+      }else if(mHeight<170){
+        jirou_stander=48.2f;
+      }else{
+        jirou_stander=54.4f;
+      }
+    }else{
+      if (mHeight<150){
+        jirou_stander=28.3f;
+      }else if(mHeight<170){
+        jirou_stander=37.5f;
+      }else{
+        jirou_stander=39.5f;
+      }
+    }
+    //肌肉量
+    KLog.e("肌肉量: "+mBodyInfoModel.getMuscle_weight()+" 平均量"+jirou_stander);
+    setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), jirou_stander));
     mTxtFeirou.setText(mBodyInfoModel.getFat_degree());
     setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.getFat_degree(), 40));
     setViewFullScreen(mBarFeirou, 0.9f);
