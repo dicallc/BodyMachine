@@ -239,24 +239,78 @@ public class PrintBaseFragment extends SwiperFragment {
   }
 
   private void initqukuaifenxi(BodyInfoModel mBodyInfoModel) {
+    double height = Double.parseDouble(mBodyInfoModel.getHeight());
+    double Weight = Double.parseDouble(mBodyInfoModel.getWeight());
+    double Age = Double.parseDouble(mBodyInfoModel.getAge());
+    double BMI=Weight/(height*height);
+    //上肢手
+    double A1;
+    //下肢脚
+    double A2;
+    //肢体
+    double A3;
     if (Integer.parseInt(mBodyInfoModel.getSex()) == 1) {
-      //男
+       A1 = -0.017042 + 11.5916 * 1 / height
+          - 1.3254 / Age
+          - 176.4793 / Weight
+          - 0.2071 * BMI
+          - 0.0013458 * Age + 0.055659 * Weight;
+       A2 = -0.096857 + 32.1057 * 1 / height
+          - 3.7095 / Age
+          - 490.2476 / Weight
+          - 0.5738 * BMI
+          - 0.0036574 * Age + 0.15427 * Weight;
+      //-8.5191 + 116.0064 * 1/(Height/100) - 5.5369 * 1/Age - 1583.0027 * 1/Weight –
+      //1.9627 * BMI - 0.0062644 * Age + 0.50888 * Weight
+       A3 = -8.5191 + 116.0064 * 1 / height
+          - 5.5369 / Age
+          - 1583.0027 / Weight
+          - 1.9627 * BMI
+          - 0.0062644 * Age + 0.50888 * Weight;
 
     }else{
-      double height = Double.parseDouble(mBodyInfoModel.getHeight());
-      double Weight = Double.parseDouble(mBodyInfoModel.getWeight());
-      //double sex = "0";
-      double Age = Double.parseDouble(mBodyInfoModel.getAge());
-      double BMI=Weight/(height*height);
-      double A1 = -0.98666 + 9.0326 * 1 / height
+      //女
+       A1 = -0.98666 + 9.0326 * 1 / height
           - 0.37064 / Age
           - 106.4763 / Weight
           - 0.1656 * BMI
           - 0.00040719 * Age + 0.051186 * Weight;
-      String mMul = BigDecimalUtils.mul(mBodyInfoModel.getRight_hand_muscle_volume(), A1 + "");
-      dlbsRightTop.setData(DataSource.getQuKuaiDeviderPercent(DataSource.getqukuai(),mBodyInfoModel.getRight_hand_fat_rate(),mMul,
-          getResources().getColor(R.color.black)));
+      A2 = -2.9762 + 29.0047 * 1 / height
+          - 1.1965 / Age
+          - 345.965 / Weight
+          - 0.5337 * BMI
+          - 0.0013882 * Age + 0.16134 * Weight;
+      //-9.7821 + 87.1411 * 1/(Height/100) - 2.7852 * 1/Age - 1021.1428 * 1/Weight –
+      //1.5975 * BMI - 0.0035455 * Age + 0.4758 * Weight
+      A3 = -9.7821 + 87.1411 * 1 / height
+          - 2.7852 / Age
+          - 1021.1428 / Weight
+          - 1.5975 * BMI
+          - 0.0035455 * Age + 0.4758 * Weight;
     }
+    //肌肉在上 脂肪在下
+    //右上肢
+    float Mul1 = BigDecimalUtils.numPecent(mBodyInfoModel.getRight_hand_muscle_volume(), A1 + "");
+    dlbsRightTop.setData(DataSource.getQuKuaiDeviderPercent(DataSource.getqukuai(),Mul1+"",mBodyInfoModel.getRight_hand_fat_rate(),
+        getResources().getColor(R.color.black)));
+    //左上肢
+    float Mul2 = BigDecimalUtils.numPecent(mBodyInfoModel.getLEFT_hand_muscle_volume(), A1 + "");
+    dlbsLeftTop.setData(DataSource.getQuKuaiDeviderPercent(DataSource.getqukuai(),Mul2+"",mBodyInfoModel.getLeft_hand_fat_ratio(),
+        getResources().getColor(R.color.black)));
+    //肢体
+    float Mul3 = BigDecimalUtils.numPecent(mBodyInfoModel.getTrunk_muscle_volume(), A3 + "");
+    dlbsBody.setData(DataSource.getQuKuaiDeviderPercent(DataSource.getqukuai(),Mul3+"",mBodyInfoModel.getTrunk_fat_rate(),
+        getResources().getColor(R.color.black)));
+    //右脚
+    float Mul4 = BigDecimalUtils.numPecent(mBodyInfoModel.getRight_root_muscle_volume(), A2 + "");
+    dlbsRightBottom.setData(DataSource.getQuKuaiDeviderPercent(DataSource.getqukuai(),Mul4+"",mBodyInfoModel.getRight_foot_fat_ratio(),
+        getResources().getColor(R.color.black)));
+    //左脚
+    float Mul5 = BigDecimalUtils.numPecent(mBodyInfoModel.getLEFT_root_muscle_volume(), A2 + "");
+    dlbsLeftBottom.setData(DataSource.getQuKuaiDeviderPercent(DataSource.getqukuai(),Mul5+"",mBodyInfoModel.getLEFT_foot_fat_ratio(),
+        getResources().getColor(R.color.black)));
+
+
   }
 
   private void toShare() {
@@ -324,6 +378,7 @@ public class PrintBaseFragment extends SwiperFragment {
     if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
       set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
       set1.setValues(yVals1);
+      set1.setDrawValues(true);
       mChart.getData().notifyDataChanged();
       mChart.notifyDataSetChanged();
     } else {
@@ -333,7 +388,7 @@ public class PrintBaseFragment extends SwiperFragment {
       set1.setColor(getResources().getColor(R.color.black));
       set1.setCircleColor(Color.WHITE);
       set1.setLineWidth(2f);
-      set1.setDrawValues(false);
+      set1.setDrawValues(true);
       set1.setCircleRadius(3f);
       set1.setFillAlpha(65);
       set1.setCircleColor(getResources().getColor(R.color.black));
@@ -358,17 +413,17 @@ public class PrintBaseFragment extends SwiperFragment {
     if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
       set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
       set1.setValues(yVals1);
+      set1.setDrawValues(true);
       mChart.getData().notifyDataChanged();
       mChart.notifyDataSetChanged();
     } else {
       set1 = new LineDataSet(yVals1, "DataSet 1");
-
+      set1.setDrawValues(true);
       set1.setAxisDependency(YAxis.AxisDependency.LEFT);
       set1.setColor(getResources().getColor(R.color.black));
       set1.setCircleColor(Color.WHITE);
       set1.setLineWidth(2f);
       set1.setCircleColor(getResources().getColor(R.color.black));
-      set1.setDrawValues(false);
       set1.setCircleRadius(3f);
       set1.setFillAlpha(65);
       set1.setHighLightColor(Color.rgb(244, 117, 117));
@@ -393,16 +448,16 @@ public class PrintBaseFragment extends SwiperFragment {
     if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
       set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
       set1.setValues(yVals1);
+      set1.setDrawValues(true);
       mChart.getData().notifyDataChanged();
       mChart.notifyDataSetChanged();
     } else {
       set1 = new LineDataSet(yVals1, "DataSet 1");
-
+      set1.setDrawValues(true);
       set1.setAxisDependency(YAxis.AxisDependency.LEFT);
       set1.setColor(getResources().getColor(R.color.black));
       set1.setCircleColor(Color.WHITE);
       set1.setLineWidth(2f);
-      set1.setDrawValues(false);
       set1.setCircleRadius(3f);
       set1.setCircleColor(getResources().getColor(R.color.black));
       set1.setFillAlpha(65);
@@ -514,9 +569,11 @@ public class PrintBaseFragment extends SwiperFragment {
   }
 
   private void initBodyCompostionAnalysis(BodyInfoModel mBodyInfoModel) {
+    String water_num =
+        BigDecimalUtils.mul(BigDecimalUtils.div(mBodyInfoModel.getPercentage_of_water(),"100")+"", mBodyInfoModel.getWeight());
     txtAllBodyWaterTest = (TextView) mView.findViewById(R.id.txt_all_body_water_test);
     txtAllBodyWater = (TextView) mView.findViewById(R.id.txt_all_body_water);
-    txtAllBodyWater.setText(mBodyInfoModel.getTotal_water_weight());
+    txtAllBodyWater.setText(water_num);
     txtJirouliang = (TextView) mView.findViewById(R.id.txt_jirouliang);
     lbsGugeji = (CareboLbsView) mView.findViewById(R.id.lbs_gugeji);
     initDanbaizhi(mBodyInfoModel);
@@ -527,8 +584,10 @@ public class PrintBaseFragment extends SwiperFragment {
     if (mBodyInfoModel.getSex().equals("1")) {
       txtMale.setText("性别\n男");
       //身体总水分正常范围	女：45%--60% 男	55%--65%
+
+
       txtAllBodyWaterTest.setText(
-          mBodyInfoModel.getTotal_water_weight() + "\n" + Arith.mul(mBodyInfoModel.getWeight(),
+          water_num + "\n" + Arith.mul(mBodyInfoModel.getWeight(),
               "0.45") + "-" + Arith.mul(mBodyInfoModel.getWeight(), "0.6"));
       //肌肉量
       if (Integer.parseInt(mBodyInfoModel.getHeight()) < 160) {
@@ -553,7 +612,7 @@ public class PrintBaseFragment extends SwiperFragment {
       txtMale.setText("性别\n女");
       //身体总水分正常范围	女：45%--60% 男	55%--65%
       txtAllBodyWaterTest.setText(
-          mBodyInfoModel.getTotal_water_weight() + "\n" + Arith.mul(mBodyInfoModel.getWeight(),
+          water_num + "\n" + Arith.mul(mBodyInfoModel.getWeight(),
               "0.55") + "-" + Arith.mul(mBodyInfoModel.getWeight(), "0.65"));
       //肌肉量
       if (Integer.parseInt(mBodyInfoModel.getHeight()) < 160) {

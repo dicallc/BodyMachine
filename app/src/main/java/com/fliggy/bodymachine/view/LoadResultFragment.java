@@ -25,6 +25,7 @@ import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.HostoryActivity;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
 import com.fliggy.bodymachine.utils.Arith;
+import com.fliggy.bodymachine.utils.BigDecimalUtils;
 import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.ToastUtils;
 import com.fliggy.http_module.http.callback.DaoCallBack;
@@ -216,8 +217,32 @@ public class LoadResultFragment extends PrintBaseFragment {
     }
     mTxtWeight.setText(mBodyInfoModel.getWeight() + "kg");
     setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.getWeight(), 180));
-    mTxtZhifan.setText(mBodyInfoModel.getFat_weight() + "kg");
-    setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.getFat_weight(), 130));
+    //体脂肪
+    float fat_pecent = BigDecimalUtils.div(mBodyInfoModel.getBody_fat_percentage(), "100");
+    String fat_num =
+        BigDecimalUtils.mul(fat_pecent+"", mBodyInfoModel.getWeight());
+    mTxtZhifan.setText(fat_num + "kg");
+    int fat_stander=0;
+    int mAge = Integer.parseInt(mBodyInfoModel.getAge());
+    if (mBodyInfoModel.getSex().equals("1")){
+        if (mAge<39){
+          fat_stander=16;
+        }else if(mAge<59){
+          fat_stander=17;
+        }else{
+          fat_stander=19;
+        }
+   }else{
+      if (mAge<39){
+        fat_stander=27;
+      }else if(mAge<59){
+        fat_stander=28;
+      }else{
+        fat_stander=29;
+      }
+   }
+    setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.getBody_fat_percentage(), fat_stander));
+    //体脂肪
     mTxtJirou.setText(mBodyInfoModel.getMuscle_weight() + "kg");
     setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), 142.5));
     mTxtFeirou.setText(mBodyInfoModel.getFat_degree());

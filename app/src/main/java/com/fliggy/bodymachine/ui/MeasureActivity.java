@@ -36,7 +36,8 @@ public class MeasureActivity extends AppCompatActivity {
     ButterKnife.bind(this);
     EventBus.getDefault().register(this);
     mSex = getIntent().getStringExtra("INTENT_SEX");
-    PlayStandAudio(R.raw.standup);
+    finish();
+    //PlayStandAudio(R.raw.standup);
   }
 
   private MediaPlayer mediaPlayer;
@@ -168,11 +169,20 @@ public class MeasureActivity extends AppCompatActivity {
       };
 
   private void releaseMedea() {
-    mVideoView.stopPlayback();
-    mediaPlayer.stop();
-    mediaPlayer.release();
-    mMeasureMediaPlayer.stop();
-    mMeasureMediaPlayer.release();
+    if (mVideoView!=null){
+      mVideoView.stopPlayback();
+    }
+    if (mediaPlayer!=null){
+      mediaPlayer.stop();
+      mediaPlayer.release();
+    }
+    if (mMeasureMediaPlayer!=null){
+      mMeasureMediaPlayer.stop();
+      mMeasureMediaPlayer.release();
+    }
+
+
+
   }
 
   private void startMesure() {

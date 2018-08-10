@@ -279,18 +279,18 @@ public class Utils {
     mModel.left_f_impedance = android.serialport.utils.Utils.toResultHasPoint(mS, 22, 26);
     mModel.right_f_impedance = android.serialport.utils.Utils.toResultHasPoint(mS, 26, 30);
     mModel.body_impedance = android.serialport.utils.Utils.toResultHasPoint(mS, 30, 34);
-
+    //预留 18-19
     //肌肉重
     mModel.muscle_weight = android.serialport.utils.Utils.toResultHasPoint(mS, 38, 42);
-    //总水重
-    mModel.total_water_weight = android.serialport.utils.Utils.toResultHasPoint(mS, 42, 46);
-    //细胞外液
+    //预留总水重
+    //mModel.total_water_weight = android.serialport.utils.Utils.toResultHasPoint(mS, 42, 46);
+    //预留细胞外液
     mModel.extracellular_fluid = android.serialport.utils.Utils.toResultHasPoint(mS, 46, 50);
-    //细胞内液
+    //预留细胞内液
     mModel.intracellular_Fluid = android.serialport.utils.Utils.toResultHasPoint(mS, 50, 54);
-    //去脂体重
+    //预留去脂体重
     mModel.fat_free = android.serialport.utils.Utils.toResultHasPoint(mS, 54, 58);
-    //标准肌肉
+    //预留标准肌肉
     mModel.Standard_muscle = android.serialport.utils.Utils.toResultHasPoint(mS, 58, 62);
     //骨盐量
     mModel.Bone_salt_content = android.serialport.utils.Utils.toResultHasPoint(mS, 62, 66);
@@ -307,10 +307,11 @@ public class Utils {
     mModel.basal_metabolism = android.serialport.utils.Utils.toResultHasPoint(mS, 78, 82);
     //体脂百分比
     mModel.Body_fat_percentage = android.serialport.utils.Utils.toResultHasPoint(mS, 82, 86);
+    //含水百分比 体水分率  身体总水分=体重*体水分率
+    String water_pecent = android.serialport.utils.Utils.toResultHasPoint(mS, 86, 90);
+    mModel.Percentage_of_water = water_pecent;
     //脂肪重
     mModel.fat_weight = BigDecimalUtils.roundString(Arith.div(mModel.weight + "", mModel.Body_fat_percentage + "")+"",2);
-    //含水百分比
-    mModel.Percentage_of_water = android.serialport.utils.Utils.toResultHasPoint(mS, 86, 90);
     //标准体重
     mModel.stander_weight = android.serialport.utils.Utils.toResultHasPoint(mS, 90, 94);
     //内脏脂肪等级

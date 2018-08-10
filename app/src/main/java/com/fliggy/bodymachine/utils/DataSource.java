@@ -200,7 +200,7 @@ public class DataSource {
 
     DeviderModel mDeviderModel = new DeviderModel();
     mDeviderModel.devider_limit_num = Float.parseFloat(num);
-    mDeviderModel.devider_limit_num = Float.parseFloat(num_two);
+    mDeviderModel.devider_Two_limit_num = Float.parseFloat(num_two);
     mDeviderModel.devider_text = mWeightData;
     mDeviderModel.paint_color = color;
     mDeviderModel.devider_percent = a5;
@@ -225,7 +225,7 @@ public class DataSource {
     float a5=0;
     if (a2<0){
       //如果A2小于0说明值比第一个还要小
-      a5=0.02f;
+      a5=0.05f;
     }else{
       float a1 = BigDecimalUtils.sub(mid_data, low_data);
 
@@ -233,6 +233,7 @@ public class DataSource {
       float mRound = BigDecimalUtils.roundF(a3, 2);
       float a4 = low + mRound;
        a5 = BigDecimalUtils.mul(a4, 0.1f);
+      a5+=0.05f;
     }
     return a5;
   }

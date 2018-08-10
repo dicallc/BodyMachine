@@ -161,7 +161,7 @@ public class CareboDoubleLbsView extends View {
       float d_rect_start_h_two =d_rect_start_h+Arith.mul(height+"", "0.2");
       float d_rect_end_h_two = d_rect_start_h_two+Arith.mul(height+"","0.15");
       if (i == 9) {
-        //X Y X Y
+        //肌肉
           canvas.drawRect(width_x_start, d_rect_start_h, width_x_end*devider_percent, d_rect_end_h,
               mRectPaint);
         canvas.drawText(devider_limit_num+"", width_x_end*devider_percent+10, d_rect_end_h, mTextBigPaint);
