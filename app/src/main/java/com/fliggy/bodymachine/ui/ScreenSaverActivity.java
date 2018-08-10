@@ -38,6 +38,7 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
     setContentView(R.layout.activity_screen_saver);
     ButterKnife.bind(this);
     EventBus.getDefault().register(this);
+    SerialPortHelp.getInstance();
     InitLocal();
     PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
     mWakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP
@@ -131,7 +132,7 @@ public class ScreenSaverActivity extends AppCompatActivity implements onConnecti
   @Subscribe(threadMode = ThreadMode.MAIN) public void Event(SerialEvent messageEvent) {
     switch (messageEvent.type) {
       case SerialEvent.WEIGHT:
-        finish();
+        toMainUI();
         break;
     }
   }

@@ -71,7 +71,7 @@ public class LoadUserActivity extends SupportActivity {
     ButterKnife.bind(this);
     initUI();
     //KLog.e("dicallc", "1.0.1 -13.05测试等待5分钟，重启");
-    SerialPortHelp.getInstance();
+
     //手动申请权限,视频音频权限为同一个
     if (ContextCompat.checkSelfPermission(this, Manifest.permission.
         WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
