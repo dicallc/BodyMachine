@@ -45,6 +45,11 @@ public class BigDecimalUtils {
     BigDecimal b2 = new BigDecimal(v2);
     return b1.subtract(b2).floatValue();
   }
+  public static String subInt(String v1, String v2) {
+    BigDecimal b1 = new BigDecimal(v1);
+    BigDecimal b2 = new BigDecimal(v2);
+    return b1.subtract(b2).intValue()+"";
+  }
   public static String subString(String v1, String v2) {
     BigDecimal b1 = new BigDecimal(v1);
     BigDecimal b2 = new BigDecimal(v2);

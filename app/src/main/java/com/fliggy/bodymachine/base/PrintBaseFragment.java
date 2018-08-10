@@ -37,6 +37,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.socks.library.KLog;
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -337,9 +338,9 @@ public class PrintBaseFragment extends SwiperFragment {
           mBodyInfoModels = mAll.subList(0,mAll.size());
         }
         //选最后一条的数据做最后参考
-        setWeightData(chartWeight,mAll);
-        setGugejiData(chartGuluoji, mAll);
-        setTizhifang(chartTizhifan, mAll);
+        setWeightData(chartWeight,mBodyInfoModels);
+        setGugejiData(chartGuluoji, mBodyInfoModels);
+        setTizhifang(chartTizhifan, mBodyInfoModels);
         initTime(mBodyInfoModels);
         getActivity().runOnUiThread(new Runnable() {
           @Override public void run() {
@@ -383,12 +384,12 @@ public class PrintBaseFragment extends SwiperFragment {
       mChart.notifyDataSetChanged();
     } else {
       set1 = new LineDataSet(yVals1, "DataSet 1");
-
       set1.setAxisDependency(YAxis.AxisDependency.LEFT);
       set1.setColor(getResources().getColor(R.color.black));
       set1.setCircleColor(Color.WHITE);
       set1.setLineWidth(2f);
       set1.setDrawValues(true);
+      set1.setValueTextColor(getResources().getColor(R.color.black));
       set1.setCircleRadius(3f);
       set1.setFillAlpha(65);
       set1.setCircleColor(getResources().getColor(R.color.black));
@@ -396,8 +397,16 @@ public class PrintBaseFragment extends SwiperFragment {
       set1.setHighLightColor(Color.rgb(244, 117, 117));
       set1.setDrawCircleHole(false);
       LineData data = new LineData(set1);
-      data.setValueTextColor(Color.WHITE);
+      List<ILineDataSet> sets = data
+          .getDataSets();
+      set1.setValueTextColor(getResources().getColor(R.color.black));
       data.setValueTextSize(9f);
+      for (ILineDataSet iSet : sets) {
+
+        LineDataSet set = (LineDataSet) iSet;
+        set.setDrawValues(true);
+        set.setValueTextColor(getResources().getColor(R.color.black));
+      }
       mChart.setData(data);
     }
   }
@@ -423,14 +432,23 @@ public class PrintBaseFragment extends SwiperFragment {
       set1.setColor(getResources().getColor(R.color.black));
       set1.setCircleColor(Color.WHITE);
       set1.setLineWidth(2f);
+
       set1.setCircleColor(getResources().getColor(R.color.black));
       set1.setCircleRadius(3f);
       set1.setFillAlpha(65);
       set1.setHighLightColor(Color.rgb(244, 117, 117));
       set1.setDrawCircleHole(false);
       LineData data = new LineData(set1);
-      data.setValueTextColor(Color.WHITE);
+      List<ILineDataSet> sets = data
+          .getDataSets();
+      set1.setValueTextColor(getResources().getColor(R.color.black));
       data.setValueTextSize(9f);
+      for (ILineDataSet iSet : sets) {
+
+        LineDataSet set = (LineDataSet) iSet;
+        set.setDrawValues(true);
+        set.setValueTextColor(getResources().getColor(R.color.black));
+      }
       mChart.setData(data);
     }
   }
@@ -457,6 +475,7 @@ public class PrintBaseFragment extends SwiperFragment {
       set1.setAxisDependency(YAxis.AxisDependency.LEFT);
       set1.setColor(getResources().getColor(R.color.black));
       set1.setCircleColor(Color.WHITE);
+      set1.setValueTextColor(getResources().getColor(R.color.black));
       set1.setLineWidth(2f);
       set1.setCircleRadius(3f);
       set1.setCircleColor(getResources().getColor(R.color.black));
@@ -465,8 +484,16 @@ public class PrintBaseFragment extends SwiperFragment {
       set1.setHighLightColor(Color.rgb(244, 117, 117));
       set1.setDrawCircleHole(false);
       LineData data = new LineData(set1);
-      data.setValueTextColor(Color.WHITE);
+      List<ILineDataSet> sets = data
+          .getDataSets();
+      set1.setValueTextColor(getResources().getColor(R.color.black));
       data.setValueTextSize(9f);
+      for (ILineDataSet iSet : sets) {
+
+        LineDataSet set = (LineDataSet) iSet;
+        set.setDrawValues(true);
+        set.setValueTextColor(getResources().getColor(R.color.black));
+      }
       mChart.setData(data);
     }
   }
@@ -682,8 +709,8 @@ public class PrintBaseFragment extends SwiperFragment {
 
       //去脂体重
       txtQuzhitizhong.setText(
-          getTextOfThreshold(mBodyInfoModel.getFat_free(), Arith.sub(low + "", tizhifan_low),
-              Arith.sub(high + "", tizhifan_high)));
+          getTextOfThreshold(BigDecimalUtils.subInt(mBodyInfoModel.getWeight(),tizhifan)+"", BigDecimalUtils.subInt(low + "", tizhifan_low),
+              BigDecimalUtils.subInt(high + "", tizhifan_high)));
     } else {
       //女 lbs 体重----------
       InitLbsWeight initLbsWeight = new InitLbsWeight(mBodyInfoModel, 20f).invoke();
@@ -719,8 +746,8 @@ public class PrintBaseFragment extends SwiperFragment {
           DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
       //去脂体重
       txtQuzhitizhong.setText(
-          getTextOfThreshold(mBodyInfoModel.getFat_free(), Arith.sub(low + "", tizhifan_low),
-              Arith.sub(high + "", tizhifan_high)));
+          getTextOfThreshold(BigDecimalUtils.subInt(mBodyInfoModel.getWeight(),tizhifan)+"", BigDecimalUtils.subInt(low + "", tizhifan_low),
+              BigDecimalUtils.subInt(high + "", tizhifan_high)));
     }
   }
 
