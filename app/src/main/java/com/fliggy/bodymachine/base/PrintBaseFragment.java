@@ -59,6 +59,9 @@ public class PrintBaseFragment extends SwiperFragment {
    * 体脂肪率 坐标
    */
   private int mFatWeighCoordinate;
+  /**
+   * 身体质量指数 坐标
+   */
   private int mPhysiqueNumDeviderPercentCoordinate;
   private TextView show_core;
   private RecyclerView rl_time;
@@ -535,6 +538,7 @@ public class PrintBaseFragment extends SwiperFragment {
         mPhysiqueNumDeviderPercent.coordinate = 3;
       }
       mPhysiqueNumDeviderPercentCoordinate = mPhysiqueNumDeviderPercent.coordinate;
+      KLog.e("身体质量指数"+mPhysiqueNumDeviderPercentCoordinate+"1 是偏低 2是适中 3是偏高");
       lbsTizhiPercent.setData(mPhysiqueNumDeviderPercent);
       //体脂百分比
     } else {
@@ -550,6 +554,7 @@ public class PrintBaseFragment extends SwiperFragment {
         mPhysiqueNumDeviderPercent.coordinate = 3;
       }
       mPhysiqueNumDeviderPercentCoordinate = mPhysiqueNumDeviderPercent.coordinate;
+      KLog.e("身体质量指数"+mPhysiqueNumDeviderPercentCoordinate+"1 是偏低 2是适中 3是偏高");
       lbsTizhiPercent.setData(mPhysiqueNumDeviderPercent);
     }
   }
@@ -577,21 +582,24 @@ public class PrintBaseFragment extends SwiperFragment {
     ImageView img_lowfat_musol = (ImageView) mView.findViewById(R.id.img_lowfat_musol);
     ImageView img_authletic = (ImageView) mView.findViewById(R.id.img_authletic);
     if (mFatWeighCoordinate == 1 && mPhysiqueNumDeviderPercentCoordinate == 1) {
-      img_authletic.setVisibility(View.VISIBLE);
+      //低值低体质指数
+      img_lowfatlowweight.setVisibility(View.VISIBLE);
     } else if (mFatWeighCoordinate == 2 && mPhysiqueNumDeviderPercentCoordinate == 1) {
-      img_overweightmusic.setVisibility(View.VISIBLE);
+      img_lowweight.setVisibility(View.VISIBLE);
     } else if (mFatWeighCoordinate == 3 && mPhysiqueNumDeviderPercentCoordinate == 1) {
-      img_obse.setVisibility(View.VISIBLE);
+      img_thinfat.setVisibility(View.VISIBLE);
     } else if (mFatWeighCoordinate == 1 && mPhysiqueNumDeviderPercentCoordinate == 2) {
+      //低脂肌肉型
       img_lowfat_musol.setVisibility(View.VISIBLE);
     } else if (mFatWeighCoordinate == 1 && mPhysiqueNumDeviderPercentCoordinate == 3) {
-      img_lowfatlowweight.setVisibility(View.VISIBLE);
+      //运动型
+      img_authletic.setVisibility(View.VISIBLE);
     } else if (mFatWeighCoordinate == 2 && mPhysiqueNumDeviderPercentCoordinate == 2) {
       img_stander.setVisibility(View.VISIBLE);
     } else if (mFatWeighCoordinate == 2 && mPhysiqueNumDeviderPercentCoordinate == 3) {
-      img_lowweight.setVisibility(View.VISIBLE);
+      img_overweightmusic.setVisibility(View.VISIBLE);
     } else if (mFatWeighCoordinate == 3 && mPhysiqueNumDeviderPercentCoordinate == 3) {
-      img_thinfat.setVisibility(View.VISIBLE);
+      img_obse.setVisibility(View.VISIBLE);
     } else if (mFatWeighCoordinate == 3 && mPhysiqueNumDeviderPercentCoordinate == 2) {
       img_overfat.setVisibility(View.VISIBLE);
     }
@@ -708,10 +716,9 @@ public class PrintBaseFragment extends SwiperFragment {
       float zhifanzhong_pecent = BigDecimalUtils.numPecent(tizhifan, tizhifan_mid);
       lbsTizhifang.setData(DataSource.getMuscleDevider(DataSource.getFatWeight(), tizhifan,
           zhifanzhong_pecent, getResources().getColor(R.color.s_black)));
-      KLog.e("肌肉脂肪分析：脂肪重："+tizhifan+" 百分比: "+zhifanzhong_pecent);
       mFatWeighCoordinate =
           DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
-
+      KLog.e("肌肉脂肪分析：脂肪重："+tizhifan+" 百分比: "+zhifanzhong_pecent+"体脂肪"+mFatWeighCoordinate+"1 是偏低 2是适中 3是偏高");
       //去脂体重
       txtQuzhitizhong.setText(
           getTextOfThreshold(BigDecimalUtils.subInt(mBodyInfoModel.getWeight(),tizhifan)+"", BigDecimalUtils.subInt(low + "", tizhifan_low),
@@ -747,9 +754,9 @@ public class PrintBaseFragment extends SwiperFragment {
       float zhifanzhong_pecent = BigDecimalUtils.numPecent(tizhifan, tizhifan_mid);
       lbsTizhifang.setData(DataSource.getMuscleDevider(DataSource.getFatWeight(), tizhifan,
           zhifanzhong_pecent, getResources().getColor(R.color.s_black)));
-      KLog.e("肌肉脂肪分析：脂肪重："+tizhifan+" 百分比: "+zhifanzhong_pecent);
-      mFatWeighCoordinate =
+        mFatWeighCoordinate =
           DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
+      KLog.e("肌肉脂肪分析：脂肪重："+tizhifan+" 百分比: "+zhifanzhong_pecent+"体脂肪"+mFatWeighCoordinate+"1 是偏低 2是适中 3是偏高");
       //去脂体重
       txtQuzhitizhong.setText(
           getTextOfThreshold(BigDecimalUtils.subInt(mBodyInfoModel.getWeight(),tizhifan)+"", BigDecimalUtils.subInt(low + "", tizhifan_low),
