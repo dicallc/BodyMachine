@@ -77,31 +77,40 @@ public class ExampleUnitTest {
     KLog.e(mS);
   }
 
+  /**
+   * 第五版
+   * @throws Exception
+   */
   @Test public void testFunction5() throws Exception {
     String mS =
         "5A0360036C00000D340D1107CE07EB00E6000001ED000000000000000000000022013600690000038A018D01BA0288005A343400000000009680E380B20000019F017F019E0182018000DB001600160058005A0000000000000000000800000000000025";
     //体重
     String weight = Utils.toResultHasPoint(mS, 6, 10);
-    //总阻抗
+    //预留
     String all_impedance = Utils.toResultHasPoint(mS, 10, 14);
+    //左手阻抗
     String left_h_impedance = Utils.toResultHasPoint(mS, 14, 18);
+    //右手阻抗
     String right_h_impedance = Utils.toResultHasPoint(mS, 18, 22);
+    //左脚阻抗
     String left_f_impedance = Utils.toResultHasPoint(mS, 22, 26);
+    //右脚阻抗
     String right_f_impedance = Utils.toResultHasPoint(mS, 26, 30);
+    //躯干阻抗
     String body_impedance = Utils.toResultHasPoint(mS, 30, 34);
-    //脂肪重1
+    //预留
     String fat_weight = Utils.toResultHasPoint(mS, 34, 38);
     //肌肉重
     String muscle_weight = Utils.toResultHasPoint(mS, 38, 42);
-    //总水重1
+    //预留
     String total_water_weight = Utils.toResultHasPoint(mS, 42, 46);
-    //细胞外液1
+    //预留
     String extracellular_fluid = Utils.toResultHasPoint(mS, 46, 50);
-    //细胞内液1
+    //预留
     String intracellular_Fluid = Utils.toResultHasPoint(mS, 50, 54);
-    //去脂体重1
+    //预留
     String fat_free = Utils.toResultHasPoint(mS, 54, 58);
-    //标准肌肉1
+    //预留
     String Standard_muscle = Utils.toResultHasPoint(mS, 58, 62);
     //骨盐量
     String Bone_salt_content = Utils.toResultHasPoint(mS, 62, 66);
@@ -115,7 +124,7 @@ public class ExampleUnitTest {
     String basal_metabolism = Utils.toResultHasPoint(mS, 78, 82);
     //体脂百分比
     String Body_fat_percentage = Utils.toResultHasPoint(mS, 82, 86);
-    //含水百分比
+    //体水分率
     String Percentage_of_water = Utils.toResultHasPoint(mS, 86, 90);
     //标准体重
     String stander_weight = Utils.toResultHasPoint(mS, 90, 94);
@@ -125,9 +134,9 @@ public class ExampleUnitTest {
     String physical_age = Utils.toResultHasPoint(mS, 98, 100);
     //身体评分
     String Body_score = Utils.toResultHasPoint(mS, 100, 102);
-    //水肿度1
+    //预留
     String Edematous_degree = Utils.toResultHasPoint(mS, 102, 106);
-    //肥胖度1
+    //预留
     String Fat_degree = Utils.toResultHasPoint(mS, 106, 110);
     //肌肉控制
     String Muscle_control = Utils.toResultHasPoint(mS, 110, 114);
@@ -135,7 +144,7 @@ public class ExampleUnitTest {
     String Weight_control = Utils.toResultHasPoint(mS, 114, 118);
     //脂肪控制
     String Fat_control = Utils.toResultHasPoint(mS, 118, 122);
-    //no
+    //预留
     String no_one = Utils.toResultHasPoint(mS, 122, 126);
     //躯干脂肪率
     String Trunk_fat_rate = Utils.toResultHasPoint(mS, 126, 130);
