@@ -219,7 +219,7 @@ public class LoadResultFragment extends PrintBaseFragment {
     float fat_pecent = BigDecimalUtils.div(mBodyInfoModel.getBody_fat_percentage(), "100");
     String fat_num =
         BigDecimalUtils.mul(fat_pecent+"", mBodyInfoModel.getWeight());
-    mTxtZhifan.setText(fat_num + "kg");
+    mTxtZhifan.setText(BigDecimalUtils.round(fat_num,1) + "kg");
     int fat_stander=0;
     int mAge = Integer.parseInt(mBodyInfoModel.getAge());
     if (mBodyInfoModel.getSex().equals("1")){
@@ -240,8 +240,6 @@ public class LoadResultFragment extends PrintBaseFragment {
       }
    }
     setViewFullScreen(mBarZhifan, Arith.MyDiv(mBodyInfoModel.getBody_fat_percentage(), fat_stander));
-    //体脂肪
-    mTxtJirou.setText(mBodyInfoModel.getMuscle_weight() + "kg");
     int mHeight = Integer.parseInt(mBodyInfoModel.getHeight());
     float jirou_stander=0;
     if (mBodyInfoModel.getSex().equals("1")){
@@ -264,6 +262,7 @@ public class LoadResultFragment extends PrintBaseFragment {
     //肌肉量
     KLog.e("肌肉量: "+mBodyInfoModel.getMuscle_weight()+" 平均量"+jirou_stander);
     setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), jirou_stander));
+    mTxtJirou.setText(BigDecimalUtils.round(mBodyInfoModel.getMuscle_weight(),1) + "kg");
 
     //腰臀比
     float yaotunbi_stander=0;

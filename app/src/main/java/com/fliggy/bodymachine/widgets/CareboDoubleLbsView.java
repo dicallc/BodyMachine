@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import com.fliggy.bodymachine.model.DeviderModel;
 import com.fliggy.bodymachine.utils.Arith;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -32,11 +33,11 @@ public class CareboDoubleLbsView extends View {
   private Paint mRectGrayPaint;
   private ArrayList<String> arrDeviderText;
   private int devider_limit;
-  private float devider_limit_num;
+  private int devider_limit_num;
   private float devider_percent;
   private int paint_color;
   private Paint mRectPaint2;
-  private float devider_Two_limit_num;
+  private int devider_Two_limit_num;
   private float devider_Two_percent;
 
   public CareboDoubleLbsView(Context context, AttributeSet attrs) {
@@ -112,8 +113,8 @@ public class CareboDoubleLbsView extends View {
     this.devider_limit = mWeightDevider.devider_limit;
     // 设置区间文字
     this.arrDeviderText = mWeightDevider.devider_text;
-    this.devider_limit_num = mWeightDevider.devider_limit_num;
-    this.devider_Two_limit_num = mWeightDevider.devider_Two_limit_num;
+    this.devider_limit_num = new BigDecimal(mWeightDevider.devider_limit_num).intValue();
+    this.devider_Two_limit_num = new BigDecimal(mWeightDevider.devider_Two_limit_num).intValue();
     this.devider_percent=mWeightDevider.devider_percent;
     this.devider_Two_percent=mWeightDevider.devider_Two_percent;
     this.paint_color=mWeightDevider.paint_color;
