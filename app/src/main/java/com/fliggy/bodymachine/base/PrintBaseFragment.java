@@ -130,6 +130,8 @@ public class PrintBaseFragment extends SwiperFragment {
   private TextView txtLeftBtId250;
 
   protected void toPrint(BodyInfoModel mBodyInfoModel) {
+    if (mBodyInfoModel==null)return;
+
     DisplayMetrics metric = new DisplayMetrics();
     mActivity.getWindowManager().getDefaultDisplay().getMetrics(metric);
     int width = metric.heightPixels;// 屏幕宽度（像素）

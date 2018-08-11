@@ -196,7 +196,7 @@
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="肥胖度"
+          android:text="腹部肥胖"
           android:textColor="@android:color/white"
           android:textSize="32sp"
           />
@@ -211,7 +211,7 @@
         android:padding="10dp"
         >
       <LinearLayout
-          android:id="@+id/bar_feirou"
+          android:id="@+id/bar_yaotun"
           android:orientation="horizontal"
           android:layout_width="match_parent"
           android:layout_height="match_parent"

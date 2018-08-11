@@ -159,7 +159,6 @@ public class HostoryActivity extends AppCompatActivity {
       set1.setColor(Color.parseColor("#0087ff"));
       set1.setCircleColor(Color.WHITE);
       set1.setLineWidth(2f);
-      set1.setDrawValues(false);
       set1.setCircleRadius(3f);
       set1.setFillAlpha(65);
       set1.setFillColor(Color.parseColor("#0087ff"));
@@ -167,7 +166,8 @@ public class HostoryActivity extends AppCompatActivity {
       set1.setDrawCircleHole(false);
       LineData data = new LineData(set1);
       data.setValueTextColor(Color.WHITE);
-      data.setValueTextSize(9f);
+      data.setDrawValues(true);
+      data.setValueTextSize(24f);
       mChart.setData(data);
     }
   }
@@ -193,14 +193,14 @@ public class HostoryActivity extends AppCompatActivity {
       set1.setColor(Color.parseColor("#e84576"));
       set1.setCircleColor(Color.WHITE);
       set1.setLineWidth(2f);
-      set1.setDrawValues(false);
       set1.setCircleRadius(3f);
       set1.setFillAlpha(65);
       set1.setHighLightColor(Color.rgb(244, 117, 117));
       set1.setDrawCircleHole(false);
       LineData data = new LineData(set1);
+      data.setDrawValues(true);
       data.setValueTextColor(Color.WHITE);
-      data.setValueTextSize(9f);
+      data.setValueTextSize(24f);
       mChart.setData(data);
     }
   }
@@ -228,15 +228,15 @@ public class HostoryActivity extends AppCompatActivity {
       set1.setColor(Color.parseColor("#e8bd21"));
       set1.setCircleColor(Color.WHITE);
       set1.setLineWidth(2f);
-      set1.setDrawValues(false);
       set1.setCircleRadius(3f);
       set1.setFillAlpha(65);
       set1.setFillColor(Color.parseColor("#e8bd21"));
       set1.setHighLightColor(Color.rgb(244, 117, 117));
       set1.setDrawCircleHole(false);
       LineData data = new LineData(set1);
+      data.setDrawValues(true);
       data.setValueTextColor(Color.WHITE);
-      data.setValueTextSize(9f);
+      data.setValueTextSize(24f);
       mChart.setData(data);
     }
   }

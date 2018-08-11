@@ -18,9 +18,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.fliggy.bodymachine.R;
 import com.fliggy.bodymachine.base.PrintBaseFragment;
-import com.fliggy.bodymachine.dao.Dao;
 import com.fliggy.bodymachine.model.BodyInfoModel;
-import com.fliggy.bodymachine.model.MsgModel;
 import com.fliggy.bodymachine.model.SerialEvent;
 import com.fliggy.bodymachine.ui.HostoryActivity;
 import com.fliggy.bodymachine.ui.LoadUserActivity;
@@ -28,7 +26,6 @@ import com.fliggy.bodymachine.utils.Arith;
 import com.fliggy.bodymachine.utils.BigDecimalUtils;
 import com.fliggy.bodymachine.utils.Constant;
 import com.fliggy.bodymachine.utils.ToastUtils;
-import com.fliggy.http_module.http.callback.DaoCallBack;
 import com.fliggy.utils_module.utils.SPUtils;
 import com.socks.library.KLog;
 import org.greenrobot.eventbus.EventBus;
@@ -41,7 +38,7 @@ public class LoadResultFragment extends PrintBaseFragment {
   @BindView(R.id.bar_weight) LinearLayout mBarWeight;
   @BindView(R.id.bar_zhifan) LinearLayout mBarZhifan;
   @BindView(R.id.bar_jirou) LinearLayout mBarJirou;
-  @BindView(R.id.bar_feirou) LinearLayout mBarFeirou;
+  @BindView(R.id.bar_yaotun) LinearLayout mBarFeirou;
   Unbinder unbinder;
   @BindView(R.id.txt_bt_one) TextView mTxtBtOne;
   @BindView(R.id.txt_bt_two) TextView mTxtBtTwo;
@@ -132,7 +129,7 @@ public class LoadResultFragment extends PrintBaseFragment {
     DisplayMetrics outMetrics = new DisplayMetrics();
     manager.getDefaultDisplay().getMetrics(outMetrics);
     int width = outMetrics.widthPixels;
-    double f_width = width * 0.5;
+    double f_width = width * 0.5*0.7;
     ViewGroup.MarginLayoutParams margin = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(margin);
     int mMul = Arith.mul(f_width + "", bili + "");
@@ -216,7 +213,8 @@ public class LoadResultFragment extends PrintBaseFragment {
       return;
     }
     mTxtWeight.setText(mBodyInfoModel.getWeight() + "kg");
-    setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.getWeight(), 180));
+    setViewFullScreen(mBarWeight, Arith.MyDiv(mBodyInfoModel.getWeight(), mBodyInfoModel.getStander_weight()));
+    KLog.e("体重: "+mBodyInfoModel.getWeight()+"标准体重： "+mBodyInfoModel.getStander_weight());
     //体脂肪
     float fat_pecent = BigDecimalUtils.div(mBodyInfoModel.getBody_fat_percentage(), "100");
     String fat_num =
@@ -266,9 +264,16 @@ public class LoadResultFragment extends PrintBaseFragment {
     //肌肉量
     KLog.e("肌肉量: "+mBodyInfoModel.getMuscle_weight()+" 平均量"+jirou_stander);
     setViewFullScreen(mBarJirou, Arith.MyDiv(mBodyInfoModel.getMuscle_weight(), jirou_stander));
-    mTxtFeirou.setText(mBodyInfoModel.getFat_degree());
-    setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.getFat_degree(), 40));
-    setViewFullScreen(mBarFeirou, 0.9f);
+
+    //腰臀比
+    float yaotunbi_stander=0;
+    if (mBodyInfoModel.getSex().equals("1")){
+      yaotunbi_stander=0.825f;
+    }else{
+      yaotunbi_stander=0.725f;
+    }
+    mTxtFeirou.setText(mBodyInfoModel.getYaotunbi());
+    setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.getYaotunbi(), yaotunbi_stander));
     //标准体重
     mTxtBtOne.setText("标准体重    " + mBodyInfoModel.getStander_weight() + "kg");
     //体脂百分比
@@ -277,19 +282,19 @@ public class LoadResultFragment extends PrintBaseFragment {
     mTxtBtThree.setText("健康指数    " + mBodyInfoModel.getBody_score());
     // 身体质量指数
     mTxtBtFour.setText("身体质量指数    " + mBodyInfoModel.getPhysique_num());
-    if (TextUtils.isEmpty(mMache_id)) {
-      ToastUtils.showShortToast("机器id为空");
-      return;
-    }
-    Dao.postCelect(mBodyInfoModel, mMache_id, new DaoCallBack<MsgModel>() {
-      @Override public void onSuccess(int code, MsgModel result) {
-        ToastUtils.showShortToast("上传数据成功");
-      }
-
-      @Override public void onFail(int code, String result) {
-        ToastUtils.showShortToast("上传数据失败");
-      }
-    });
+    //if (TextUtils.isEmpty(mMache_id)) {
+    //  ToastUtils.showShortToast("机器id为空");
+    //  return;
+    //}
+    //Dao.postCelect(mBodyInfoModel, mMache_id, new DaoCallBack<MsgModel>() {
+    //  @Override public void onSuccess(int code, MsgModel result) {
+    //    ToastUtils.showShortToast("上传数据成功");
+    //  }
+    //
+    //  @Override public void onFail(int code, String result) {
+    //    ToastUtils.showShortToast("上传数据失败");
+    //  }
+    //});
   }
 
   @OnClick({ R.id.txt_back, R.id.print,R.id.txt_history}) public void onViewClicked(View view) {
