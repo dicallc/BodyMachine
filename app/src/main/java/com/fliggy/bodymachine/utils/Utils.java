@@ -271,7 +271,7 @@ public class Utils {
     mModel.setHeight(mHeight);
     mModel.setSex(mSex);
 
-    mModel.weight = android.serialport.utils.Utils.toResultHasPoint(mS, 6, 10);
+    mModel.weight = BigDecimalUtils.roundString(android.serialport.utils.Utils.toResultHasPoint(mS, 6, 10),0);
     //总阻抗
     mModel.all_impedance = android.serialport.utils.Utils.toResultHasPoint(mS, 10, 14);
     mModel.left_h_impedance = android.serialport.utils.Utils.toResultHasPoint(mS, 14, 18);
@@ -295,7 +295,7 @@ public class Utils {
     //骨盐量
     mModel.Bone_salt_content = android.serialport.utils.Utils.toResultHasPoint(mS, 62, 66);
     //骨骼肌重
-    mModel.skeletal_muscle = android.serialport.utils.Utils.toResultHasPoint(mS, 66, 70);
+    mModel.skeletal_muscle = BigDecimalUtils.round(android.serialport.utils.Utils.toResultHasPoint(mS, 66, 70),0);
     //蛋白质
     mModel.protein = android.serialport.utils.Utils.toResultHasPoint(mS, 70, 74);
     //身体质量指数 BMI=体重（kg）/身高（m^2）
@@ -311,7 +311,7 @@ public class Utils {
     String water_pecent = android.serialport.utils.Utils.toResultHasPoint(mS, 86, 90);
     mModel.Percentage_of_water = water_pecent;
     //脂肪重
-    mModel.fat_weight = BigDecimalUtils.roundString(Arith.div(mModel.weight + "", mModel.Body_fat_percentage + "")+"",2);
+    mModel.fat_weight = BigDecimalUtils.roundString(Arith.div(mModel.weight + "", mModel.Body_fat_percentage + "")+"",1);
     //标准体重
     mModel.stander_weight = android.serialport.utils.Utils.toResultHasPoint(mS, 90, 94);
     //内脏脂肪等级
