@@ -151,7 +151,7 @@
       app:layout_constraintVertical_bias="0.275"
       app:layout_constraintWidth_default="percent"
       >
-    <com.fliggy.bodymachine.widgets.CareboLbsBaseView
+    <com.fliggy.bodymachine.widgets.MuscleCareboLbsView
         android:id="@+id/lbs_tizhong"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -161,7 +161,7 @@
         app:layout_constraintHeight_percent="0.333"
         app:layout_constraintStart_toStartOf="parent"
         />
-    <com.fliggy.bodymachine.widgets.CareboLbsView
+    <com.fliggy.bodymachine.widgets.MuscleCareboLbsView
         android:id="@+id/lbs_gugeji"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -172,7 +172,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbs_tizhong"
         />
-    <com.fliggy.bodymachine.widgets.CareboLbsView
+    <com.fliggy.bodymachine.widgets.MuscleCareboLbsView
         android:id="@+id/lbs_tizhifang"
         android:layout_width="match_parent"
         android:layout_height="0dp"

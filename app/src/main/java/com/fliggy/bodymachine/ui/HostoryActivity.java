@@ -167,7 +167,7 @@ public class HostoryActivity extends AppCompatActivity {
       LineData data = new LineData(set1);
       data.setValueTextColor(Color.WHITE);
       data.setDrawValues(true);
-      data.setValueTextSize(24f);
+      data.setValueTextSize(18f);
       mChart.setData(data);
     }
   }
@@ -200,7 +200,7 @@ public class HostoryActivity extends AppCompatActivity {
       LineData data = new LineData(set1);
       data.setDrawValues(true);
       data.setValueTextColor(Color.WHITE);
-      data.setValueTextSize(24f);
+      data.setValueTextSize(18f);
       mChart.setData(data);
     }
   }
@@ -236,7 +236,7 @@ public class HostoryActivity extends AppCompatActivity {
       LineData data = new LineData(set1);
       data.setDrawValues(true);
       data.setValueTextColor(Color.WHITE);
-      data.setValueTextSize(24f);
+      data.setValueTextSize(18f);
       mChart.setData(data);
     }
   }

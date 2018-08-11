@@ -28,10 +28,10 @@ import com.fliggy.bodymachine.utils.DataSource;
 import com.fliggy.bodymachine.utils.TiZhiData;
 import com.fliggy.bodymachine.utils.Utils;
 import com.fliggy.bodymachine.widgets.CareboDoubleLbsView;
-import com.fliggy.bodymachine.widgets.CareboLbsBaseView;
 import com.fliggy.bodymachine.widgets.CareboLbsFatView;
 import com.fliggy.bodymachine.widgets.CareboLbsView;
 import com.fliggy.bodymachine.widgets.CareboLbsWaistToHipView;
+import com.fliggy.bodymachine.widgets.MuscleCareboLbsView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -90,9 +90,9 @@ public class PrintBaseFragment extends SwiperFragment {
   private TextView txtDanbaizhiTest;
   private TextView txtWujiyanTest;
   private TextView txt_tizhong_one;
-  private CareboLbsBaseView lbsTizhong;
-  private CareboLbsView lbsGugeji;
-  private CareboLbsView lbsTizhifang;
+  private MuscleCareboLbsView lbsTizhong;
+  private MuscleCareboLbsView lbsGugeji;
+  private MuscleCareboLbsView lbsTizhifang;
   private CareboLbsView lbsZhiliangzhishu;
   private CareboLbsView lbsTizhiPercent;
   private CareboDoubleLbsView dlbsRightTop;
@@ -604,7 +604,7 @@ public class PrintBaseFragment extends SwiperFragment {
     txtAllBodyWater = (TextView) mView.findViewById(R.id.txt_all_body_water);
     txtAllBodyWater.setText(water_num);
     txtJirouliang = (TextView) mView.findViewById(R.id.txt_jirouliang);
-    lbsGugeji = (CareboLbsView) mView.findViewById(R.id.lbs_gugeji);
+    lbsGugeji = (MuscleCareboLbsView) mView.findViewById(R.id.lbs_gugeji);
     initDanbaizhi(mBodyInfoModel);
     txtWujiyanTest = (TextView) mView.findViewById(R.id.txt_wujiyan_test);
     mD_age = Integer.parseInt(mBodyInfoModel.getAge());
@@ -634,9 +634,10 @@ public class PrintBaseFragment extends SwiperFragment {
       //算出骨骼肌正常值
       String mMul = BigDecimalUtils.mul(mBodyInfoModel.getMuscle_weight(), "0.6");
       float gugeji_pecent = BigDecimalUtils.numPecent(mBodyInfoModel.getSkeletal_muscle(), mMul);
-      lbsGugeji.setData(DataSource.getCommonDeviderPercent_l(DataSource.getSkeletalMuscleData(),
+      lbsGugeji.setData(DataSource.getMuscleDevider(DataSource.getSkeletalMuscleData(),
           mBodyInfoModel.getSkeletal_muscle(), gugeji_pecent,
           getResources().getColor(R.color.s_black)));
+      KLog.e("肌肉脂肪分析：骨骼肌："+mBodyInfoModel.getSkeletal_muscle()+" 百分比: "+gugeji_pecent);
     } else {
       txtMale.setText("性别\n女");
       //身体总水分正常范围	女：45%--60% 男	55%--65%
@@ -660,9 +661,10 @@ public class PrintBaseFragment extends SwiperFragment {
       //算出骨骼肌正常值
       String mMul = BigDecimalUtils.mul(mBodyInfoModel.getMuscle_weight(), "0.6");
       float gugeji_pecent = BigDecimalUtils.numPecent(mBodyInfoModel.getSkeletal_muscle(), mMul);
-      lbsGugeji.setData(DataSource.getCommonDeviderPercent_l(DataSource.getSkeletalMuscleData(),
+      lbsGugeji.setData(DataSource.getMuscleDevider(DataSource.getSkeletalMuscleData(),
           mBodyInfoModel.getSkeletal_muscle(), gugeji_pecent,
           getResources().getColor(R.color.s_black)));
+      KLog.e("肌肉脂肪分析：骨骼肌："+mBodyInfoModel.getSkeletal_muscle()+" 百分比: "+gugeji_pecent);
     }
   }
 
@@ -673,8 +675,8 @@ public class PrintBaseFragment extends SwiperFragment {
     txt_tizhong_one = (TextView) mView.findViewById(R.id.txt_tizhong_one);
     txtTizhifangtizhong = (TextView) mView.findViewById(R.id.txt_tizhifangtizhong);
     txtQuzhitizhong = (TextView) mView.findViewById(R.id.txt_quzhitizhong);
-    lbsTizhong = (CareboLbsBaseView) mView.findViewById(R.id.lbs_tizhong);
-    lbsTizhifang = (CareboLbsView) mView.findViewById(R.id.lbs_tizhifang);
+    lbsTizhong = (MuscleCareboLbsView) mView.findViewById(R.id.lbs_tizhong);
+    lbsTizhifang = (MuscleCareboLbsView) mView.findViewById(R.id.lbs_tizhifang);
     String tizhifan = BigDecimalUtils.mulString(mBodyInfoModel.getWeight(),
         Arith.mulString(mBodyInfoModel.getBody_fat_percentage(), "0.01"));
     if (mBodyInfoModel.getSex().equals("1")) {
@@ -704,8 +706,9 @@ public class PrintBaseFragment extends SwiperFragment {
       }
       //lbs 脂肪重
       float zhifanzhong_pecent = BigDecimalUtils.numPecent(tizhifan, tizhifan_mid);
-      lbsTizhifang.setData(DataSource.getCommonDeviderPercent_l(DataSource.getFatWeight(), tizhifan,
+      lbsTizhifang.setData(DataSource.getMuscleDevider(DataSource.getFatWeight(), tizhifan,
           zhifanzhong_pecent, getResources().getColor(R.color.s_black)));
+      KLog.e("肌肉脂肪分析：脂肪重："+tizhifan+" 百分比: "+zhifanzhong_pecent);
       mFatWeighCoordinate =
           DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
 
@@ -742,8 +745,9 @@ public class PrintBaseFragment extends SwiperFragment {
       }
       //lbs 脂肪重
       float zhifanzhong_pecent = BigDecimalUtils.numPecent(tizhifan, tizhifan_mid);
-      lbsTizhifang.setData(DataSource.getCommonDeviderPercent_l(DataSource.getFatWeight(), tizhifan,
+      lbsTizhifang.setData(DataSource.getMuscleDevider(DataSource.getFatWeight(), tizhifan,
           zhifanzhong_pecent, getResources().getColor(R.color.s_black)));
+      KLog.e("肌肉脂肪分析：脂肪重："+tizhifan+" 百分比: "+zhifanzhong_pecent);
       mFatWeighCoordinate =
           DataSource.getFatWeightCoordinate(tizhifan, tizhifan_high, tizhifan_low);
       //去脂体重
@@ -870,8 +874,9 @@ public class PrintBaseFragment extends SwiperFragment {
               BigDecimalUtils.round(mHigh + "", 2)));
       float mPecent = BigDecimalUtils.numPecent(mBodyInfoModel.getWeight(), mid + "");
       DeviderModel mWeightDeviderPercent =
-          DataSource.getCommonDeviderPercent_l(DataSource.getWeightData(),
+          DataSource.getMuscleDevider(DataSource.getWeightData(),
               mBodyInfoModel.getWeight(), mPecent, getResources().getColor(R.color.black));
+      KLog.e("肌肉脂肪分析：体重："+mBodyInfoModel.getWeight()+" 百分比: "+mPecent);
       lbsTizhong.setData(mWeightDeviderPercent);
       return this;
     }
