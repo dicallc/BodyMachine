@@ -36,8 +36,8 @@ public class MeasureActivity extends AppCompatActivity {
     ButterKnife.bind(this);
     EventBus.getDefault().register(this);
     mSex = getIntent().getStringExtra("INTENT_SEX");
-    finish();
-    //PlayStandAudio(R.raw.standup);
+    //finish();
+    PlayStandAudio(R.raw.standup);
   }
 
   private MediaPlayer mediaPlayer;
@@ -90,7 +90,7 @@ public class MeasureActivity extends AppCompatActivity {
       new MediaPlayer.OnCompletionListener() {
         @Override public void onCompletion(MediaPlayer mp) {
           //播放结束后多少秒进行测量视频
-          mVideoView.postDelayed(startMeasure, 10000);
+          mVideoView.postDelayed(startMeasure, 5000);
         }
       };
   MediaPlayer.OnCompletionListener mOnMeasureCompletionListener =

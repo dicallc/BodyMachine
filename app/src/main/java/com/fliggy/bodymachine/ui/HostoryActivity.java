@@ -245,8 +245,10 @@ public class HostoryActivity extends AppCompatActivity {
     switch (view.getId()) {
       case R.id.img_back:
         finish();
+
         break;
       case R.id.img_test:
+        setResult(Constant.RESULT_HISTORY);
         finish();
         break;
     }

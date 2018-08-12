@@ -24,6 +24,7 @@ public class Constant {
   public static final String PRINT_MODEL="print_model";
   public static final String SETTING_ID="setting_id";
   public static final String ISPLAYAUDIO="ISPLAYAUDIO";
+  public static final int RESULT_HISTORY=406;
   public static final int TEST_DATA_ERRO=404;
   public static  String CurentId="";
   public static  String MainId="";

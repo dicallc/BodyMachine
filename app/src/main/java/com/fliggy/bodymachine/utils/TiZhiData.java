@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class TiZhiData {
   public static ArrayList<String> getTiZhiForMan() {
     ArrayList<String> list_text = new ArrayList<>();
-    list_text.add("0");
-    list_text.add("5");
     list_text.add("10");
+    list_text.add("12.5");
     list_text.add("15");
+    list_text.add("17.5");
     list_text.add("20");
     list_text.add("25");
     list_text.add("30");

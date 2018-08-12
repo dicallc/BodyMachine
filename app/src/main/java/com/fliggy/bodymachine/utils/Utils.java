@@ -360,8 +360,9 @@ public class Utils {
     mModel.Hipline = android.serialport.utils.Utils.toResultHasPoint(mS, 174, 178);
     //胸围
     mModel.Bust = android.serialport.utils.Utils.toResultHasPoint(mS, 178, 182);
-    //右上臂围
+    //腰臀比
     mModel.yaotunbi = android.serialport.utils.Utils.toResultHasPoint(mS, 182, 186);
+
     //左上臂围
     mModel.l_t_Hipline = android.serialport.utils.Utils.toResultHasPoint(mS, 186, 190);
     //右大腿围

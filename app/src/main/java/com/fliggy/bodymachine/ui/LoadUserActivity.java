@@ -126,9 +126,13 @@ public class LoadUserActivity extends SupportActivity {
   }
 
   public void toOrgin() {
-    mTxtLoadData.setText("");
-    showHideFragment(mSupportFragments.get(0), mSupportFragments.get(mSupportFragments.size() - 1));
-    position = 0;
+    Intent mIntent=new Intent(this, ScreenSaverActivity.class);
+    startActivity(mIntent);
+    //mTxtLoadData.setText("");
+    //showHideFragment(mSupportFragments.get(0), mSupportFragments.get(mSupportFragments.size() - 1));
+    //position = 0;
+    finish();
+
   }
 
   public void NextPre(boolean isNext) {
@@ -247,6 +251,10 @@ public class LoadUserActivity extends SupportActivity {
       NextPre(false);
     } else if (requestCode == result_ui_code) {
       PlayAudio(R.raw.metureup_finish);
+    }else if (resultCode == Constant.RESULT_HISTORY) {
+      finish();
+      Intent mIntent=new Intent(this, ScreenSaverActivity.class);
+      startActivity(mIntent);
     }
   }
   protected void PlayAudio(int resid) {

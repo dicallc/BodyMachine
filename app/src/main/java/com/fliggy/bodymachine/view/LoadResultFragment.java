@@ -100,7 +100,7 @@ public class LoadResultFragment extends PrintBaseFragment {
     super.onHiddenChanged(hidden);
     if (!hidden){
       KLog.e("onHiddenChanged");
-      TestFunction();
+      //TestFunction();
       //如果不开id记录，没必要显示历史记录
       int ids_model = SPUtils.getInt(getActivity(), Constant.SETTING_ID, 0);
       if (ids_model == 0) {
@@ -193,12 +193,12 @@ public class LoadResultFragment extends PrintBaseFragment {
     } else {
       noRecord = true;
     }
-    //mBodyInfoModel =
-    //    com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
-    //        content, noRecord);
-    mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
-        content,
-        true);
+    mBodyInfoModel =
+        com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel(mHeight, mAge, mSex,
+            content, noRecord);
+    //mBodyInfoModel = com.fliggy.bodymachine.utils.Utils.toShowFinalResultModel("176", "19", "1",
+    //    content,
+    //    true);
 
     if (TextUtils.isEmpty(mBodyInfoModel.getId())) {
       ToastUtils.showShortToast("数据库初始化失败");
@@ -272,7 +272,7 @@ public class LoadResultFragment extends PrintBaseFragment {
       yaotunbi_stander=0.725f;
     }
     mTxtFeirou.setText(mBodyInfoModel.getYaotunbi());
-    setViewFullScreen(mBarFeirou, Arith.MyDiv(mBodyInfoModel.getYaotunbi(), yaotunbi_stander));
+    setViewFullScreen(mBarFeirou, BigDecimalUtils.div(BigDecimalUtils.divString(mBodyInfoModel.getYaotunbi(),"10",2), yaotunbi_stander+"",2));
     //标准体重
     mTxtBtOne.setText("标准体重    " + mBodyInfoModel.getStander_weight() + "kg");
     //体脂百分比
@@ -307,7 +307,7 @@ public class LoadResultFragment extends PrintBaseFragment {
         break;
       case R.id.txt_history:
         Intent mIntent=new Intent(getActivity(), HostoryActivity.class);
-        startActivity(mIntent);
+        startActivityForResult(mIntent,Constant.RESULT_HISTORY);
         break;
     }
   }
